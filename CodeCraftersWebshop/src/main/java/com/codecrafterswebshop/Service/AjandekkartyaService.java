@@ -38,4 +38,16 @@ public class AjandekkartyaService {
             return ex.getMessage();
         }
     }
+
+    public static String torlesAjandekKartya(Integer idBE) {
+        try {
+            if (Ajandekkartya.torlesAjandekKartya(idBE)) {
+                return "Ajándék kártya törölve!";
+            } else {
+                return "Hiba az ajándék kártya törlésénél!";
+            }
+        } catch (Exception ex) {
+            return ex.getMessage();
+        }
+    }
 }
