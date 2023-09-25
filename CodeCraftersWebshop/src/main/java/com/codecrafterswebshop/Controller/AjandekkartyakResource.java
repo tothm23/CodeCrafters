@@ -5,10 +5,12 @@ import com.codecrafterswebshop.Service.AjandekkartyaService;
 import java.util.List;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
+import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
 
 /**
  * REST Web Service
@@ -28,5 +30,14 @@ public class AjandekkartyakResource {
     public List<Ajandekkartya> ajandekKartya(@PathParam("ajandekKartyaId") Integer id) {
         List<Ajandekkartya> result = AjandekkartyaService.ajandekKartya(id);
         return result;
+    }
+
+    @POST
+    public Response ujAjandekKartya(Ajandekkartya a) {
+        String result = AjandekkartyaService.ujAjandekKartya(a.getNev(), a.getAr(),
+                a.getLeiras(), a.getKep(), a.getAkcio(), a.getMennyisegraktaron(),
+                a.getEszkozId(), a.getPlatformId());
+        return Response.status(Response.Status.OK).entity(result)
+                .type(MediaType.APPLICATION_JSON).build();
     }
 }
