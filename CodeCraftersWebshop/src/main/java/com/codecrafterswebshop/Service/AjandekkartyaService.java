@@ -25,4 +25,17 @@ public class AjandekkartyaService {
             return ex.getMessage();
         }
     }
+
+    public static String frissitesAjandekKartya(Integer idBE, String nevBE, Integer arBE, String leirasBE,
+            String kepBE, Integer akcioBE, Integer mennyisegraktaronBE, Integer eszkozIdBE, Integer platformIdBE) {
+        try {
+            if (Ajandekkartya.frissitesAjandekKartya(idBE, nevBE, arBE, leirasBE, kepBE, akcioBE, mennyisegraktaronBE, eszkozIdBE, platformIdBE)) {
+                return "Ajándék kártya frissítve!";
+            } else {
+                return "Hiba az ajándék kártya frissítésénél!";
+            }
+        } catch (Exception ex) {
+            return ex.getMessage();
+        }
+    }
 }

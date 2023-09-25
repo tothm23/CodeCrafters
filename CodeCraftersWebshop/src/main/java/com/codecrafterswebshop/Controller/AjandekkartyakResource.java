@@ -6,6 +6,7 @@ import java.util.List;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
+import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
@@ -35,6 +36,16 @@ public class AjandekkartyakResource {
     @POST
     public Response ujAjandekKartya(Ajandekkartya a) {
         String result = AjandekkartyaService.ujAjandekKartya(a.getNev(), a.getAr(),
+                a.getLeiras(), a.getKep(), a.getAkcio(), a.getMennyisegraktaron(),
+                a.getEszkozId(), a.getPlatformId());
+        return Response.status(Response.Status.OK).entity(result)
+                .type(MediaType.APPLICATION_JSON).build();
+    }
+
+    @PUT
+    @Path("{ajandekKartyaId}")
+    public Response frissitesAjandekKartya(@PathParam("ajandekKartyaId") Integer id, Ajandekkartya a) {
+        String result = AjandekkartyaService.frissitesAjandekKartya(id, a.getNev(), a.getAr(),
                 a.getLeiras(), a.getKep(), a.getAkcio(), a.getMennyisegraktaron(),
                 a.getEszkozId(), a.getPlatformId());
         return Response.status(Response.Status.OK).entity(result)
