@@ -21,4 +21,18 @@ public class JatekService {
             return ex.getMessage();
         }
     }
+
+    public static String frissitesJatek(Integer idBE, String nevBE, Integer arBE, String leirasBE,
+            String kepBE, Integer korhatarBE, Integer akcioBE, Integer mennyisegraktaronBE, Integer kategoriaIdBE, Integer eszkozIdBE, Integer platformIdBE) {
+        try {
+            if (Jatek.frissitesJatek(idBE, nevBE, arBE, leirasBE, kepBE, korhatarBE, akcioBE,
+                    mennyisegraktaronBE, kategoriaIdBE, eszkozIdBE, platformIdBE)) {
+                return "Játék frissítve!";
+            } else {
+                return "Hiba a Játék frissítésénél!";
+            }
+        } catch (Exception ex) {
+            return ex.getMessage();
+        }
+    }
 }

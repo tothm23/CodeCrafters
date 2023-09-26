@@ -299,4 +299,52 @@ public class Jatek implements Serializable {
         }
     }
 
+    public static boolean frissitesJatek(Integer idBE, String nevBE, Integer arBE, String leirasBE,
+            String kepBE, Integer korhatarBE, Integer akcioBE, Integer mennyisegraktaronBE, Integer kategoriaIdBE, Integer eszkozIdBE, Integer platformIdBE) {
+
+        EntityManagerFactory emf = Persistence.createEntityManagerFactory("com_CodeCraftersWebshop_war_1.0-SNAPSHOTPU");
+        EntityManager em = emf.createEntityManager();
+
+        try {
+            StoredProcedureQuery spq = em.createStoredProcedureQuery("frissitesJatek");
+
+            spq.registerStoredProcedureParameter("idBE", Integer.class, ParameterMode.IN);
+            spq.registerStoredProcedureParameter("nevBE", String.class, ParameterMode.IN);
+            spq.registerStoredProcedureParameter("arBE", Integer.class, ParameterMode.IN);
+            spq.registerStoredProcedureParameter("leirasBE", String.class, ParameterMode.IN);
+            spq.registerStoredProcedureParameter("kepBE", String.class, ParameterMode.IN);
+            spq.registerStoredProcedureParameter("korhatarBE", Integer.class, ParameterMode.IN);
+            spq.registerStoredProcedureParameter("akcioBE", Integer.class, ParameterMode.IN);
+            spq.registerStoredProcedureParameter("mennyisegraktaronBE", Integer.class, ParameterMode.IN);
+            spq.registerStoredProcedureParameter("kategoriaIdBE", Integer.class, ParameterMode.IN);
+            spq.registerStoredProcedureParameter("eszkozIdBE", Integer.class, ParameterMode.IN);
+            spq.registerStoredProcedureParameter("platformIdBE", Integer.class, ParameterMode.IN);
+
+            spq.setParameter("idBE", idBE);
+            spq.setParameter("nevBE", nevBE);
+            spq.setParameter("arBE", arBE);
+            spq.setParameter("leirasBE", leirasBE);
+            spq.setParameter("kepBE", kepBE);
+            spq.setParameter("korhatarBE", korhatarBE);
+            spq.setParameter("akcioBE", akcioBE);
+            spq.setParameter("mennyisegraktaronBE", mennyisegraktaronBE);
+            spq.setParameter("kategoriaIdBE", kategoriaIdBE);
+            spq.setParameter("eszkozIdBE", eszkozIdBE);
+            spq.setParameter("platformIdBE", platformIdBE);
+
+            spq.execute();
+            return true;
+
+        } catch (Exception e) {
+
+            System.err.println(e.getMessage());
+            return false;
+
+        } finally {
+            em.clear();
+            em.close();
+            emf.close();
+        }
+    }
+
 }
