@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Sep 25, 2023 at 01:14 PM
+-- Generation Time: Sep 26, 2023 at 09:40 AM
 -- Server version: 5.7.24
 -- PHP Version: 8.0.1
 
@@ -20,6 +20,8 @@ SET time_zone = "+00:00";
 --
 -- Database: `codecraftersdb`
 --
+CREATE DATABASE IF NOT EXISTS `codecraftersdb` DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;
+USE `codecraftersdb`;
 
 DELIMITER $$
 --
@@ -29,9 +31,23 @@ CREATE DEFINER=`root`@`localhost` PROCEDURE `ajandekKartya` (IN `ajandekKartyaId
 FROM ajandekkartya
 WHERE ajandekkartya.id = ajandekKartyaIdBE$$
 
+CREATE DEFINER=`root`@`localhost` PROCEDURE `ajandekKartyak` ()   SELECT *
+FROM ajandekkartya$$
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `csokkenoArAjandekKartya` ()   SELECT *
+FROM ajandekkartya
+ORDER BY ajandekkartya.ar DESC$$
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `csokkenoArJatek` ()   SELECT *
+FROM jatek
+ORDER BY jatek.ar DESC$$
+
 CREATE DEFINER=`root`@`localhost` PROCEDURE `felhasznaloBelepes` (IN `felhasznaloNevBE` VARCHAR(100), IN `jelszoBE` TEXT)   SELECT *
 FROM felhasznalo
 WHERE felhasznalo.felhasznaloNev = felhasznaloNevBE AND felhasznalo.jelszo = SHA1(jelszoBE)$$
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `felhasznalok` ()   SELECT *
+FROM felhasznalo$$
 
 CREATE DEFINER=`root`@`localhost` PROCEDURE `felhasznaloKosar` (IN `felhasznaloIdBE` INT(9))   SELECT * 
 FROM kosar
@@ -62,7 +78,7 @@ SET felhasznalo.felhasznaloNev = felhasznaloNevBE,
     felhasznalo.frissitve = CURRENT_TIMESTAMP
 WHERE felhasznalo.jelszo = SHA1(jelszoBE)$$
 
-CREATE DEFINER=`root`@`localhost` PROCEDURE `frissitesJatek` (IN `idBE` INT(9), IN `nevBE` VARCHAR(100), IN `arBE` INT(9), IN `leirasBE` TEXT, IN `kepBE` VARCHAR(100), IN `korhatarBE` CHAR(2), IN `akcioBE` INT(3), IN `mennyisegraktaronBE` INT(5), IN `kategoriaIdBE` INT(9), IN `eszkozIdBE` INT(9), IN `platformIdBE` INT(9))   UPDATE jatek
+CREATE DEFINER=`root`@`localhost` PROCEDURE `frissitesJatek` (IN `idBE` INT(9), IN `nevBE` VARCHAR(100), IN `arBE` INT(9), IN `leirasBE` TEXT, IN `kepBE` VARCHAR(100), IN `korhatarBE` INT(2), IN `akcioBE` INT(3), IN `mennyisegraktaronBE` INT(5), IN `kategoriaIdBE` INT(9), IN `eszkozIdBE` INT(9), IN `platformIdBE` INT(9))   UPDATE jatek
 SET jatek.nev = nevBE,
 	jatek.ar = arBE,
     jatek.leiras = leirasBE,
@@ -75,6 +91,21 @@ SET jatek.nev = nevBE,
     jatek.platformId = platformIdBE,
     jatek.frissitve = CURRENT_TIMESTAMP
 WHERE jatek.id = idBE$$
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `jatek` (IN `idBe` INT(9))   SELECT *
+FROM jatek
+WHERE jatek.id = idBe$$
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `jatekok` ()   SELECT *
+FROM jatek$$
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `novekvoArAjandekKartya` ()   SELECT *
+FROM ajandekkartya
+ORDER BY ajandekkartya.ar ASC$$
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `novekvoArJatek` ()   SELECT *
+FROM jatek
+ORDER BY jatek.ar ASC$$
 
 CREATE DEFINER=`root`@`localhost` PROCEDURE `torlesAjandekKartya` (IN `idBE` INT(9))   DELETE 
 FROM ajandekkartya
@@ -131,7 +162,7 @@ VALUES(
     telefon
 )$$
 
-CREATE DEFINER=`root`@`localhost` PROCEDURE `ujJatek` (IN `nevBE` VARCHAR(100), IN `arBE` INT(9), IN `leirasBE` TEXT, IN `kepBE` VARCHAR(100), IN `korhatarBE` CHAR(2), IN `akcioBE` INT(3), IN `mennyisegraktaronBE` INT(5), IN `kategoriaIdBE` INT(9), IN `eszkozIdBE` INT(9), IN `platformIdBE` INT(9))   INSERT INTO jatek(
+CREATE DEFINER=`root`@`localhost` PROCEDURE `ujJatek` (IN `nevBE` VARCHAR(100), IN `arBE` INT(9), IN `leirasBE` TEXT, IN `kepBE` VARCHAR(100), IN `korhatarBE` INT(2), IN `akcioBE` INT(3), IN `mennyisegraktaronBE` INT(5), IN `kategoriaIdBE` INT(9), IN `eszkozIdBE` INT(9), IN `platformIdBE` INT(9))   INSERT INTO jatek(
 	jatek.nev,
     jatek.ar,
     jatek.leiras,
@@ -255,7 +286,7 @@ CREATE TABLE `jatek` (
   `ar` int(9) NOT NULL,
   `leiras` text NOT NULL,
   `kep` varchar(100) NOT NULL,
-  `korhatar` char(2) NOT NULL,
+  `korhatar` int(2) NOT NULL,
   `akcio` int(3) NOT NULL DEFAULT '0',
   `mennyisegraktaron` int(5) NOT NULL,
   `kategoriaId` int(9) NOT NULL,
@@ -270,8 +301,8 @@ CREATE TABLE `jatek` (
 --
 
 INSERT INTO `jatek` (`id`, `nev`, `ar`, `leiras`, `kep`, `korhatar`, `akcio`, `mennyisegraktaron`, `kategoriaId`, `eszkozId`, `platformId`, `letrehozva`, `frissitve`) VALUES
-(1, 'ProbaJatek', 999, 'leirasfriss', '', '18', 10, 150, 3, 2, 1, '2023-09-18 17:30:41', '2023-09-25 12:38:50'),
-(2, 'ProbaJatek2', 1500, 'leiras', '', '16', 0, 1000, 1, 2, 3, '2023-09-25 12:30:55', NULL);
+(1, 'ProbaJatek', 999, 'leirasfriss', '', 18, 10, 150, 3, 2, 1, '2023-09-18 17:30:41', '2023-09-25 12:38:50'),
+(2, 'ProbaJatek2', 1500, 'leiras', '', 16, 0, 1000, 1, 2, 3, '2023-09-25 12:30:55', NULL);
 
 -- --------------------------------------------------------
 
