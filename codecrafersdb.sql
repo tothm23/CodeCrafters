@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Sep 26, 2023 at 09:40 AM
+-- Generation Time: Sep 26, 2023 at 11:13 AM
 -- Server version: 5.7.24
 -- PHP Version: 8.0.1
 
@@ -225,10 +225,11 @@ INSERT INTO `ajandekkartya` (`id`, `nev`, `ar`, `leiras`, `kep`, `akcio`, `menny
 
 CREATE TABLE `cupon` (
   `id` int(9) NOT NULL,
-  `nev` int(11) NOT NULL,
-  `ertek` char(2) NOT NULL,
+  `cuponKod` varchar(14) NOT NULL,
+  `ertek` int(2) NOT NULL,
   `ervenyessegIdo` datetime NOT NULL,
-  `ervenyes` tinyint(1) NOT NULL DEFAULT '0'
+  `ervenyes` tinyint(1) NOT NULL DEFAULT '0',
+  `aktivalva` tinyint(1) NOT NULL DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
@@ -337,6 +338,7 @@ CREATE TABLE `kosar` (
   `felhasznaloId` int(9) NOT NULL,
   `jatekId` int(9) NOT NULL,
   `ajandekKartyaId` int(9) NOT NULL,
+  `cuponId` int(9) NOT NULL,
   `vegosszeg` int(9) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -362,7 +364,6 @@ CREATE TABLE `rendeles` (
   `felhasznaloId` int(9) NOT NULL,
   `feladva` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `kosarId` int(9) NOT NULL,
-  `cuponId` int(9) NOT NULL,
   `kiszallitva` tinyint(1) NOT NULL DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -448,8 +449,7 @@ ALTER TABLE `platform`
 --
 ALTER TABLE `rendeles`
   ADD PRIMARY KEY (`id`),
-  ADD KEY `felhasznaloId` (`felhasznaloId`,`kosarId`),
-  ADD KEY `cuponId` (`cuponId`);
+  ADD KEY `felhasznaloId` (`felhasznaloId`,`kosarId`);
 
 --
 -- Indexes for table `termekkulcsok`
