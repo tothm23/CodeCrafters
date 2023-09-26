@@ -1,7 +1,9 @@
 package com.codecrafterswebshop.Model;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -251,6 +253,31 @@ public class Jatek implements Serializable {
     @Override
     public String toString() {
         return "com.codecrafterswebshop.Model.Jatek[ id=" + id + " ]";
+    }
+
+    public static List<Jatek> jatek(Integer idBe) {
+
+        List<Jatek> jatek = new ArrayList<>();
+
+        EntityManagerFactory emf = Persistence.createEntityManagerFactory("com_CodeCraftersWebshop_war_1.0-SNAPSHOTPU");
+        EntityManager em = emf.createEntityManager();
+
+        try {
+            StoredProcedureQuery spq = em.createStoredProcedureQuery("jatek");
+
+            spq.registerStoredProcedureParameter("idBe", Integer.class, ParameterMode.IN);
+            spq.setParameter("idBe", idBe);
+            jatek = spq.getResultList();
+
+        } catch (Exception e) {
+            System.err.println(e.getMessage());
+        } finally {
+            em.clear();
+            em.close();
+            emf.close();
+        }
+
+        return jatek;
     }
 
     public static boolean ujJatek(String nevBE, Integer arBE, String leirasBE,

@@ -1,12 +1,17 @@
 package com.codecrafterswebshop.Service;
 
 import com.codecrafterswebshop.Model.Jatek;
+import java.util.List;
 
 /**
  *
  * @author tothm23
  */
 public class JatekService {
+
+    public static List<Jatek> jatek(Integer idBe) {
+        return Jatek.jatek(idBe);
+    }
 
     public static String ujJatek(String nevBE, Integer arBE, String leirasBE,
             String kepBE, Integer korhatarBE, Integer akcioBE, Integer mennyisegraktaronBE, Integer kategoriaIdBE, Integer eszkozIdBE, Integer platformIdBE) {
