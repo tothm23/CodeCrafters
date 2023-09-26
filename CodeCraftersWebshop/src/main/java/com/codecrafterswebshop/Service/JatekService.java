@@ -35,4 +35,16 @@ public class JatekService {
             return ex.getMessage();
         }
     }
+
+    public static String torlesJatek(Integer idBE) {
+        try {
+            if (Jatek.torlesJatek(idBE)) {
+                return "Játék törölve!";
+            } else {
+                return "Hiba a Játék törlésénél!";
+            }
+        } catch (Exception ex) {
+            return ex.getMessage();
+        }
+    }
 }

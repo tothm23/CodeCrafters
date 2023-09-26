@@ -3,6 +3,7 @@ package com.codecrafterswebshop.Controller;
 import com.codecrafterswebshop.Model.Jatek;
 import com.codecrafterswebshop.Service.JatekService;
 import javax.ws.rs.Consumes;
+import javax.ws.rs.DELETE;
 import javax.ws.rs.POST;
 import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
@@ -41,6 +42,14 @@ public class JatekokResource {
                 j.getLeiras(), j.getKep(), j.getKorhatar(), j.getAkcio(), j.getMennyisegraktaron(),
                 j.getKategoriaId(), j.getEszkozId(), j.getPlatformId()
         );
+        return Response.status(Response.Status.OK).entity(result)
+                .type(MediaType.APPLICATION_JSON).build();
+    }
+
+    @DELETE
+    @Path("{jatekId}")
+    public Response torlesJatek(@PathParam("jatekId") Integer id) {
+        String result = JatekService.torlesJatek(id);
         return Response.status(Response.Status.OK).entity(result)
                 .type(MediaType.APPLICATION_JSON).build();
     }
