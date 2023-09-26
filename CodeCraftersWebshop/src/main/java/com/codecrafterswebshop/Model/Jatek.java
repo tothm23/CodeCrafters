@@ -5,12 +5,17 @@ import java.util.Date;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Lob;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.ParameterMode;
+import javax.persistence.Persistence;
+import javax.persistence.StoredProcedureQuery;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -69,9 +74,8 @@ public class Jatek implements Serializable {
     private String kep;
     @Basic(optional = false)
     @NotNull
-    @Size(min = 1, max = 2)
     @Column(name = "korhatar")
-    private String korhatar;
+    private int korhatar;
     @Basic(optional = false)
     @NotNull
     @Column(name = "akcio")
@@ -108,7 +112,7 @@ public class Jatek implements Serializable {
         this.id = id;
     }
 
-    public Jatek(Integer id, String nev, int ar, String leiras, String kep, String korhatar, int akcio, int mennyisegraktaron, int kategoriaId, int eszkozId, int platformId, Date letrehozva) {
+    public Jatek(Integer id, String nev, int ar, String leiras, String kep, int korhatar, int akcio, int mennyisegraktaron, int kategoriaId, int eszkozId, int platformId, Date letrehozva) {
         this.id = id;
         this.nev = nev;
         this.ar = ar;
@@ -163,11 +167,11 @@ public class Jatek implements Serializable {
         this.kep = kep;
     }
 
-    public String getKorhatar() {
+    public int getKorhatar() {
         return korhatar;
     }
 
-    public void setKorhatar(String korhatar) {
+    public void setKorhatar(int korhatar) {
         this.korhatar = korhatar;
     }
 
@@ -247,6 +251,52 @@ public class Jatek implements Serializable {
     @Override
     public String toString() {
         return "com.codecrafterswebshop.Model.Jatek[ id=" + id + " ]";
+    }
+
+    public static boolean ujJatek(String nevBE, Integer arBE, String leirasBE,
+            String kepBE, Integer korhatarBE, Integer akcioBE, Integer mennyisegraktaronBE, Integer kategoriaIdBE, Integer eszkozIdBE, Integer platformIdBE) {
+
+        EntityManagerFactory emf = Persistence.createEntityManagerFactory("com_CodeCraftersWebshop_war_1.0-SNAPSHOTPU");
+        EntityManager em = emf.createEntityManager();
+
+        try {
+            StoredProcedureQuery spq = em.createStoredProcedureQuery("ujJatek");
+
+            spq.registerStoredProcedureParameter("nevBE", String.class, ParameterMode.IN);
+            spq.registerStoredProcedureParameter("arBE", Integer.class, ParameterMode.IN);
+            spq.registerStoredProcedureParameter("leirasBE", String.class, ParameterMode.IN);
+            spq.registerStoredProcedureParameter("kepBE", String.class, ParameterMode.IN);
+            spq.registerStoredProcedureParameter("korhatarBE", Integer.class, ParameterMode.IN);
+            spq.registerStoredProcedureParameter("akcioBE", Integer.class, ParameterMode.IN);
+            spq.registerStoredProcedureParameter("mennyisegraktaronBE", Integer.class, ParameterMode.IN);
+            spq.registerStoredProcedureParameter("kategoriaIdBE", Integer.class, ParameterMode.IN);
+            spq.registerStoredProcedureParameter("eszkozIdBE", Integer.class, ParameterMode.IN);
+            spq.registerStoredProcedureParameter("platformIdBE", Integer.class, ParameterMode.IN);
+
+            spq.setParameter("nevBE", nevBE);
+            spq.setParameter("arBE", arBE);
+            spq.setParameter("leirasBE", leirasBE);
+            spq.setParameter("kepBE", kepBE);
+            spq.setParameter("korhatarBE", korhatarBE);
+            spq.setParameter("akcioBE", akcioBE);
+            spq.setParameter("mennyisegraktaronBE", mennyisegraktaronBE);
+            spq.setParameter("kategoriaIdBE", kategoriaIdBE);
+            spq.setParameter("eszkozIdBE", eszkozIdBE);
+            spq.setParameter("platformIdBE", platformIdBE);
+
+            spq.execute();
+            return true;
+
+        } catch (Exception e) {
+
+            System.err.println(e.getMessage());
+            return false;
+
+        } finally {
+            em.clear();
+            em.close();
+            emf.close();
+        }
     }
 
 }
