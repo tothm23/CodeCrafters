@@ -13,8 +13,11 @@ signupLoginLink.forEach(link => {
     });
 });
 
+
+// regisztráció fetch 
 regisztracio.addEventListener('click',() => 
 {
     fetch("http://localhost:8080/CodeCraftersWebshop-1.0-SNAPSHOT/webresources/felhasznalok")
+    method: "POST"
     .then((response) => response.json());
 });
