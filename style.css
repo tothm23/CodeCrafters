@@ -106,3 +106,24 @@
 .bar .options{
     background-color: #8c8c8c;
 }
+
+/*menu gombok*/
+.gomblink{
+    text-decoration: none;
+    color: inherit;
+    text-transform: uppercase;
+    font-size: 12pt;
+    font-weight: bold;
+}
+.category .gomblink:hover{
+    color: #ff4444;
+}
+.gomblink:hover{
+    color: #ff4444;
+}
+h2{
+    text-align: center;
+}
+h2,form .mb-3,p{
+color: white;
+}
