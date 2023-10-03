@@ -21,3 +21,61 @@
     justify-content: space-between;
     align-items: flex-start;
   }
+
+  /*nav*/
+
+.nav{
+    width: 100%;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    padding-left: 30px;
+    padding-right: 30px;
+    background-color: #BB4930;
+    display: flex;
+    flex-direction: row;
+    border: solid 1px;
+    /*justify-content: space-between; */
+    align-items: center;
+    
+}
+.navbar{
+    background-color: #BB4930;
+}
+.nav img{
+    border-radius: 10px;
+    max-width: 100px;
+    border: solid 1px;
+    margin-right: 30px;
+    
+}
+.keplink{
+    text-decoration: none;
+    color: inherit;
+}
+.keplink:hover{
+    text-decoration: none;
+    color: inherit;
+}
+.nav input{
+    flex-grow: 1;
+    display: flex;
+    align-items: center;
+}
+
+/*gombok*/
+
+.log_reg{
+    display: flex;
+    flex-direction: column;
+    margin-right: 20px;
+}
+.log_reg button{
+    color: #000000;
+    background-color: #ffffff;
+    border-radius: 5px;
+    height: 30px;
+    margin: 5px;
+}
+.log_reg a{
+    text-align: center;
+}
