@@ -1,0 +1,23 @@
+*{
+    box-sizing: border-box;
+    text-transform: uppercase;
+}
+.container{
+    background-color: #404040;
+    max-width: 100%;
+    padding-top: 30px;
+    padding-left: 0px;
+    padding-right: 0px;
+    display: flex;
+    flex-direction: column;
+    background-color: #404040;
+    padding: 30px 0px;
+    justify-content: space-between;
+  }
+  .content-container {
+    display: flex;
+    margin-right: 0px;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: flex-start;
+  }
