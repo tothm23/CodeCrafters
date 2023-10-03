@@ -308,6 +308,60 @@ public class Felhasznalo implements Serializable {
         return felhasznalok;
     }
 
+    public static List<Felhasznalo> felhasznalo(Integer idBE) {
+
+        List<Felhasznalo> felhasznalo = new ArrayList<>();
+
+        EntityManagerFactory emf = Persistence.createEntityManagerFactory("com_CodeCraftersWebshop_war_1.0-SNAPSHOTPU");
+        EntityManager em = emf.createEntityManager();
+
+        try {
+            StoredProcedureQuery spq = em.createStoredProcedureQuery("felhasznalo");
+
+            spq.registerStoredProcedureParameter("idBe", Integer.class, ParameterMode.IN);
+            spq.setParameter("idBe", idBE);
+            felhasznalo = spq.getResultList();
+
+        } catch (Exception e) {
+            System.err.println(e.getMessage());
+        } finally {
+            em.clear();
+            em.close();
+            emf.close();
+        }
+
+        return felhasznalo;
+    }
+
+    public static Integer felhasznaloBelepes(String felhasznaloNevBE, String jelszoBE) {
+
+        EntityManagerFactory emf = Persistence.createEntityManagerFactory("com_CodeCraftersWebshop_war_1.0-SNAPSHOTPU");
+        EntityManager em = emf.createEntityManager();
+
+        try {
+            StoredProcedureQuery spq = em.createStoredProcedureQuery("felhasznaloBelepes");
+
+            spq.registerStoredProcedureParameter("felhasznaloNevBE", String.class, ParameterMode.IN);
+            spq.registerStoredProcedureParameter("jelszoBE", String.class, ParameterMode.IN);
+            spq.registerStoredProcedureParameter("felhasznaloIdKI", Integer.class, ParameterMode.OUT);
+
+            spq.setParameter("felhasznaloNevBE", felhasznaloNevBE);
+            spq.setParameter("jelszoBE", jelszoBE);
+
+            System.out.println("Success! ID: " + new Felhasznalo((Integer) spq.getOutputParameterValue("felhasznaloIdKI")).getId());
+            return new Felhasznalo((Integer) spq.getOutputParameterValue("felhasznaloIdKI")).getId();
+
+        } catch (Exception e) {
+            System.err.println(e.getMessage());
+            return new Felhasznalo().getId();
+        } finally {
+            em.clear();
+            em.close();
+            emf.close();
+        }
+
+    }
+
     public static boolean ujFelhasznalo(String felhasznaloNevBE, String vezetekNevBE, String keresztNev,
             String szuletesiDatumBE, String emailBE, String jelszoBE, String orszagBE, String telefon) {
 

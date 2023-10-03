@@ -39,4 +39,11 @@ public class FelhasznalokResource {
                 .type(MediaType.APPLICATION_JSON).build();
     }
 
+    @GET
+    @Path("bejelentkezes")
+    public List<Felhasznalo> felhasznaloBelepes(Felhasznalo f) {
+        List<Felhasznalo> felhasznalok = FelhasznaloService.felhasznaloBelepes(f.getFelhasznaloNev(), f.getJelszo());
+        return felhasznalok;
+    }
+
 }

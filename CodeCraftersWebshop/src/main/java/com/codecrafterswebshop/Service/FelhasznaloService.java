@@ -8,11 +8,11 @@ import java.util.List;
  * @author tothm23
  */
 public class FelhasznaloService {
-
+    
     public static List<Felhasznalo> felhasznalok() {
         return Felhasznalo.felhasznalok();
     }
-
+    
     public static String ujFelhasznalo(String felhasznaloNevBE, String vezetekNevBE, String keresztNev,
             String szuletesiDatumBE, String emailBE, String jelszoBE, String orszagBE, String telefon) {
         try {
@@ -25,5 +25,10 @@ public class FelhasznaloService {
         } catch (Exception ex) {
             return ex.getMessage();
         }
+    }
+    
+    public static List<Felhasznalo> felhasznaloBelepes(String felhasznaloNevBE, String jelszoBE) {
+        Integer id = Felhasznalo.felhasznaloBelepes(felhasznaloNevBE, jelszoBE);
+        return Felhasznalo.felhasznalo(id);
     }
 }
