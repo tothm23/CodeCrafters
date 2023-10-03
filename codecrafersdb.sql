@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Oct 03, 2023 at 09:11 AM
+-- Generation Time: Oct 03, 2023 at 10:44 AM
 -- Server version: 5.7.24
 -- PHP Version: 8.0.1
 
@@ -41,6 +41,10 @@ ORDER BY ajandekkartya.ar DESC$$
 CREATE DEFINER=`root`@`localhost` PROCEDURE `csokkenoArJatek` ()   SELECT *
 FROM jatek
 ORDER BY jatek.ar DESC$$
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `felhasznalo` (IN `idBE` INT(9))   SELECT *
+FROM felhasznalo
+WHERE felhasznalo.id = idBE$$
 
 CREATE DEFINER=`root`@`localhost` PROCEDURE `felhasznaloBelepes` (IN `felhasznaloNevBE` VARCHAR(100), IN `jelszoBE` TEXT, OUT `felhasznaloIdKI` INT(9))   SELECT felhasznalo.id
 FROM felhasznalo
