@@ -11,6 +11,33 @@
     <script src="script.js" defer></script>
 </head>
 <body>
-    
+    <div class="blur-bg-overlay"></div>
+    <div class="form-popup">
+        <span class="close-btn material-symbols-rounded">close</span>
+        <div class="form-box login">
+            <div class="form-details">
+                <h2>Üdvözlünk</h2>
+                <p>
+                    Kérjük, jelentkezzen be személyes adataival, hogy kapcsolatban maradjon velünk.</p>
+            </div>
+            <div class="form-content">
+                <h2>Bejelentkezés</h2>
+                <form action="#">
+                    <div class="input-field">
+                        <input type="text" required>
+                        <label>Email</label>
+                    </div>
+                    <div class="input-field">
+                        <input type="password" required>
+                        <label>Jelszó</label>
+                    </div>
+                    <a href="#" class="forgot-pass-link">Elfelejtetted a jelszavad?</a>
+                    <button type="submit">Belépés</button>
+                </form>
+                <div class="bottom-link">Nincs fiókod?
+                    <a href="#" id="signup-link">Regisztrálj</a>
+                </div>
+            </div>
+        </div>
 </body>
 </html>
