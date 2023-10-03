@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Sep 26, 2023 at 11:13 AM
+-- Generation Time: Oct 03, 2023 at 09:11 AM
 -- Server version: 5.7.24
 -- PHP Version: 8.0.1
 
@@ -42,9 +42,10 @@ CREATE DEFINER=`root`@`localhost` PROCEDURE `csokkenoArJatek` ()   SELECT *
 FROM jatek
 ORDER BY jatek.ar DESC$$
 
-CREATE DEFINER=`root`@`localhost` PROCEDURE `felhasznaloBelepes` (IN `felhasznaloNevBE` VARCHAR(100), IN `jelszoBE` TEXT)   SELECT *
+CREATE DEFINER=`root`@`localhost` PROCEDURE `felhasznaloBelepes` (IN `felhasznaloNevBE` VARCHAR(100), IN `jelszoBE` TEXT, OUT `felhasznaloIdKI` INT(9))   SELECT felhasznalo.id
 FROM felhasznalo
-WHERE felhasznalo.felhasznaloNev = felhasznaloNevBE AND felhasznalo.jelszo = SHA1(jelszoBE)$$
+WHERE felhasznalo.felhasznaloNev = felhasznaloNevBE AND felhasznalo.jelszo = SHA1(jelszoBE)
+INTO felhasznaloIdKI$$
 
 CREATE DEFINER=`root`@`localhost` PROCEDURE `felhasznalok` ()   SELECT *
 FROM felhasznalo$$
@@ -273,7 +274,8 @@ CREATE TABLE `felhasznalo` (
 
 INSERT INTO `felhasznalo` (`id`, `felhasznaloNev`, `vezetekNev`, `keresztNev`, `szuletesiDatum`, `email`, `jelszo`, `orszag`, `telefon`, `aktiv`, `profilkep`, `jogosultsagId`, `letrehozva`, `frissitve`, `torolve`) VALUES
 (2, 'Probafriss', 'Ujnev1', 'Ujnev2', '2000-03-23', 'proba@gamil.com', 'a58c0c94fba109fa2e93458e184f3007bd2552a1', 'Németország', '+360620607210', 1, '', 1, '2023-09-18 11:28:10', '2023-09-25 12:41:04', '2023-09-18 16:54:16'),
-(3, 'Proba2', 'ASD', 'DSA', '1987-04-07', 'kerib.113sz@acsjszki.hu', 'b6157765d4e408995d0b67b0956d3c0a3215a57e', 'Magyarország', '+3606204077373', 0, NULL, 1, '2023-09-25 12:33:02', NULL, NULL);
+(3, 'Proba2', 'ASD', 'DSA', '1987-04-07', 'kerib.113sz@acsjszki.hu', 'b6157765d4e408995d0b67b0956d3c0a3215a57e', 'Magyarország', '+3606204077373', 0, NULL, 1, '2023-09-25 12:33:02', NULL, NULL),
+(4, 'Proba3', 'Jancsi', 'Béla', '1997-02-24', 'jani@gmail.com', 'f1ff673bf872ea25ce8fcd148fdfbe7129e5380a', 'Franciaország', '+36204032312', 0, NULL, 1, '2023-10-03 11:01:46', NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -484,7 +486,7 @@ ALTER TABLE `eszkoz`
 -- AUTO_INCREMENT for table `felhasznalo`
 --
 ALTER TABLE `felhasznalo`
-  MODIFY `id` int(9) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(9) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `jatek`
