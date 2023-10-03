@@ -15,6 +15,7 @@ import javax.persistence.Id;
 import javax.persistence.Lob;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.ParameterMode;
 import javax.persistence.Persistence;
 import javax.persistence.StoredProcedureQuery;
 import javax.persistence.Table;
@@ -73,8 +74,7 @@ public class Felhasznalo implements Serializable {
     @Basic(optional = false)
     @NotNull
     @Column(name = "szuletesiDatum")
-    @Temporal(TemporalType.DATE)
-    private Date szuletesiDatum;
+    private String szuletesiDatum;
     // @Pattern(regexp="[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?", message="Invalid email")//if the field contains email address consider using this annotation to enforce field validation
     @Basic(optional = false)
     @NotNull
@@ -127,7 +127,7 @@ public class Felhasznalo implements Serializable {
         this.id = id;
     }
 
-    public Felhasznalo(Integer id, String felhasznaloNev, String vezetekNev, String keresztNev, Date szuletesiDatum, String email, String jelszo, String orszag, String telefon, boolean aktiv, int jogosultsagId, Date letrehozva) {
+    public Felhasznalo(Integer id, String felhasznaloNev, String vezetekNev, String keresztNev, String szuletesiDatum, String email, String jelszo, String orszag, String telefon, boolean aktiv, int jogosultsagId, Date letrehozva) {
         this.id = id;
         this.felhasznaloNev = felhasznaloNev;
         this.vezetekNev = vezetekNev;
@@ -174,11 +174,11 @@ public class Felhasznalo implements Serializable {
         this.keresztNev = keresztNev;
     }
 
-    public Date getSzuletesiDatum() {
+    public String getSzuletesiDatum() {
         return szuletesiDatum;
     }
 
-    public void setSzuletesiDatum(Date szuletesiDatum) {
+    public void setSzuletesiDatum(String szuletesiDatum) {
         this.szuletesiDatum = szuletesiDatum;
     }
 
@@ -306,6 +306,48 @@ public class Felhasznalo implements Serializable {
         }
 
         return felhasznalok;
+    }
+
+    public static boolean ujFelhasznalo(String felhasznaloNevBE, String vezetekNevBE, String keresztNev,
+            String szuletesiDatumBE, String emailBE, String jelszoBE, String orszagBE, String telefon) {
+
+        EntityManagerFactory emf = Persistence.createEntityManagerFactory("com_CodeCraftersWebshop_war_1.0-SNAPSHOTPU");
+        EntityManager em = emf.createEntityManager();
+
+        try {
+            StoredProcedureQuery spq = em.createStoredProcedureQuery("ujFelhasznalo");
+
+            spq.registerStoredProcedureParameter("felhasznaloNevBE", String.class, ParameterMode.IN);
+            spq.registerStoredProcedureParameter("vezetekNevBE", String.class, ParameterMode.IN);
+            spq.registerStoredProcedureParameter("keresztNev", String.class, ParameterMode.IN);
+            spq.registerStoredProcedureParameter("szuletesiDatumBE", String.class, ParameterMode.IN);
+            spq.registerStoredProcedureParameter("emailBE", String.class, ParameterMode.IN);
+            spq.registerStoredProcedureParameter("jelszoBE", String.class, ParameterMode.IN);
+            spq.registerStoredProcedureParameter("orszagBE", String.class, ParameterMode.IN);
+            spq.registerStoredProcedureParameter("telefon", String.class, ParameterMode.IN);
+
+            spq.setParameter("felhasznaloNevBE", felhasznaloNevBE);
+            spq.setParameter("vezetekNevBE", vezetekNevBE);
+            spq.setParameter("keresztNev", keresztNev);
+            spq.setParameter("szuletesiDatumBE", szuletesiDatumBE);
+            spq.setParameter("emailBE", emailBE);
+            spq.setParameter("jelszoBE", jelszoBE);
+            spq.setParameter("orszagBE", orszagBE);
+            spq.setParameter("telefon", telefon);
+
+            spq.execute();
+            return true;
+
+        } catch (Exception e) {
+
+            System.err.println(e.getMessage());
+            return false;
+
+        } finally {
+            em.clear();
+            em.close();
+            emf.close();
+        }
     }
 
 }
