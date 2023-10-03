@@ -79,3 +79,30 @@
 .log_reg a{
     text-align: center;
 }
+
+/*menu*/
+.bar{
+    margin-right: 30px;
+    display: flex;
+    flex-direction: column;
+    align-items: baseline;
+    flex: 1;
+    text-align: center;
+}
+.bar ul{
+    width: 150px;
+    padding: 5px;
+}
+
+.bar li{
+    list-style: none;
+    border: #000000 1px solid;
+    border-radius: 5px;
+}
+.bar .category{
+    color: #ffffff;
+    background-color: #241F1F;
+}
+.bar .options{
+    background-color: #8c8c8c;
+}
