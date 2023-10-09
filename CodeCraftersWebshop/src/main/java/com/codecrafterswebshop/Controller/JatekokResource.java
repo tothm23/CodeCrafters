@@ -40,7 +40,7 @@ public class JatekokResource {
                 j.getLeiras(), j.getKep(), j.getKorhatar(), j.getAkcio(), j.getMennyisegraktaron(),
                 j.getKategoriaId(), j.getEszkozId(), j.getPlatformId()
         );
-        return Response.status(Response.Status.OK).entity(result)
+        return Response.status(Response.Status.CREATED).entity(result)
                 .type(MediaType.APPLICATION_JSON).build();
     }
 
