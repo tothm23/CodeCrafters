@@ -23,26 +23,26 @@ import javax.ws.rs.core.Response;
 @Produces(MediaType.APPLICATION_JSON)
 @Consumes(MediaType.APPLICATION_JSON)
 public class AjandekkartyakResource {
-    
+
     public AjandekkartyakResource() {
     }
-    
+
     @GET
     @Path("{ajandekKartyaId}")
     public List<Ajandekkartya> ajandekKartya(@PathParam("ajandekKartyaId") Integer id) {
         List<Ajandekkartya> result = AjandekkartyaService.ajandekKartya(id);
         return result;
     }
-    
+
     @POST
     public Response ujAjandekKartya(Ajandekkartya a) {
         String result = AjandekkartyaService.ujAjandekKartya(a.getNev(), a.getAr(),
                 a.getLeiras(), a.getKep(), a.getAkcio(), a.getMennyisegraktaron(),
                 a.getEszkozId(), a.getPlatformId());
-        return Response.status(Response.Status.OK).entity(result)
+        return Response.status(Response.Status.CREATED).entity(result)
                 .type(MediaType.APPLICATION_JSON).build();
     }
-    
+
     @PUT
     @Path("{ajandekKartyaId}")
     public Response frissitesAjandekKartya(@PathParam("ajandekKartyaId") Integer id, Ajandekkartya a) {
@@ -52,7 +52,7 @@ public class AjandekkartyakResource {
         return Response.status(Response.Status.OK).entity(result)
                 .type(MediaType.APPLICATION_JSON).build();
     }
-    
+
     @DELETE
     @Path("{ajandekKartyaId}")
     public Response torlesAjandekKartya(@PathParam("ajandekKartyaId") Integer id) {
