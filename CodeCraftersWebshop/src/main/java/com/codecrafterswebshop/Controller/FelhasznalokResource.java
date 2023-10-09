@@ -35,7 +35,7 @@ public class FelhasznalokResource {
         String result = FelhasznaloService.ujFelhasznalo(f.getFelhasznaloNev(), f.getVezetekNev(),
                 f.getKeresztNev(), f.getSzuletesiDatum(), f.getEmail(), f.getJelszo(),
                 f.getOrszag(), f.getTelefon());
-        return Response.status(Response.Status.OK).entity(result)
+        return Response.status(Response.Status.CREATED).entity(result)
                 .type(MediaType.APPLICATION_JSON).build();
     }
 
