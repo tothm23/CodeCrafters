@@ -1,15 +1,18 @@
 <!DOCTYPE html>
 <!-- Coding By CodingNepal - www.codingnepalweb.com -->
 <html lang="hu">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Bejelentkezés és regisztráció</title>
     <!-- Google Fonts Link For Icons -->
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@48,400,0,0">
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@48,400,0,0">
     <link rel="stylesheet" href="../bejelentkezés_regisztrációsfeulet/style.css">
     <script src="script.js" defer></script>
 </head>
+
 <body>
     <div class="blur-bg-overlay"></div>
     <div class="form-popup">
@@ -25,7 +28,7 @@
                 <form action="#">
                     <div class="input-field">
                         <input type="text" required>
-                        <label>Email</label>
+                        <label>Felhasználó név</label>
                     </div>
                     <div class="input-field">
                         <input type="password" required>
@@ -48,12 +51,40 @@
                 <h2>REGISZTRÁLJ</h2>
                 <form action="#">
                     <div class="input-field">
-                        <input type="text" required>
-                        <label>Írd be az email címed</label>
+                        <input type="text" required id="felhasz">
+                        <label for="felhasz">Írd be a Felhasználó neved</label>
                     </div>
                     <div class="input-field">
-                        <input type="password" required>
-                        <label>Jelszó létrehozása</label>
+                        <input type="text" required id="vezeteknev">
+                        <label for="vezeteknev">Írd be a Vezetékneved</label>
+                    </div>
+                    <div class="input-field">
+                        <input type="text" required id="keresztnev">
+                        <label for="keresztnev">Írd be a Keresztneved</label>
+                    </div>
+                    <div class="input-field">
+                        <input type="text" required id="datum">
+                        <label for="datum">Írd be a Születési dátumod</label>
+                    </div>
+                    <div class="input-field">
+                        <input type="text" required id="email">
+                        <label for="email">Írd be az email címed</label>
+                    </div>
+                    <div class="input-field">
+                        <input type="password" required id="jelszo">
+                        <label for="jelszo">Jelszó létrehozása</label>
+                    </div>
+                    <div class="input-field">
+                        <input type="password" required id="jelszoegyezes">
+                        <label>Jelszó Újra</label>
+                    </div>
+                    <div class="input-field">
+                        <input type="text" required id="orszag">
+                        <label for="orszag">Írd be az országot</label>
+                    </div>
+                    <div class="input-field">
+                        <input type="text" required id="telefonszam">
+                        <label for="telefonszam">Írd be a telefonszámod</label>
                     </div>
                     <div class="policy-text">
                         <input type="checkbox" id="policy" required>
@@ -73,4 +104,5 @@
         </div>
     </div>
 </body>
+
 </html>

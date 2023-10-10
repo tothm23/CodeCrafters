@@ -7,6 +7,8 @@
     box-sizing: border-box;
     font-family: "Open Sans", sans-serif;
     text-transform: uppercase;
+    color: white;
+    ;
 }
 
 .form-popup {
@@ -32,7 +34,7 @@
     transition: transform 0.3s ease, opacity 0.1s;
 }
 
-.close-btn{
+.close-btn {
     visibility: hidden;
 }
 
@@ -121,7 +123,8 @@ form .input-field {
 }
 
 .input-field input:focus {
-    border: 1px solid #ffffff;;
+    border: 1px solid #ffffff;
+    ;
 }
 
 .input-field label {
@@ -140,7 +143,8 @@ form .input-field {
 
 .input-field input:is(:focus, :valid)~label {
     transform: translateY(-120%);
-    color: #ffffff;;
+    color: #ffffff;
+    ;
     font-size: 0.75rem;
 }
 
@@ -171,12 +175,14 @@ form button {
     border-radius: 3px;
     cursor: pointer;
     margin: 25px 0;
-    background: #BB4930;;
+    background: #BB4930;
+    ;
     transition: 0.2s ease;
 }
 
 form button:hover {
-    background: #712d1e;;
+    background: #712d1e;
+    ;
 }
 
 .form-content .bottom-link {
