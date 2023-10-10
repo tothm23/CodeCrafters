@@ -2,7 +2,7 @@ const formPopup = document.querySelector(".form-popup");
 const signupLoginLink = formPopup.querySelectorAll(".bottom-link a");
 const regisztracio = document.getElementById('regisztracio');
 
-const felhaszN = document.getElementById('felhasz').value;
+const felhasz = document.getElementById('felhasz').value;
 const vezeteknev = document.getElementById('vezeteknev').value;
 const keresztnev = document.getElementById('keresztnev').value;
 const datum = document.getElementById('datum').value;
@@ -45,5 +45,5 @@ regisztracio.addEventListener('click', () => {
             "Content-type": "application/json; charset=UTF-8",
         },
 
-    }.then((response) => response.json()).then(data => { console.log(data) }));
+    }).then((response) => response.json());
 });
