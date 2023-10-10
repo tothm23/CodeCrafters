@@ -19,7 +19,7 @@
     width: 100%;
     opacity: 0;
     pointer-events: none;
-    max-width: 720px;
+    max-width: 900px;
     background: #241F1F;
     border: 2px solid #fff;
     border-radius: 10%;
@@ -210,6 +210,11 @@ form button:hover {
     margin-right: 7px;
 }
 
+.inputrow{
+    display: flex;
+    flex-direction: row;
+}
+
 @media (max-width: 760px) {
     .form-popup {
         width: 95%;
@@ -221,5 +226,9 @@ form button:hover {
 
     .form-box .form-content {
         padding: 30px 20px;
+    }
+    .inputrow{
+        display: flex;
+        flex-direction: column;
     }
 }

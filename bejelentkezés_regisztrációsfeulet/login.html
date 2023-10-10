@@ -42,7 +42,7 @@
                 </div>
             </div>
         </div>
-        <div class="form-box signup">
+        <div class="form-box signup reg">
             <div class="form-details">
                 <h2>Fiók létrehozása</h2>
                 <p>Ahhoz, hogy közösségünk tagja lehessen, kérjük, regisztráljon személyes adataival.</p>
@@ -50,37 +50,45 @@
             <div class="form-content">
                 <h2>REGISZTRÁLJ</h2>
                 <form action="#">
-                    <div class="input-field">
-                        <input type="text" required id="felhasz">
-                        <label for="felhasz">Írd be a Felhasználó neved</label>
+                    <div class="inputrow">
+                        <div class="input-field">
+                            <input type="text" required id="felhasz">
+                            <label for="felhasz">Írd be a Felhasználó neved</label>
+                        </div>
+                        <div class="input-field">
+                            <input type="text" required id="vezeteknev">
+                            <label for="vezeteknev">Írd be a Vezetékneved</label>
+                        </div>
                     </div>
-                    <div class="input-field">
-                        <input type="text" required id="vezeteknev">
-                        <label for="vezeteknev">Írd be a Vezetékneved</label>
+                    <div class="inputrow">
+                        <div class="input-field">
+                            <input type="text" required id="keresztnev">
+                            <label for="keresztnev">Írd be a Keresztneved</label>
+                        </div>
+                        <div class="input-field">
+                            <input type="text" required id="datum">
+                            <label for="datum">Írd be a Születési dátumod</label>
+                        </div>
                     </div>
-                    <div class="input-field">
-                        <input type="text" required id="keresztnev">
-                        <label for="keresztnev">Írd be a Keresztneved</label>
+                    <div class="inputrow">
+                        <div class="input-field">
+                            <input type="text" required id="email">
+                            <label for="email">Írd be az email címed</label>
+                        </div>
+                        <div class="input-field">
+                            <input type="password" required id="jelszo">
+                            <label for="jelszo">Jelszó létrehozása</label>
+                        </div>
                     </div>
-                    <div class="input-field">
-                        <input type="text" required id="datum">
-                        <label for="datum">Írd be a Születési dátumod</label>
-                    </div>
-                    <div class="input-field">
-                        <input type="text" required id="email">
-                        <label for="email">Írd be az email címed</label>
-                    </div>
-                    <div class="input-field">
-                        <input type="password" required id="jelszo">
-                        <label for="jelszo">Jelszó létrehozása</label>
-                    </div>
-                    <div class="input-field">
-                        <input type="password" required id="jelszoegyezes">
-                        <label>Jelszó Újra</label>
-                    </div>
-                    <div class="input-field">
-                        <input type="text" required id="orszag">
-                        <label for="orszag">Írd be az országot</label>
+                    <div class="inputrow">
+                        <div class="input-field">
+                            <input type="password" required id="jelszoegyezes">
+                            <label>Jelszó Újra</label>
+                        </div>
+                        <div class="input-field">
+                            <input type="text" required id="orszag">
+                            <label for="orszag">Írd be az országot</label>
+                        </div>
                     </div>
                     <div class="input-field">
                         <input type="text" required id="telefonszam">
