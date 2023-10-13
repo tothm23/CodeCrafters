@@ -18,6 +18,7 @@ public class ApplicationConfig extends Application {
     }
 
     private void addRestResourceClasses(Set<Class<?>> resources) {
+        resources.add(com.codecrafterswebshop.Config.CorsFilter.class);
         resources.add(com.codecrafterswebshop.Controller.AjandekkartyakResource.class);
         resources.add(com.codecrafterswebshop.Controller.FelhasznalokResource.class);
         resources.add(com.codecrafterswebshop.Controller.JatekokResource.class);
