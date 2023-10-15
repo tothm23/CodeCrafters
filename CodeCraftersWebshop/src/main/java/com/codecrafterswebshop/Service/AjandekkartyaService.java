@@ -1,7 +1,8 @@
 package com.codecrafterswebshop.Service;
 
 import com.codecrafterswebshop.Model.Ajandekkartya;
-import java.util.List;
+import java.util.Map;
+import org.json.JSONObject;
 
 /**
  *
@@ -9,8 +10,16 @@ import java.util.List;
  */
 public class AjandekkartyaService {
 
-    public static List<Ajandekkartya> ajandekKartya(Integer ajandekKartyaIdBE) {
-        return Ajandekkartya.ajandekKartya(ajandekKartyaIdBE);
+    public static JSONObject ajandekKartya(Integer ajandekKartyaIdBE) {
+
+        Map<String, Object> ajandekKartya = Ajandekkartya.ajandekKartya(ajandekKartyaIdBE);
+        JSONObject obj = new JSONObject();
+
+        for (Map.Entry<String, Object> set : ajandekKartya.entrySet()) {
+            obj.put(set.getKey(), set.getValue());
+        }
+
+        return obj;
     }
 
     public static String ujAjandekKartya(String nevBE, Integer arBE, String leirasBE,
