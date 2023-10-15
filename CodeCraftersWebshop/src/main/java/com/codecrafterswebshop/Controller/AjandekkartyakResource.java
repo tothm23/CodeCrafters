@@ -2,7 +2,6 @@ package com.codecrafterswebshop.Controller;
 
 import com.codecrafterswebshop.Model.Ajandekkartya;
 import com.codecrafterswebshop.Service.AjandekkartyaService;
-import java.util.List;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
@@ -13,6 +12,7 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
+import org.json.JSONObject;
 
 /**
  * REST Web Service
@@ -29,9 +29,13 @@ public class AjandekkartyakResource {
 
     @GET
     @Path("{ajandekKartyaId}")
-    public List<Ajandekkartya> ajandekKartya(@PathParam("ajandekKartyaId") Integer id) {
-        List<Ajandekkartya> result = AjandekkartyaService.ajandekKartya(id);
-        return result;
+    public Response ajandekKartya(@PathParam("ajandekKartyaId") Integer id) {
+        JSONObject eredmeny = AjandekkartyaService.ajandekKartya(id);
+
+        return eredmeny.length() == 0 ? Response.status(Response.Status.NOT_FOUND).entity(eredmeny.toString())
+                .type(MediaType.APPLICATION_JSON).build()
+                : Response.status(Response.Status.OK).entity(eredmeny.toString())
+                        .type(MediaType.APPLICATION_JSON).build();
     }
 
     @POST
