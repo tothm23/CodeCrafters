@@ -12,6 +12,7 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
+import org.json.JSONArray;
 import org.json.JSONObject;
 
 /**
@@ -25,6 +26,13 @@ import org.json.JSONObject;
 public class AjandekkartyakResource {
 
     public AjandekkartyakResource() {
+    }
+
+    @GET
+    public Response ajandekKartyak() {
+        JSONArray eredmeny = AjandekkartyaService.ajandekKartyak();
+        return Response.status(Response.Status.OK).entity(eredmeny.toString())
+                .type(MediaType.APPLICATION_JSON).build();
     }
 
     @GET
