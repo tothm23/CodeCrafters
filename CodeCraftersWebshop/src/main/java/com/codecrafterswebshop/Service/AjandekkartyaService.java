@@ -50,6 +50,9 @@ public class AjandekkartyaService {
 
     public static String torlesAjandekKartya(Integer idBE) {
         try {
+            if (ajandekKartya(idBE).length() == 0) {
+                return "Hiba az ajándék kártya törlésénél!";
+            }
             if (Ajandekkartya.torlesAjandekKartya(idBE)) {
                 return "Ajándék kártya törölve!";
             } else {
