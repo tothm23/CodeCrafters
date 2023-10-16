@@ -60,8 +60,11 @@ public class AjandekkartyakResource {
     @DELETE
     @Path("{ajandekKartyaId}")
     public Response torlesAjandekKartya(@PathParam("ajandekKartyaId") Integer id) {
-        String result = AjandekkartyaService.torlesAjandekKartya(id);
-        return Response.status(Response.Status.OK).entity(result)
+        JSONObject eredmeny = AjandekkartyaService.ajandekKartya(id);
+        String torles = AjandekkartyaService.torlesAjandekKartya(id);
+
+        return eredmeny.length() == 0 ? Response.status(Response.Status.NOT_FOUND).entity(torles)
+                .type(MediaType.APPLICATION_JSON).build() : Response.status(Response.Status.OK).entity(torles)
                 .type(MediaType.APPLICATION_JSON).build();
     }
 }
