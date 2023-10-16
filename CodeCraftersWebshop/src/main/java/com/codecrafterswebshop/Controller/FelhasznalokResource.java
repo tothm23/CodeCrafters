@@ -10,6 +10,7 @@ import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
+import org.json.JSONObject;
 
 /**
  * REST Web Service
@@ -41,9 +42,10 @@ public class FelhasznalokResource {
 
     @GET
     @Path("bejelentkezes")
-    public List<Felhasznalo> felhasznaloBelepes(Felhasznalo f) {
-        List<Felhasznalo> felhasznalok = FelhasznaloService.felhasznaloBelepes(f.getFelhasznaloNev(), f.getJelszo());
-        return felhasznalok;
+    public Response felhasznaloBelepes(Felhasznalo f) {
+        JSONObject eredmeny = FelhasznaloService.felhasznaloBelepes(f.getFelhasznaloNev(), f.getJelszo());
+        return Response.status(Response.Status.OK).entity(eredmeny.toString())
+                .type(MediaType.APPLICATION_JSON).build();
     }
 
 }

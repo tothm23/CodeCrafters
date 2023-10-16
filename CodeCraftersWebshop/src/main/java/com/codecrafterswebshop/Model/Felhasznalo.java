@@ -3,7 +3,9 @@ package com.codecrafterswebshop.Model;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -308,9 +310,9 @@ public class Felhasznalo implements Serializable {
         return felhasznalok;
     }
 
-    public static List<Felhasznalo> felhasznalo(Integer idBE) {
+    public static Map<String, Object> felhasznalo(Integer idBE) {
 
-        List<Felhasznalo> felhasznalo = new ArrayList<>();
+        Map<String, Object> felhasznalo = new HashMap<>();
 
         EntityManagerFactory emf = Persistence.createEntityManagerFactory("com_CodeCraftersWebshop_war_1.0-SNAPSHOTPU");
         EntityManager em = emf.createEntityManager();
@@ -320,7 +322,24 @@ public class Felhasznalo implements Serializable {
 
             spq.registerStoredProcedureParameter("idBe", Integer.class, ParameterMode.IN);
             spq.setParameter("idBe", idBE);
-            felhasznalo = spq.getResultList();
+
+            List<Object[]> eredmeny = spq.getResultList();
+
+            if (!eredmeny.isEmpty()) {
+                Object[] sor = eredmeny.get(0);
+                felhasznalo.put("id", sor[0]);
+                felhasznalo.put("felhasznaloNev", sor[1]);
+                felhasznalo.put("vezetekNev", sor[2]);
+                felhasznalo.put("keresztNev", sor[3]);
+                felhasznalo.put("szuletesiDatum", sor[4]);
+                felhasznalo.put("email", sor[5]);
+                felhasznalo.put("jelszo", sor[6]);
+                felhasznalo.put("orszag", sor[7]);
+                felhasznalo.put("telefon", sor[8]);
+                felhasznalo.put("aktiv", sor[9]);
+                felhasznalo.put("profilkep", sor[10]);
+                felhasznalo.put("letrehozva", sor[12]);
+            }
 
         } catch (Exception e) {
             System.err.println(e.getMessage());
