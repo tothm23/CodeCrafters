@@ -94,39 +94,47 @@
 }
 
 /*menu*/
-.content-container{
-    width: 100%;
+.mynavbar{
+    justify-content: center;
+    display: flex;
+    flex-direction: row;
 }
-.bar{
-    border: 1px solid rgb(186, 67, 3);
-    width: 100%;
-    margin-right: 30px;
+
+.my-bar-btn{
+    margin-left: 10px;
+    margin-right: 10px;
+    max-width: 160px;
     display: flex;
     flex-direction: column;
     align-items: baseline;
     flex: 1;
     text-align: center;
 }
-.bar ul{
-    border: 1px solid rgb(3, 95, 186);
+
+.my-bar-btn ul{
     width: 150px;
     padding: 5px;
+    background-color: #241F1F;
 }
 
-.bar li{
+.my-bar-btn a{
+    width: 100%;
+}
+
+.my-bar-btn li{
     list-style: none;
     border: #000000 1px solid;
     border-radius: 5px;
 }
-.bar .category{
+.my-bar-btn .category{
     color: #ffffff;
     background-color: #241F1F;
 }
-.bar .options{
+.my-bar-btn .options{
     background-color: #8c8c8c;
 }
 
-/*menu gombok*/
+/*menu gombok formázása*/
 .gomblink{
     text-decoration: none;
     color: inherit;
@@ -136,9 +144,11 @@
 }
 .category .gomblink:hover{
     color: #ff4444;
+    border-radius: 5px;
 }
 .gomblink:hover{
     color: #ff4444;
+    border-radius: 5px;
 }
 h2{
     text-align: center;
@@ -156,4 +166,28 @@ slide
     margin-left: auto;
     margin-right: auto;
 
+}
+
+@media only screen and (max-width: 600px){
+    .mynavbar{
+        justify-content: center;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+    .my-bar-btn{
+        margin-left: 10px;
+        margin-right: 10px;
+        min-width: 90%;
+        display: flex;
+        flex-direction: column;
+        align-items: baseline;
+        flex: 1;
+        text-align: center;
+    }
+    .my-bar-btn ul{
+        min-width: 100%;
+        text-align: center;
+        align-items: center;
+    }
 }
