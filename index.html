@@ -1,95 +1,113 @@
 <!DOCTYPE html>
 <html lang="hu">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CodeCrafters Webshop</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-    <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CodeCrafters Webshop</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+  <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
-    <div class="container">
-        <div class="nav">
-            
-            <a class="keplink" href="#"><img src="img/logo.png"></a>
-            <nav class="navbar navbar-light searchbar">
-                <div class="container-fluid">
-                  <form class="d-flex">
-                    <input class="form-control me-2" type="search" placeholder="Search..." aria-label="Search">
-                    <button class="btn bg-dark btn-outline-light" type="submit"><svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 40 40" fill="none">
-                        <g clip-path="url(#clip0_41_926)">
-                          <path d="M25.8333 23.3333H24.5167L24.05 22.8833C25.6833 20.9833 26.6667 18.5167 26.6667 15.8333C26.6667 9.85 21.8167 5 15.8333 5C9.85 5 5 9.85 5 15.8333C5 21.8167 9.85 26.6667 15.8333 26.6667C18.5167 26.6667 20.9833 25.6833 22.8833 24.05L23.3333 24.5167V25.8333L31.6667 34.15L34.15 31.6667L25.8333 23.3333ZM15.8333 23.3333C11.6833 23.3333 8.33333 19.9833 8.33333 15.8333C8.33333 11.6833 11.6833 8.33333 15.8333 8.33333C19.9833 8.33333 23.3333 11.6833 23.3333 15.8333C23.3333 19.9833 19.9833 23.3333 15.8333 23.3333Z" fill="white"/>
-                        </g>
-                        <defs>
-                          <clipPath id="clip0_41_926">
-                            <rect width="40" height="40" fill="white"/>
-                          </clipPath>
-                        </defs>
-                      </svg></button>
-                  </form>
-                </div>
-              </nav>
+  <div class="container">
+    <div class="nav">
 
-            <div class="log_reg">
-                <button type="button"><a class="gomblink" href="../bejelentkezés_regisztrációsfeulet/login.html">Bejelentkezés</a></button>
-            </div>
+      <a class="keplink" href="#"><img src="img/logo.png"></a>
+      <nav class="navbar navbar-light searchbar">
+        <div class="container-fluid">
+          <form class="d-flex">
+            <input class="form-control me-2" type="search" placeholder="Search..." aria-label="Search">
+            <button class="btn bg-dark btn-outline-light" type="submit"><svg xmlns="http://www.w3.org/2000/svg"
+                width="30" height="30" viewBox="0 0 40 40" fill="none">
+                <g clip-path="url(#clip0_41_926)">
+                  <path
+                    d="M25.8333 23.3333H24.5167L24.05 22.8833C25.6833 20.9833 26.6667 18.5167 26.6667 15.8333C26.6667 9.85 21.8167 5 15.8333 5C9.85 5 5 9.85 5 15.8333C5 21.8167 9.85 26.6667 15.8333 26.6667C18.5167 26.6667 20.9833 25.6833 22.8833 24.05L23.3333 24.5167V25.8333L31.6667 34.15L34.15 31.6667L25.8333 23.3333ZM15.8333 23.3333C11.6833 23.3333 8.33333 19.9833 8.33333 15.8333C8.33333 11.6833 11.6833 8.33333 15.8333 8.33333C19.9833 8.33333 23.3333 11.6833 23.3333 15.8333C23.3333 19.9833 19.9833 23.3333 15.8333 23.3333Z"
+                    fill="white" />
+                </g>
+                <defs>
+                  <clipPath id="clip0_41_926">
+                    <rect width="40" height="40" fill="white" />
+                  </clipPath>
+                </defs>
+              </svg></button>
+          </form>
         </div>
+      </nav>
 
-        <div class="content-container">
-            <div class="bar">
-                <ul>
-                    <li class="category"><a class="gomblink" href="#">Kategória</a></li>
-                    <li class="options"><a class="gomblink" href="#">Összes Játék</a></li>
-                    <li class="options"><a class="gomblink" href="#">GTA</a></li>
-                    <li class="options"><a class="gomblink" href="#">R6</a></li>
-                </ul>
-            </div>
-        </div>
-
-        <div class="slider-container slideshow">
-            <div id="carouselExampleCaptions" class="carousel slide" data-bs-ride="carousel">
-                <div class="carousel-indicators">
-                  <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
-                  <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="1" aria-label="Slide 2"></button>
-                  <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="2" aria-label="Slide 3"></button>
-                </div>
-                
-                <div class="carousel-inner">
-                  <div class="carousel-item active">
-                    <img src="img/miles.png" class="d-block w-100" alt="...">
-                    <div class="carousel-caption d-none d-md-block">
-                      <h5>First slide label</h5>
-                      <p>Some representative placeholder content for the first slide.</p>
-                    </div>
-                  </div>
-                  <div class="carousel-item">
-                    <img src="img/miles.png" class="d-block w-100" alt="...">
-                    <div class="carousel-caption d-none d-md-block">
-                      <h5>Second slide label</h5>
-                      <p>Some representative placeholder content for the second slide.</p>
-                    </div>
-                  </div>
-                  <div class="carousel-item">
-                    <img src="img/miles.png" class="d-block w-100" alt="...">
-                    <div class="carousel-caption d-none d-md-block">
-                      <h5>Third slide label</h5>
-                      <p>Some representative placeholder content for the third slide.</p>
-                    </div>
-                  </div>
-                </div>
-                <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="prev">
-                  <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                  <span class="visually-hidden">Previous</span>
-                </button>
-                <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="next">
-                  <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                  <span class="visually-hidden">Next</span>
-                </button>
-              </div>
-        </div>
-        
+      <div class="log_reg">
+        <button type="button"><a class="gomblink"
+            href="../bejelentkezés_regisztrációsfeulet/login.html">Bejelentkezés</a></button>
+      </div>
     </div>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
-    <script src="script.js"></script>
+
+    <body>
+      <!-- <div class="content-container">
+        <div class="bar">
+          <ul>
+            <li class="category"><a class="gomblink" href="#">Kategória</a></li>
+            <li class="options"><a class="gomblink" href="#">Összes Játék</a></li>
+            <li class="options"><a class="gomblink" href="#">GTA</a></li>
+            <li class="options"><a class="gomblink" href="#">R6</a></li>
+          </ul>
+        </div>
+      </div> -->
+
+      <div class="slider-container slideshow">
+        <div id="carouselExampleCaptions" class="carousel slide" data-bs-ride="carousel">
+          <div class="carousel-indicators">
+            <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="0" class="active"
+              aria-current="true" aria-label="Slide 1"></button>
+            <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="1"
+              aria-label="Slide 2"></button>
+            <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="2"
+              aria-label="Slide 3"></button>
+          </div>
+
+          <div class="carousel-inner">
+            <div class="carousel-item active">
+              <img src="img/miles.png" class="d-block w-100" alt="...">
+              <div class="carousel-caption d-none d-md-block">
+                <h5>First slide label</h5>
+                <p>Some representative placeholder content for the first slide.</p>
+              </div>
+            </div>
+            <div class="carousel-item">
+              <img src="img/miles.png" class="d-block w-100" alt="...">
+              <div class="carousel-caption d-none d-md-block">
+                <h5>Second slide label</h5>
+                <p>Some representative placeholder content for the second slide.</p>
+              </div>
+            </div>
+            <div class="carousel-item">
+              <img src="img/miles.png" class="d-block w-100" alt="...">
+              <div class="carousel-caption d-none d-md-block">
+                <h5>Third slide label</h5>
+                <p>Some representative placeholder content for the third slide.</p>
+              </div>
+            </div>
+          </div>
+          <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleCaptions"
+            data-bs-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Previous</span>
+          </button>
+          <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleCaptions"
+            data-bs-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Next</span>
+          </button>
+        </div>
+      </div>
+    </body>
+
+
+  </div>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+    crossorigin="anonymous"></script>
+  <script src="script.js"></script>
 </body>
+
 </html>
