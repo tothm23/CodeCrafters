@@ -26,6 +26,33 @@ nav {
   border-radius: 15px;
 }
 
+#nav-belso {
+  width: 60%;
+}
+
+#keresomezo {
+  display: flex;
+}
+
+input[type="search"] {
+  outline: none;
+  border: 1px solid #241f1f;
+
+  width: 100%;
+  padding-left: 10px;
+  border-top-left-radius: 5px;
+  border-bottom-left-radius: 5px;
+}
+
+button[type="submit"] {
+  outline: none;
+  border: 1px solid #241f1f;
+  background-color: #241f1f;
+  width: 7vh;
+  border-top-right-radius: 5px;
+  border-bottom-right-radius: 5px;
+}
+
 #felhasznalo-box {
   background-color: #241f1f;
   width: 25vh;
