@@ -28,10 +28,33 @@ nav {
 
 #nav-belso {
   width: 60%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  position: relative;
 }
 
 #keresomezo {
   display: flex;
+}
+
+ul {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  width: 100%;
+  position: absolute;
+  bottom: 0;
+}
+
+li {
+  list-style-type: none;
+  padding: 0.5vh 2vh;
+  background-color: #241f1f;
+  color: #fff;
+  border: 1px solid #241f1f;
+  border-radius: 5px;
+  margin-right: 1vh;
 }
 
 input[type="search"] {
