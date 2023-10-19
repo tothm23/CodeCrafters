@@ -159,3 +159,18 @@ main {
   font-size: 0.9rem;
   cursor: pointer;
 }
+
+#leiras-box {
+  margin-right: 3vh;
+  border-radius: 1vh;
+  background-color: #241f1f;
+  color: #fff;
+}
+
+h2 {
+  padding: 1.5vh 1.5vh;
+}
+
+#leiras {
+  padding: 1vh 1.5vh 2vh;
+}
