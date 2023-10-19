@@ -61,8 +61,8 @@ input[type="search"] {
   border: 1px solid #241f1f;
   width: 100%;
   padding: 1.7vh;
-  border-top-left-radius: 5px;
-  border-bottom-left-radius: 5px;
+  border-top-left-radius: 0.5vh;
+  border-bottom-left-radius: 0.5vh;
   font-size: 1rem;
 }
 
@@ -96,4 +96,56 @@ button[type="submit"] {
 #felhasznalo {
   color: #fff;
   padding-top: 0.3vh;
+}
+
+/* főoldal */
+main {
+  margin-left: 18%;
+  padding: 3vh 0;
+}
+
+#termek-box {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+  grid-template-rows: auto;
+  grid-gap: 3vh;
+  grid-template-areas:
+    "kep kep kep nev nev nev nev"
+    "kep kep kep - - ar ar"
+    "kep kep kep - - akcios akcios";
+}
+
+.termek-kep {
+  grid-area: kep;
+  border-radius: 1vh;
+  width: 100%;
+}
+
+.termek-nev,
+.termek-ar,
+.termek-ar-akcios {
+  color: #fff;
+  background-color: #241f1f;
+  border-radius: 1vh;
+  height: fit-content;
+  text-align: center;
+}
+
+.termek-nev {
+  grid-area: nev;
+  padding: 1vh;
+  margin-right: 3vh;
+}
+
+.termek-ar {
+  grid-area: ar;
+  padding: 1vh 3vh;
+  width: fit-content;
+  text-decoration: line-through;
+}
+
+.termek-ar-akcios {
+  grid-area: akcios;
+  padding: 1vh 3vh;
+  width: fit-content;
 }
