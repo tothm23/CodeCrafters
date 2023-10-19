@@ -24,7 +24,7 @@ nav {
   width: 10vh;
   height: 10vh;
   margin: 2.5vh 3vh 2.5vh;
-  border-radius: 15px;
+  border-radius: 1.5vh;
 }
 
 #nav-belso {
@@ -52,7 +52,7 @@ li {
   background-color: #241f1f;
   color: #fff;
   border: 1px solid #241f1f;
-  border-radius: 0.5vh;
+  border-radius: 0.7vh;
   margin-right: 1vh;
 }
 
@@ -61,8 +61,8 @@ input[type="search"] {
   border: 1px solid #241f1f;
   width: 100%;
   padding: 1.7vh;
-  border-top-left-radius: 0.5vh;
-  border-bottom-left-radius: 0.5vh;
+  border-top-left-radius: 1vh;
+  border-bottom-left-radius: 1vh;
   font-size: 1rem;
 }
 
@@ -71,8 +71,8 @@ button[type="submit"] {
   border: 1px solid #241f1f;
   background-color: #241f1f;
   width: 7vh;
-  border-top-right-radius: 0.5vh;
-  border-bottom-right-radius: 0.5vh;
+  border-top-right-radius: 1vh;
+  border-bottom-right-radius: 1vh;
 }
 
 #felhasznalo-box {
@@ -101,6 +101,7 @@ button[type="submit"] {
 /* főoldal */
 main {
   margin-left: 18%;
+  margin-right: 20%;
   padding: 3vh 0;
 }
 
@@ -111,8 +112,11 @@ main {
   grid-gap: 3vh;
   grid-template-areas:
     "kep kep kep nev nev nev nev"
-    "kep kep kep - - ar ar"
-    "kep kep kep - - akcios akcios";
+    "kep kep kep nev nev nev nev"
+    "kep kep kep - - - ar"
+    "kep kep kep - - - ar"
+    "kep kep kep - - - akcios"
+    "kep kep kep - - - akcios";
 }
 
 .termek-kep {
@@ -142,12 +146,14 @@ main {
   padding: 1vh 3vh;
   width: fit-content;
   text-decoration: line-through;
+  margin-right: 3vh;
 }
 
 .termek-ar-akcios {
   grid-area: akcios;
   padding: 1vh 3vh;
   width: fit-content;
+  margin-right: 3vh;
 }
 
 #hozzadas {
