@@ -149,3 +149,13 @@ main {
   padding: 1vh 3vh;
   width: fit-content;
 }
+
+#hozzadas {
+  border: 0;
+  margin: 3vh 0;
+  padding: 1vh 1.5vh;
+  border-radius: 1vh;
+  background-color: greenyellow;
+  font-size: 0.9rem;
+  cursor: pointer;
+}
