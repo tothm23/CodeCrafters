@@ -180,3 +180,25 @@ h2 {
 #leiras {
   padding: 1vh 1.5vh 2vh;
 }
+
+/* kosárba */
+#kosar-box {
+  background-color: #241f1f;
+  border: 0.2vh solid #000;
+  color: #fff;
+  font-size: 3vh;
+  width: 7vh;
+  height: 7vh;
+  margin-top: 2.5vh;
+  border-radius: 50%;
+  cursor: pointer;
+
+  position: absolute;
+  top: 20vh;
+  right: 5vh;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
