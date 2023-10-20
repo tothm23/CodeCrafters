@@ -51,14 +51,14 @@ li {
   padding: 0.7vh 2.5vh;
   background-color: #241f1f;
   color: #fff;
-  border: 1px solid #241f1f;
+  border: 2px solid #000;
   border-radius: 0.7vh;
   margin-right: 1vh;
 }
 
 input[type="search"] {
   outline: none;
-  border: 1px solid #241f1f;
+  border: 2px solid #000;
   width: 100%;
   padding: 1.7vh;
   border-top-left-radius: 1vh;
@@ -206,7 +206,7 @@ h2 {
 /* vissza az oldal tetejére */
 #vissza-box {
   background-color: #bb4930;
-  border: 0.2vh solid #000;
+  border: 2px solid #000;
   color: #000;
   font-size: 3vh;
   width: 7vh;
