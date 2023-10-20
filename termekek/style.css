@@ -202,3 +202,25 @@ h2 {
   justify-content: center;
   flex-direction: column;
 }
+
+/* vissza az oldal tetejére */
+#vissza-box {
+  background-color: #bb4930;
+  border: 0.2vh solid #000;
+  color: #000;
+  font-size: 3vh;
+  width: 7vh;
+  height: 7vh;
+  margin-top: 2.5vh;
+  border-radius: 50%;
+  cursor: pointer;
+
+  position: absolute;
+  top: 80vh;
+  right: 5vh;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
