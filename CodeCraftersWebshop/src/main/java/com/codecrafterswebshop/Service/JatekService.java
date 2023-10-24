@@ -1,7 +1,8 @@
 package com.codecrafterswebshop.Service;
 
 import com.codecrafterswebshop.Model.Jatek;
-import java.util.List;
+import java.util.Map;
+import org.json.JSONObject;
 
 /**
  *
@@ -9,8 +10,15 @@ import java.util.List;
  */
 public class JatekService {
 
-    public static List<Jatek> jatek(Integer idBe) {
-        return Jatek.jatek(idBe);
+    public static JSONObject jatek(Integer idBe) {
+        Map<String, Object> jatek = Jatek.jatek(idBe);
+        JSONObject obj = new JSONObject();
+
+        for (Map.Entry<String, Object> set : jatek.entrySet()) {
+            obj.put(set.getKey(), set.getValue());
+        }
+
+        return obj;
     }
 
     public static String ujJatek(String nevBE, Integer arBE, String leirasBE,

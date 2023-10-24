@@ -2,7 +2,6 @@ package com.codecrafterswebshop.Controller;
 
 import com.codecrafterswebshop.Model.Jatek;
 import com.codecrafterswebshop.Service.JatekService;
-import java.util.List;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
@@ -13,6 +12,7 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
+import org.json.JSONObject;
 
 /**
  * REST Web Service
@@ -29,9 +29,10 @@ public class JatekokResource {
 
     @GET
     @Path("{jatekId}")
-    public List<Jatek> jatek(@PathParam("jatekId") Integer id) {
-        List<Jatek> result = JatekService.jatek(id);
-        return result;
+    public Response jatek(@PathParam("jatekId") Integer id) {
+        JSONObject eredmeny = JatekService.jatek(id);
+        return Response.status(Response.Status.OK).entity(eredmeny.toString())
+                .type(MediaType.APPLICATION_JSON).build();
     }
 
     @POST
