@@ -1,9 +1,10 @@
 package com.codecrafterswebshop.Model;
 
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -255,9 +256,9 @@ public class Jatek implements Serializable {
         return "com.codecrafterswebshop.Model.Jatek[ id=" + id + " ]";
     }
 
-    public static List<Jatek> jatek(Integer idBe) {
+    public static Map<String, Object> jatek(Integer idBe) {
 
-        List<Jatek> jatek = new ArrayList<>();
+        Map<String, Object> jatek = new HashMap<>();
 
         EntityManagerFactory emf = Persistence.createEntityManagerFactory("com_CodeCraftersWebshop_war_1.0-SNAPSHOTPU");
         EntityManager em = emf.createEntityManager();
@@ -267,7 +268,20 @@ public class Jatek implements Serializable {
 
             spq.registerStoredProcedureParameter("idBe", Integer.class, ParameterMode.IN);
             spq.setParameter("idBe", idBe);
-            jatek = spq.getResultList();
+
+            List<Object[]> eredmeny = spq.getResultList();
+
+            if (!eredmeny.isEmpty()) {
+                Object[] sor = eredmeny.get(0);
+                jatek.put("id", sor[0]);
+                jatek.put("nev", sor[1]);
+                jatek.put("ar", sor[2]);
+                jatek.put("leiras", sor[3]);
+                jatek.put("kep", sor[4]);
+                jatek.put("korhatar", sor[5]);
+                jatek.put("akcio", sor[6]);
+                jatek.put("mennyisegraktaron", sor[7]);
+            }
 
         } catch (Exception e) {
             System.err.println(e.getMessage());
