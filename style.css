@@ -6,7 +6,7 @@
   }
   
   html {
-    background-color: #717171;
+    background-color: #404040;
   }
   
   /* navigáció */
@@ -357,4 +357,32 @@
     justify-content: center;
     flex-direction: column;
   }
-  
+  .termekjatek{
+    max-width:500px;
+    border: #000 solid 1px;
+    border-radius: 15px;
+    background-color: #241f1f;
+    color: white;
+    display: flex;
+    margin: 5px;
+  }
+  .termekjatek img,.termekkartyak img {
+    max-width: 200px;
+    border-radius: 15px;
+    display: inline;
+
+  }
+  .termekkartyak{
+    max-width:500px;
+    border: #000 solid 1px;
+    border-radius: 15px;
+    background-color: #241f1f;
+    color: white;
+    display: flex;
+    margin: 5px;
+  }
+  .adatok{
+    margin: 5px;
+    display: flex;
+    flex-direction: column;
+  }

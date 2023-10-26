@@ -7,14 +7,14 @@ function toggleElem() {
     }
   }
 
-document.addEventListener("DOMContentLoaded", function() {
+  document.addEventListener("DOMContentLoaded", function() {
     var adatok = {
         "jatekok" :[
             {
                 "nevBE": "Játék 1",
                 "arBE": 29.99,
                 "leirasBE": "Ez egy fantasztikus játék.",
-                "kepBE": "jatek1.jpg",
+                "kepBE": "jatek.png",
                 "korhatarBE": 12,
                 "akcioBE": true,
                 "mennyisegraktaronBE": 50,
@@ -26,7 +26,7 @@ document.addEventListener("DOMContentLoaded", function() {
                 "nevBE": "Játék 2",
                 "arBE": 39.99,
                 "leirasBE": "Izgalmas játékélmény vár rád.",
-                "kepBE": "jatek2.jpg",
+                "kepBE": "jatek.png",
                 "korhatarBE": 16,
                 "akcioBE": false,
                 "mennyisegraktaronBE": 30,
@@ -38,7 +38,7 @@ document.addEventListener("DOMContentLoaded", function() {
                 "nevBE": "Játék 3",
                 "arBE": 49.99,
                 "leirasBE": "Felfedezd a világot ebben a játékban.",
-                "kepBE": "jatek3.jpg",
+                "kepBE": "jatek.png",
                 "korhatarBE": 18,
                 "akcioBE": true,
                 "mennyisegraktaronBE": 20,
@@ -50,7 +50,7 @@ document.addEventListener("DOMContentLoaded", function() {
                 "nevBE": "Játék 4",
                 "arBE": 19.99,
                 "leirasBE": "Egyszerű, de szórakoztató játék.",
-                "kepBE": "jatek4.jpg",
+                "kepBE": "jatek.png",
                 "korhatarBE": 10,
                 "akcioBE": false,
                 "mennyisegraktaronBE": 45,
@@ -62,7 +62,7 @@ document.addEventListener("DOMContentLoaded", function() {
                 "nevBE": "Játék 5",
                 "arBE": 59.99,
                 "leirasBE": "Merülj el a játék világában.",
-                "kepBE": "jatek5.jpg",
+                "kepBE": "jatek.png",
                 "korhatarBE": 20,
                 "akcioBE": true,
                 "mennyisegraktaronBE": 15,
@@ -76,7 +76,7 @@ document.addEventListener("DOMContentLoaded", function() {
                 "nevBE": "Ajándék kártya 1",
                 "arBE": 50,
                 "leirasBE": "Vásárolj kedvedre a boltban ezzel a kártyával.",
-                "kepBE": "kartya1.jpg",
+                "kepBE": "kartya.png",
                 "akcioBE": false,
                 "mennyisegraktaronBE": 100,
                 "eszkozIdBE": 1,
@@ -86,7 +86,7 @@ document.addEventListener("DOMContentLoaded", function() {
                 "nevBE": "Ajándék kártya 2",
                 "arBE": 25,
                 "leirasBE": "Kényeztesd magad a boltban ezzel a kártyával.",
-                "kepBE": "kartya2.jpg",
+                "kepBE": "kartya.png",
                 "akcioBE": true,
                 "mennyisegraktaronBE": 75,
                 "eszkozIdBE": 3,
@@ -96,7 +96,7 @@ document.addEventListener("DOMContentLoaded", function() {
                 "nevBE": "Ajándék kártya 3",
                 "arBE": 100,
                 "leirasBE": "Válaszd ki a kedvenc termékeidet a boltban ezzel a kártyával.",
-                "kepBE": "kartya3.jpg",
+                "kepBE": "kartya.png",
                 "akcioBE": true,
                 "mennyisegraktaronBE": 50,
                 "eszkozIdBE": 2,
@@ -106,7 +106,7 @@ document.addEventListener("DOMContentLoaded", function() {
                 "nevBE": "Ajándék kártya 4",
                 "arBE": 75,
                 "leirasBE": "Vásárolj bármit a boltban ezzel a kártyával.",
-                "kepBE": "kartya4.jpg",
+                "kepBE": "kartya.png",
                 "akcioBE": false,
                 "mennyisegraktaronBE": 90,
                 "eszkozIdBE": 1,
@@ -116,7 +116,7 @@ document.addEventListener("DOMContentLoaded", function() {
                 "nevBE": "Ajándék kártya 5",
                 "arBE": 200,
                 "leirasBE": "Engedd szabadjára a vágyaidat ezzel a kártyával.",
-                "kepBE": "kartya5.jpg",
+                "kepBE": "kartya.png",
                 "akcioBE": true,
                 "mennyisegraktaronBE": 30,
                 "eszkozIdBE": 3,
@@ -128,31 +128,34 @@ document.addEventListener("DOMContentLoaded", function() {
     var termekekHTML = "";
     adatok.jatekok.forEach(function(jatek) {
       termekekHTML += `
-        <div class="termek">
+        <div class="termekjatek">
           <img src="./kepek/${jatek.kepBE}" alt="${jatek.nevBE}">
-          <div class="nev">${jatek.nevBE}</div>
-          <div class="ar">${jatek.arBE} HUF</div>
-          <div class="leiras">${jatek.leirasBE}</div>
-          ${jatek.akcioBE ? '<div class="akcio">Akcióban!</div>' : ''}
+          <div class="adatok">
+              <div class="nev">${jatek.nevBE}</div>
+              <div class="ar">${jatek.arBE} HUF</div>
+              <div class="leiras">${jatek.leirasBE}</div>
+              ${jatek.akcioBE ? '<div class="akcio">Akcióban!</div>' : ''}
+          </div>
         </div>
       `;
     });
 
     adatok.ajandekkartyak.forEach(function(kartya) {
       termekekHTML += `
-        <div class="termek">
+        <div class="termekkartyak">
           <img src="./kepek/${kartya.kepBE}" alt="${kartya.nevBE}">
-          <div class="nev">${kartya.nevBE}</div>
-          <div class="ar">${kartya.arBE} HUF</div>
-          <div class="leiras">${kartya.leirasBE}</div>
-          ${kartya.akcioBE ? '<div class="akcio">Akcióban!</div>' : ''}
+          <div class="adatok">
+              <div class="nev">${kartya.nevBE}</div>
+              <div class="ar">${kartya.arBE} HUF</div>
+              <div class="leiras">${kartya.leirasBE}</div>
+              ${kartya.akcioBE ? '<div class="akcio">Akcióban!</div>' : ''}
+          </div>
         </div>
       `;
     });
-
     var termekekDiv = document.querySelector(".termekek");
     termekekDiv.innerHTML = termekekHTML;
-
+    
     /*ár kereső*/
     var minPriceInput = document.querySelector('input[name="min"]');
     var maxPriceInput = document.querySelector('input[name="max"]');
