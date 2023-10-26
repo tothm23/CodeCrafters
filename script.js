@@ -152,4 +152,56 @@ document.addEventListener("DOMContentLoaded", function() {
 
     var termekekDiv = document.querySelector(".termekek");
     termekekDiv.innerHTML = termekekHTML;
+
+    /*ár kereső*/
+    var minPriceInput = document.querySelector('input[name="min"]');
+    var maxPriceInput = document.querySelector('input[name="max"]');
+    
+    minPriceInput.addEventListener('input', updateProducts);
+    maxPriceInput.addEventListener('input', updateProducts);
+
+    function updateProducts() {
+        var minPrice = parseFloat(minPriceInput.value) || 0;
+        var maxPrice = parseFloat(maxPriceInput.value) || Number.MAX_VALUE;
+
+        var filteredProducts = adatok.jatekok.filter(function(jatek) {
+            return jatek.arBE >= minPrice && jatek.arBE <= maxPrice;
+        });
+
+        var filteredKartyak = adatok.ajandekkartyak.filter(function(kartya) {
+            return kartya.arBE >= minPrice && kartya.arBE <= maxPrice;
+        });
+
+        var filteredHTML = "";
+        filteredProducts.forEach(function(jatek) {
+            filteredHTML += `
+                <div class="termekjatek">
+                    <img src="./kepek/${jatek.kepBE}" alt="${jatek.nevBE}">
+                    <div class="adatok">
+                        <div class="nev">${jatek.nevBE}</div>
+                        <div class="ar">${jatek.arBE} HUF</div>
+                        <div class="leiras">${jatek.leirasBE}</div>
+                        ${jatek.akcioBE ? '<div class="akcio">Akcióban!</div>' : ''}
+                    </div>
+                </div>
+            `;
+        });
+
+        filteredKartyak.forEach(function(kartya) {
+            filteredHTML += `
+                <div class="termekkartyak">
+                    <img src="./kepek/${kartya.kepBE}" alt="${kartya.nevBE}">
+                    <div class="adatok">
+                        <div class="nev">${kartya.nevBE}</div>
+                        <div class="ar">${kartya.arBE} HUF</div>
+                        <div class="leiras">${kartya.leirasBE}</div>
+                        ${kartya.akcioBE ? '<div class="akcio">Akcióban!</div>' : ''}
+                    </div>
+                </div>
+            `;
+        });
+
+        var termekekDiv = document.querySelector(".termekek");
+        termekekDiv.innerHTML = filteredHTML;
+    }
   });
