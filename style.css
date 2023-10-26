@@ -322,6 +322,10 @@
     flex-direction: column;
   }
   
+  #elrejtettElem {
+    display: none;
+  }
+
   /* vissza az oldal tetejére */
   #vissza-box {
     background-color: #bb4930;

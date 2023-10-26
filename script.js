@@ -1,3 +1,12 @@
+function toggleElem() {
+    var elem = document.getElementById("elrejtettElem");
+    if (elem.style.display === "none") {
+      elem.style.display = "block";
+    } else {
+      elem.style.display = "none";
+    }
+  }
+
 document.addEventListener("DOMContentLoaded", function() {
     var adatok = {
         "jatekok" :[
