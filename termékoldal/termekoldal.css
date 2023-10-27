@@ -103,12 +103,15 @@
   .szurok{
     display: flex;
     flex-direction: column;
-    min-width: 225px;
+    min-width: 250px;
+    background-color: #241f1f;
+    padding: 10px;
 
   }
   .form-check{
     border-radius: 10px;
-    background-color: #241f1f;
+    background-color: #404040;
+    border: #000 solid 1px;
   }
   .form-check-input{
     width: 25px;
