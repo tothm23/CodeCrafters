@@ -38,6 +38,9 @@ public class JatekService {
     public static String frissitesJatek(Integer idBE, String nevBE, Integer arBE, String leirasBE,
             String kepBE, Integer korhatarBE, Integer akcioBE, Integer mennyisegraktaronBE, Integer kategoriaIdBE, Integer eszkozIdBE, Integer platformIdBE) {
         try {
+            if (jatek(idBE).length() == 0) {
+                return "Hiba a Játék frissítésénél!";
+            }
             if (Jatek.frissitesJatek(idBE, nevBE, arBE, leirasBE, kepBE, korhatarBE, akcioBE,
                     mennyisegraktaronBE, kategoriaIdBE, eszkozIdBE, platformIdBE)) {
                 return "Játék frissítve!";

@@ -48,11 +48,14 @@ public class JatekokResource {
     @PUT
     @Path("{jatekId}")
     public Response frissitesJatek(Jatek j, @PathParam("jatekId") Integer id) {
-        String result = JatekService.frissitesJatek(id, j.getNev(), j.getAr(),
+        JSONObject eredmeny = JatekService.jatek(id);
+        String frissites = JatekService.frissitesJatek(id, j.getNev(), j.getAr(),
                 j.getLeiras(), j.getKep(), j.getKorhatar(), j.getAkcio(), j.getMennyisegraktaron(),
                 j.getKategoriaId(), j.getEszkozId(), j.getPlatformId()
         );
-        return Response.status(Response.Status.OK).entity(result)
+
+        return eredmeny.length() == 0 ? Response.status(Response.Status.NOT_FOUND).entity(frissites)
+                .type(MediaType.APPLICATION_JSON).build() : Response.status(Response.Status.OK).entity(frissites)
                 .type(MediaType.APPLICATION_JSON).build();
     }
 
