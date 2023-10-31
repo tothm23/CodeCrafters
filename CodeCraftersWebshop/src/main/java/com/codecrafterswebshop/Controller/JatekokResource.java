@@ -62,8 +62,11 @@ public class JatekokResource {
     @DELETE
     @Path("{jatekId}")
     public Response torlesJatek(@PathParam("jatekId") Integer id) {
-        String result = JatekService.torlesJatek(id);
-        return Response.status(Response.Status.OK).entity(result)
+        JSONObject eredmeny = JatekService.jatek(id);
+        String torles = JatekService.torlesJatek(id);
+
+        return eredmeny.length() == 0 ? Response.status(Response.Status.NOT_FOUND).entity(torles)
+                .type(MediaType.APPLICATION_JSON).build() : Response.status(Response.Status.OK).entity(torles)
                 .type(MediaType.APPLICATION_JSON).build();
     }
 }

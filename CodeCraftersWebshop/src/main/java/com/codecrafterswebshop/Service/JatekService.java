@@ -54,6 +54,9 @@ public class JatekService {
 
     public static String torlesJatek(Integer idBE) {
         try {
+            if (jatek(idBE).length() == 0) {
+                return "Hiba a Játék frissítésénél!";
+            }
             if (Jatek.torlesJatek(idBE)) {
                 return "Játék törölve!";
             } else {
