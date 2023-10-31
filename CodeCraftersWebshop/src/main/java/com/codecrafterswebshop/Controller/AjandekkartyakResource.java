@@ -58,10 +58,13 @@ public class AjandekkartyakResource {
     @PUT
     @Path("{ajandekKartyaId}")
     public Response frissitesAjandekKartya(@PathParam("ajandekKartyaId") Integer id, Ajandekkartya a) {
-        String result = AjandekkartyaService.frissitesAjandekKartya(id, a.getNev(), a.getAr(),
+        JSONObject eredmeny = AjandekkartyaService.ajandekKartya(id);
+        String frissites = AjandekkartyaService.frissitesAjandekKartya(id, a.getNev(), a.getAr(),
                 a.getLeiras(), a.getKep(), a.getAkcio(), a.getMennyisegraktaron(),
                 a.getEszkozId(), a.getPlatformId());
-        return Response.status(Response.Status.OK).entity(result)
+
+        return eredmeny.length() == 0 ? Response.status(Response.Status.NOT_FOUND).entity(frissites)
+                .type(MediaType.APPLICATION_JSON).build() : Response.status(Response.Status.OK).entity(frissites)
                 .type(MediaType.APPLICATION_JSON).build();
     }
 
