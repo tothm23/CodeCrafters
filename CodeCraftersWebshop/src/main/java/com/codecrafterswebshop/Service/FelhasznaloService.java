@@ -3,6 +3,7 @@ package com.codecrafterswebshop.Service;
 import com.codecrafterswebshop.Model.Felhasznalo;
 import java.util.List;
 import java.util.Map;
+import org.json.JSONArray;
 import org.json.JSONObject;
 
 /**
@@ -11,8 +12,30 @@ import org.json.JSONObject;
  */
 public class FelhasznaloService {
 
-    public static List<Felhasznalo> felhasznalok() {
-        return Felhasznalo.felhasznalok();
+    public static JSONArray felhasznalok() {
+        JSONArray jsonArray = new JSONArray();
+
+        List<Map<String, Object>> ajandekKartyak = Felhasznalo.felhasznalok();
+
+        for (Map<String, Object> ajandekKartya : ajandekKartyak) {
+            JSONObject obj = new JSONObject();
+            obj.put("id", ajandekKartya.get("id"));
+            obj.put("felhasznaloNev", ajandekKartya.get("felhasznaloNev"));
+            obj.put("vezetekNev", ajandekKartya.get("vezetekNev"));
+            obj.put("keresztNev", ajandekKartya.get("keresztNev"));
+            obj.put("szuletesiDatum", ajandekKartya.get("szuletesiDatum"));
+            obj.put("email", ajandekKartya.get("email"));
+            obj.put("jelszo", ajandekKartya.get("jelszo"));
+            obj.put("orszag", ajandekKartya.get("orszag"));
+            obj.put("telefon", ajandekKartya.get("telefon"));
+            obj.put("aktiv", ajandekKartya.get("aktiv"));
+            obj.put("profilkep", ajandekKartya.get("profilkep"));
+            obj.put("letrehozva", ajandekKartya.get("letrehozva"));
+
+            jsonArray.put(obj);
+        }
+
+        return jsonArray;
     }
 
     public static String ujFelhasznalo(String felhasznaloNevBE, String vezetekNevBE, String keresztNev,
