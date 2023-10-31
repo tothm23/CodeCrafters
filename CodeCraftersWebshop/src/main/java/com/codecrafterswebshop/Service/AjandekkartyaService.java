@@ -61,6 +61,9 @@ public class AjandekkartyaService {
     public static String frissitesAjandekKartya(Integer idBE, String nevBE, Integer arBE, String leirasBE,
             String kepBE, Integer akcioBE, Integer mennyisegraktaronBE, Integer eszkozIdBE, Integer platformIdBE) {
         try {
+            if (ajandekKartya(idBE).length() == 0) {
+                return "Hiba az ajándék kártya frissítésénél!";
+            }
             if (Ajandekkartya.frissitesAjandekKartya(idBE, nevBE, arBE, leirasBE, kepBE, akcioBE, mennyisegraktaronBE, eszkozIdBE, platformIdBE)) {
                 return "Ajándék kártya frissítve!";
             } else {
