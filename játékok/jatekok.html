@@ -1,7 +1,24 @@
 <body>
-  <center>Játékok tesztelése</center>
   <h1>GET jatekok</h1>
+  <p id="GETjatekok"></p>
   <h1>POST jatekok</h1>
   <h1>PUT jatekok</h1>
   <h1>DELETE jatekok</h1>
+
+  <script>
+    const URL = "http://localhost:8080/CodeCraftersWebshop-1.0-SNAPSHOT/webresources/jatekok";
+    const GETjatekok = document.getElementById("GETjatekok");
+
+    // GET kérés
+    fetch(`${URL}/1`)
+      .then((response) => response.json())
+      .then((data) => {
+        if (data.id) {
+          GETjatekok.innerHTML += "id: " + data.id + "<br>nev: " + data.nev + "<br>ar: " + data.ar + "<br>leiras: " + data.leiras + "<br>kep: " + data.kep + "<br>korhatar: " + data.korhatar + "<br>akcio: " + data.akcio + "<br>mennyisegraktaron: " + data.mennyisegraktaron;
+        } else {
+          GETjatekok.innerHTML += "A játék nem található!";
+        }
+      })
+      .catch((error) => (GETjatekok.innerHTML = error));
+  </script>
 </body>
