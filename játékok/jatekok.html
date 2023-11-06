@@ -28,7 +28,14 @@
     <input type="button" id="button_" value="frissítés" onclick="frissites()" />
   </form>
   <p id="PUTjatekok"></p>
+
   <h1>DELETE jatekok</h1>
+
+  <form>
+    <input type="id" id="id_1" placeholder="id" /><br />
+    <input type="button" id="button_1" value="törlés" onclick="torles()" />
+  </form>
+  <p id="DELETEjatekok"></p>
 
   <script>
     const URL = "http://localhost:8080/CodeCraftersWebshop-1.0-SNAPSHOT/webresources/jatekok";
@@ -108,6 +115,17 @@
       })
         .then((response) => response.json())
         .catch((error) => (PUTjatekok.innerHTML = error));
+    }
+
+    function torles() {
+      const id_1 = document.getElementById("id_1").value;
+
+      // DELETE kérés
+      fetch(`${URL}/${id_1}`, {
+        method: "DELETE",
+      })
+        .then((response) => response.json())
+        .catch((error) => (DELETEjatekok.innerHTML = error));
     }
   </script>
 </body>
