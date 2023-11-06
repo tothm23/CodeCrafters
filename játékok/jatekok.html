@@ -1,24 +1,69 @@
 <body>
   <h1>GET jatekok</h1>
   <p id="GETjatekok"></p>
+
   <h1>POST jatekok</h1>
+  <form>
+    <input type="text" id="nev" placeholder="nev" /><br />
+    <input type="number" id="ar" placeholder="ar" /><br />
+    <input type="text" id="leiras" placeholder="leiras" /><br />
+    <input type="text" id="kep" placeholder="kep" /><br />
+    <input type="number" id="korhatar" placeholder="korhatar" /><br />
+    <input type="text" id="akcio" placeholder="akcio" /><br />
+    <input type="text" id="mennyisegraktaron" placeholder="mennyisegraktaron" /><br />
+    <input type="button" id="button" value="küldés" onclick="kuldes()" />
+  </form>
+  <p id="POSTjatekok"></p>
+
   <h1>PUT jatekok</h1>
   <h1>DELETE jatekok</h1>
 
   <script>
     const URL = "http://localhost:8080/CodeCraftersWebshop-1.0-SNAPSHOT/webresources/jatekok";
     const GETjatekok = document.getElementById("GETjatekok");
+    const POSTjatekok = document.getElementById("POSTjatekok");
 
     // GET kérés
     fetch(`${URL}/1`)
       .then((response) => response.json())
       .then((data) => {
         if (data.id) {
-          GETjatekok.innerHTML += "id: " + data.id + "<br>nev: " + data.nev + "<br>ar: " + data.ar + "<br>leiras: " + data.leiras + "<br>kep: " + data.kep + "<br>korhatar: " + data.korhatar + "<br>akcio: " + data.akcio + "<br>mennyisegraktaron: " + data.mennyisegraktaron;
+          GETjatekok.innerHTML += "<br>nev: " + data.nev + "<br>ar: " + data.ar + "<br>leiras: " + data.leiras + "<br>kep: " + data.kep + "<br>korhatar: " + data.korhatar + "<br>akcio: " + data.akcio + "<br>mennyisegraktaron: " + data.mennyisegraktaron;
         } else {
           GETjatekok.innerHTML += "A játék nem található!";
         }
       })
       .catch((error) => (GETjatekok.innerHTML = error));
+
+    function kuldes() {
+      const nev = document.getElementById("nev").value;
+      const ar = document.getElementById("ar").value;
+      const leiras = document.getElementById("leiras").value;
+      const kep = document.getElementById("kep").value;
+      const korhatar = document.getElementById("korhatar").value;
+      const akcio = document.getElementById("akcio").value;
+      const mennyisegraktaron = document.getElementById("mennyisegraktaron").value;
+
+      const jatek = {
+        nev: nev,
+        ar: parseInt(ar),
+        leiras: leiras,
+        kep: kep,
+        korhatar: parseInt(korhatar),
+        akcio: parseInt(akcio),
+        mennyisegraktaron: parseInt(mennyisegraktaron),
+      };
+
+      // POST kérés
+      fetch(URL, {
+        method: "POST",
+        body: JSON.stringify(jatek),
+        headers: {
+          "Content-type": "application/json; charset=UTF-8",
+        },
+      })
+        .then((response) => response.json())
+        .catch((error) => (POSTjatekok.innerHTML = error));
+    }
   </script>
 </body>
