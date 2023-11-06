@@ -1,6 +1,7 @@
 const formPopup = document.querySelector(".form-popup");
 const signupLoginLink = formPopup.querySelectorAll(".bottom-link a");
 const regisztracio = document.getElementById('regisztracio');
+const belepes = document.getElementById('belepes');
 
 document.body.classList.toggle("show-popup");
 
@@ -11,6 +12,38 @@ signupLoginLink.forEach(link => {
         formPopup.classList[link.id === 'signup-link' ? 'add' : 'remove']("show-signup");
     });
 });
+
+//bejelentkezés
+belepes.addEventListener('click', (event) => {
+    event.preventDefault();
+    
+    const felhaszNev = document.querySelector('.input-field:nth-child(1) input').value;
+    const jelszo = document.querySelector('.input-field:nth-child(2) input').value;
+
+    // A query stringet hozzáfűzzük az URL-hez, ahol a felhasználónevet és jelszót átadjuk
+    const endpoint = `http://localhost:8080/CodeCraftersWebshop-1.0-SNAPSHOT/webresources/felhasznalok/bejelentkezes?felhasznaloNev=${felhaszNev}&jelszo=${jelszo}`;
+
+    fetch(endpoint, {
+        method: "GET",
+        headers: {
+            "Content-type": "application/json; charset=UTF-8"
+        }
+    })
+    .then((response) => {
+        if (response.ok) {
+            // Sikeres bejelentkezés, itt kezelheted a sikeres bejelentkezés eseményét
+            console.log("Sikeres bejelentkezés!");
+        } else {
+            // Sikertelen bejelentkezés, itt kezelheted a sikertelen bejelentkezés eseményét
+            console.error("Sikertelen bejelentkezés!");
+        }
+    })
+    .catch((error) => {
+        // Hibakezelés, ha valami nem működik a kérés során
+        console.error("Hiba történt a bejelentkezés során: ", error);
+    });
+});
+
 
 // regisztráció fetch 
 regisztracio.addEventListener('click', () => {
