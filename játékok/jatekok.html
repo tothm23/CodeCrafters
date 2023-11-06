@@ -16,6 +16,18 @@
   <p id="POSTjatekok"></p>
 
   <h1>PUT jatekok</h1>
+  <form>
+    <input type="id" id="id_" placeholder="id" /><br />
+    <input type="text" id="nev_" placeholder="nev" /><br />
+    <input type="number" id="ar_" placeholder="ar" /><br />
+    <input type="text" id="leiras_" placeholder="leiras" /><br />
+    <input type="text" id="kep_" placeholder="kep" /><br />
+    <input type="number" id="korhatar_" placeholder="korhatar" /><br />
+    <input type="text" id="akcio_" placeholder="akcio" /><br />
+    <input type="text" id="mennyisegraktaron_" placeholder="mennyisegraktaron" /><br />
+    <input type="button" id="button_" value="frissítés" onclick="frissites()" />
+  </form>
+  <p id="PUTjatekok"></p>
   <h1>DELETE jatekok</h1>
 
   <script>
@@ -64,6 +76,38 @@
       })
         .then((response) => response.json())
         .catch((error) => (POSTjatekok.innerHTML = error));
+    }
+
+    function frissites() {
+      const id_ = document.getElementById("id_").value;
+      const nev_ = document.getElementById("nev_").value;
+      const ar_ = document.getElementById("ar_").value;
+      const leiras_ = document.getElementById("leiras_").value;
+      const kep_ = document.getElementById("kep_").value;
+      const korhatar_ = document.getElementById("korhatar_").value;
+      const akcio_ = document.getElementById("akcio_").value;
+      const mennyisegraktaron_ = document.getElementById("mennyisegraktaron_").value;
+
+      const jatek = {
+        nev: nev_,
+        ar: parseInt(ar_),
+        leiras: leiras_,
+        kep: kep_,
+        korhatar: parseInt(korhatar_),
+        akcio: parseInt(akcio_),
+        mennyisegraktaron: parseInt(mennyisegraktaron_),
+      };
+
+      // PUT kérés
+      fetch(`${URL}/${id_}`, {
+        method: "PUT",
+        body: JSON.stringify(jatek),
+        headers: {
+          "Content-type": "application/json; charset=UTF-8",
+        },
+      })
+        .then((response) => response.json())
+        .catch((error) => (PUTjatekok.innerHTML = error));
     }
   </script>
 </body>
