@@ -64,12 +64,12 @@
 
       const jatek = {
         nev: nev,
-        ar: parseInt(ar),
+        ar: ar,
         leiras: leiras,
         kep: kep,
-        korhatar: parseInt(korhatar),
-        akcio: parseInt(akcio),
-        mennyisegraktaron: parseInt(mennyisegraktaron),
+        korhatar: korhatar,
+        akcio: akcio,
+        mennyisegraktaron: mennyisegraktaron,
       };
 
       // POST kérés
@@ -80,8 +80,16 @@
           "Content-type": "application/json; charset=UTF-8",
         },
       })
-        .then((response) => response.json())
-        .catch((error) => (POSTjatekok.innerHTML = error));
+        .then((valasz) => valasz.text())
+        .then((adat) => {
+          try {
+            const elemzettAdat = JSON.parse(adat);
+            POSTjatekok.innerHTML = elemzettAdat.message;
+          } catch (error) {
+            POSTjatekok.innerHTML = adat;
+          }
+        })
+        .catch((hiba) => (POSTjatekok.innerHTML = hiba));
     }
 
     function frissites() {
