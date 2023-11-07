@@ -139,8 +139,16 @@
       fetch(`${URL}/${id_1}`, {
         method: "DELETE",
       })
-        .then((response) => response.json())
-        .catch((error) => (DELETEjatekok.innerHTML = error));
+        .then((valasz) => valasz.text())
+        .then((adat) => {
+          try {
+            const elemzettAdat = JSON.parse(adat);
+            DELETEjatekok.innerHTML = elemzettAdat.message;
+          } catch (error) {
+            DELETEjatekok.innerHTML = adat;
+          }
+        })
+        .catch((hiba) => (DELETEjatekok.innerHTML = hiba));
     }
   </script>
 </body>
