@@ -120,8 +120,16 @@
           "Content-type": "application/json; charset=UTF-8",
         },
       })
-        .then((response) => response.json())
-        .catch((error) => (PUTjatekok.innerHTML = error));
+        .then((valasz) => valasz.text())
+        .then((adat) => {
+          try {
+            const elemzettAdat = JSON.parse(adat);
+            PUTjatekok.innerHTML = elemzettAdat.message;
+          } catch (error) {
+            PUTjatekok.innerHTML = adat;
+          }
+        })
+        .catch((hiba) => (PUTjatekok.innerHTML = hiba));
     }
 
     function torles() {
