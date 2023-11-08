@@ -1,5 +1,6 @@
 package com.codecrafterswebshop.Service;
 
+import com.codecrafterswebshop.Exception.AjandekkartyaException;
 import com.codecrafterswebshop.Model.Ajandekkartya;
 import java.util.List;
 import java.util.Map;
@@ -48,12 +49,14 @@ public class AjandekkartyaService {
     public static String ujAjandekKartya(String nevBE, Integer arBE, String leirasBE,
             String kepBE, Integer akcioBE, Integer mennyisegraktaronBE, Integer eszkozIdBE, Integer platformIdBE) {
         try {
-            if (Ajandekkartya.ujAjandekKartya(nevBE, arBE, leirasBE, kepBE, akcioBE, mennyisegraktaronBE, eszkozIdBE, platformIdBE)) {
+            if (!Ajandekkartya.nevEllenorzes(nevBE)) {
+                return "Hibás név!";
+            } else if (Ajandekkartya.ujAjandekKartya(nevBE, arBE, leirasBE, kepBE, akcioBE, mennyisegraktaronBE, eszkozIdBE, platformIdBE)) {
                 return "Ajándék kártya hozzáadva!";
             } else {
                 return "Hiba az ajándék kártya hozzáadásánál!";
             }
-        } catch (Exception ex) {
+        } catch (AjandekkartyaException ex) {
             return ex.getMessage();
         }
     }
