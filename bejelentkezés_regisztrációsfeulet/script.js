@@ -2,7 +2,7 @@ const formPopup = document.querySelector(".form-popup");
 const signupLoginLink = formPopup.querySelectorAll(".bottom-link a");
 const regisztracio = document.getElementById('regisztracio');
 const belepes = document.getElementById('belepes');
-const sikeres_reg = document.getElementById('"sikeres_reg"');
+const sikeres = document.getElementById('sikeres');
 
 document.body.classList.toggle("show-popup");
 
@@ -79,10 +79,10 @@ regisztracio.addEventListener('click', () => {
     .then((adat) => {
       try {
         const elemzettAdat = JSON.parse(adat);
-        sikeres_reg.innerHTML = elemzettAdat.message;
+        sikeres.innerHTML = elemzettAdat.message;
       } catch (error) {
-        sikeres_reg.innerHTML = adat;
+        sikeres.innerHTML = adat;
       }
     })
-    .catch((hiba) => (sikeres_reg.innerHTML = hiba));
+    .catch((hiba) => (sikeres.innerHTML = hiba));
 });

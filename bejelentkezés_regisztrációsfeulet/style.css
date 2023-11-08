@@ -6,7 +6,6 @@
     padding: 0;
     box-sizing: border-box;
     font-family: "Open Sans", sans-serif;
-    text-transform: uppercase;
     color: white;
     ;
 }
@@ -136,6 +135,7 @@ form .input-field {
     color: #ececec;
     pointer-events: none;
     transition: 0.2s ease;
+    text-transform: uppercase;
 }
 
 .input-field input:is(:focus, :valid) {
@@ -177,7 +177,6 @@ form button {
     cursor: pointer;
     margin: 25px 0;
     background: #BB4930;
-    ;
     transition: 0.2s ease;
 }
 
