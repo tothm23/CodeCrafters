@@ -20,11 +20,12 @@ belepes.addEventListener('click', (event) => {
     const felhaszNev = document.querySelector('.input-field:nth-child(1) input').value;
     const jelszo = document.querySelector('.input-field:nth-child(2) input').value;
 
-    // A query stringet hozzáfűzzük az URL-hez, ahol a felhasználónevet és jelszót átadjuk
-    const endpoint = `http://localhost:8080/CodeCraftersWebshop-1.0-SNAPSHOT/webresources/felhasznalok/bejelentkezes?felhasznaloNev=${felhaszNev}&jelszo=${jelszo}`;
-
-    fetch(endpoint, {
+    fetch("http://localhost:8080/CodeCraftersWebshop-1.0-SNAPSHOT/webresources/felhasznalok/bejelentkezes", {
         method: "GET",
+        body: JSON.stringify({
+            felhasznaloNev: felhaszNev,
+            jelszo: jelszo
+        }),
         headers: {
             "Content-type": "application/json; charset=UTF-8"
         }
