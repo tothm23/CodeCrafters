@@ -426,4 +426,12 @@ public class Ajandekkartya implements Serializable {
         }
     }
 
+    public static boolean arEllenorzes(Integer ar) throws AjandekkartyaException {
+        if (ar < 0) {
+            throw new AjandekkartyaException("Az ajándék kártya ára nem lehet kisebb, mint 0!");
+        } else {
+            return true;
+        }
+    }
+
 }
