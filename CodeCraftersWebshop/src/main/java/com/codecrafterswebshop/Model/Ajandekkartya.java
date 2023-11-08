@@ -441,5 +441,13 @@ public class Ajandekkartya implements Serializable {
             return true;
         }
     }
+    
+     public static boolean kepEllenorzes(String kep) throws AjandekkartyaException {
+        if (kep.equals("")) {
+            throw new AjandekkartyaException("Az ajándék kártya képe lehet üres!");
+        } else {
+            return true;
+        }
+    }
 
 }
