@@ -1,5 +1,6 @@
 package com.codecrafterswebshop.Model;
 
+import com.codecrafterswebshop.Exception.AjandekkartyaException;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
@@ -412,6 +413,16 @@ public class Ajandekkartya implements Serializable {
             em.clear();
             em.close();
             emf.close();
+        }
+    }
+
+    public static boolean nevEllenorzes(String nev) throws AjandekkartyaException {
+        if (nev.equals("")) {
+            throw new AjandekkartyaException("Az ajándék kártya neve lehet üres!");
+        } else if (nev.length() > 100) {
+            throw new AjandekkartyaException("Az ajándék kártya neve nem lehet 100 karakternél hosszabb!");
+        } else {
+            return true;
         }
     }
 
