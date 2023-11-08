@@ -441,10 +441,20 @@ public class Ajandekkartya implements Serializable {
             return true;
         }
     }
-    
-     public static boolean kepEllenorzes(String kep) throws AjandekkartyaException {
+
+    public static boolean kepEllenorzes(String kep) throws AjandekkartyaException {
         if (kep.equals("")) {
             throw new AjandekkartyaException("Az ajándék kártya képe lehet üres!");
+        } else {
+            return true;
+        }
+    }
+
+    public static boolean akcioEllenorzes(Integer akcio) throws AjandekkartyaException {
+        if (akcio < 0) {
+            throw new AjandekkartyaException("Az ajándék kártya akciója nem lehet kisebb, mint 0!");
+        } else if (akcio > 100) {
+            throw new AjandekkartyaException("Az ajándék kártya akciója nem lehet nagyobb, mint 100!");
         } else {
             return true;
         }
