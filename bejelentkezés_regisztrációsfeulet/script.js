@@ -2,6 +2,7 @@ const formPopup = document.querySelector(".form-popup");
 const signupLoginLink = formPopup.querySelectorAll(".bottom-link a");
 const regisztracio = document.getElementById('regisztracio');
 const belepes = document.getElementById('belepes');
+const sikeres_reg = document.getElementById('"sikeres_reg"');
 
 document.body.classList.toggle("show-popup");
 
@@ -74,5 +75,14 @@ regisztracio.addEventListener('click', () => {
         headers: {
             "Content-type": "application/json; charset=UTF-8",
         },
-    }).then((response) => response.json());
+    }).then((valasz) => valasz.text())
+    .then((adat) => {
+      try {
+        const elemzettAdat = JSON.parse(adat);
+        sikeres_reg.innerHTML = elemzettAdat.message;
+      } catch (error) {
+        sikeres_reg.innerHTML = adat;
+      }
+    })
+    .catch((hiba) => (sikeres_reg.innerHTML = hiba));
 });
