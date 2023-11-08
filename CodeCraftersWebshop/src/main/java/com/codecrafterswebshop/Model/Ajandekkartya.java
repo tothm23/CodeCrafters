@@ -434,4 +434,12 @@ public class Ajandekkartya implements Serializable {
         }
     }
 
+    public static boolean leirasEllenorzes(String leiras) throws AjandekkartyaException {
+        if (leiras.equals("")) {
+            throw new AjandekkartyaException("Az ajándék kártya leírása lehet üres!");
+        } else {
+            return true;
+        }
+    }
+
 }
