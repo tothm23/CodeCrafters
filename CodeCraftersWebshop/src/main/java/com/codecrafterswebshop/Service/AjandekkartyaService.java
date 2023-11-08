@@ -59,6 +59,8 @@ public class AjandekkartyaService {
                 return "Hibás kép!";
             } else if (!Ajandekkartya.akcioEllenorzes(akcioBE)) {
                 return "Hibás akció!";
+            } else if (!Ajandekkartya.mennyisegraktaronEllenorzes(mennyisegraktaronBE)) {
+                return "Hibás mennyiségraktáron!";
             } else if (Ajandekkartya.ujAjandekKartya(nevBE, arBE, leirasBE, kepBE, akcioBE, mennyisegraktaronBE, eszkozIdBE, platformIdBE)) {
                 return "Ajándék kártya hozzáadva!";
             } else {

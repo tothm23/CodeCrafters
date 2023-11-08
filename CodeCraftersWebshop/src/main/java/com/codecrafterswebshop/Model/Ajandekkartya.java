@@ -460,4 +460,12 @@ public class Ajandekkartya implements Serializable {
         }
     }
 
+    public static boolean mennyisegraktaronEllenorzes(Integer mennyisegraktaron) throws AjandekkartyaException {
+        if (mennyisegraktaron < 0) {
+            throw new AjandekkartyaException("Az ajándék kártya mennyisegraktaronja nem lehet kisebb, mint 0!");
+        } else {
+            return true;
+        }
+    }
+
 }
