@@ -3,9 +3,8 @@ body {
     background: #404040;
     display: flex;
     justify-content: center;
+    flex-direction: column;
     align-items: center;
-    margin-top: 50px;
-    margin-bottom: 50px;
     height: 100vh;
 }
 
@@ -95,4 +94,13 @@ a:hover {
     border: 1px solid #FFF;
     background: rgba(0, 0, 0, 0.50);
     max-width: 125px;
+}
+
+#Alert{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    text-align: center;
+    margin-top: 10px;
+    height: 100%;
 }
