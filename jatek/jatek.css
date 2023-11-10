@@ -254,3 +254,22 @@ p {
   justify-content: center;
   flex-direction: column;
 }
+
+#elrejtettElem {
+  width: 350px;
+  height: 300px;
+  padding: 15px;
+  background-color: #241f1f;
+  color: white;
+  display: none;
+  position: absolute;
+  border-radius: 15px;
+  top: 18vh;
+  right: 13.5vh;
+}
+
+.fiz-torl {
+  width: 320px;
+  position: absolute;
+  bottom: 15px;
+}
