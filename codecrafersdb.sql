@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Oct 03, 2023 at 10:44 AM
+-- Generation Time: Nov 11, 2023 at 12:23 PM
 -- Server version: 5.7.24
 -- PHP Version: 8.0.1
 
@@ -219,8 +219,11 @@ CREATE TABLE `ajandekkartya` (
 --
 
 INSERT INTO `ajandekkartya` (`id`, `nev`, `ar`, `leiras`, `kep`, `akcio`, `mennyisegraktaron`, `eszkozId`, `platformId`, `letrehozva`, `frissitve`) VALUES
-(2, 'ProbaKartya2', 1999, 'sgagagsgshsdgsdggfdhdfgsgddghsbahennfabfdgídvshtejnsdfgsaggsvsdfsdff', '', 0, 0, 0, 2, '2023-09-18 17:44:16', '2023-09-18 17:44:56'),
-(3, 'ProbaKartya3friss', 1000, 'leirasfriss', '', 30, 100, 2, 1, '2023-09-25 12:34:39', '2023-09-25 12:42:04');
+(1, 'PlayStation Store Ajándékkártya 7500 Ft', 7500, 'A kártyát felhasználva játékok, filmek, interaktív könyvek, játék kiegészítések és számos más érdekes letölthető tartalom várja, hogy kedvenc Sony konzolodra (legyen az PS4, PS5) beszerezd őket! Témák, háttérképek, kosztümök - válogass kedvedre, úgy, hogy még a kanapédból sem állsz fel. A virtuális vásárlási utalvány ajándéknak is ideális!', '', 0, 500, 5, 1, '2023-11-11 12:52:17', NULL),
+(2, 'PlayStation Store Ajándékkártya 30000 Ft', 30000, 'A kártyát felhasználva játékok, filmek, interaktív könyvek, játék kiegészítések és számos más érdekes letölthető tartalom várja, hogy kedvenc Sony konzolodra (legyen az PS4, PS5) beszerezd őket! Témák, háttérképek, kosztümök - válogass kedvedre, úgy, hogy még a kanapédból sem állsz fel. A virtuális vásárlási utalvány ajándéknak is ideális!', '', 0, 200, 5, 1, '2023-09-18 17:44:16', '2023-09-18 17:44:56'),
+(3, 'Grand Theft Auto Online: Great White Shark Card', 5000, 'A Great White Shark kártyán 1 250 000 virtuális GTA dollárt találsz, melyet kedved szerint elkölthetsz a Grand Theft Auto Online játékban.', '', 0, 100, 1, 1, '2023-09-25 12:34:39', '2023-09-25 12:42:04'),
+(4, 'Grand Theft Auto Online: Whale Shark Card', 12000, 'A Whale Shark kártyán 3 500 000 virtuális GTA dollárt találsz, melyet kedved szerint elkölthetsz a Grand Theft Auto Online játékban.', '', 0, 150, 1, 1, '2023-11-11 12:59:53', NULL),
+(5, 'FC 24 2800 FUT Points', 10000, 'A kártyán 2800 FUT Point-ot találsz, melyet kedved szerint elkölthetsz az FC 24 játékban.', '', 0, 220, 1, 2, '2023-11-11 13:02:51', NULL);
 
 -- --------------------------------------------------------
 
@@ -247,6 +250,19 @@ CREATE TABLE `eszkoz` (
   `id` int(9) NOT NULL,
   `eszkozNev` varchar(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `eszkoz`
+--
+
+INSERT INTO `eszkoz` (`id`, `eszkozNev`) VALUES
+(1, 'PC'),
+(2, 'XBOX One'),
+(3, 'XBOX Series S'),
+(4, 'XBOX Series X'),
+(5, 'PS4'),
+(6, 'PS5'),
+(7, 'Nintendo Switch');
 
 -- --------------------------------------------------------
 
@@ -308,8 +324,11 @@ CREATE TABLE `jatek` (
 --
 
 INSERT INTO `jatek` (`id`, `nev`, `ar`, `leiras`, `kep`, `korhatar`, `akcio`, `mennyisegraktaron`, `kategoriaId`, `eszkozId`, `platformId`, `letrehozva`, `frissitve`) VALUES
-(1, 'ProbaJatek', 999, 'leirasfriss', '', 18, 10, 150, 3, 2, 1, '2023-09-18 17:30:41', '2023-09-25 12:38:50'),
-(2, 'ProbaJatek2', 1500, 'leiras', '', 16, 0, 1000, 1, 2, 3, '2023-09-25 12:30:55', NULL);
+(1, 'The Witcher 3: Wild Hunt', 5999, 'A The Witcher 3: Wild Hunt egy fantasy szerepjáték, melyben Geralt of Rivia karakterét irányítva különböző küldetéseket teljesíthetsz egy nyitott világban.', 'witcher3.jpg', 18, 1, 100, 1, 1, 1, '2023-11-11 11:57:24', NULL),
+(2, 'Counter-Strike: Global Offensive', 1499, 'A Counter-Strike: Global Offensive egy taktikai lövöldözős játék, ahol két csapat, a terroristák és az antiterroristák egymás ellen küzdenek.', 'csgo.jpg', 16, 1, 300, 1, 1, 1, '2023-11-11 12:02:56', NULL),
+(3, 'Minecraft', 2999, 'A Minecraft egy sandbox játék, ahol a játékosok kockákból építhetnek és felfedezhetnek egy végtelen világot.', 'minecraft.jpg', 6, 1, 200, 1, 7, 3, '2023-11-11 12:04:14', NULL),
+(4, 'FC 24', 6999, 'A FC 24 egy futballszimulátor játék, ahol a játékosok vezethetik kedvenc csapatukat és részt vehetnek különböző versenyeken.', 'fifa22.jpg', 0, 0, 150, 1, 2, 2, '2023-11-11 12:04:14', NULL),
+(5, 'Grand Theft Auto V', 6999, 'A Grand Theft Auto V egy akció-kaland játék, melyben a játékosok Los Santos városában szabadon közlekedhetnek és különböző küldetéseket teljesíthetnek.', 'gta5.jpg', 18, 0, 100, 1, 1, 3, '2023-11-11 12:14:09', NULL);
 
 -- --------------------------------------------------------
 
@@ -332,6 +351,14 @@ CREATE TABLE `kategoria` (
   `id` int(9) NOT NULL,
   `nev` varchar(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `kategoria`
+--
+
+INSERT INTO `kategoria` (`id`, `nev`) VALUES
+(1, 'Játék'),
+(2, 'Ajándék Kártya');
 
 -- --------------------------------------------------------
 
@@ -358,6 +385,16 @@ CREATE TABLE `platform` (
   `id` int(9) NOT NULL,
   `nev` varchar(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `platform`
+--
+
+INSERT INTO `platform` (`id`, `nev`) VALUES
+(1, 'Steam'),
+(2, 'Origin'),
+(3, 'Epic Games'),
+(4, 'Ubisoft Connect');
 
 -- --------------------------------------------------------
 
@@ -472,7 +509,7 @@ ALTER TABLE `termekkulcsok`
 -- AUTO_INCREMENT for table `ajandekkartya`
 --
 ALTER TABLE `ajandekkartya`
-  MODIFY `id` int(9) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(9) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `cupon`
@@ -484,7 +521,7 @@ ALTER TABLE `cupon`
 -- AUTO_INCREMENT for table `eszkoz`
 --
 ALTER TABLE `eszkoz`
-  MODIFY `id` int(9) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(9) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `felhasznalo`
@@ -496,7 +533,7 @@ ALTER TABLE `felhasznalo`
 -- AUTO_INCREMENT for table `jatek`
 --
 ALTER TABLE `jatek`
-  MODIFY `id` int(9) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(9) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `jogosultsag`
@@ -508,7 +545,7 @@ ALTER TABLE `jogosultsag`
 -- AUTO_INCREMENT for table `kategoria`
 --
 ALTER TABLE `kategoria`
-  MODIFY `id` int(9) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(9) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `kosar`
@@ -520,7 +557,7 @@ ALTER TABLE `kosar`
 -- AUTO_INCREMENT for table `platform`
 --
 ALTER TABLE `platform`
-  MODIFY `id` int(9) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(9) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `rendeles`
