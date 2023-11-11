@@ -6,24 +6,6 @@
   box-sizing: border-box;
   font-family: Arial, Helvetica, sans-serif;
   }
-  
-  
-  
-  /* magyar */
-  #magyar-box {
-    position: absolute;
-    top: 15.5vh;
-    right: 25vh;
-    display: flex;
-  }
-  
-  #magyar-zaszlo-box {
-    width: 4vh;
-    display: flex;
-    flex-direction: column;
-    border: 2px solid #241f1f;
-  }
-  
   #felhasznalo-box {
     background-color: #241f1f;
     width: 15vh;
@@ -198,25 +180,6 @@
     justify-content: center;
     flex-direction: column;
   }
-  
-  #elrejtettElem {
-    width: 350px;
-    height: 300px;
-    padding: 15px;
-    background-color: #241f1f;
-    color: white;
-    display: none;
-    position: absolute;
-    border-radius: 15px;
-    top: 18vh; 
-    right: 13.5vh;
-  }
-
-.fiz-torl{
-  width: 320px;
-  position: absolute;
-  bottom: 15px;
-}
 
   /* vissza az oldal tetejére */
   #vissza-box {
