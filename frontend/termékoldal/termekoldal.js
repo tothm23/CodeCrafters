@@ -2,10 +2,10 @@ document.addEventListener("DOMContentLoaded", function() {
     var adatok = {
         "jatekok" :[
             {
-                "nevBE": "Játék 1",
+                "nevBE": "Witcher 3",
                 "arBE": 29.99,
                 "leirasBE": "Ez egy fantasztikus játék.",
-                "kepBE": "jatek.png",
+                "kepBE": "witcher3.jpg",
                 "korhatarBE": 12,
                 "akcioBE": true,
                 "mennyisegraktaronBE": 50,

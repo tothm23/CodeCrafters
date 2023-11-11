@@ -43,7 +43,7 @@ body {
     justify-content: space-between;
     align-items: center;
 }
-
+/*kereső*/
 .searchbar {
     flex-grow: 1;
     display: flex;
@@ -91,6 +91,32 @@ body {
     text-decoration: none;
     color: inherit;
 }
+
+#felhasznalo-box {
+    background-color: #241f1f;
+    width: 15vh;
+    height: 12.5vh;
+    margin-top: 2.5vh;
+    border-top-left-radius: 4vh;
+  
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+
+    border: #000 1px solid;
+    display: none;
+  }
+  
+  #felhasznalo-kep {
+    width: 50px;
+    height: 50px;
+  }
+  
+  #felhasznalo {
+    color: #fff;
+    padding-top: 0.3vh;
+  }
 
 
 /*gombok*/
