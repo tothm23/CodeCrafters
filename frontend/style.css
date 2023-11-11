@@ -1,4 +1,4 @@
-*{
+* {
     box-sizing: border-box;
     text-transform: uppercase;
     margin: 0;
@@ -6,12 +6,12 @@
     box-sizing: border-box;
     font-family: Arial, Helvetica, sans-serif;
 }
-body{
+
+body {
     background-color: #404040;
 }
 
-.container{
-    
+.container {
     max-width: 100%;
     padding-top: 30px;
     padding-left: 0px;
@@ -21,18 +21,19 @@ body{
     background-color: #404040;
     padding: 30px 0px;
     justify-content: space-between;
-  }
-  .content-container {
+}
+
+.content-container {
     display: flex;
     margin-right: 0px;
     flex-direction: row;
     justify-content: space-between;
     align-items: flex-start;
-  }
+}
 
-  /*nav*/
+/*nav*/
 
-.nav{
+.nav {
     width: 100%;
     padding-top: 20px;
     padding-bottom: 20px;
@@ -44,9 +45,11 @@ body{
     border: solid 1px;
     justify-content: space-between;
     align-items: center;
-    
+    padding: 5px;
+
 }
-.searchbar{
+
+.searchbar {
     background-color: #BB4930;
     flex-grow: 1;
     display: flex;
@@ -57,26 +60,29 @@ body{
     min-width: 200px;
 }
 
-.searchbar form{
+.searchbar form {
     flex-grow: 1;
     display: flex;
     align-items: center;
 }
-.searchbar input{
+
+.searchbar input {
     border: #000000 1px solid;
 }
 
-.nav img{
+.nav img {
     border-radius: 10px;
     max-width: 100px;
-    border: solid  #fff 1px;
-    margin:5px;
+    border: solid #fff 1px;
+    margin: 5px;
 }
-.keplink{
+
+.keplink {
     text-decoration: none;
     color: inherit;
 }
-.keplink:hover{
+
+.keplink:hover {
     text-decoration: none;
     color: inherit;
 }
@@ -84,12 +90,13 @@ body{
 
 /*gombok*/
 
-.log_reg{
+.log_reg {
     display: flex;
     flex-direction: column;
     margin-right: 20px;
 }
-.log_reg button{
+
+.log_reg button {
     color: #000000;
     background-color: #ffffff;
     border-radius: 5px;
@@ -98,12 +105,13 @@ body{
     padding-left: 10px;
     padding-right: 10px;
 }
-.log_reg a{
+
+.log_reg a {
     text-align: center;
 }
 
 /*menu*/
-.mynavbar{
+.mynavbar {
     justify-content: center;
     display: flex;
     flex-direction: row;
@@ -111,66 +119,84 @@ body{
     margin-bottom: 10px;
 }
 
-.my-bar-btn{
+.my-bar-btn {
     margin: 5px;
-    max-width: 160px;
+    max-width: 350px;
     display: flex;
     flex-direction: column;
     align-items: baseline;
     flex: 1;
     text-align: center;
+
 }
 
-.my-bar-btn ul{
+.my-bar-btn ul {
     width: 150px;
     padding: 5px;
     background-color: #241F1F;
 }
 
-.my-bar-btn a{
+.my-bar-btn a {
     width: 100%;
 }
 
-.my-bar-btn li{
+.my-bar-btn li {
     list-style: none;
     border: #000000 1px solid;
     border-radius: 5px;
 }
-.my-bar-btn .category{
+
+.my-bar-btn .category {
     color: #ffffff;
     background-color: #241F1F;
 }
-.my-bar-btn .options{
+
+.my-bar-btn .options {
     background-color: #8c8c8c;
 }
 
 /*menu gombok formázása*/
-.gomblink{
+.gomblink {
     text-decoration: none;
     color: inherit;
     text-transform: uppercase;
     font-size: 12pt;
     font-weight: bold;
+    flex-shrink: 0;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
-.category .gomblink:hover{
+
+.gomblink:focus {
+    box-shadow: none;
+}
+
+.category .gomblink:hover {
     color: #ff4444;
     border-radius: 5px;
 }
-.gomblink:hover{
+
+.gomblink:hover {
     color: #ff4444;
     border-radius: 5px;
 }
-h2{
+
+h2 {
     text-align: center;
 }
-h2,form .mb-3,p{
-color: white;
+
+h2,
+form .mb-3,
+p {
+    color: white;
 }
 
 /* 
 slide
 */
-.slideshow{
+.slideshow {
     width: 100%;
     position: relative;
     margin-left: auto;
@@ -178,23 +204,27 @@ slide
 
 }
 
-@media only screen and (max-width: 700px){
-    .nav{
+@media only screen and (max-width: 700px) {
+    .nav {
         flex-direction: column;
     }
-    .searchbar form{
+
+    .searchbar form {
         flex-direction: column;
     }
-    .searchbar form input{
+
+    .searchbar form input {
         margin-bottom: 5px;
     }
-    .mynavbar{
+
+    .mynavbar {
         justify-content: center;
         display: flex;
         flex-direction: column;
         align-items: center;
     }
-    .my-bar-btn{
+
+    .my-bar-btn {
         margin-left: 10px;
         margin-right: 10px;
         min-width: 90%;
@@ -204,7 +234,8 @@ slide
         flex: 1;
         text-align: center;
     }
-    .my-bar-btn ul{
+
+    .my-bar-btn ul {
         min-width: 100%;
         text-align: center;
         align-items: center;
