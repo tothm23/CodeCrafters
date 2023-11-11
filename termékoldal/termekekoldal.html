@@ -7,9 +7,9 @@
 </head>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" />
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
-  integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
 <link rel="stylesheet" href="../style.css">
-<link rel="stylesheet" href="termekoldal.css">
+<link rel="stylesheet" href="../termékoldal/termekoldal.css">
 <title>Termekek oldal</title>
 
 <body>
@@ -39,16 +39,18 @@
       </nav>
 
       <div class="log_reg">
-        <button type="button"><a class="gomblink" href="../bejeletkezés/bejelentkezes.html">Bejelentkezés</a></button>
-        <button type="button"><a class="gomblink" href="../regisztracio/regisztracio.html">Regisztráció</a></button>
+        <button type="button"><a class="gomblink"
+            href="../bejeletkezés/bejelentkezes.html">Bejelentkezés</a></button>
+            <button type="button"><a class="gomblink"
+              href="../regisztracio/regisztracio.html">Regisztráció</a></button>
       </div>
     </div>
-    <!-- felhasználó fül -->
-    <div id="felhasznalo-box">
-      <img src="./kepek/felhasznalo.png" id="felhasznalo-kep" alt="Mákosguba55" />
-      <p id="felhasznalo">Mákosguba55</p>
-    </div>
-
+      <!-- felhasználó fül -->
+      <div id="felhasznalo-box" >
+        <img src="../kepek/felhasznalo.png" id="felhasznalo-kep" alt="Mákosguba55" />
+        <p id="felhasznalo">Mákosguba55</p>
+      </div>
+    
     </nav>
 
   </div>
@@ -56,22 +58,21 @@
   <div class="mynavbar">
     <!--kategóriák 1. jaték 2.platform 3.gidt cards 4.akciós 5. best seller-->
     <div class="dropdown my-bar-btn">
-      <a class="btn btn-secondary category gomblink" href="#" role="button" id="dropdownMenuLink"
-        data-bs-toggle="dropdown" aria-expanded="false">
+      <a class="btn btn-secondary category gomblink" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown"
+        aria-expanded="false">
         Kategória
       </a>
 
       <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-        <li class="options"><a class="dropdown-item gomblink" href="termékoldal/termekekoldal.html">Összes Játék</a>
-        </li>
+        <li class="options"><a class="dropdown-item gomblink" href="../termékoldal/termekekoldal.html">Összes Játék</a></li>
         <li class="options"><a class="dropdown-item gomblink" href="#">GTA</a></li>
         <li class="options"><a class="dropdown-item gomblink" href="#">R6</a></li>
       </ul>
     </div>
 
     <div class="dropdown my-bar-btn">
-      <a class="btn btn-secondary category gomblink" href="#" role="button" id="dropdownMenuLink"
-        data-bs-toggle="dropdown" aria-expanded="false">
+      <a class="btn btn-secondary category gomblink" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown"
+        aria-expanded="false">
         Eszköz
       </a>
 
@@ -84,26 +85,26 @@
     </div>
 
     <div class="dropdown my-bar-btn">
-      <a class="btn btn-secondary category gomblink" href="#" role="button" id="dropdownMenuLink"
-        data-bs-toggle="dropdown" aria-expanded="false" href="#">
+      <a class="btn btn-secondary category gomblink" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown"
+        aria-expanded="false" href="#">
         Ajándék Kártya
       </a>
     </div>
 
     <div class="dropdown my-bar-btn">
-      <a class="btn btn-secondary category gomblink" href="#" role="button" id="dropdownMenuLink"
-        data-bs-toggle="dropdown" aria-expanded="false" href="#">
+      <a class="btn btn-secondary category gomblink" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown"
+        aria-expanded="false" href="#">
         Játékok
       </a>
     </div>
 
     <div class="dropdown my-bar-btn">
-      <a class="btn btn-secondary category gomblink" href="#" role="button" id="dropdownMenuLink"
-        data-bs-toggle="dropdown" aria-expanded="false" href="#">
+      <a class="btn btn-secondary category gomblink" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown"
+        aria-expanded="false" href="#">
         Éppen Akciós
       </a>
     </div>
-
+      
   </div>
   <div class="main">
     <header class="main-header">
@@ -112,7 +113,7 @@
 
     <!-- kosár -->
     <div id="kosar-box">
-      <button2 id="megjelenitoGomb" onclick="toggleElem()"><i class="fa-solid fa-cart-shopping"></i></button>
+      <button2 id="megjelenitoGomb"><i class="fa-solid fa-cart-shopping"></i></button>
     </div>
     <div class="main-inner">
       <div class="szurok">
@@ -128,12 +129,12 @@
         </div>
         <div class="akcios">
           <h2>Akció</h2>
-          <div class="form-check">
-            <input class="form-check-input" type="checkbox" value="" id="Akciós">
-            <label class="form-check-label" for="Akciós">
-              Akciós termékek
-            </label>
-          </div>
+            <div class="form-check">
+              <input class="form-check-input" type="checkbox" value="" id="Akciós">
+              <label class="form-check-label" for="Akciós">
+                Akciós termékek
+              </label>
+            </div>
         </div>
         <div class="ar">
           <h2>Ár (HUF)</h2>
@@ -167,52 +168,52 @@
               Ubisoft Connect
             </label>
           </div>
-
+          
         </div>
         <div class="eszkoz">
           <h2>Eszköz</h2>
-          <div class="form-check">
-            <input class="form-check-input" type="checkbox" value="" id="PC">
-            <label class="form-check-label" for="PC">
-              PC
-            </label>
-          </div>
-          <div class="form-check">
-            <input class="form-check-input" type="checkbox" value="" id="Xbox">
-            <label class="form-check-label" for="Xbox">
-              Xbox One
-            </label>
-          </div>
-          <div class="form-check">
-            <input class="form-check-input" type="checkbox" value="" id="XboxS">
-            <label class="form-check-label" for="XboxS">
-              Xbox Series S
-            </label>
-          </div>
-          <div class="form-check">
-            <input class="form-check-input" type="checkbox" value="" id="XboxX">
-            <label class="form-check-label" for="XboxX">
-              Xbox Series X
-            </label>
-          </div>
-          <div class="form-check">
-            <input class="form-check-input" type="checkbox" value="" id="PS4">
-            <label class="form-check-label" for="PS4">
-              PS4
-            </label>
-          </div>
-          <div class="form-check">
-            <input class="form-check-input" type="checkbox" value="" id="PS5">
-            <label class="form-check-label" for="PS5">
-              PS5
-            </label>
-          </div>
-          <div class="form-check">
-            <input class="form-check-input" type="checkbox" value="" id="Nintendo">
-            <label class="form-check-label" for="Nintendo">
-              Nintendo Switch
-            </label>
-          </div>
+            <div class="form-check">
+              <input class="form-check-input" type="checkbox" value="" id="PC">
+              <label class="form-check-label" for="PC">
+                PC
+              </label>
+            </div>
+            <div class="form-check">
+              <input class="form-check-input" type="checkbox" value="" id="Xbox">
+              <label class="form-check-label" for="Xbox">
+                Xbox One
+              </label>
+            </div>
+            <div class="form-check">
+              <input class="form-check-input" type="checkbox" value="" id="XboxS">
+              <label class="form-check-label" for="XboxS">
+                Xbox Series S
+              </label>
+            </div>
+            <div class="form-check">
+              <input class="form-check-input" type="checkbox" value="" id="XboxX">
+              <label class="form-check-label" for="XboxX">
+                Xbox Series X
+              </label>
+            </div>
+            <div class="form-check">
+              <input class="form-check-input" type="checkbox" value="" id="PS4">
+              <label class="form-check-label" for="PS4">
+                PS4
+              </label>
+            </div>
+            <div class="form-check">
+              <input class="form-check-input" type="checkbox" value="" id="PS5">
+              <label class="form-check-label" for="PS5">
+                PS5
+              </label>
+            </div>
+            <div class="form-check">
+              <input class="form-check-input" type="checkbox" value="" id="Nintendo">
+              <label class="form-check-label" for="Nintendo">
+                Nintendo Switch
+              </label>
+            </div>
         </div>
       </div>
       <div class="termekek"></div>
@@ -222,7 +223,6 @@
   <!-- vissza -->
   <div id="vissza-box">
     <i class="fa-solid fa-arrow-up"></i>
-  </div>
   </div>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
     integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
