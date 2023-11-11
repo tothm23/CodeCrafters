@@ -82,12 +82,18 @@ a:hover {
     min-width: 300px;
 }
 
-#bejelentkezes {
+#regisztracio {
     border-radius: 15px;
     border: 1px solid #FFF;
     background: rgba(0, 0, 0, 0.50);
     max-width: 125px;
 }
+
+#regisztracio a{
+    text-decoration: none;
+    color: #fff;
+}
+
 
 #Alert{
     display: flex;
