@@ -43,6 +43,7 @@ document.addEventListener("DOMContentLoaded", function () {
       )
       .then((valasz) => valasz.text())
       .then((adat) => {
+        sikeresElem.style.removeProperty('display');
         if(adat=="Felhasználó hozzáadva!"){
           sikeresElem.style.color = "green";
           sikeresElem.style.backgroundColor = "lightgreen";
