@@ -129,7 +129,7 @@ function toggleElem() {
     adatok.jatekok.forEach(function(jatek) {
       termekekHTML += `
         <div class="termekjatek">
-          <img src="./kepek/${jatek.kepBE}" alt="${jatek.nevBE}">
+          <img src="../kepek/${jatek.kepBE}" alt="${jatek.nevBE}">
           <div class="adatok">
               <div class="nev">${jatek.nevBE}</div>
               <div class="ar">${jatek.arBE} HUF</div>
@@ -143,7 +143,7 @@ function toggleElem() {
     adatok.ajandekkartyak.forEach(function(kartya) {
       termekekHTML += `
         <div class="termekkartyak">
-          <img src="./kepek/${kartya.kepBE}" alt="${kartya.nevBE}">
+          <img src="../kepek/${kartya.kepBE}" alt="${kartya.nevBE}">
           <div class="adatok">
               <div class="nev">${kartya.nevBE}</div>
               <div class="ar">${kartya.arBE} HUF</div>
@@ -179,7 +179,7 @@ function toggleElem() {
         filteredProducts.forEach(function(jatek) {
             filteredHTML += `
                 <div class="termekjatek">
-                    <img src="./kepek/${jatek.kepBE}" alt="${jatek.nevBE}">
+                    <img src="../kepek/${jatek.kepBE}" alt="${jatek.nevBE}">
                     <div class="adatok">
                         <div class="nev">${jatek.nevBE}</div>
                         <div class="ar">${jatek.arBE} HUF</div>
@@ -193,7 +193,7 @@ function toggleElem() {
         filteredKartyak.forEach(function(kartya) {
             filteredHTML += `
                 <div class="termekkartyak">
-                    <img src="./kepek/${kartya.kepBE}" alt="${kartya.nevBE}">
+                    <img src="../kepek/${kartya.kepBE}" alt="${kartya.nevBE}">
                     <div class="adatok">
                         <div class="nev">${kartya.nevBE}</div>
                         <div class="ar">${kartya.arBE} HUF</div>
