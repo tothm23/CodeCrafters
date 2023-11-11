@@ -24,33 +24,6 @@
     border: 2px solid #241f1f;
   }
   
-  #magyar-zaszlo-box > div:nth-child(1) {
-    height: 1vh;
-    background-color: #ff0000;
-  }
-  
-  #magyar-zaszlo-box > div:nth-child(2) {
-    height: 1vh;
-    background-color: #fff;
-  }
-  
-  #magyar-zaszlo-box > div:nth-child(3) {
-    height: 1vh;
-    background-color: #00ff00;
-  }
-  
-  #magyar-felirat {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-direction: column;
-    color: #fff;
-    background-color: #241f1f;
-    border-top-right-radius: 2vh;
-    border-bottom-right-radius: 2vh;
-    padding: 0.5vh;
-  }
-  
   #felhasznalo-box {
     background-color: #241f1f;
     width: 15vh;
@@ -62,6 +35,8 @@
     align-items: center;
     justify-content: center;
     flex-direction: column;
+
+    display: none;
   }
   
   #felhasznalo-kep {
@@ -74,9 +49,6 @@
     padding-top: 0.3vh;
   }
   
-  #magyar-box,#felhasznalo-box {
-    display: none;
-  }
   .main{
     padding-left: 50px;
     padding-right: 50px;
