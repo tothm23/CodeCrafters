@@ -2,7 +2,6 @@ const link = "http://localhost:8080/CodeCraftersWebshop-1.0-SNAPSHOT/webresource
 
 const kep = document.getElementById("kep");
 const nev = document.getElementById("nev");
-const kategoria = document.getElementById("kategoria");
 const eszkoz = document.getElementById("eszkoz");
 const platform = document.getElementById("platform");
 const korhatar = document.getElementById("korhatar");
@@ -22,15 +21,37 @@ fetch(`${link}/${id}`)
   .then((response) => response.json())
   .then((data) => {
     if (data.id) {
-      kep.innerHTML = data.nev;
-      kep.setAttribute("src", data.kep);
+      // kep.innerHTML = data.nev;
+      // kep.setAttribute("src", data.kep);
 
       nev.innerHTML = data.nev;
-      kategoria.innerHTML = data.kategoria;
-      eszkoz.innerHTML = data.eszkoz;
-      platform.innerHTML = data.platform;
+      // eszkoz.innerHTML = data.eszkoz;
+      // platform.innerHTML = data.platform;
+
+      // Korhatár színe
+      switch (data.korhatar) {
+        case 3:
+          korhatar.style.border = "3px solid #a5c301";
+          break;
+        case 7:
+          korhatar.style.border = "3px solid #a5c301";
+          break;
+        case 12:
+          korhatar.style.border = "3px solid #f7a100";
+          break;
+        case 16:
+          korhatar.style.border = "3px solid #f7a100";
+          break;
+        case 18:
+          korhatar.style.border = "3px solid #e4001b";
+        default:
+          break;
+      }
+
+      korhatar.style.borderRadius = "50%";
       korhatar.innerHTML = data.korhatar;
 
+      // Raktáron
       if (data.mennyisegraktaron == 0) {
         elerheto.innerHTML = "elérhető";
         elerheto.style.color = "#95e72d";
@@ -40,7 +61,9 @@ fetch(`${link}/${id}`)
       }
 
       eredeti_ar.innerHTML = data.ar + " Ft";
-      akcios_ar.innerHTML = Math.round(data.ar - data.akcio / 100) + " Ft";
+
+      // Akciós ár egész számra kerekítve
+      akcios_ar.innerHTML = Math.round(data.ar - (data.ar / 100) * data.akcio) + " Ft";
       leiras.innerHTML = data.leiras;
     } else {
       alert("A játék nem található!");
