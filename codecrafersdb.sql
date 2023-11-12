@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Nov 11, 2023 at 04:01 PM
+-- Generation Time: Nov 12, 2023 at 03:21 PM
 -- Server version: 5.7.24
 -- PHP Version: 8.0.1
 
@@ -27,8 +27,24 @@ DELIMITER $$
 --
 -- Procedures
 --
-CREATE DEFINER=`root`@`localhost` PROCEDURE `ajandekKartya` (IN `ajandekKartyaIdBE` INT(9))   SELECT * 
+CREATE DEFINER=`root`@`localhost` PROCEDURE `ajandekKartya` (IN `ajandekKartyaIdBE` INT(9))   SELECT 
+    ajandekkartya.id,
+    ajandekkartya.nev AS "ajandekkartyaNev",
+    ajandekkartya.ar,
+    ajandekkartya.leiras,
+    ajandekkartya.kep,
+    ajandekkartya.akcio,
+    ajandekkartya.mennyisegraktaron,
+    eszkoz.nev AS "eszkozNev",
+    platform.nev AS "platformNev"
 FROM ajandekkartya
+
+INNER JOIN eszkoz
+ON ajandekkartya.eszkozId = eszkoz.id
+
+INNER JOIN platform
+ON ajandekkartya.platformId = platform.id
+
 WHERE ajandekkartya.id = ajandekKartyaIdBE$$
 
 CREATE DEFINER=`root`@`localhost` PROCEDURE `ajandekKartyak` ()   SELECT *
@@ -97,8 +113,25 @@ SET jatek.nev = nevBE,
     jatek.frissitve = CURRENT_TIMESTAMP
 WHERE jatek.id = idBE$$
 
-CREATE DEFINER=`root`@`localhost` PROCEDURE `jatek` (IN `idBe` INT(9))   SELECT *
+CREATE DEFINER=`root`@`localhost` PROCEDURE `jatek` (IN `idBe` INT(9))   SELECT 
+	jatek.id,
+    jatek.nev AS "jatekNev",
+    jatek.ar,
+    jatek.leiras,
+    jatek.kep,
+    jatek.korhatar,
+    jatek.akcio,
+    jatek.mennyisegraktaron,
+    eszkoz.nev AS "eszkozNev",
+    platform.nev AS "platformNev"
 FROM jatek
+
+INNER JOIN eszkoz
+ON jatek.eszkozId = eszkoz.id
+
+INNER JOIN platform
+ON jatek.platformId = platform.id
+
 WHERE jatek.id = idBe$$
 
 CREATE DEFINER=`root`@`localhost` PROCEDURE `jatekok` ()   SELECT *
@@ -248,14 +281,14 @@ CREATE TABLE `cupon` (
 
 CREATE TABLE `eszkoz` (
   `id` int(9) NOT NULL,
-  `eszkozNev` varchar(100) NOT NULL
+  `nev` varchar(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `eszkoz`
 --
 
-INSERT INTO `eszkoz` (`id`, `eszkozNev`) VALUES
+INSERT INTO `eszkoz` (`id`, `nev`) VALUES
 (1, 'PC'),
 (2, 'XBOX One'),
 (3, 'XBOX Series S'),
@@ -393,7 +426,7 @@ INSERT INTO `platform` (`id`, `nev`) VALUES
 (1, 'Steam'),
 (2, 'Origin'),
 (3, 'Epic Games'),
-(4, 'Ubisoft Connect');
+(4, 'Ubisoft');
 
 -- --------------------------------------------------------
 
