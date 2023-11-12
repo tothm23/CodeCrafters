@@ -20,12 +20,12 @@ fetch(`${link}/${id}`)
   .then((response) => response.json())
   .then((data) => {
     if (data.id) {
-      kep.innerHTML = data.nev;
-      kep.setAttribute("src", data.kep);
+      // kep.innerHTML = data.nev;
+      // kep.setAttribute("src", data.kep);
 
       nev.innerHTML = data.nev;
-      eszkoz.innerHTML = data.eszkoz;
-      platform.innerHTML = data.platform;
+      // eszkoz.innerHTML = data.eszkoz;
+      // platform.innerHTML = data.platform;
 
       if (data.mennyisegraktaron == 0) {
         elerheto.innerHTML = "elérhető";
@@ -36,7 +36,8 @@ fetch(`${link}/${id}`)
       }
 
       eredeti_ar.innerHTML = data.ar + " Ft";
-      akcios_ar.innerHTML = Math.round(data.ar - data.akcio / 100) + " Ft";
+      // Akciós ár egész számra kerekítve
+      akcios_ar.innerHTML = Math.round(data.ar - (data.ar / 100) * data.akcio) + " Ft";
       leiras.innerHTML = data.leiras;
     } else {
       alert("A játék nem található!");
