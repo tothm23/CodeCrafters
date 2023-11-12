@@ -285,6 +285,7 @@ public class Ajandekkartya implements Serializable {
 
             if (!eredmeny.isEmpty()) {
                 Object[] sor = eredmeny.get(0);
+                ajandekKartya.put("id", sor[0]);
                 ajandekKartya.put("nev", sor[1]);
                 ajandekKartya.put("ar", sor[2]);
                 ajandekKartya.put("leiras", sor[3]);
