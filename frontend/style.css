@@ -164,7 +164,6 @@ body {
 
 .my-bar-btn ul {
     width: 100%;
-    padding: 5px;
     background-color: #241F1F;
 }
 
@@ -173,9 +172,14 @@ body {
 }
 
 .my-bar-btn li {
+    text-align: center;
+    width: 100%;
     list-style: none;
     border: #000000 1px solid;
     border-radius: 5px;
+    color: white;
+    display: flex;
+    flex-direction: column;
 }
 
 .my-bar-btn .category {
@@ -184,7 +188,7 @@ body {
 }
 
 .my-bar-btn .options {
-    background-color: #8c8c8c;
+    background-color: #404040;
 }
 
 /*menu gombok formázása*/
@@ -201,8 +205,8 @@ body {
     justify-content: center;
 }
 
-.gomblink:focus {
-    box-shadow: none;
+.options a {
+    white-space: normal;
 }
 
 .category .gomblink:hover {
