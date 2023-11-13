@@ -25,8 +25,8 @@ fetch(`${link}/${id}`)
       // kep.setAttribute("src", data.kep);
 
       nev.innerHTML = data.nev;
-      // eszkoz.innerHTML = data.eszkoz;
-      // platform.innerHTML = data.platform;
+      eszkoz.innerHTML = data.eszkoz;
+      platform.innerHTML = data.platform;
 
       // Korhatár színe
       switch (data.korhatar) {
