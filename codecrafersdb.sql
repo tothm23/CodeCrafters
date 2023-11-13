@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Nov 13, 2023 at 12:39 PM
+-- Generation Time: Nov 13, 2023 at 09:56 PM
 -- Server version: 5.7.24
 -- PHP Version: 8.0.1
 
@@ -328,7 +328,12 @@ INSERT INTO `ajandekkartya` (`id`, `nev`, `ar`, `leiras`, `kep`, `akcio`, `menny
 (2, 'PlayStation Store Ajándékkártya 30000 Ft', 30000, 'A kártyát felhasználva játékok, filmek, interaktív könyvek, játék kiegészítések és számos más érdekes letölthető tartalom várja, hogy kedvenc Sony konzolodra (legyen az PS4, PS5) beszerezd őket! Témák, háttérképek, kosztümök - válogass kedvedre, úgy, hogy még a kanapédból sem állsz fel. A virtuális vásárlási utalvány ajándéknak is ideális!', '30000PScard.jpg', 15, 200, 5, 1, '2023-09-18 17:44:16', '2023-09-18 17:44:56'),
 (3, 'Grand Theft Auto Online: Great White Shark Card', 5000, 'A Great White Shark kártyán 1 250 000 virtuális GTA dollárt találsz, melyet kedved szerint elkölthetsz a Grand Theft Auto Online játékban.', 'white-shark-card.jpg', 0, 100, 1, 1, '2023-09-25 12:34:39', '2023-09-25 12:42:04'),
 (4, 'Grand Theft Auto Online: Whale Shark Card', 12000, 'A Whale Shark kártyán 3 500 000 virtuális GTA dollárt találsz, melyet kedved szerint elkölthetsz a Grand Theft Auto Online játékban.', 'whale-shark-card.jpg', 10, 150, 1, 1, '2023-11-11 12:59:53', NULL),
-(5, 'FC 24 2800 FUT Points', 10000, 'A kártyán 2800 FUT Point-ot találsz, melyet kedved szerint elkölthetsz az FC 24 játékban.', '2800FUTpoints.jpg', 0, 0, 1, 2, '2023-11-11 13:02:51', NULL);
+(5, 'FC 24 2800 FUT Points', 10000, 'A kártyán 2800 FUT Point-ot találsz, melyet kedved szerint elkölthetsz az FC 24 játékban.', '2800FUTpoints.jpg', 0, 0, 1, 2, '2023-11-11 13:02:51', NULL),
+(6, '5990 forintos XBOX ajándékkártya digitális kód', 5990, 'Használja Xbox ajándékkártyáit játékok és alkalmazások vásárlásakor Xbox konzolhoz. Egy ajándékkártya felhasználásához először váltsa be azt saját , vagy böngéssze a Játékáruházat Xbox konzolján. Az ajándékkártya bármeddig felhasználható, még a beváltást követően is.', '5990XBOXcard.webp', 0, 66, 2, 4, '2023-11-13 21:35:14', NULL),
+(7, '12990 forintos XBOX ajándékkártya digitális kód', 12990, 'Használja Xbox ajándékkártyáit játékok és alkalmazások vásárlásakor Xbox konzolhoz. Egy ajándékkártya felhasználásához először váltsa be azt saját , vagy böngéssze a Játékáruházat Xbox konzolján. Az ajándékkártya bármeddig felhasználható, még a beváltást követően is. ', '12990XBOXcard.jpg', 10, 175, 2, 4, '2023-11-13 21:41:57', NULL),
+(8, 'FC 24 5900 FC Points', 19990, 'A kártyán 5900 FUT Point-ot találsz, melyet kedved szerint elkölthetsz az FC 24 játékban.', '5900FUTpoints.webp', 0, 210, 1, 2, '2023-11-13 21:47:38', NULL),
+(9, 'Battlefield 2042 Coins - 1100 BFC', 4490, 'Vásárolj 1100 BFC-t! Ez a játékbeli valuta új kozmetikai elemek vásárlására használható fegyverekhez, járművekhez és a játékban elérhető Battle Pass elemeihez.\r\n\r\n\r\n\r\n\r\n', '1100BFC.jpg', 0, 125, 2, 4, '2023-11-13 22:38:12', NULL),
+(10, 'Steam 50€ ajándékkártya', 18890, 'A Steam ajándékkártya egy digitális ajándékkártya, amelyet csak a Steamen lehet felhasználni, hogy meghatározott összeget adjon hozzá a Steam Wallet fiókodhoz. A 30 eurós Steam kártya 30 eurót utal át közvetlenül a Steam pénztárcádba. Amint a pénz megérkezett a fiókodba, vásárolhatsz a Steam áruházban.', 'Steam50card.jpeg', 0, 350, 1, 1, '2023-11-13 22:50:31', NULL);
 
 -- --------------------------------------------------------
 
@@ -432,7 +437,12 @@ INSERT INTO `jatek` (`id`, `nev`, `ar`, `leiras`, `kep`, `korhatar`, `akcio`, `m
 (2, 'Counter-Strike: Global Offensive', 1499, 'A Counter-Strike: Global Offensive egy taktikai lövöldözős játék, ahol két csapat, a terroristák és az antiterroristák egymás ellen küzdenek.', 'csgo.jpg', 16, 0, 300, 1, 1, '2023-11-11 12:02:56', NULL),
 (3, 'Minecraft', 2999, 'A Minecraft egy sandbox játék, ahol a játékosok kockákból építhetnek és felfedezhetnek egy végtelen világot.', 'minecraft.jpg', 7, 0, 200, 7, 3, '2023-11-11 12:04:14', NULL),
 (4, 'FC 24', 9999, 'A FC 24 egy futballszimulátor játék, ahol a játékosok vezethetik kedvenc csapatukat és részt vehetnek különböző versenyeken.', 'fc24.jpg', 7, 20, 150, 2, 2, '2023-11-11 12:04:14', NULL),
-(5, 'Grand Theft Auto V', 6999, 'A Grand Theft Auto V egy akció-kaland játék, melyben a játékosok Los Santos városában szabadon közlekedhetnek és különböző küldetéseket teljesíthetnek.', 'gta5.jpg', 18, 0, 100, 1, 3, '2023-11-11 12:14:09', NULL);
+(5, 'Grand Theft Auto V', 6999, 'A Grand Theft Auto V egy akció-kaland játék, melyben a játékosok Los Santos városában szabadon közlekedhetnek és különböző küldetéseket teljesíthetnek.', 'gta5.jpg', 18, 0, 100, 1, 3, '2023-11-11 12:14:09', NULL),
+(6, 'Red Dead Redemption 2: Ultimate Edition', 28999, 'Amerika, 1899. A vadnyugat hőskora lassan véget ér, ahogy a törvény emberei az utolsó bűnbandákat is levadásszák. Aki nem hajlandó megadni magát, halál fia. Arthur Morgan és a Van der Linde banda egy félresikerült rablási kísérlet miatt menekülni kényszerül Blackwater városából. Miközben szövetségi ügynökök és az ország legjobb fejvadászai lihegnek a nyomukban, a bandának nincs más választása, mint hogy a túlélés érdekében rabolva és fosztogatva átverekedjék magukat Amerika könyörtelen belvidékein. Amikor az egyre élesedő belső ellentétek a banda szétszakításával fenyegetnek, Arthur kénytelen eldönteni, hogy saját elveihez marad hű, vagy a bandához, amely felnevelte.', 'RDR2.jfif', 18, 0, 235, 1, 3, '2023-11-13 21:57:50', NULL),
+(7, 'Alan Wake 2', 17900, 'Az Alan Wake 2 egy túlélőhorror játék, amit a Remedy Entertainment stúdió fejlesztett ki. Ez a 2010-ben megjelent Alan Wake folytatása.', 'AlanWake2.webp', 18, 0, 50, 6, 1, '2023-11-13 22:06:04', NULL),
+(8, 'Star Wars Battlefront 2', 13990, 'A Star Wars Battlefront II-ben lehetőségünk nyílik átvenni az irányítást Iden Versio, a Birodalom jól ismert Inferno Squad-jának parancsnoka felett, hogy a mintegy 30 évtizedet felölelő kampány során megismerhessünk egy izgalmas sztorit a bosszúról, az árulásról és a megváltásról, méghozzá a mozifilmekhez kapcsolódó áthallásokkal és szereplőkkel a középpontban.', 'BF2.webp', 16, 15, 188, 5, 1, '2023-11-13 22:09:22', NULL),
+(9, 'Battlefield 2042', 19990, 'Az Amerikai Egyesült Államok és Oroszország a háború szélére sodródott. Miután a két nagyhatalom peremháborúi már évtizedek óta tartanak, számos tapasztalt veterán harcol a világban, akiknek elege van a fennálló rendszerből. Ezek a specialisták a saját, különleges harci képzettségüket arra használják, hogy alakítsák az emberiség jövőjét. Ebben a futurisztikus háborúban vehetsz részt te is a Battlefield 2042 harcosaként.', 'BF2042.png', 16, 0, 150, 2, 2, '2023-11-13 22:18:27', NULL),
+(10, 'Tom Clancy\'s Rainbow Six Siege', 6660, 'A taktikai FPS-ek egyik legjobbjaként számon tartott Rainbow Six-sorozat legújabb epizódjában ismét megtapasztalhatjuk, hogy milyen egy speciális katonai egység tagjaként csapatban, parancsra engedelmeskedni, és egy előre meghatározott stratégia mentén együtt végrehajtani a feladatokat.', 'R6.jpg', 18, 0, 125, 1, 4, '2023-11-13 22:23:30', NULL);
 
 -- --------------------------------------------------------
 
@@ -613,7 +623,7 @@ ALTER TABLE `termekkulcsok`
 -- AUTO_INCREMENT for table `ajandekkartya`
 --
 ALTER TABLE `ajandekkartya`
-  MODIFY `id` int(9) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(9) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT for table `cupon`
@@ -637,7 +647,7 @@ ALTER TABLE `felhasznalo`
 -- AUTO_INCREMENT for table `jatek`
 --
 ALTER TABLE `jatek`
-  MODIFY `id` int(9) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(9) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT for table `jogosultsag`
