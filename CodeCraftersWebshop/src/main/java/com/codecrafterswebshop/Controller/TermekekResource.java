@@ -12,4 +12,5 @@ public class TermekekResource {
 
     public TermekekResource() {
     }
+
 }
