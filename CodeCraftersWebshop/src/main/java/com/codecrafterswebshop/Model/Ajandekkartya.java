@@ -2,7 +2,6 @@ package com.codecrafterswebshop.Model;
 
 import com.codecrafterswebshop.Exception.AjandekkartyaException;
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -225,47 +224,6 @@ public class Ajandekkartya implements Serializable {
     @Override
     public String toString() {
         return "com.codecrafterswebshop.Model.Ajandekkartya[ id=" + id + " ]";
-    }
-
-    public static List<Map<String, Object>> ajandekKartyak() {
-        List<Map<String, Object>> ajandekKartyak = new ArrayList<>();
-
-        EntityManagerFactory emf = Persistence.createEntityManagerFactory("com_CodeCraftersWebshop_war_1.0-SNAPSHOTPU");
-        EntityManager em = emf.createEntityManager();
-
-        try {
-            StoredProcedureQuery spq = em.createStoredProcedureQuery("ajandekKartyak");
-
-            List<Object[]> eredmeny = spq.getResultList();
-
-            if (!eredmeny.isEmpty()) {
-
-                for (Object[] sor : eredmeny) {
-                    HashMap<String, Object> ajandekKartya = new HashMap<>();
-
-                    ajandekKartya.put("id", (Integer) sor[0]);
-                    ajandekKartya.put("nev", (String) sor[1]);
-                    ajandekKartya.put("ar", (Integer) sor[2]);
-                    ajandekKartya.put("leiras", (String) sor[3]);
-                    ajandekKartya.put("kep", (String) sor[4]);
-                    ajandekKartya.put("akcio", (Integer) sor[5]);
-                    ajandekKartya.put("mennyisegraktaron", (Integer) sor[6]);
-
-                    ajandekKartyak.add(ajandekKartya);
-                }
-
-            }
-
-        } catch (Exception e) {
-            System.err.println(e.getMessage());
-        } finally {
-            em.clear();
-            em.close();
-            emf.close();
-        }
-
-        return ajandekKartyak;
-
     }
 
     public static Map<String, Object> ajandekKartya(Integer ajandekKartyaIdBE) {

@@ -29,13 +29,6 @@ public class AjandekkartyakResource {
     }
 
     @GET
-    public Response ajandekKartyak() {
-        JSONArray eredmeny = AjandekkartyaService.ajandekKartyak();
-        return Response.status(Response.Status.OK).entity(eredmeny.toString())
-                .type(MediaType.APPLICATION_JSON).build();
-    }
-
-    @GET
     @Path("{ajandekKartyaId}")
     public Response ajandekKartya(@PathParam("ajandekKartyaId") Integer id) {
         JSONObject eredmeny = AjandekkartyaService.ajandekKartya(id);
