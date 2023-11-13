@@ -2,9 +2,7 @@ package com.codecrafterswebshop.Service;
 
 import com.codecrafterswebshop.Exception.AjandekkartyaException;
 import com.codecrafterswebshop.Model.Ajandekkartya;
-import java.util.List;
 import java.util.Map;
-import org.json.JSONArray;
 import org.json.JSONObject;
 
 /**
@@ -12,29 +10,6 @@ import org.json.JSONObject;
  * @author tothm23
  */
 public class AjandekkartyaService {
-
-    public static JSONArray ajandekKartyak() {
-        JSONArray jsonArray = new JSONArray();
-
-        List<Map<String, Object>> ajandekKartyak = Ajandekkartya.ajandekKartyak();
-
-        for (Map<String, Object> ajandekKartya : ajandekKartyak) {
-            JSONObject obj = new JSONObject();
-            obj.put("id", ajandekKartya.get("id"));
-            obj.put("nev", ajandekKartya.get("nev"));
-            obj.put("ar", ajandekKartya.get("ar"));
-            obj.put("leiras", ajandekKartya.get("leiras"));
-            obj.put("kep", ajandekKartya.get("kep"));
-            obj.put("akcio", ajandekKartya.get("akcio"));
-            obj.put("mennyisegraktaron", ajandekKartya.get("mennyisegraktaron"));
-            obj.put("eszkoz", ajandekKartya.get("eszkoz"));
-            obj.put("platform", ajandekKartya.get("platform"));
-
-            jsonArray.put(obj);
-        }
-
-        return jsonArray;
-    }
 
     public static JSONObject ajandekKartya(Integer ajandekKartyaIdBE) {
 
