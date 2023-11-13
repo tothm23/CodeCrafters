@@ -13,14 +13,8 @@ document.addEventListener('DOMContentLoaded', function () {
 
             // Ellenőrizzük, hogy a checkbox megtalálható-e
             if (checkbox) {
-                // Ellenőrizzük, hogy a kattintás az aktuális oldalon történt-e
-                if (window.location.href.includes(targetId)) {
-                    // Beállítjuk a checkbox állapotát (kipipáljuk)
-                    checkbox.checked = true;
-                } else {
-                    // Ha a kattintás más oldalon történt, akkor továbbítjuk a felhasználót az új oldalra
-                    window.location.href = this.getAttribute('href');
-                }
+                // Beállítjuk a checkbox állapotát (kipipáljuk)
+                checkbox.checked = true;
             }
         });
     });
