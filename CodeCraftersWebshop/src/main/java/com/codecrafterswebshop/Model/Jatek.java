@@ -281,6 +281,8 @@ public class Jatek implements Serializable {
                 jatek.put("korhatar", sor[5]);
                 jatek.put("akcio", sor[6]);
                 jatek.put("mennyisegraktaron", sor[7]);
+                jatek.put("eszkoz", sor[8]);
+                jatek.put("platform", sor[9]);
             }
 
         } catch (Exception e) {
