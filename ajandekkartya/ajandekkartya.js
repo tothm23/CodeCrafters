@@ -24,8 +24,8 @@ fetch(`${link}/${id}`)
       // kep.setAttribute("src", data.kep);
 
       nev.innerHTML = data.nev;
-      // eszkoz.innerHTML = data.eszkoz;
-      // platform.innerHTML = data.platform;
+      eszkoz.innerHTML = data.eszkoz;
+      platform.innerHTML = data.platform;
 
       if (data.mennyisegraktaron == 0) {
         elerheto.innerHTML = "elérhető";
