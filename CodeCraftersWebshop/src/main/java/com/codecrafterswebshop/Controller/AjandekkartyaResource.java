@@ -12,7 +12,6 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
-import org.json.JSONArray;
 import org.json.JSONObject;
 
 /**
@@ -20,12 +19,12 @@ import org.json.JSONObject;
  *
  * @author tothm23
  */
-@Path("ajandekkartyak")
+@Path("ajandekkartya")
 @Produces(MediaType.APPLICATION_JSON)
 @Consumes(MediaType.APPLICATION_JSON)
-public class AjandekkartyakResource {
+public class AjandekkartyaResource {
 
-    public AjandekkartyakResource() {
+    public AjandekkartyaResource() {
     }
 
     @GET
