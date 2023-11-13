@@ -292,6 +292,8 @@ public class Ajandekkartya implements Serializable {
                 ajandekKartya.put("kep", sor[4]);
                 ajandekKartya.put("akcio", sor[5]);
                 ajandekKartya.put("mennyisegraktaron", sor[6]);
+                ajandekKartya.put("eszkoz", sor[7]);
+                ajandekKartya.put("platform", sor[8]);
             }
 
         } catch (Exception e) {

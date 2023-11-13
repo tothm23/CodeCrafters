@@ -26,7 +26,9 @@ public class AjandekkartyaService {
             obj.put("leiras", ajandekKartya.get("leiras"));
             obj.put("kep", ajandekKartya.get("kep"));
             obj.put("akcio", ajandekKartya.get("akcio"));
-            obj.put("mennyisegraktaron", ajandekKartya.get("mennyisegraktaronF"));
+            obj.put("mennyisegraktaron", ajandekKartya.get("mennyisegraktaron"));
+            obj.put("eszkoz", ajandekKartya.get("eszkoz"));
+            obj.put("platform", ajandekKartya.get("platform"));
 
             jsonArray.put(obj);
         }
