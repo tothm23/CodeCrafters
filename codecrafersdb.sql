@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Nov 12, 2023 at 03:21 PM
+-- Generation Time: Nov 13, 2023 at 12:39 PM
 -- Server version: 5.7.24
 -- PHP Version: 8.0.1
 
@@ -29,7 +29,7 @@ DELIMITER $$
 --
 CREATE DEFINER=`root`@`localhost` PROCEDURE `ajandekKartya` (IN `ajandekKartyaIdBE` INT(9))   SELECT 
     ajandekkartya.id,
-    ajandekkartya.nev AS "ajandekkartyaNev",
+    ajandekkartya.nev AS "ajandekKartyaNev",
     ajandekkartya.ar,
     ajandekkartya.leiras,
     ajandekkartya.kep,
@@ -47,8 +47,23 @@ ON ajandekkartya.platformId = platform.id
 
 WHERE ajandekkartya.id = ajandekKartyaIdBE$$
 
-CREATE DEFINER=`root`@`localhost` PROCEDURE `ajandekKartyak` ()   SELECT *
-FROM ajandekkartya$$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `ajandekKartyak` ()   SELECT 
+    ajandekkartya.id,
+    ajandekkartya.nev AS "ajandekKartyaNev",
+    ajandekkartya.ar,
+    ajandekkartya.leiras,
+    ajandekkartya.kep,
+    ajandekkartya.akcio,
+    ajandekkartya.mennyisegraktaron,
+    eszkoz.nev AS "eszkozNev",
+    platform.nev AS "platformNev"
+FROM ajandekkartya
+
+INNER JOIN eszkoz
+ON ajandekkartya.eszkozId = eszkoz.id
+
+INNER JOIN platform
+ON ajandekkartya.platformId = platform.id$$
 
 CREATE DEFINER=`root`@`localhost` PROCEDURE `csokkenoArAjandekKartya` ()   SELECT *
 FROM ajandekkartya
@@ -134,8 +149,24 @@ ON jatek.platformId = platform.id
 
 WHERE jatek.id = idBe$$
 
-CREATE DEFINER=`root`@`localhost` PROCEDURE `jatekok` ()   SELECT *
-FROM jatek$$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `jatekok` ()   SELECT 
+	jatek.id,
+    jatek.nev AS "jatekNev",
+    jatek.ar,
+    jatek.leiras,
+    jatek.kep,
+    jatek.korhatar,
+    jatek.akcio,
+    jatek.mennyisegraktaron,
+    eszkoz.nev AS "eszkozNev",
+    platform.nev AS "platformNev"
+FROM jatek
+
+INNER JOIN eszkoz
+ON jatek.eszkozId = eszkoz.id
+
+INNER JOIN platform
+ON jatek.platformId = platform.id$$
 
 CREATE DEFINER=`root`@`localhost` PROCEDURE `novekvoArAjandekKartya` ()   SELECT *
 FROM ajandekkartya
@@ -144,6 +175,47 @@ ORDER BY ajandekkartya.ar ASC$$
 CREATE DEFINER=`root`@`localhost` PROCEDURE `novekvoArJatek` ()   SELECT *
 FROM jatek
 ORDER BY jatek.ar ASC$$
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `osszesTermek` ()   BEGIN
+
+SELECT 
+	jatek.id,
+    jatek.nev AS "jatekNev",
+    jatek.ar,
+    jatek.leiras,
+    jatek.kep,
+    jatek.korhatar,
+    jatek.akcio,
+    jatek.mennyisegraktaron,
+    eszkoz.nev AS "eszkozNev",
+    platform.nev AS "platformNev"
+FROM jatek
+
+INNER JOIN eszkoz
+ON jatek.eszkozId = eszkoz.id
+
+INNER JOIN platform
+ON jatek.platformId = platform.id;
+
+SELECT 
+    ajandekkartya.id,
+    ajandekkartya.nev AS "ajandekKartyaNev",
+    ajandekkartya.ar,
+    ajandekkartya.leiras,
+    ajandekkartya.kep,
+    ajandekkartya.akcio,
+    ajandekkartya.mennyisegraktaron,
+    eszkoz.nev AS "eszkozNev",
+    platform.nev AS "platformNev"
+FROM ajandekkartya
+
+INNER JOIN eszkoz
+ON ajandekkartya.eszkozId = eszkoz.id
+
+INNER JOIN platform
+ON ajandekkartya.platformId = platform.id;
+
+END$$
 
 CREATE DEFINER=`root`@`localhost` PROCEDURE `torlesAjandekKartya` (IN `idBE` INT(9))   DELETE 
 FROM ajandekkartya
@@ -358,8 +430,8 @@ CREATE TABLE `jatek` (
 INSERT INTO `jatek` (`id`, `nev`, `ar`, `leiras`, `kep`, `korhatar`, `akcio`, `mennyisegraktaron`, `eszkozId`, `platformId`, `letrehozva`, `frissitve`) VALUES
 (1, 'The Witcher 3: Wild Hunt', 5999, 'A The Witcher 3: Wild Hunt egy fantasy szerepjáték, melyben Geralt of Rivia karakterét irányítva különböző küldetéseket teljesíthetsz egy nyitott világban.', 'witcher3.jpg', 18, 15, 100, 1, 1, '2023-11-11 11:57:24', NULL),
 (2, 'Counter-Strike: Global Offensive', 1499, 'A Counter-Strike: Global Offensive egy taktikai lövöldözős játék, ahol két csapat, a terroristák és az antiterroristák egymás ellen küzdenek.', 'csgo.jpg', 16, 0, 300, 1, 1, '2023-11-11 12:02:56', NULL),
-(3, 'Minecraft', 2999, 'A Minecraft egy sandbox játék, ahol a játékosok kockákból építhetnek és felfedezhetnek egy végtelen világot.', 'minecraft.jpg', 6, 0, 200, 7, 3, '2023-11-11 12:04:14', NULL),
-(4, 'FC 24', 9999, 'A FC 24 egy futballszimulátor játék, ahol a játékosok vezethetik kedvenc csapatukat és részt vehetnek különböző versenyeken.', 'fc24.jpg', 0, 20, 150, 2, 2, '2023-11-11 12:04:14', NULL),
+(3, 'Minecraft', 2999, 'A Minecraft egy sandbox játék, ahol a játékosok kockákból építhetnek és felfedezhetnek egy végtelen világot.', 'minecraft.jpg', 7, 0, 200, 7, 3, '2023-11-11 12:04:14', NULL),
+(4, 'FC 24', 9999, 'A FC 24 egy futballszimulátor játék, ahol a játékosok vezethetik kedvenc csapatukat és részt vehetnek különböző versenyeken.', 'fc24.jpg', 7, 20, 150, 2, 2, '2023-11-11 12:04:14', NULL),
 (5, 'Grand Theft Auto V', 6999, 'A Grand Theft Auto V egy akció-kaland játék, melyben a játékosok Los Santos városában szabadon közlekedhetnek és különböző küldetéseket teljesíthetnek.', 'gta5.jpg', 18, 0, 100, 1, 3, '2023-11-11 12:14:09', NULL);
 
 -- --------------------------------------------------------
