@@ -19,12 +19,12 @@ import org.json.JSONObject;
  *
  * @author tothm23
  */
-@Path("jatekok")
+@Path("jatek")
 @Produces(MediaType.APPLICATION_JSON)
 @Consumes(MediaType.APPLICATION_JSON)
-public class JatekokResource {
+public class JatekResource {
 
-    public JatekokResource() {
+    public JatekResource() {
     }
 
     @GET
