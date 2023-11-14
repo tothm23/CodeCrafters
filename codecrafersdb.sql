@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Nov 13, 2023 at 09:56 PM
+-- Generation Time: Nov 14, 2023 at 01:43 PM
 -- Server version: 5.7.24
 -- PHP Version: 8.0.1
 
@@ -65,6 +65,11 @@ ON ajandekkartya.eszkozId = eszkoz.id
 INNER JOIN platform
 ON ajandekkartya.platformId = platform.id$$
 
+CREATE DEFINER=`root`@`localhost` PROCEDURE `carouselRandomKepek` ()   SELECT jatek.kep
+FROM jatek
+ORDER BY RAND()
+LIMIT 3$$
+
 CREATE DEFINER=`root`@`localhost` PROCEDURE `csokkenoArAjandekKartya` ()   SELECT *
 FROM ajandekkartya
 ORDER BY ajandekkartya.ar DESC$$
@@ -114,7 +119,7 @@ SET felhasznalo.felhasznaloNev = felhasznaloNevBE,
     felhasznalo.frissitve = CURRENT_TIMESTAMP
 WHERE felhasznalo.jelszo = SHA1(jelszoBE)$$
 
-CREATE DEFINER=`root`@`localhost` PROCEDURE `frissitesJatek` (IN `idBE` INT(9), IN `nevBE` VARCHAR(100), IN `arBE` INT(9), IN `leirasBE` TEXT, IN `kepBE` VARCHAR(100), IN `korhatarBE` INT(2), IN `akcioBE` INT(3), IN `mennyisegraktaronBE` INT(5), IN `kategoriaIdBE` INT(9), IN `eszkozIdBE` INT(9), IN `platformIdBE` INT(9))   UPDATE jatek
+CREATE DEFINER=`root`@`localhost` PROCEDURE `frissitesJatek` (IN `idBE` INT(9), IN `nevBE` VARCHAR(100), IN `arBE` INT(9), IN `leirasBE` TEXT, IN `kepBE` VARCHAR(100), IN `korhatarBE` INT(2), IN `akcioBE` INT(3), IN `mennyisegraktaronBE` INT(5), IN `eszkozIdBE` INT(9), IN `platformIdBE` INT(9))   UPDATE jatek
 SET jatek.nev = nevBE,
 	jatek.ar = arBE,
     jatek.leiras = leirasBE,
@@ -122,7 +127,6 @@ SET jatek.nev = nevBE,
     jatek.korhatar = korhatarBE,
     jatek.akcio = akcioBE,
     jatek.mennyisegraktaron = mennyisegraktaronBE,
-    jatek.kategoriaId = kategoriaIdBE,
     jatek.eszkozId = eszkozIdBE,
     jatek.platformId = platformIdBE,
     jatek.frissitve = CURRENT_TIMESTAMP
@@ -272,7 +276,7 @@ VALUES(
     telefon
 )$$
 
-CREATE DEFINER=`root`@`localhost` PROCEDURE `ujJatek` (IN `nevBE` VARCHAR(100), IN `arBE` INT(9), IN `leirasBE` TEXT, IN `kepBE` VARCHAR(100), IN `korhatarBE` INT(2), IN `akcioBE` INT(3), IN `mennyisegraktaronBE` INT(5), IN `kategoriaIdBE` INT(9), IN `eszkozIdBE` INT(9), IN `platformIdBE` INT(9))   INSERT INTO jatek(
+CREATE DEFINER=`root`@`localhost` PROCEDURE `ujJatek` (IN `nevBE` VARCHAR(100), IN `arBE` INT(9), IN `leirasBE` TEXT, IN `kepBE` VARCHAR(100), IN `korhatarBE` INT(2), IN `akcioBE` INT(3), IN `mennyisegraktaronBE` INT(5), IN `eszkozIdBE` INT(9), IN `platformIdBE` INT(9))   INSERT INTO jatek(
 	jatek.nev,
     jatek.ar,
     jatek.leiras,
@@ -280,7 +284,6 @@ CREATE DEFINER=`root`@`localhost` PROCEDURE `ujJatek` (IN `nevBE` VARCHAR(100), 
     jatek.korhatar,
     jatek.akcio,
     jatek.mennyisegraktaron,
-    jatek.kategoriaId,
     jatek.eszkozId,
     jatek.platformId
 )
@@ -292,7 +295,6 @@ VALUES(
     korhatarBE,
     akcioBE,
     mennyisegraktaronBE,
-    kategoriaIdBE,
     eszkozIdBE,
     platformIdBE
 )$$
