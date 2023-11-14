@@ -31,6 +31,8 @@ public class JatekService {
                 return "Hibás ár!";
             } else if (!Jatek.leirasEllenorzes(leirasBE)) {
                 return "Hibás leírás!";
+            } else if (!Jatek.kepEllenorzes(kepBE)) {
+                return "Hibás kép!";
             } else if (Jatek.ujJatek(nevBE, arBE, leirasBE, kepBE, korhatarBE, akcioBE,
                     mennyisegraktaronBE, kategoriaIdBE, eszkozIdBE, platformIdBE)) {
                 return "Játék hozzáadva!";
