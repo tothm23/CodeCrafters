@@ -39,7 +39,7 @@ public class JatekResource {
     public Response ujJatek(Jatek j) {
         String result = JatekService.ujJatek(j.getNev(), j.getAr(),
                 j.getLeiras(), j.getKep(), j.getKorhatar(), j.getAkcio(), j.getMennyisegraktaron(),
-                j.getKategoriaId(), j.getEszkozId(), j.getPlatformId()
+                j.getEszkozId(), j.getPlatformId()
         );
         return Response.status(Response.Status.CREATED).entity(result)
                 .type(MediaType.APPLICATION_JSON).build();
@@ -51,7 +51,7 @@ public class JatekResource {
         JSONObject eredmeny = JatekService.jatek(id);
         String frissites = JatekService.frissitesJatek(id, j.getNev(), j.getAr(),
                 j.getLeiras(), j.getKep(), j.getKorhatar(), j.getAkcio(), j.getMennyisegraktaron(),
-                j.getKategoriaId(), j.getEszkozId(), j.getPlatformId()
+                j.getEszkozId(), j.getPlatformId()
         );
 
         return eredmeny.length() == 0 ? Response.status(Response.Status.NOT_FOUND).entity(frissites)
