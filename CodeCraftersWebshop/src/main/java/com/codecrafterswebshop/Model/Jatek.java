@@ -487,4 +487,12 @@ public class Jatek implements Serializable {
             return true;
         }
     }
+
+    public static boolean kepEllenorzes(String kep) throws JatekException {
+        if (kep.equals("")) {
+            throw new JatekException("A játék képe lehet üres!");
+        } else {
+            return true;
+        }
+    }
 }
