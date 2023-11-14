@@ -497,8 +497,18 @@ public class Jatek implements Serializable {
     }
 
     public static boolean korhatarEllenorzes(Integer korhatar) throws JatekException {
-        if (korhatar != 3 || korhatar != 7 || korhatar != 12 || korhatar != 16 || korhatar != 18) {
+        if (korhatar != 3 && korhatar != 7 && korhatar != 12 && korhatar != 16 && korhatar != 18) {
             throw new JatekException("A játék korhatára nem térhet el a PEGI számoktól!");
+        } else {
+            return true;
+        }
+    }
+
+    public static boolean akcioEllenorzes(Integer akcio) throws JatekException {
+        if (akcio < 0) {
+            throw new JatekException("A játék akciója nem lehet kisebb, mint 0!");
+        } else if (akcio > 100) {
+            throw new JatekException("A játék akciója nem lehet nagyobb, mint 100!");
         } else {
             return true;
         }
