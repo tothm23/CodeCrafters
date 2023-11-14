@@ -1,3 +1,4 @@
+//checkbox
 document.addEventListener('DOMContentLoaded', function () {
     // Eseménykezelő a mynavbar elemekre
     var myNavbarItems = document.querySelectorAll('.mynavbar .gomblink');
@@ -20,7 +21,7 @@ document.addEventListener('DOMContentLoaded', function () {
     });
 });
 
-
+//carouselInner
 var games = [
     { title: "Játék 1 címe", price: "$10", description: "Leírás 1", image: "./kepek/jatekok/miles.png" },
     { title: "Játék 2 címe", price: "$20", description: "Leírás 2", image: "./kepek/jatekok/fc24.jpg" },
