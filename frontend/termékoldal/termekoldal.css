@@ -159,49 +159,6 @@
     padding-left: 30px;
   }
   
-  /* kosárba */
-  #kosar-box {
-    background-color: #241f1f;
-    border: 0.2vh solid #000;
-    color: #fff;
-    font-size: 3vh;
-    width: 7vh;
-    height: 7vh;
-    margin-top: 2.5vh;
-    border-radius: 50%;
-    cursor: pointer;
-  
-    position: absolute;
-    top: 20vh;
-    right: 5vh;
-  
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-direction: column;
-  }
-
-  /* vissza az oldal tetejére */
-  #vissza-box {
-    background-color: #bb4930;
-    border: 2px solid #000;
-    color: #000;
-    font-size: 3vh;
-    width: 7vh;
-    height: 7vh;
-    margin-top: 2.5vh;
-    border-radius: 50%;
-    cursor: pointer;
-  
-    position: absolute;
-    top: 80vh;
-    right: 5vh;
-  
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-direction: column;
-  }
   .termekjatek{
     max-width:500px;
     border: #000 solid 1px;

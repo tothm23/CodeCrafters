@@ -5,74 +5,103 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous" />
     <link rel="stylesheet" href="jatek.css" />
+    <link rel="stylesheet" href="../style.css" />
     <title>Játék</title>
   </head>
 
   <body>
     <div class="container">
       <div class="nav">
-        <a class="keplink" href="#"><img src="kepek/logo.png" /></a>
-        <nav class="navbar navbar-light searchbar">
-          <div class="container-fluid">
-            <form class="d-flex">
-              <input class="form-control me-2" type="search" placeholder="Search..." aria-label="Search" />
-              <button class="btn bg-dark btn-outline-light" type="submit">
-                <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 40 40" fill="none">
-                  <g clip-path="url(#clip0_41_926)">
-                    <path d="M25.8333 23.3333H24.5167L24.05 22.8833C25.6833 20.9833 26.6667 18.5167 26.6667 15.8333C26.6667 9.85 21.8167 5 15.8333 5C9.85 5 5 9.85 5 15.8333C5 21.8167 9.85 26.6667 15.8333 26.6667C18.5167 26.6667 20.9833 25.6833 22.8833 24.05L23.3333 24.5167V25.8333L31.6667 34.15L34.15 31.6667L25.8333 23.3333ZM15.8333 23.3333C11.6833 23.3333 8.33333 19.9833 8.33333 15.8333C8.33333 11.6833 11.6833 8.33333 15.8333 8.33333C19.9833 8.33333 23.3333 11.6833 23.3333 15.8333C23.3333 19.9833 19.9833 23.3333 15.8333 23.3333Z" fill="white" />
-                  </g>
-                  <defs>
-                    <clipPath id="clip0_41_926">
-                      <rect width="40" height="40" fill="white" />
-                    </clipPath>
-                  </defs>
-                </svg>
-              </button>
-            </form>
+        <div class="navsearchbar">
+          <a class="keplink" href="../index.html"><img src="../kepek/logo.png"></a>
+          <nav class="navbar navbar-light searchbar">
+            <div class="container-fluid">
+              <form class="d-flex">
+                <input class="form-control me-2" type="search" placeholder="Kereső..." aria-label="Search">
+                <button class="btn bg-dark btn-outline-light" type="submit"><svg xmlns="http://www.w3.org/2000/svg"
+                    width="30" height="30" viewBox="0 0 40 40" fill="none">
+                    <g clip-path="url(#clip0_41_926)">
+                      <path
+                        d="M25.8333 23.3333H24.5167L24.05 22.8833C25.6833 20.9833 26.6667 18.5167 26.6667 15.8333C26.6667 9.85 21.8167 5 15.8333 5C9.85 5 5 9.85 5 15.8333C5 21.8167 9.85 26.6667 15.8333 26.6667C18.5167 26.6667 20.9833 25.6833 22.8833 24.05L23.3333 24.5167V25.8333L31.6667 34.15L34.15 31.6667L25.8333 23.3333ZM15.8333 23.3333C11.6833 23.3333 8.33333 19.9833 8.33333 15.8333C8.33333 11.6833 11.6833 8.33333 15.8333 8.33333C19.9833 8.33333 23.3333 11.6833 23.3333 15.8333C23.3333 19.9833 19.9833 23.3333 15.8333 23.3333Z"
+                        fill="white" />
+                    </g>
+                    <defs>
+                      <clipPath id="clip0_41_926">
+                        <rect width="40" height="40" fill="white" />
+                      </clipPath>
+                    </defs>
+                  </svg></button>
+              </form>
+            </div>
+          </nav>
+          <div class="log_reg">
+            <button type="button"><a class="gomblink" href="../bejeletkezés/bejelentkezes.html">Bejelentkezés</a></button>
+            <button type="button"><a class="gomblink" href="../regisztracio/regisztracio.html">Regisztráció</a></button>
           </div>
-        </nav>
-
-        <div class="log_reg">
-          <button type="button"><a class="gomblink" href="../bejelentkezés_regisztrációsfeulet/login.html">Bejelentkezés</a></button>
+          <div id="felhasznalo-box">
+            <img src="./kepek/felhasznalo.png" id="felhasznalo-kep" alt="Mákosguba55" />
+            <p id="felhasznalo">Mákosguba55</p>
+          </div>
         </div>
+        <div class="mynavbar">
+          <!--kategóriák 1. játék 2. platform 3. gift cards 4. akciós 5. best seller-->
+          <div class="dropdown my-bar-btn">
+            <a class="btn btn-secondary category gomblink" href="#" role="button" id="dropdownMenuLink1"
+              data-bs-toggle="dropdown" aria-expanded="false">
+              Kategória
+            </a>
+  
+            <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink1">
+              <li class="options"><a class="dropdown-item gomblink" href="../termékoldal/termekekoldal.html"
+                  id="termekLink">Termékek</a></li>
+              <li class="options"><a class="dropdown-item gomblink" href="../termékoldal/termekekoldal.html"
+                  id="jatekokLink">Játékok</a></li>
+              <li class="options"><a class="dropdown-item gomblink" href="../termékoldal/termekekoldal.html"
+                  id="ajandekKartyakLink">Ajándék Kártyák</a></li>
+            </ul>
+          </div>
+  
+          <div class="dropdown my-bar-btn">
+            <a class="btn btn-secondary category gomblink" href="#" role="button" id="dropdownMenuLink2"
+              data-bs-toggle="dropdown" aria-expanded="false">
+              Eszköz
+            </a>
+  
+            <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink2">
+              <li class="options"><a class="dropdown-item gomblink" href="#" id="pcLink">PC</a></li>
+              <li class="options"><a class="dropdown-item gomblink" href="#" id="xboxOneLink">XBOX one</a></li>
+              <li class="options"><a class="dropdown-item gomblink" href="#" id="xboxSeriesSLink">XBOX Series S</a></li>
+              <li class="options"><a class="dropdown-item gomblink" href="#" id="xboxSeriesXLink">XBOX Series X</a></li>
+              <li class="options"><a class="dropdown-item gomblink" href="#" id="ps4Link">PS4</a></li>
+              <li class="options"><a class="dropdown-item gomblink" href="#" id="ps5Link">PS5</a></li>
+              <li class="options"><a class="dropdown-item gomblink" href="#" id="nintendoSwitchLink">NINTENDO switch</a>
+              </li>
+            </ul>
+          </div>
+  
+          <div class="dropdown my-bar-btn">
+            <a class="btn btn-secondary category gomblink" href="#" role="button" id="dropdownMenuLink3"
+              data-bs-toggle="dropdown" aria-expanded="false" href="#">
+              Platform
+            </a>
+  
+            <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink3">
+              <li class="options"><a class="dropdown-item gomblink" href="#" id="steamLink">Steam</a></li>
+              <li class="options"><a class="dropdown-item gomblink" href="#" id="originLink">Origin</a></li>
+              <li class="options"><a class="dropdown-item gomblink" href="#" id="epicGamesLink">Epic Games</a></li>
+              <li class="options"><a class="dropdown-item gomblink" href="#" id="ubisoftLink">Ubisoft</a></li>
+            </ul>
+          </div>
+  
+          <div class="dropdown my-bar-btn">
+            <a class="btn btn-secondary category gomblink" href="#" role="button" id="akcios" data-bs-toggle="dropdown"
+              aria-expanded="false" href="#">
+              Akciós
+            </a>
+          </div>
+        </div>
+  
       </div>
-
-      <div class="mynavbar">
-        <!--kategóriák 1. jaték 2.platform 3.gidt cards 4.akciós 5. best seller-->
-        <div class="dropdown my-bar-btn">
-          <a class="btn btn-secondary category gomblink" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false"> Kategória </a>
-
-          <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-            <li class="options"><a class="dropdown-item gomblink" href="termékoldal/termekekoldal.html">Összes Játék</a></li>
-            <li class="options"><a class="dropdown-item gomblink" href="#">GTA</a></li>
-            <li class="options"><a class="dropdown-item gomblink" href="#">R6</a></li>
-          </ul>
-        </div>
-
-        <div class="dropdown my-bar-btn">
-          <a class="btn btn-secondary category gomblink" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false"> Platform </a>
-
-          <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-            <li class="options"><a class="dropdown-item gomblink" href="#">PC</a></li>
-            <li class="options"><a class="dropdown-item gomblink" href="#">PS</a></li>
-            <li class="options"><a class="dropdown-item gomblink" href="#">XBOX</a></li>
-            <li class="options"><a class="dropdown-item gomblink" href="#">NINTENDO</a></li>
-          </ul>
-        </div>
-
-        <div class="dropdown my-bar-btn">
-          <a class="btn btn-secondary category gomblink" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false" href="#"> Ajándék Kártya </a>
-        </div>
-
-        <div class="dropdown my-bar-btn">
-          <a class="btn btn-secondary category gomblink" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false" href="#"> Éppen Akciós </a>
-        </div>
-
-        <div class="dropdown my-bar-btn">
-          <a class="btn btn-secondary category gomblink" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false" href="#"> Best seller </a>
-        </div>
-      </div>
-
       <!-- főoldal -->
       <div class="container w-75">
         <div class="row">
@@ -114,15 +143,16 @@
 
         <!-- kosár -->
         <div id="kosar-box">
-          <button id="megjelenitoGomb" onclick="toggleElem()"><i class="fa-solid fa-cart-shopping"></i></button>
+          <button2 id="megjelenitoGomb"><i class="fa-solid fa-cart-shopping"></i></button>
         </div>
-        <div id="elrejtettElem">
-          <p>Termékek megjelenítése.</p>
-          <div class="fiz-torl">
-            <button>Fizetes</button>
-            <button>Összes Törlése</button>
-          </div>
-        </div>
+      </div>
+
+    <div id="vissza-box">
+      <i class="fa-solid fa-arrow-up"></i>
+    </div>
+    <div id="lablec">
+      <div class="footer-content">
+        <p>Készítette: Váradi Barnabás & Tóth Milán & Kéri Bence</p>
       </div>
     </div>
     <script src="jatek.js"></script>
