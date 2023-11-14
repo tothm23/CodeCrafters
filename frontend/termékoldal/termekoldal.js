@@ -199,3 +199,69 @@ document.addEventListener("DOMContentLoaded", function() {
         termekekDiv.innerHTML = filteredHTML;
     }
   });
+
+
+  //checkbox manipulálása a navbárból
+document.addEventListener('DOMContentLoaded', function () {
+    // Eseménykezelő a mynavbar elemekre
+    var myNavbarItems = document.querySelectorAll('.mynavbar .gomblink');
+
+    myNavbarItems.forEach(function (navbarItem) {
+        navbarItem.addEventListener('click', function (event) {
+            // Megtaláljuk az id-t a href-ben
+            var targetId = this.getAttribute('id');
+
+            // Megtaláljuk a megfelelő checkboxot
+            var checkboxId = targetId + 'input';
+            var checkbox = document.getElementById(checkboxId);
+
+            // Ellenőrizzük, hogy a checkbox megtalálható-e
+            if (checkbox) {
+                // Beállítjuk a checkbox állapotát (kipipáljuk)
+                checkbox.checked = true;
+            }
+        });
+    });
+});
+
+document.addEventListener('DOMContentLoaded', function () {
+    // Eseménykezelő a mynavbar elemekre
+    var myNavbarItems = document.querySelectorAll('.mynavbar .gomblink');
+
+    myNavbarItems.forEach(function (navbarItem) {
+        navbarItem.addEventListener('click', function (event) {
+            // Megtaláljuk az id-t a href-ben
+            var targetId = this.getAttribute('id');
+
+            // Megtaláljuk a megfelelő checkboxot
+            var checkboxId = targetId + 'input';
+            var checkbox = document.getElementById(checkboxId);
+
+            // Ellenőrizzük, hogy a checkbox megtalálható-e
+            if (checkbox) {
+                // Beállítjuk a checkbox állapotát (kipipáljuk)
+                checkbox.checked = true;
+
+                // Frissítjük az URL-t a kipipált checkbox alapján
+                updateURL();
+            }
+        });
+    });
+
+    // Az alábbi részt hozzáadva az URL frissítése a kipipált checkboxok alapján
+    function updateURL() {
+        const checkboxes = document.querySelectorAll('.form-check-input');
+        const params = [];
+
+        checkboxes.forEach((checkbox) => {
+            if (checkbox.checked) {
+                params.push(checkbox.id.replace('input', ''));
+            }
+        });
+
+        const url = new URL('../termékoldal/termekoldal.html', window.location.origin);
+        url.searchParams.set('categories', params.join('&'));
+        window.history.pushState({}, '', url);
+    }
+});
+ 
