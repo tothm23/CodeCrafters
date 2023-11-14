@@ -27,6 +27,8 @@ public class JatekService {
         try {
             if (!Jatek.nevEllenorzes(nevBE)) {
                 return "Hibás név!";
+            } else if (!Jatek.arEllenorzes(arBE)) {
+                return "Hibás ár!";
             } else if (Jatek.ujJatek(nevBE, arBE, leirasBE, kepBE, korhatarBE, akcioBE,
                     mennyisegraktaronBE, kategoriaIdBE, eszkozIdBE, platformIdBE)) {
                 return "Játék hozzáadva!";

@@ -471,4 +471,12 @@ public class Jatek implements Serializable {
             return true;
         }
     }
+
+    public static boolean arEllenorzes(Integer ar) throws JatekException {
+        if (ar < 0) {
+            throw new JatekException("A játék ára nem lehet kisebb, mint 0!");
+        } else {
+            return true;
+        }
+    }
 }
