@@ -479,4 +479,12 @@ public class Jatek implements Serializable {
             return true;
         }
     }
+
+    public static boolean leirasEllenorzes(String leiras) throws JatekException {
+        if (leiras.equals("")) {
+            throw new JatekException("A játék leírása lehet üres!");
+        } else {
+            return true;
+        }
+    }
 }
