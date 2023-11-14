@@ -1,4 +1,4 @@
-const link = "http://localhost:8080/CodeCraftersWebshop-1.0-SNAPSHOT/webresources/ajandekkartyak";
+const link = "http://localhost:8080/CodeCraftersWebshop-1.0-SNAPSHOT/webresources/ajandekkartya";
 
 const kep = document.getElementById("kep");
 const nev = document.getElementById("nev");
