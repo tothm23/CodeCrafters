@@ -260,7 +260,7 @@ document.addEventListener('DOMContentLoaded', function () {
         });
 
         const url = new URL('../termékoldal/termekoldal.html', window.location.origin);
-        url.searchParams.set('categories', params.join('&'));
+        url.searchParams.set('categories', params.join('re'));
         window.history.pushState({}, '', url);
     }
 });
