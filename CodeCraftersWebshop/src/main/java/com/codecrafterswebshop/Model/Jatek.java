@@ -1,5 +1,6 @@
 package com.codecrafterswebshop.Model;
 
+import com.codecrafterswebshop.Exception.JatekException;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
@@ -458,6 +459,16 @@ public class Jatek implements Serializable {
             em.clear();
             em.close();
             emf.close();
+        }
+    }
+
+    public static boolean nevEllenorzes(String nev) throws JatekException {
+        if (nev.equals("")) {
+            throw new JatekException("A játék neve lehet üres!");
+        } else if (nev.length() > 100) {
+            throw new JatekException("A játék neve nem lehet 100 karakternél hosszabb!");
+        } else {
+            return true;
         }
     }
 }
