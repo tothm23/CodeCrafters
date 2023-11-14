@@ -495,4 +495,12 @@ public class Jatek implements Serializable {
             return true;
         }
     }
+
+    public static boolean korhatarEllenorzes(Integer korhatar) throws JatekException {
+        if (korhatar != 3 || korhatar != 7 || korhatar != 12 || korhatar != 16 || korhatar != 18) {
+            throw new JatekException("A játék korhatára nem térhet el a PEGI számoktól!");
+        } else {
+            return true;
+        }
+    }
 }
