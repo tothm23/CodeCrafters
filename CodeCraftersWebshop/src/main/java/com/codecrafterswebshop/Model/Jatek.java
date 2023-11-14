@@ -513,4 +513,12 @@ public class Jatek implements Serializable {
             return true;
         }
     }
+
+    public static boolean mennyisegraktaronEllenorzes(Integer mennyisegraktaron) throws JatekException {
+        if (mennyisegraktaron < 0) {
+            throw new JatekException("A játék mennyisegraktaronja nem lehet kisebb, mint 0!");
+        } else {
+            return true;
+        }
+    }
 }
