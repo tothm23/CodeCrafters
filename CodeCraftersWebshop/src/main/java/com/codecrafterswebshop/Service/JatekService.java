@@ -23,7 +23,7 @@ public class JatekService {
     }
 
     public static String ujJatek(String nevBE, Integer arBE, String leirasBE,
-            String kepBE, Integer korhatarBE, Integer akcioBE, Integer mennyisegraktaronBE, Integer kategoriaIdBE, Integer eszkozIdBE, Integer platformIdBE) {
+            String kepBE, Integer korhatarBE, Integer akcioBE, Integer mennyisegraktaronBE, Integer eszkozIdBE, Integer platformIdBE) {
         try {
             if (!Jatek.nevEllenorzes(nevBE)) {
                 return "Hibás név!";
@@ -40,7 +40,7 @@ public class JatekService {
             } else if (!Jatek.mennyisegraktaronEllenorzes(mennyisegraktaronBE)) {
                 return "Hibás mennyiségraktáron!";
             } else if (Jatek.ujJatek(nevBE, arBE, leirasBE, kepBE, korhatarBE, akcioBE,
-                    mennyisegraktaronBE, kategoriaIdBE, eszkozIdBE, platformIdBE)) {
+                    mennyisegraktaronBE, eszkozIdBE, platformIdBE)) {
                 return "Játék hozzáadva!";
             } else {
                 return "Hiba a Játék hozzáadásánál!";
@@ -51,13 +51,13 @@ public class JatekService {
     }
 
     public static String frissitesJatek(Integer idBE, String nevBE, Integer arBE, String leirasBE,
-            String kepBE, Integer korhatarBE, Integer akcioBE, Integer mennyisegraktaronBE, Integer kategoriaIdBE, Integer eszkozIdBE, Integer platformIdBE) {
+            String kepBE, Integer korhatarBE, Integer akcioBE, Integer mennyisegraktaronBE, Integer eszkozIdBE, Integer platformIdBE) {
         try {
             if (jatek(idBE).length() == 0) {
                 return "Hiba a Játék frissítésénél!";
             }
             if (Jatek.frissitesJatek(idBE, nevBE, arBE, leirasBE, kepBE, korhatarBE, akcioBE,
-                    mennyisegraktaronBE, kategoriaIdBE, eszkozIdBE, platformIdBE)) {
+                    mennyisegraktaronBE, eszkozIdBE, platformIdBE)) {
                 return "Játék frissítve!";
             } else {
                 return "Hiba a Játék frissítésénél!";

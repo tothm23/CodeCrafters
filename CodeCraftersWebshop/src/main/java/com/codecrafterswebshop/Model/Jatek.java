@@ -42,7 +42,6 @@ import javax.validation.constraints.Size;
     @NamedQuery(name = "Jatek.findByKorhatar", query = "SELECT j FROM Jatek j WHERE j.korhatar = :korhatar"),
     @NamedQuery(name = "Jatek.findByAkcio", query = "SELECT j FROM Jatek j WHERE j.akcio = :akcio"),
     @NamedQuery(name = "Jatek.findByMennyisegraktaron", query = "SELECT j FROM Jatek j WHERE j.mennyisegraktaron = :mennyisegraktaron"),
-    @NamedQuery(name = "Jatek.findByKategoriaId", query = "SELECT j FROM Jatek j WHERE j.kategoriaId = :kategoriaId"),
     @NamedQuery(name = "Jatek.findByEszkozId", query = "SELECT j FROM Jatek j WHERE j.eszkozId = :eszkozId"),
     @NamedQuery(name = "Jatek.findByPlatformId", query = "SELECT j FROM Jatek j WHERE j.platformId = :platformId"),
     @NamedQuery(name = "Jatek.findByLetrehozva", query = "SELECT j FROM Jatek j WHERE j.letrehozva = :letrehozva"),
@@ -89,10 +88,6 @@ public class Jatek implements Serializable {
     private int mennyisegraktaron;
     @Basic(optional = false)
     @NotNull
-    @Column(name = "kategoriaId")
-    private int kategoriaId;
-    @Basic(optional = false)
-    @NotNull
     @Column(name = "eszkozId")
     private int eszkozId;
     @Basic(optional = false)
@@ -115,7 +110,7 @@ public class Jatek implements Serializable {
         this.id = id;
     }
 
-    public Jatek(Integer id, String nev, int ar, String leiras, String kep, int korhatar, int akcio, int mennyisegraktaron, int kategoriaId, int eszkozId, int platformId, Date letrehozva) {
+    public Jatek(Integer id, String nev, int ar, String leiras, String kep, int korhatar, int akcio, int mennyisegraktaron, int eszkozId, int platformId, Date letrehozva) {
         this.id = id;
         this.nev = nev;
         this.ar = ar;
@@ -124,7 +119,6 @@ public class Jatek implements Serializable {
         this.korhatar = korhatar;
         this.akcio = akcio;
         this.mennyisegraktaron = mennyisegraktaron;
-        this.kategoriaId = kategoriaId;
         this.eszkozId = eszkozId;
         this.platformId = platformId;
         this.letrehozva = letrehozva;
@@ -192,14 +186,6 @@ public class Jatek implements Serializable {
 
     public void setMennyisegraktaron(int mennyisegraktaron) {
         this.mennyisegraktaron = mennyisegraktaron;
-    }
-
-    public int getKategoriaId() {
-        return kategoriaId;
-    }
-
-    public void setKategoriaId(int kategoriaId) {
-        this.kategoriaId = kategoriaId;
     }
 
     public int getEszkozId() {
@@ -341,7 +327,7 @@ public class Jatek implements Serializable {
     }
 
     public static boolean ujJatek(String nevBE, Integer arBE, String leirasBE,
-            String kepBE, Integer korhatarBE, Integer akcioBE, Integer mennyisegraktaronBE, Integer kategoriaIdBE, Integer eszkozIdBE, Integer platformIdBE) {
+            String kepBE, Integer korhatarBE, Integer akcioBE, Integer mennyisegraktaronBE, Integer eszkozIdBE, Integer platformIdBE) {
 
         EntityManagerFactory emf = Persistence.createEntityManagerFactory("com_CodeCraftersWebshop_war_1.0-SNAPSHOTPU");
         EntityManager em = emf.createEntityManager();
@@ -356,7 +342,6 @@ public class Jatek implements Serializable {
             spq.registerStoredProcedureParameter("korhatarBE", Integer.class, ParameterMode.IN);
             spq.registerStoredProcedureParameter("akcioBE", Integer.class, ParameterMode.IN);
             spq.registerStoredProcedureParameter("mennyisegraktaronBE", Integer.class, ParameterMode.IN);
-            spq.registerStoredProcedureParameter("kategoriaIdBE", Integer.class, ParameterMode.IN);
             spq.registerStoredProcedureParameter("eszkozIdBE", Integer.class, ParameterMode.IN);
             spq.registerStoredProcedureParameter("platformIdBE", Integer.class, ParameterMode.IN);
 
@@ -367,7 +352,6 @@ public class Jatek implements Serializable {
             spq.setParameter("korhatarBE", korhatarBE);
             spq.setParameter("akcioBE", akcioBE);
             spq.setParameter("mennyisegraktaronBE", mennyisegraktaronBE);
-            spq.setParameter("kategoriaIdBE", kategoriaIdBE);
             spq.setParameter("eszkozIdBE", eszkozIdBE);
             spq.setParameter("platformIdBE", platformIdBE);
 
@@ -387,7 +371,7 @@ public class Jatek implements Serializable {
     }
 
     public static boolean frissitesJatek(Integer idBE, String nevBE, Integer arBE, String leirasBE,
-            String kepBE, Integer korhatarBE, Integer akcioBE, Integer mennyisegraktaronBE, Integer kategoriaIdBE, Integer eszkozIdBE, Integer platformIdBE) {
+            String kepBE, Integer korhatarBE, Integer akcioBE, Integer mennyisegraktaronBE, Integer eszkozIdBE, Integer platformIdBE) {
 
         EntityManagerFactory emf = Persistence.createEntityManagerFactory("com_CodeCraftersWebshop_war_1.0-SNAPSHOTPU");
         EntityManager em = emf.createEntityManager();
@@ -403,7 +387,6 @@ public class Jatek implements Serializable {
             spq.registerStoredProcedureParameter("korhatarBE", Integer.class, ParameterMode.IN);
             spq.registerStoredProcedureParameter("akcioBE", Integer.class, ParameterMode.IN);
             spq.registerStoredProcedureParameter("mennyisegraktaronBE", Integer.class, ParameterMode.IN);
-            spq.registerStoredProcedureParameter("kategoriaIdBE", Integer.class, ParameterMode.IN);
             spq.registerStoredProcedureParameter("eszkozIdBE", Integer.class, ParameterMode.IN);
             spq.registerStoredProcedureParameter("platformIdBE", Integer.class, ParameterMode.IN);
 
@@ -415,7 +398,6 @@ public class Jatek implements Serializable {
             spq.setParameter("korhatarBE", korhatarBE);
             spq.setParameter("akcioBE", akcioBE);
             spq.setParameter("mennyisegraktaronBE", mennyisegraktaronBE);
-            spq.setParameter("kategoriaIdBE", kategoriaIdBE);
             spq.setParameter("eszkozIdBE", eszkozIdBE);
             spq.setParameter("platformIdBE", platformIdBE);
 
