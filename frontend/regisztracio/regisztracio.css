@@ -1,0 +1,106 @@
+body {
+    box-sizing: border-box;
+    background: #404040;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    height: 100vh;
+}
+
+.form-popup {
+    width: 100%;
+    max-width: 700px;
+    border: 2px solid #fff;
+    border-radius: 15px;
+    padding: 20px;
+    text-align: left;
+    border-radius: 20px;
+    background: #241F1F;
+}
+
+.form-content {
+    color: #FFF;
+    text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;
+    font-family: Inter;
+    font-size: 20px;
+    font-style: normal;
+    font-weight: bold;
+    line-height: normal;
+    flex-shrink: 0;
+}
+
+
+.form-content .btn-primary {
+    background-color: #BB4930;
+    border: none;
+    margin-top: 20px;
+}
+
+.form-content .btn-primary:hover {
+    background-color: #712d1e;
+}
+
+.form-content .mb-3 input[type="text"],
+.form-content .mb-3 input[type="password"] {
+    background: none;
+    color: white;
+    box-shadow: none;
+    border-radius: 15px;
+    border: 1px solid #000;
+    background: rgba(217, 217, 217, 0.10);
+}
+
+.form-check-input[type="checkbox"] {
+    background: #404040;
+    border: 1px solid #717171;
+    box-shadow: none;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+}
+
+a {
+    color: #BB4930;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+a:hover {
+    color: #BB4930;
+    text-decoration: underline;
+}
+
+.option:hover {
+    text-decoration: none;
+}
+
+.mb-3 label {
+    font-weight: bold;
+    min-width: 300px;
+}
+
+#regisztracio {
+    border-radius: 15px;
+    border: 1px solid #FFF;
+    background: rgba(0, 0, 0, 0.50);
+    max-width: 125px;
+}
+
+#regisztracio a{
+    text-decoration: none;
+    color: #fff;
+}
+
+
+#Alert{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    text-align: center;
+    margin-top: 10px;
+    position: fixed;
+    bottom: 0;
+}

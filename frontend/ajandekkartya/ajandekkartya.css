@@ -1,0 +1,18 @@
+/* főoldal */
+.szoveg-doboz {
+  background-color: #241f1f;
+  color: #fff;
+  border-radius: 20px;
+}
+
+#elerheto {
+  color: #95e72d;
+}
+
+#hozzadas {
+  background-color: #95e72d;
+  color: #000;
+  border: 0;
+  border-radius: 10px;
+}
+
