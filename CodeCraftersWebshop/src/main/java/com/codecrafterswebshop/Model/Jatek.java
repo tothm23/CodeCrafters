@@ -286,6 +286,50 @@ public class Jatek implements Serializable {
 
     }
 
+    public static List<Map<String, Object>> _3veletlenjatek() {
+        List<Map<String, Object>> jatekok = new ArrayList<>();
+
+        EntityManagerFactory emf = Persistence.createEntityManagerFactory("com_CodeCraftersWebshop_war_1.0-SNAPSHOTPU");
+        EntityManager em = emf.createEntityManager();
+
+        try {
+            StoredProcedureQuery spq = em.createStoredProcedureQuery("3veletlenjatek");
+
+            List<Object[]> eredmeny = spq.getResultList();
+
+            if (!eredmeny.isEmpty()) {
+
+                for (Object[] sor : eredmeny) {
+                    HashMap<String, Object> jatek = new HashMap<>();
+
+                    jatek.put("id", (Integer) sor[0]);
+                    jatek.put("nev", (String) sor[1]);
+                    jatek.put("ar", (Integer) sor[2]);
+                    jatek.put("leiras", (String) sor[3]);
+                    jatek.put("kep", (String) sor[4]);
+                    jatek.put("korhatar", (Integer) sor[5]);
+                    jatek.put("akcio", (Integer) sor[6]);
+                    jatek.put("mennyisegraktaron", (Integer) sor[7]);
+                    jatek.put("eszkoz", (String) sor[8]);
+                    jatek.put("platform", (String) sor[9]);
+
+                    jatekok.add(jatek);
+                }
+
+            }
+
+        } catch (Exception e) {
+            System.err.println(e.getMessage());
+        } finally {
+            em.clear();
+            em.close();
+            emf.close();
+        }
+
+        return jatekok;
+
+    }
+
     public static Map<String, Object> jatek(Integer idBe) {
 
         Map<String, Object> jatek = new HashMap<>();
