@@ -278,7 +278,7 @@ slide
     display: flex;
     flex-direction: column;
     background-color: #241F1F;
-
+    padding: 10px;
 }
 
 .top{
@@ -303,6 +303,7 @@ justify-content: center;
 border: #000 solid 1px;
 width: 100%;
 font-size: larger;
+margin: 5px;
 }
 
 
