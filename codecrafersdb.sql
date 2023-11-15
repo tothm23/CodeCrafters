@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Nov 15, 2023 at 11:11 AM
+-- Generation Time: Nov 15, 2023 at 01:58 PM
 -- Server version: 5.7.24
 -- PHP Version: 8.0.1
 
@@ -194,6 +194,17 @@ ON jatek.eszkozId = eszkoz.id
 INNER JOIN platform
 ON jatek.platformId = platform.id$$
 
+CREATE DEFINER=`root`@`localhost` PROCEDURE `kosar` (IN `felhasznaloIdBE` INT(9), IN `jatekIdBE` INT(9), IN `ajandekKartyaIdBE` INT(9))   INSERT INTO kosar(
+    kosar.felhasznaloId,
+    kosar.jatekId,
+    kosar.ajandekKartyaId
+)
+VALUES(
+    felhasznaloIdBE,
+    jatekIdBE,
+    ajandekKartyaIdBE
+)$$
+
 CREATE DEFINER=`root`@`localhost` PROCEDURE `novekvoArAjandekKartya` ()   SELECT *
 FROM ajandekkartya
 ORDER BY ajandekkartya.ar ASC$$
@@ -362,21 +373,6 @@ INSERT INTO `ajandekkartya` (`id`, `nev`, `ar`, `leiras`, `kep`, `akcio`, `menny
 -- --------------------------------------------------------
 
 --
--- Table structure for table `cupon`
---
-
-CREATE TABLE `cupon` (
-  `id` int(9) NOT NULL,
-  `cuponKod` varchar(14) NOT NULL,
-  `ertek` int(2) NOT NULL,
-  `ervenyessegIdo` datetime NOT NULL,
-  `ervenyes` tinyint(1) NOT NULL DEFAULT '0',
-  `aktivalva` tinyint(1) NOT NULL DEFAULT '0'
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
--- --------------------------------------------------------
-
---
 -- Table structure for table `eszkoz`
 --
 
@@ -428,7 +424,7 @@ CREATE TABLE `felhasznalo` (
 
 INSERT INTO `felhasznalo` (`id`, `felhasznaloNev`, `vezetekNev`, `keresztNev`, `szuletesiDatum`, `email`, `jelszo`, `orszag`, `telefon`, `aktiv`, `profilkep`, `jogosultsagId`, `letrehozva`, `frissitve`, `torolve`) VALUES
 (2, 'Probafriss', 'Ujnev1', 'Ujnev2', '2000-03-23', 'proba@gamil.com', 'a58c0c94fba109fa2e93458e184f3007bd2552a1', 'Németország', '+360620607210', 1, '', 1, '2023-09-18 11:28:10', '2023-09-25 12:41:04', '2023-09-18 16:54:16'),
-(3, 'Proba2', 'ASD', 'DSA', '1987-04-07', 'kerib.113sz@acsjszki.hu', 'b6157765d4e408995d0b67b0956d3c0a3215a57e', 'Magyarország', '+3606204077373', 0, NULL, 1, '2023-09-25 12:33:02', NULL, NULL),
+(3, 'Proba2', 'ASD', 'DSA', '1987-04-07', 'kerib.113sz@acsjszki.hu', 'b6157765d4e408995d0b67b0956d3c0a3215a57e', 'Magyarország', '+3606204077373', 0, NULL, 2, '2023-09-25 12:33:02', NULL, NULL),
 (4, 'Proba3', 'Jancsi', 'Béla', '1997-02-24', 'jani@gmail.com', 'f1ff673bf872ea25ce8fcd148fdfbe7129e5380a', 'Franciaország', '+36204032312', 0, NULL, 1, '2023-10-03 11:01:46', NULL, NULL);
 
 -- --------------------------------------------------------
@@ -479,6 +475,14 @@ CREATE TABLE `jogosultsag` (
   `jogosultsagNev` varchar(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+--
+-- Dumping data for table `jogosultsag`
+--
+
+INSERT INTO `jogosultsag` (`id`, `jogosultsagNev`) VALUES
+(1, 'user'),
+(2, 'admin');
+
 -- --------------------------------------------------------
 
 --
@@ -509,9 +513,15 @@ CREATE TABLE `kosar` (
   `felhasznaloId` int(9) NOT NULL,
   `jatekId` int(9) NOT NULL,
   `ajandekKartyaId` int(9) NOT NULL,
-  `cuponId` int(9) NOT NULL,
-  `vegosszeg` int(9) NOT NULL
+  `vegosszeg` int(9) NOT NULL DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `kosar`
+--
+
+INSERT INTO `kosar` (`id`, `felhasznaloId`, `jatekId`, `ajandekKartyaId`, `vegosszeg`) VALUES
+(1, 2, 3, 7, 0);
 
 -- --------------------------------------------------------
 
@@ -573,12 +583,6 @@ ALTER TABLE `ajandekkartya`
   ADD PRIMARY KEY (`id`),
   ADD KEY `platformId` (`platformId`),
   ADD KEY `eszkozId` (`eszkozId`);
-
---
--- Indexes for table `cupon`
---
-ALTER TABLE `cupon`
-  ADD PRIMARY KEY (`id`);
 
 --
 -- Indexes for table `eszkoz`
@@ -650,12 +654,6 @@ ALTER TABLE `ajandekkartya`
   MODIFY `id` int(9) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
--- AUTO_INCREMENT for table `cupon`
---
-ALTER TABLE `cupon`
-  MODIFY `id` int(9) NOT NULL AUTO_INCREMENT;
-
---
 -- AUTO_INCREMENT for table `eszkoz`
 --
 ALTER TABLE `eszkoz`
@@ -677,7 +675,7 @@ ALTER TABLE `jatek`
 -- AUTO_INCREMENT for table `jogosultsag`
 --
 ALTER TABLE `jogosultsag`
-  MODIFY `id` int(9) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(9) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `kategoria`
@@ -689,7 +687,7 @@ ALTER TABLE `kategoria`
 -- AUTO_INCREMENT for table `kosar`
 --
 ALTER TABLE `kosar`
-  MODIFY `id` int(9) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(9) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `platform`
