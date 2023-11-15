@@ -274,62 +274,42 @@ p {
 slide
 */
 .slideshow {
-    max-width: 1000px;
+    max-width: 80%;
     display: flex;
     flex-direction: column;
     background-color: #241F1F;
-    padding: 10px;
 }
 
-.top{
-    align-items: center; /* Középre igazítás */
-}
-
-.bottom{
+.card {
+    background-color: inherit;
+    color: white;
     display: flex;
     flex-direction: row;
-    justify-content: space-between;
+    width: 100%;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    font-size: larger;
+    margin: 5px;
+    text-align: center;
+    padding-bottom: 10px ;
 }
 
-.card{
-background-color: inherit;
-color: white;
-display: flex;
-flex-direction:row;
-max-width: 500px;
-align-items: center;
-box-sizing: border-box;
-justify-content: center;
-border: #000 solid 1px;
-width: 100%;
-font-size: larger;
-margin: 5px;
-}
-
-
-.szazalek{
-    background-color: #84b45e;
-    max-width: 50%;
-    text-align: left;
-    padding-left: 5px;
-}
-
-.arak{
-    display: flex;
-    flex-direction: row;
-    background: #404040;
-    justify-content: space-between;
-    text-align: left;
-    padding-left: 5px;
-    padding-right: 5px;
-}
-
-.akciosar{
-    color: #84b45e; 
+.ar{
+    text-decoration: line-through;
 }
 
 .carousel-inner img {
-    max-width: 200px;
+    max-width: 50%;
+}
+
+
+
+#hozzadas {
+    background-color: #95e72d;
+    color: #000;
+    border: 0;
+    border-radius: 10px;
 }
 
 #lablec {
@@ -386,14 +366,17 @@ margin: 5px;
         text-align: center;
         align-items: center;
     }
-    .card{
+
+    .card {
         min-width: 100%;
         flex-direction: column;
     }
+
     .card-body {
-    min-width: 100%;
+        min-width: 100%;
     }
-    .bottom{
+
+    .bottom {
         display: flex;
         flex-direction: column;
     }
