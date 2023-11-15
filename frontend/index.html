@@ -68,12 +68,12 @@
 
           <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink2">
             <li class="options"><a class="dropdown-item gomblink" href="#" id="pc">PC</a></li>
-            <li class="options"><a class="dropdown-item gomblink" href="#" id="xboxOne">XBOX one</a></li>
-            <li class="options"><a class="dropdown-item gomblink" href="#" id="xboxSeriesS">XBOX Series S</a></li>
-            <li class="options"><a class="dropdown-item gomblink" href="#" id="xboxSeriesX">XBOX Series X</a></li>
+            <li class="options"><a class="dropdown-item gomblink" href="#" id="xboxOne">Xbox One</a></li>
+            <li class="options"><a class="dropdown-item gomblink" href="#" id="xboxSeriesS">Xbox Series S</a></li>
+            <li class="options"><a class="dropdown-item gomblink" href="#" id="xboxSeriesX">Xbox Series X</a></li>
             <li class="options"><a class="dropdown-item gomblink" href="#" id="ps4">PS4</a></li>
             <li class="options"><a class="dropdown-item gomblink" href="#" id="ps5">PS5</a></li>
-            <li class="options"><a class="dropdown-item gomblink" href="#" id="nintendoSwitch">NINTENDO switch</a></li>
+            <li class="options"><a class="dropdown-item gomblink" href="#" id="nintendoSwitch">Nintendo Switch</a></li>
           </ul>
         </div>
 
@@ -92,10 +92,14 @@
         </div>
 
         <div class="dropdown my-bar-btn">
-          <a class="btn btn-secondary category gomblink" href="#" role="button" id="akcios" data-bs-toggle="dropdown"
-            aria-expanded="false" href="#">
+          <a class="btn btn-secondary category gomblink" href="#" role="button" id="dropdownMenuLink3"
+            data-bs-toggle="dropdown" aria-expanded="false" href="#">
             Akciós
           </a>
+
+          <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink3">
+            <li class="options"><a class="dropdown-item gomblink" href="#" id="Akcios">Akciós</a></li>
+          </ul>
         </div>
       </div>
 
@@ -104,37 +108,35 @@
     <div class="slider-container slideshow">
       <div id="carouselExampleCaptions" class="carousel slide" data-bs-ride="carousel">
         <div class="carousel-indicators">
-          <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="0" class="active"
-            aria-current="true" aria-label="Slide 1"></button>
-          <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="1"
-            aria-label="Slide 2"></button>
-          <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="2"
-            aria-label="Slide 3"></button>
+          <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+          <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="1" aria-label="Slide 2"></button>
+          <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="2" aria-label="Slide 3"></button>
         </div>
-
+    
         <div class="carousel-inner" id="gameCarousel">
           <!-- JavaScript segítségével betöltendő játék adatai itt -->
         </div>
-
-        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleCaptions"
-          data-bs-slide="prev">
+    
+        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="prev">
           <span class="carousel-control-prev-icon" aria-hidden="true"></span>
           <span class="visually-hidden">Előző</span>
         </button>
-        <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleCaptions"
-          data-bs-slide="next">
+        <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="next">
           <span class="carousel-control-next-icon" aria-hidden="true"></span>
           <span class="visually-hidden">Következő</span>
         </button>
       </div>
     </div>
+    
+    
     <!-- kosár -->
     <div id="kosar-box">
       <button2 id="megjelenitoGomb"><i class="fa-solid fa-cart-shopping"></i></button>
     </div>
-      <div id="vissza-box">
-        <i class="fa-solid fa-arrow-up"></i>
-      </div>
+    <!-- vissza -->
+  <div id="vissza-gomb" onclick="topFunction()">
+    <i class="fa-solid fa-arrow-up"></i>
+  </div>
   </div>
   <div id="lablec">
     <div class="footer-content">
