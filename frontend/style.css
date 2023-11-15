@@ -274,10 +274,12 @@ p {
 slide
 */
 .slideshow {
-    max-width: 80%;
+    max-width: 100%;
     display: flex;
     flex-direction: column;
     background-color: #241F1F;
+    margin-left: 10%;
+    margin-right: 10%;
 }
 
 .card {
@@ -290,9 +292,7 @@ slide
     justify-content: center;
     width: 100%;
     font-size: larger;
-    margin: 5px;
     text-align: center;
-    padding-bottom: 10px ;
 }
 
 .ar{
@@ -301,6 +301,7 @@ slide
 
 .carousel-inner img {
     max-width: 50%;
+    border: #000 solid 1px;
 }
 
 
