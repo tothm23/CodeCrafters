@@ -70,46 +70,45 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 
 var games = [
-    {
-        nevBE: "Witcher 3",
-        arBE: 29.99,
-        akciosarBE: 20.99,
-        leirasBE: "Ez egy fantasztikus játék.",
-        kepBE: "./kepek/jatekok/witcher3.jpg",
-        korhatarBE: 12,
-        akcioBE: true,
-        mennyisegraktaronBE: 50,
-        kategoriaIdBE: 1,
-        eszkozIdBE: 3,
-        platformIdBE: 2
-      },
-      {
-        nevBE: "Játék 2",
-        arBE: 39.99,
-        akciosarBE: 21.99,
-        leirasBE: "Ez egy másik fantasztikus játék.",
-        kepBE: "./kepek/jatekok/BF2.webp",
-        korhatarBE: 16,
-        akcioBE: false,
-        mennyisegraktaronBE: 30,
-        kategoriaIdBE: 2,
-        eszkozIdBE: 1,
-        platformIdBE: 1
-      },
-      {
-        nevBE: "Játék 3",
-        arBE: 19.99,
-        akciosarBE: 6.99,
-        leirasBE: "Ez is egy fantasztikus játék.",
-        kepBE: "./kepek/jatekok/csgo.jpg",
-        korhatarBE: 18,
-        akcioBE: true,
-        mennyisegraktaronBE: 20,
-        kategoriaIdBE: 1,
-        eszkozIdBE: 2,
-        platformIdBE: 3
-      },
-      
+  {
+    nevBE: "Witcher 3",
+    arBE: 29.99,
+    akciosarBE: 20.99,
+    leirasBE: "Ez egy fantasztikus játék.",
+    kepBE: "./kepek/jatekok/witcher3.jpg",
+    korhatarBE: 12,
+    akcioBE: true,
+    mennyisegraktaronBE: 50,
+    kategoriaIdBE: 1,
+    eszkozIdBE: 3,
+    platformIdBE: 2,
+  },
+  {
+    nevBE: "Játék 2",
+    arBE: 39.99,
+    akciosarBE: 21.99,
+    leirasBE: "Ez egy másik fantasztikus játék.",
+    kepBE: "./kepek/jatekok/BF2.webp",
+    korhatarBE: 16,
+    akcioBE: false,
+    mennyisegraktaronBE: 30,
+    kategoriaIdBE: 2,
+    eszkozIdBE: 1,
+    platformIdBE: 1,
+  },
+  {
+    nevBE: "Játék 3",
+    arBE: 19.99,
+    akciosarBE: 6.99,
+    leirasBE: "Ez is egy fantasztikus játék.",
+    kepBE: "./kepek/jatekok/csgo.jpg",
+    korhatarBE: 18,
+    akcioBE: true,
+    mennyisegraktaronBE: 20,
+    kategoriaIdBE: 1,
+    eszkozIdBE: 2,
+    platformIdBE: 3,
+  },
 ];
 
 var carouselInner = document.getElementById("gameCarousel");
@@ -120,45 +119,15 @@ games.forEach(function (game, index) {
 
   carouselInner.innerHTML += `
     <div class="carousel-item ${activeClass} ${itemClass}">
-        <!-- Top Card -->
-        <div class="top">
-            <div class="card">
-                <img src="${game.kepBE}" class="card-img-top" alt="...">
+        <div class="card">
+            <img src="${game.kepBE}" class="card-img-top" alt="...">
                 <div class="card-body">
-                    <h5 class="card-title">${game.nevBE}</h5>
-                    <p class="card-text szazalek">${Math.round((game.arBE-game.akciosarBE)/game.arBE*100)}%</p>
-                    <div class="arak">
-                        <p class="card-text ar">${game.arBE}</p>
-                        <p class="card-text akciosar">${game.akciosarBE}</p>
-                    </div>
-                </div>
-            </div>
+                <h5 class="card-title">${game.nevBE}</h5>
+                <p class="card-text ar">${game.arBE} Ft</p>
+                <p class="card-text akciosar">${game.akciosarBE}Ft</p>
+                <input id="hozzadas" class="my-2 p-2 btn btn-success fs-5" type="button" value="Hozzáadás a kosárhoz" />         
         </div>
-        <!-- Bottom Cards -->
-        <div class="bottom">
-            <div class="card">
-                <img src="${game.kepBE}" class="card-img-top" alt="...">
-                <div class="card-body">
-                    <h5 class="card-title">${game.nevBE}</h5>
-                    <p class="card-text szazalek">${Math.round((game.arBE-game.akciosarBE)/game.arBE*100)}%</p>
-                    <div class="arak">
-                        <p class="card-text ar">${game.arBE}</p>
-                        <p class="card-text akciosar">${game.akciosarBE}</p>
-                    </div>
-                </div>
-            </div>
-
-            <div class="card">
-                <img src="${game.kepBE}" class="card-img-top" alt="...">
-                <div class="card-body">
-                    <h5 class="card-title">${game.nevBE}</h5>
-                    <p class="card-text szazalek">${Math.round((game.arBE-game.akciosarBE)/game.arBE*100)}%</p>
-                    <div class="arak">
-                        <p class="card-text ar">${game.arBE}</p>
-                        <p class="card-text akciosar">${game.akciosarBE}</p>
-                    </div>
-                </div>
-            </div>
+    </div>    
         </div>
     </div>
   `;
