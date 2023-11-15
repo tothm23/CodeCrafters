@@ -1,6 +1,5 @@
 * {
     box-sizing: border-box;
-    text-transform: uppercase;
     margin: 0;
     padding: 0;
     box-sizing: border-box;
@@ -34,15 +33,15 @@ body {
     flex-direction: column;
     align-items: center;
     border: #000 solid 1px;
-
 }
 
-.navsearchbar{
+.navsearchbar {
     width: 100%;
     display: flex;
     justify-content: space-between;
     align-items: center;
 }
+
 /*kereső*/
 .searchbar {
     flex-grow: 1;
@@ -67,7 +66,7 @@ body {
     margin: 0;
 }
 
-.searchbar button{
+.searchbar button {
     border-radius: 0px 10px 10px 0px;
     border: 1px solid #000;
     background: #241F1F;
@@ -98,7 +97,7 @@ body {
     height: 12.5vh;
     margin-top: 2.5vh;
     border-top-left-radius: 4vh;
-  
+
     display: flex;
     align-items: center;
     justify-content: center;
@@ -106,20 +105,20 @@ body {
 
     border: #000 1px solid;
     display: none;
-  }
-  
-  #felhasznalo-kep {
+}
+
+#felhasznalo-kep {
     width: 50px;
     height: 50px;
-  }
-  
-  #felhasznalo {
+}
+
+#felhasznalo {
     color: #fff;
     padding-top: 0.3vh;
-  }
+}
 
 
-  #kosar-box {
+#kosar-box {
     background-color: #241f1f;
     border: 0.2vh solid #000;
     color: #fff;
@@ -129,19 +128,19 @@ body {
     margin-top: 2.5vh;
     border-radius: 50%;
     cursor: pointer;
-  
-    position: absolute;
-    top: 20vh;
+
+    position: fixed;
+    top: 250px;
     right: 5vh;
-  
+
     display: flex;
     align-items: center;
     justify-content: center;
     flex-direction: column;
-  }
+}
 
-  /* vissza az oldal tetejére */
-  #vissza-box {
+/* vissza az oldal tetejére */
+#vissza-gomb {
     background-color: #bb4930;
     border: 2px solid #000;
     color: #000;
@@ -151,16 +150,16 @@ body {
     margin-top: 2.5vh;
     border-radius: 50%;
     cursor: pointer;
-  
-    position: absolute;
-    top: 80vh;
-    right: 5vh;
-  
+
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+
     display: flex;
     align-items: center;
     justify-content: center;
     flex-direction: column;
-  }
+}
 
 /*gombok*/
 
@@ -238,7 +237,6 @@ body {
 .gomblink {
     text-decoration: none;
     color: inherit;
-    text-transform: uppercase;
     font-size: 12pt;
     font-weight: bold;
     flex-shrink: 0;
@@ -280,10 +278,17 @@ slide
     position: relative;
     margin-left: auto;
     margin-right: auto;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
 
 }
 
-#lablec{
+.carousel-inner img {
+    max-width: 300px;
+}
+
+#lablec {
     height: 100px;
     background: #241F1F;
     color: white;
@@ -292,9 +297,7 @@ slide
     align-items: center;
     color: #fff;
     padding: 10px;
-    position: fixed;
     width: 100%;
-    bottom: 0;
 }
 
 @media only screen and (max-width: 700px) {
@@ -310,7 +313,8 @@ slide
         margin-bottom: 5px;
         border-radius: 5px;
     }
-    .searchbar button{
+
+    .searchbar button {
         border-radius: 5px;
     }
 
