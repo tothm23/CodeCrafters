@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Nov 14, 2023 at 01:43 PM
+-- Generation Time: Nov 15, 2023 at 11:11 AM
 -- Server version: 5.7.24
 -- PHP Version: 8.0.1
 
@@ -27,6 +27,28 @@ DELIMITER $$
 --
 -- Procedures
 --
+CREATE DEFINER=`root`@`localhost` PROCEDURE `3veletlenjatek` ()   SELECT 
+	jatek.id,
+    jatek.nev AS "jatekNev",
+    jatek.ar,
+    jatek.leiras,
+    jatek.kep,
+    jatek.korhatar,
+    jatek.akcio,
+    jatek.mennyisegraktaron,
+    eszkoz.nev AS "eszkozNev",
+    platform.nev AS "platformNev"
+FROM jatek
+
+INNER JOIN eszkoz
+ON jatek.eszkozId = eszkoz.id
+
+INNER JOIN platform
+ON jatek.platformId = platform.id
+
+ORDER BY RAND()
+LIMIT 3$$
+
 CREATE DEFINER=`root`@`localhost` PROCEDURE `ajandekKartya` (IN `ajandekKartyaIdBE` INT(9))   SELECT 
     ajandekkartya.id,
     ajandekkartya.nev AS "ajandekKartyaNev",
