@@ -69,86 +69,49 @@ document.addEventListener("DOMContentLoaded", function () {
   parseURL();
 });
 
-var games = [
-  {
-    nevBE: "Witcher 3",
-    arBE: 29.99,
-    akciosarBE: 20.99,
-    leirasBE: "Ez egy fantasztikus játék.",
-    kepBE: "./kepek/jatekok/witcher3.jpg",
-    korhatarBE: 12,
-    akcioBE: true,
-    mennyisegraktaronBE: 50,
-    kategoriaIdBE: 1,
-    eszkozIdBE: 3,
-    platformIdBE: 2,
-  },
-  {
-    nevBE: "Játék 2",
-    arBE: 39.99,
-    akciosarBE: 21.99,
-    leirasBE: "Ez egy másik fantasztikus játék.",
-    kepBE: "./kepek/jatekok/BF2.webp",
-    korhatarBE: 16,
-    akcioBE: false,
-    mennyisegraktaronBE: 30,
-    kategoriaIdBE: 2,
-    eszkozIdBE: 1,
-    platformIdBE: 1,
-  },
-  {
-    nevBE: "Játék 3",
-    arBE: 19.99,
-    akciosarBE: 6.99,
-    leirasBE: "Ez is egy fantasztikus játék.",
-    kepBE: "./kepek/jatekok/csgo.jpg",
-    korhatarBE: 18,
-    akcioBE: true,
-    mennyisegraktaronBE: 20,
-    kategoriaIdBE: 1,
-    eszkozIdBE: 2,
-    platformIdBE: 3,
-  },
-];
+// GET kérés
+fetch("http://localhost:8080/CodeCraftersWebshop-1.0-SNAPSHOT/webresources/fooldal")
+  .then((valasz) => valasz.json())
+  .then((adat) => {
+    var carouselInner = document.getElementById("gameCarousel");
 
-var carouselInner = document.getElementById("gameCarousel");
+    for (let i = 0; i < adat.length; i++) {
+      carouselInner.innerHTML += `
+      <div class="carousel-item">
+          <div class="card ">
+              <img src="./kepek/jatekok/${adat[i].kep}" class="d-block w-100" alt="${adat[i].nev}">
+                  
+              <div class="card-body">
+                  <h5 class="card-title">${adat[i].nev}</h5>
+                  <p class="card-text ar">${adat[i].ar} Ft</p>
+                  <p class="card-text akciosar">${adat[i].ar}Ft</p>
+                  <input id="hozzadas" class="my-2 p-2 btn btn-success fs-5" type="button" value="Hozzáadás a kosárhoz" />         
+              </div>
+            </div>    
+      </div>
+    `;
 
-games.forEach(function (game, index) {
-  var activeClass = index === 0 ? "active" : "";
-  var itemClass = "three-cards";
+      // Kiválasztjuk az első carousel-item-et
+      var elsoCarouselElem = document.querySelector(".carousel-item");
 
-  carouselInner.innerHTML += `
-    <div class="carousel-item ${activeClass} ${itemClass}">
-        <div class="card">
-            <img src="${game.kepBE}" class="card-img-top" alt="...">
-                <div class="card-body">
-                <h5 class="card-title">${game.nevBE}</h5>
-                <p class="card-text ar">${game.arBE} Ft</p>
-                <p class="card-text akciosar">${game.akciosarBE}Ft</p>
-                <input id="hozzadas" class="my-2 p-2 btn btn-success fs-5" type="button" value="Hozzáadás a kosárhoz" />         
-        </div>
-    </div>    
-        </div>
-    </div>
-  `;
-});
+      // Hozzáadjuk az "active" osztályt
+      elsoCarouselElem.classList.add("active");
+    }
+  })
+  .catch((hiba) => alert(hiba));
 
-//vissza gomb
+// vissza gomb
 let mybutton = document.getElementById("vissza-gomb");
 
-window.onscroll = function () {
-  scrollFunction();
-};
-
-function scrollFunction() {
+window.onscroll = () => {
   if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
-    mybutton.style.display = "block";
+    mybutton.style.display = "flex";
   } else {
     mybutton.style.display = "none";
   }
-}
+};
 
-function topFunction() {
+function felgorget() {
   window.scrollTo({
     top: 0,
     behavior: "smooth",
