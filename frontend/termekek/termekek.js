@@ -1,120 +1,26 @@
 document.addEventListener("DOMContentLoaded", function() {
-    var adatok = {
-        "jatekok" :[
-            {
-                "nevBE": "Witcher 3",
-                "arBE": 29.99,
-                "leirasBE": "Ez egy fantasztikus játék.",
-                "kepBE": "./jatekok/witcher3.jpg",
-                "korhatarBE": 12,
-                "akcioBE": true,
-                "mennyisegraktaronBE": 50,
-                "kategoriaIdBE": 1,
-                "eszkozIdBE": 3,
-                "platformIdBE": 2
-            },
-            {
-                "nevBE": "Játék 2",
-                "arBE": 39.99,
-                "leirasBE": "Izgalmas játékélmény vár rád.",
-                "kepBE": "./jatekok/miles.png",
-                "korhatarBE": 16,
-                "akcioBE": false,
-                "mennyisegraktaronBE": 30,
-                "kategoriaIdBE": 2,
-                "eszkozIdBE": 1,
-                "platformIdBE": 1
-            },
-            {
-                "nevBE": "Játék 3",
-                "arBE": 49.99,
-                "leirasBE": "Felfedezd a világot ebben a játékban.",
-                "kepBE": "./jatekok/csgo.jpg",
-                "korhatarBE": 18,
-                "akcioBE": true,
-                "mennyisegraktaronBE": 20,
-                "kategoriaIdBE": 1,
-                "eszkozIdBE": 2,
-                "platformIdBE": 3
-            },
-            {
-                "nevBE": "Játék 4",
-                "arBE": 19.99,
-                "leirasBE": "Egyszerű, de szórakoztató játék.",
-                "kepBE": "./jatekok/miles.png",
-                "korhatarBE": 10,
-                "akcioBE": false,
-                "mennyisegraktaronBE": 45,
-                "kategoriaIdBE": 2,
-                "eszkozIdBE": 1,
-                "platformIdBE": 2
-            },
-            {
-                "nevBE": "Játék 5",
-                "arBE": 59.99,
-                "leirasBE": "Merülj el a játék világában.",
-                "kepBE": "./jatekok/miles.png",
-                "korhatarBE": 20,
-                "akcioBE": true,
-                "mennyisegraktaronBE": 15,
-                "kategoriaIdBE": 1,
-                "eszkozIdBE": 3,
-                "platformIdBE": 1
-            }
-        ],
-        "ajandekkartyak" :[
-            {
-                "nevBE": "Ajándék kártya 1",
-                "arBE": 50,
-                "leirasBE": "Vásárolj kedvedre a boltban ezzel a kártyával.",
-                "kepBE": "./ajandekkartya/kartya.png",
-                "akcioBE": false,
-                "mennyisegraktaronBE": 100,
-                "eszkozIdBE": 1,
-                "platformIdBE": 2
-            },
-            {
-                "nevBE": "Ajándék kártya 2",
-                "arBE": 25,
-                "leirasBE": "Kényeztesd magad a boltban ezzel a kártyával.",
-                "kepBE": "./ajandekkartya/kartya.png",
-                "akcioBE": true,
-                "mennyisegraktaronBE": 75,
-                "eszkozIdBE": 3,
-                "platformIdBE": 1
-            },
-            {
-                "nevBE": "Ajándék kártya 3",
-                "arBE": 100,
-                "leirasBE": "Válaszd ki a kedvenc termékeidet a boltban ezzel a kártyával.",
-                "kepBE": "./ajandekkartya/kartya.png",
-                "akcioBE": true,
-                "mennyisegraktaronBE": 50,
-                "eszkozIdBE": 2,
-                "platformIdBE": 3
-            },
-            {
-                "nevBE": "Ajándék kártya 4",
-                "arBE": 75,
-                "leirasBE": "Vásárolj bármit a boltban ezzel a kártyával.",
-                "kepBE": "./ajandekkartya/kartya.png",
-                "akcioBE": false,
-                "mennyisegraktaronBE": 90,
-                "eszkozIdBE": 1,
-                "platformIdBE": 1
-            },
-            {
-                "nevBE": "Ajándék kártya 5",
-                "arBE": 200,
-                "leirasBE": "Engedd szabadjára a vágyaidat ezzel a kártyával.",
-                "kepBE": "./ajandekkartya/kartya.png",
-                "akcioBE": true,
-                "mennyisegraktaronBE": 30,
-                "eszkozIdBE": 3,
-                "platformIdBE": 2
-            }
-        ]
-    };
+    // GET kérés
+  fetch("http://localhost:8080/CodeCraftersWebshop-1.0-SNAPSHOT/webresources/termekek")
+  .then((valasz) => valasz.json())
+  .then((adat) => {
+    var termekek = document.getElementById("termekek");
+
+    console.log(adat);
+    for (let i = 0; i < adat.length; i++) {
+      termekek.innerHTML += `
+          <div class="card my-4">
+              <img src="../kepek/ajandekkartya/${adat[i].kep}" class="card-img-top w-50" alt="${adat[i].nev}">
+                  
+              <div class="card-body">
+                  <h5 class="card-title">${adat[i].nev}</h5>
+                  <p class="card-text ar">${adat[i].ar} Ft</p>
+                  <p class="card-text akciosar">${Math.round(adat[i].ar - (adat[i].ar / 100) * adat[i].akcio)}Ft</p>
+                  <input id="hozzadas" class="my-2 p-2 btn btn-success fs-5" type="button" value="Hozzáadás a kosárhoz" />
+          </div>
+      `;
+    }
+  })
+  .catch((hiba) => alert(hiba));
 
     var termekekHTML = "";
     adatok.jatekok.forEach(function(jatek) {
