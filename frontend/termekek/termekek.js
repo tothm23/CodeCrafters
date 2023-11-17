@@ -66,6 +66,60 @@ document.addEventListener("DOMContentLoaded", function () {
   var termekekDiv = document.querySelector(".termekek");
   termekekDiv.innerHTML = termekekHTML;
 
+  // Keresési mező eseményfigyelése
+  var searchInput = document.querySelector('input[name="search"]');
+  searchInput.addEventListener("input", updateProducts);
+
+  function updateProducts() {
+    var searchTerm = searchInput.value.toLowerCase();
+
+    var filteredProducts = adatok.jatekok.filter(function (jatek) {
+      return (
+        jatek.nevBE.toLowerCase().includes(searchTerm) ||
+        jatek.leirasBE.toLowerCase().includes(searchTerm)
+      );
+    });
+
+    var filteredKartyak = adatok.ajandekkartyak.filter(function (kartya) {
+      return (
+        kartya.nevBE.toLowerCase().includes(searchTerm) ||
+        kartya.leirasBE.toLowerCase().includes(searchTerm)
+      );
+    });
+
+    var filteredHTML = "";
+    filteredProducts.forEach(function (jatek) {
+      filteredHTML += `
+        <div class="termekjatek">
+          <img src="../kepek/${jatek.kepBE}" alt="${jatek.nevBE}">
+          <div class="adatok">
+              <div class="nev">${jatek.nevBE}</div>
+              <div class="ar">${jatek.arBE} HUF</div>
+              <div class="leiras">${jatek.leirasBE}</div>
+              ${jatek.akcioBE ? '<div class="akcio">Akcióban!</div>' : ""}
+          </div>
+        </div>
+      `;
+    });
+
+    filteredKartyak.forEach(function (kartya) {
+      filteredHTML += `
+        <div class="termekkartyak">
+          <img src="../kepek/${kartya.kepBE}" alt="${kartya.nevBE}">
+          <div class="adatok">
+              <div class="nev">${kartya.nevBE}</div>
+              <div class="ar">${kartya.arBE} HUF</div>
+              <div class="leiras">${kartya.leirasBE}</div>
+              ${kartya.akcioBE ? '<div class="akcio">Akcióban!</div>' : ""}
+          </div>
+        </div>
+      `;
+    });
+
+    var termekekDiv = document.querySelector(".termekek");
+    termekekDiv.innerHTML = filteredHTML;
+  }
+
   /*ár kereső*/
   var minPriceInput = document.querySelector('input[name="min"]');
   var maxPriceInput = document.querySelector('input[name="max"]');
@@ -177,7 +231,7 @@ document.addEventListener("DOMContentLoaded", function () {
       }
     });
 
-    const url = new URL("../termékoldal/termekoldal.html", window.location.origin);
+    const url = new URL("../termekek/termekek.html", window.location.origin);
     url.searchParams.set("categories", params.join("re"));
     window.history.pushState({}, "", url);
   }
