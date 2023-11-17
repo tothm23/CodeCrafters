@@ -84,7 +84,7 @@ fetch("http://localhost:8080/CodeCraftersWebshop-1.0-SNAPSHOT/webresources/foold
               <div class="card-body">
                   <h5 class="card-title">${adat[i].nev}</h5>
                   <p class="card-text ar">${adat[i].ar} Ft</p>
-                  <p class="card-text akciosar">${adat[i].ar}Ft</p>
+                  <p class="card-text akciosar">${Math.round(adat[i].ar - (adat[i].ar / 100) * adat[i].akcio)}Ft</p>
                   <input id="hozzadas" class="my-2 p-2 btn btn-success fs-5" type="button" value="Hozzáadás a kosárhoz" />         
               </div>
             </div>    
