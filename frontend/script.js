@@ -85,8 +85,7 @@ fetch("http://localhost:8080/CodeCraftersWebshop-1.0-SNAPSHOT/webresources/foold
                   <h5 class="card-title">${adat[i].nev}</h5>
                   <p class="card-text ar">${adat[i].ar} Ft</p>
                   <p class="card-text akciosar">${Math.round(adat[i].ar - (adat[i].ar / 100) * adat[i].akcio)}Ft</p>
-                  <input id="hozzadas" class="my-2 p-2 btn btn-success fs-5" type="button" value="Hozzáadás a kosárhoz" />         
-              </div>
+                  <input id="hozzadas" class="my-2 p-2 btn btn-success fs-5" type="button" value="Hozzáadás a kosárhoz" />
             </div>    
       </div>
     `;
@@ -99,6 +98,15 @@ fetch("http://localhost:8080/CodeCraftersWebshop-1.0-SNAPSHOT/webresources/foold
     }
   })
   .catch((hiba) => alert(hiba));
+
+
+//kosar gomb
+let dbszam=document.getElementsByClassName("darabszam");
+var hozzadasButton = document.getElementById('hozzadas');
+        hozzadasButton.addEventListener('click', function() {
+        dbszam.style.display=block;
+        dbszam.innerHTML=parseInt(dbszam.innerHTML)+1;
+        });
 
 // vissza gomb
 let mybutton = document.getElementById("vissza-gomb");

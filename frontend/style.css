@@ -137,6 +137,21 @@ body {
   flex-direction: column;
 }
 
+.darabszam {
+  border: #000 solid 1px;
+  border-radius: 50%;
+  width: 20px;
+  height: 20px;
+  color: white;
+  font-size: 10pt;
+  position: fixed;
+  top: 295px;
+  right: 4vh;
+  text-align: center;
+  background: red;
+  display: none;
+}
+
 /* vissza az oldal tetejére */
 #vissza-gomb {
   background-color: #bb4930;
