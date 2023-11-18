@@ -99,14 +99,13 @@ fetch("http://localhost:8080/CodeCraftersWebshop-1.0-SNAPSHOT/webresources/foold
   })
   .catch((hiba) => alert(hiba));
 
-
 //kosar gomb
-let dbszam=document.getElementsByClassName("darabszam");
+let dbszam = document.getElementsByClassName("darabszam");
 var hozzadasButton = document.getElementById('hozzadas');
-        hozzadasButton.addEventListener('click', function() {
-        dbszam.style.display=block;
-        dbszam.innerHTML=parseInt(dbszam.innerHTML)+1;
-        });
+hozzadasButton.addEventListener('click', function () {
+  dbszam.style.display = block;
+  dbszam.innerHTML = parseInt(dbszam.innerHTML) + 1;
+});
 
 // vissza gomb
 let mybutton = document.getElementById("vissza-gomb");

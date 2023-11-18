@@ -137,6 +137,10 @@ body {
   flex-direction: column;
 }
 
+#kosar-box a{
+  color: white;
+}
+
 .darabszam {
   border: #000 solid 1px;
   border-radius: 50%;
@@ -173,6 +177,8 @@ body {
   justify-content: center;
   flex-direction: column;
 }
+
+
 
 /*gombok*/
 
