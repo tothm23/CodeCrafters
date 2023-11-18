@@ -10,7 +10,6 @@ document.addEventListener("DOMContentLoaded", function () {
 
     regisztraciosForm.addEventListener("submit", function (event) {
       event.preventDefault();
-
       const felhasz = document.getElementById("felhasz").value;
       const vezeteknev = document.getElementById("vezeteknev").value;
       const keresztnev = document.getElementById("keresztnev").value;
@@ -21,14 +20,17 @@ document.addEventListener("DOMContentLoaded", function () {
       const telefonszam = document.getElementById("telefonszam").value;
 
       const inputdata = {
-        felhasznaloNev: felhasz,
-        vezetekNev: vezeteknev,
-        keresztNev: keresztnev,
-        szuletesiDatum: datum,
-        email: email,
-        jelszo: jelszo,
-        orszag: orszag,
-        telefon: telefonszam,
+          jelszo: jelszo,
+          orszag: orszag,
+          telefon: telefonszam,
+          szuletesiDatum: datum,
+          felhasznaloNev: felhasz,
+          keresztNev: keresztnev,
+          vezetekNev: vezeteknev,
+          profilkep: "",
+          id: 2,
+          email: email,
+          aktiv: true,
       };
       // regisztráció fetch
       fetch(
@@ -41,32 +43,17 @@ document.addEventListener("DOMContentLoaded", function () {
           },
         }
       )
-      .then((valasz) => valasz.text())
+      .then((valasz) => {
+        console.log('Válasz érkezett:', valasz);
+        return valasz.text();
+      })
       .then((adat) => {
-        sikeresElem.style.removeProperty('display');
-        if(adat=="Felhasználó hozzáadva!"){
-          sikeresElem.style.color = "green";
-          sikeresElem.style.backgroundColor = "lightgreen";
-          sikeresElem.style.borderColor = "darkgreen";
-          sikeresElem.style.display = "block";
-        }
-        else{
-          sikeresElem.style.color = "red";
-          sikeresElem.style.backgroundColor = "lightcoral";
-          sikeresElem.style.borderColor = "darkred";
-          sikeresElem.style.display = "block";
-        }
-        try {
-          const elemzettAdat = JSON.parse(adat);
-          sikeresElem.innerHTML = elemzettAdat.message;
-        } catch (error) {
-          console.log(error);
-          sikeresElem.innerHTML = adat;
-          
-        }
+        alert('Sikeres kérés! Válasz: ' + adat); // Sikeres kérés!
+        console.log('Adatok érkeztek:', adat);
       })
       .catch((hiba) => {
-        sikeresElem.innerHTML = hiba;
+        alert('Hiba történt a kérés során: ' + hiba); // Alert hiba
+        console.error('Hiba:', hiba);
       });
     });
   });
