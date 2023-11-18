@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Nov 15, 2023 at 01:58 PM
+-- Generation Time: Nov 18, 2023 at 06:53 PM
 -- Server version: 5.7.24
 -- PHP Version: 8.0.1
 
@@ -129,15 +129,11 @@ SET ajandekkartya.nev = nevBE,
     ajandekkartya.frissitve = CURRENT_TIMESTAMP
 WHERE ajandekkartya.id = idBE$$
 
-CREATE DEFINER=`root`@`localhost` PROCEDURE `frissitesFelhasznalo` (IN `felhasznaloNevBE` VARCHAR(100), IN `vezetekNevBE` VARCHAR(100), IN `keresztNev` VARCHAR(100), IN `szuletesiDatumBE` DATE, IN `emailBE` VARCHAR(100), IN `orszagBE` VARCHAR(100), IN `telefonBE` VARCHAR(14), IN `profilkepBE` VARCHAR(100), IN `jelszoBE` TEXT)   UPDATE felhasznalo
+CREATE DEFINER=`root`@`localhost` PROCEDURE `frissitesFelhasznalo` (IN `felhasznaloNevBE` VARCHAR(100), IN `vezetekNevBE` VARCHAR(100), IN `keresztNev` VARCHAR(100), IN `emailBE` VARCHAR(100), IN `jelszoBE` TEXT)   UPDATE felhasznalo
 SET felhasznalo.felhasznaloNev = felhasznaloNevBE,
 	felhasznalo.vezetekNev = vezetekNevBE,
     felhasznalo.keresztNev = keresztNev,
-    felhasznalo.szuletesiDatum = szuletesiDatumBE,
     felhasznalo.email = emailBE,
-    felhasznalo.orszag = orszagBE,
-    felhasznalo.telefon = telefonBE,
-    felhasznalo.profilkep = profilkepBE,
     felhasznalo.frissitve = CURRENT_TIMESTAMP
 WHERE felhasznalo.jelszo = SHA1(jelszoBE)$$
 
@@ -405,27 +401,22 @@ CREATE TABLE `felhasznalo` (
   `felhasznaloNev` varchar(100) NOT NULL,
   `vezetekNev` varchar(100) NOT NULL,
   `keresztNev` varchar(100) NOT NULL,
-  `szuletesiDatum` date NOT NULL,
   `email` varchar(100) NOT NULL,
   `jelszo` text NOT NULL,
-  `orszag` varchar(100) NOT NULL,
-  `telefon` varchar(14) NOT NULL,
-  `aktiv` tinyint(1) NOT NULL DEFAULT '0',
-  `profilkep` varchar(100) DEFAULT NULL,
   `jogosultsagId` int(9) NOT NULL DEFAULT '1',
+  `token` text NOT NULL,
   `letrehozva` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `frissitve` datetime DEFAULT NULL,
-  `torolve` datetime DEFAULT NULL
+  `frissitve` datetime DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `felhasznalo`
 --
 
-INSERT INTO `felhasznalo` (`id`, `felhasznaloNev`, `vezetekNev`, `keresztNev`, `szuletesiDatum`, `email`, `jelszo`, `orszag`, `telefon`, `aktiv`, `profilkep`, `jogosultsagId`, `letrehozva`, `frissitve`, `torolve`) VALUES
-(2, 'Probafriss', 'Ujnev1', 'Ujnev2', '2000-03-23', 'proba@gamil.com', 'a58c0c94fba109fa2e93458e184f3007bd2552a1', 'Németország', '+360620607210', 1, '', 1, '2023-09-18 11:28:10', '2023-09-25 12:41:04', '2023-09-18 16:54:16'),
-(3, 'Proba2', 'ASD', 'DSA', '1987-04-07', 'kerib.113sz@acsjszki.hu', 'b6157765d4e408995d0b67b0956d3c0a3215a57e', 'Magyarország', '+3606204077373', 0, NULL, 2, '2023-09-25 12:33:02', NULL, NULL),
-(4, 'Proba3', 'Jancsi', 'Béla', '1997-02-24', 'jani@gmail.com', 'f1ff673bf872ea25ce8fcd148fdfbe7129e5380a', 'Franciaország', '+36204032312', 0, NULL, 1, '2023-10-03 11:01:46', NULL, NULL);
+INSERT INTO `felhasznalo` (`id`, `felhasznaloNev`, `vezetekNev`, `keresztNev`, `email`, `jelszo`, `jogosultsagId`, `token`, `letrehozva`, `frissitve`) VALUES
+(2, 'Probafriss', 'Ujnev1', 'Ujnev2', 'proba@gamil.com', 'a58c0c94fba109fa2e93458e184f3007bd2552a1', 1, '', '2023-09-18 11:28:10', '2023-09-25 12:41:04'),
+(3, 'Proba2', 'ASD', 'DSA', 'kerib.113sz@acsjszki.hu', 'b6157765d4e408995d0b67b0956d3c0a3215a57e', 2, '', '2023-09-25 12:33:02', NULL),
+(4, 'Proba3', 'Jancsi', 'Béla', 'jani@gmail.com', 'f1ff673bf872ea25ce8fcd148fdfbe7129e5380a', 1, '', '2023-10-03 11:01:46', NULL);
 
 -- --------------------------------------------------------
 
