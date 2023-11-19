@@ -7,31 +7,48 @@
     <link rel="stylesheet" href="kosar.css" />
     <title>Kosar</title>
   </head>
-
-  <body>
+<body>
 
     <section class="container content-section">
-        <h1 class="section-header">Kosár</h1>
-        <div class="kosar-row">
-            <span class="kosar-tetel kosar-header kosar-column">Tétel</span>
-            <span class="kosar-ar kosar-header kosar-column">Ár</span>
-            <span class="kosar-mennyiseg kosar-header kosar-column">Mennyiség</span>
-        </div>
-        <div class="kosar-tetelek">
+        <h2 class="section-header">A kosár tartalma</h2>
+        <div class="cart-items">
+            <div class="kosar-row">
+                <div class="kosar-tetel kosar-column">
+                    <img class="kosar-tetel-kep" src="../kepek/jatekok/BF2042.png" width="100" height="100">
+                    <span class="kosar-tetel-nev">Battlefield 2042</span>
+                </div>
+                <span class="kosar-ar kosar-column">19 990 Ft</span>
+                <div class="kosar-torles kosar-column">
+                    <button class="btn btn-danger" type="button">X</button>
+                </div>
+            </div>
+            <div class="kosar-row">
+                <div class="kosar-tetel kosar-column">
+                    <img class="kosar-tetel-kep" src="../kepek/jatekok/gta5.jpg" width="100" height="100">
+                    <span class="kosar-tetel-nev">Grand Theft Auto V</span>
+                </div>
+                <span class="kosar-ar kosar-column">6999 Ft</span>
+                <div class="kosar-torles kosar-column"> 
+                    <button class="btn btn-danger" type="button">X</button>
+                </div>
+            </div>
         </div>
         <div class="kosar-vegosszeg">
-            <strong class="kosar-vegosszeg-title">Végösszeg</strong>
-            <span class="kosar-vegosszeg-ar">0 FT</span>
+            <strong class="kosar-vegosszeg-title">Végösszeg:</strong>
+            <span class="kosar-vegosszeg-ar">50 000FT</span>
         </div>
-        <button class="btn btn-primary btn-fizetes" type="button">Fizetés</button>
+        <div class="kosar-btns">
+            <button class="btn btn-primary btn-vissza" type="button">Vissza</button>
+            <button class="btn btn-primary btn-rendeles" type="button">Rendelés</button>
+        </div>
     </section>
-    
+
     <div id="lablec">
-      <div class="footer-content">
-        <p>Készítette: Váradi Barnabás, Tóth Milán, Kéri Bence</p>
-      </div>
+        <div class="footer-content">
+          <p>Készítette: Váradi Barnabás, Tóth Milán, Kéri Bence</p>
+        </div>
     </div>
-    <script src="kosar.js"></script>
+
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
   </body>
 </html>

@@ -5,9 +5,16 @@
     font-family: Arial, Helvetica, sans-serif;
     color: white;
 }
-  
-body {
+
+html, body {
+    margin: 0;
+    padding: 0;
+    min-height: 100%;
     background-color: #404040;
+}
+
+.content-section {
+    margin: 1em;
 }
 
 .container {
@@ -17,74 +24,85 @@ body {
 }
 
 .section-header {
-    margin-top: 50px;
-    margin-bottom: 50px;
+    font-weight: normal;
+    color: white;
     text-align: center;
     font-size: 2.5em;
+    margin-top: 1em;
+    margin-bottom: 1em;
+}
+
+.btn {
+    text-align: center;
+    vertical-align: middle;
+    padding: .67em .67em;
+    cursor: pointer;
 }
 
 .kosar-header {
     font-weight: bold;
     font-size: 1.25em;
+    color: white;
 }
 
 .kosar-column {
     display: flex;
     align-items: center;
-    border-bottom: 1px solid black;
     margin-right: 1.5em;
-    padding-bottom: 10px;
-    margin-top: 10px;
 }
 
 .kosar-row {
     display: flex;
+    border: 1px solid black;
+    margin-bottom: 1.5em;
+    border-radius: 10px;
+    background-color: #241f1f;
 }
 
 .kosar-tetel {
-    width: 45%;
+    width: 50%;
 }
 
 .kosar-ar {
+    width: 30%;
+    font-size: 1.2em;
+    color: white;
+}
+
+.kosar-torles {
     width: 20%;
+}
+
+.kosar-tetel-nev {
+    color: white;
+    margin-left: .5em;
     font-size: 1.2em;
 }
 
-.kosar-mennyiseg {
-    width: 35%;
+.kosar-tetel-kep {
+    width: 115px;
+    height: 100%;
+    border-radius: 10px;
 }
 
 .btn-danger {
     color: white;
     background-color: #EB5757;
     border: none;
-    border-radius: .3em;
+    border-radius: 10px;
     font-weight: bold;
+    font-size: 60px;
+    height: 100%;
+    width: 100%;
 }
 
 .btn-danger:hover {
     background-color: #CC4C4C;
 }
 
-.kosar-mennyiseg-input {
-    height: 34px;
-    width: 50px;
-    border-radius: 5px;
-    border: 1px solid black;
-    background-color: #fff;
-    color: black;
-    padding: 0;
-    text-align: center;
-    font-size: 1.2em;
-    margin-right: 25px;
-}
-
-.kosar-row:last-child {
-    border-bottom: 1px solid black;
-}
-
-.kosar-row:last-child .kosar-column {
+.kosar-column:last-child {
     border: none;
+    margin-right: 0px;
 }
 
 .kosar-vegosszeg {
@@ -94,7 +112,7 @@ body {
 }
 
 .kosar-vegosszeg-title {
-    font-weight: bold;
+    font-weight: lighter;
     font-size: 1.5em;
     color: white;
     margin-right: 20px;
@@ -102,17 +120,53 @@ body {
 
 .kosar-vegosszeg-ar {
     color: white;
-    font-size: 1.1em;
+    font-size: 1.5em;
+    font-weight: bold;
 }
 
-.btn-fizetes {
-    display: block;
+.kosar-btns{
+    display: flex;
+}
+
+.btn-primary {
+    padding-left: 40px;
+    padding-right: 40px;
+}
+
+.btn-vissza{
+    color: white;
+    background-color: #404040;
+    border: 1px solid white;
+    border-radius: 10px;
+    font-weight: bold;
     margin: 40px auto 80px auto;
     font-size: 1.75em;
 }
-  
+
+.btn-vissza:hover {
+    border: 1px solid white;
+    background-color: black;
+}
+
+.btn-rendeles {
+    color: black;
+    background-color: greenyellow;
+    border: 1px solid black;
+    border-radius: 10px;
+    font-weight: bold;
+    margin: 40px auto 80px auto;
+    font-size: 1.75em;
+}
+
+.btn-rendeles:hover {
+    color: black;
+    border: 1px solid black;
+    background-color: rgb(139, 185, 45);
+}
+
 /* lábléc */
 #lablec {
+    position: fixed;
     height: 100px;
     background: #241f1f;
     color: white;
@@ -122,4 +176,5 @@ body {
     color: #fff;
     padding: 10px;
     width: 100%;
+    bottom: 0;
 }
