@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Nov 18, 2023 at 06:53 PM
+-- Generation Time: Nov 19, 2023 at 07:24 PM
 -- Server version: 5.7.24
 -- PHP Version: 8.0.1
 
@@ -112,7 +112,12 @@ INTO felhasznaloIdKI$$
 CREATE DEFINER=`root`@`localhost` PROCEDURE `felhasznalok` ()   SELECT *
 FROM felhasznalo$$
 
-CREATE DEFINER=`root`@`localhost` PROCEDURE `felhasznaloKosar` (IN `felhasznaloIdBE` INT(9))   SELECT * 
+CREATE DEFINER=`root`@`localhost` PROCEDURE `felhasznaloKosar` (IN `felhasznaloIdBE` INT(9))   SELECT 
+	kosar.id,
+	kosar.felhasznaloId,
+    kosar.jatekId,
+    kosar.ajandekKartyaId,
+    kosar.vegosszeg
 FROM kosar
 LEFT JOIN felhasznalo
 ON kosar.felhasznaloId = felhasznalo.id$$
@@ -190,16 +195,46 @@ ON jatek.eszkozId = eszkoz.id
 INNER JOIN platform
 ON jatek.platformId = platform.id$$
 
-CREATE DEFINER=`root`@`localhost` PROCEDURE `kosar` (IN `felhasznaloIdBE` INT(9), IN `jatekIdBE` INT(9), IN `ajandekKartyaIdBE` INT(9))   INSERT INTO kosar(
+CREATE DEFINER=`root`@`localhost` PROCEDURE `kosar` (IN `jatekIdBE` INT(9), IN `ajandekKartyaIdBE` INT(9), IN `kosárIdBE` INT(9), IN `felhasznaloIdBE` INT(9))   BEGIN
+
+DECLARE jatekAr INT(9);
+DECLARE jatekAkcio INT(9);
+DECLARE ajandekKartyaAr INT(9);
+DECLARE ajandekKartyaAkcio INT(9);
+DECLARE vegosszeg INT(9);
+
+SELECT jatek.ar INTO jatekAr
+FROM jatek
+WHERE jatek.id = jatekIdBE;
+
+SELECT jatek.akcio INTO jatekAkcio
+FROM jatek
+WHERE jatek.id = jatekIdBE;
+
+SELECT ajandekkartya.ar INTO ajandekKartyaAr
+FROM ajandekkartya
+WHERE ajandekkartya.id = ajandekKartyaIdBE;
+
+SELECT ajandekkartya.akcio INTO ajandekKartyaAkcio
+FROM ajandekkartya
+WHERE ajandekkartya.id = ajandekKartyaIdBE;
+
+UPDATE kosar 
+SET kosar.vegosszeg = jatekAr - (jatekAr * jatekAkcio / 100) + ajandekKartyaAr - (ajandekKartyaAr * ajandekKartyaAkcio / 100)
+WHERE kosar.id = kosárIdBE;
+
+INSERT INTO kosar(
     kosar.felhasznaloId,
     kosar.jatekId,
     kosar.ajandekKartyaId
 )
 VALUES(
     felhasznaloIdBE,
-    jatekIdBE,
+	jatekIdBE,
     ajandekKartyaIdBE
-)$$
+);
+
+END$$
 
 CREATE DEFINER=`root`@`localhost` PROCEDURE `novekvoArAjandekKartya` ()   SELECT *
 FROM ajandekkartya
@@ -512,7 +547,10 @@ CREATE TABLE `kosar` (
 --
 
 INSERT INTO `kosar` (`id`, `felhasznaloId`, `jatekId`, `ajandekKartyaId`, `vegosszeg`) VALUES
-(1, 2, 3, 7, 0);
+(1, 2, 3, 7, 14690),
+(3, 2, 3, 7, 17999),
+(4, 2, 3, 7, 0),
+(5, 2, 4, 5, 0);
 
 -- --------------------------------------------------------
 
@@ -678,7 +716,7 @@ ALTER TABLE `kategoria`
 -- AUTO_INCREMENT for table `kosar`
 --
 ALTER TABLE `kosar`
-  MODIFY `id` int(9) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(9) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `platform`
