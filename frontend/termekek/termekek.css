@@ -151,14 +151,14 @@ h2 {
 }
 
 #termekek {
-  width: 35%;
+  width: 50%;
   align-self: flex-start;
   flex-direction: column;
   padding-left: 30px;
 }
 
-.termekkartyak {
-  max-width: 500px;
+.termekkartyak ,.termekekjatek{
+  width: 100%;
   border: #000 solid 1px;
   border-radius: 15px;
   background-color: #241f1f;
