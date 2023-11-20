@@ -6,7 +6,120 @@
 }
   
 body {
-    background-color: #404040;
+    box-sizing: border-box;
+    background: #404040;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    height: 100vh;
+    margin-top: 20px;
+}
+
+img {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+}
+
+.felhasznalo-nev {
+    margin-top: 10px;
+    font-weight: bold;
+    font-size: 25px;
+}
+
+.felhasznalo-valos-nevek {
+    display: flex;
+    margin-bottom: 20px;
+}
+
+.felhasznalo-vezeteknev {
+    width: auto;
+    margin-right: 6px;
+}
+
+.felhasznalo-keresztnev {
+    width: auto;
+}
+
+.form-popup {
+    width: 100%;
+    max-width: 700px;
+    border: 2px solid #fff;
+    border-radius: 15px;
+    padding: 20px;
+    text-align: left;
+    border-radius: 20px;
+    background: #241F1F;
+    margin-bottom: 80px;
+}
+
+.form-content {
+    color: #FFF;
+    text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;
+    font-family: Inter;
+    font-style: normal;
+    line-height: normal;
+    flex-shrink: 0;
+}
+
+.form-content .mb-3 input[type="text"],
+.form-content .mb-3 input[type="password"] {
+    background: none;
+    color: white;
+    box-shadow: none;
+    border-radius: 15px;
+    border: 1px solid #000;
+    background: rgba(217, 217, 217, 0.10);
+}
+
+.form-check-input[type="checkbox"] {
+    background: #404040;
+    border: 1px solid #717171;
+    box-shadow: none;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+}
+
+#email::placeholder{
+    color: white;
+}
+
+.felhasznalo-btns {
+    margin-top: 1em;
+}
+
+#mentes {
+    border-radius: 10px;
+    border: 1px solid black;
+    color: black;
+    font-weight: bold;
+    background: greenyellow;
+    max-width: 125px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+#mentes:hover {
+    background-color: rgb(139, 185, 45)
+}
+
+#torles {
+    border-radius: 10px;
+    border: 1px solid black;
+    color: black;
+    font-weight: bold;
+    background: #EB5757;
+    max-width: 125px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+#torles:hover {
+    background-color: #CC4C4C;
 }
 
 /* lábléc */
