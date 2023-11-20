@@ -84,12 +84,6 @@ public class Felhasznalo implements Serializable {
     private int jogosultsagId;
     @Basic(optional = false)
     @NotNull
-    @Lob
-    @Size(min = 1, max = 65535)
-    @Column(name = "token")
-    private String token;
-    @Basic(optional = false)
-    @NotNull
     @Column(name = "letrehozva")
     @Temporal(TemporalType.TIMESTAMP)
     private Date letrehozva;
@@ -104,7 +98,7 @@ public class Felhasznalo implements Serializable {
         this.id = id;
     }
 
-    public Felhasznalo(Integer id, String felhasznaloNev, String vezetekNev, String keresztNev, String email, String jelszo, int jogosultsagId, String token, Date letrehozva) {
+    public Felhasznalo(Integer id, String felhasznaloNev, String vezetekNev, String keresztNev, String email, String jelszo, int jogosultsagId) {
         this.id = id;
         this.felhasznaloNev = felhasznaloNev;
         this.vezetekNev = vezetekNev;
@@ -112,8 +106,6 @@ public class Felhasznalo implements Serializable {
         this.email = email;
         this.jelszo = jelszo;
         this.jogosultsagId = jogosultsagId;
-        this.token = token;
-        this.letrehozva = letrehozva;
     }
 
     public Integer getId() {
@@ -170,14 +162,6 @@ public class Felhasznalo implements Serializable {
 
     public void setJogosultsagId(int jogosultsagId) {
         this.jogosultsagId = jogosultsagId;
-    }
-
-    public String getToken() {
-        return token;
-    }
-
-    public void setToken(String token) {
-        this.token = token;
     }
 
     public Date getLetrehozva() {
@@ -241,7 +225,6 @@ public class Felhasznalo implements Serializable {
                 felhasznalo.put("email", sor[4]);
                 felhasznalo.put("jelszo", sor[5]);
                 felhasznalo.put("jogosultsagId", sor[6]);
-                felhasznalo.put("token", sor[7]);
             }
 
         } catch (Exception e) {
@@ -285,7 +268,7 @@ public class Felhasznalo implements Serializable {
     }
 
     public static boolean ujFelhasznalo(String felhasznaloNevBE, String vezetekNevBE, String keresztNev,
-            String emailBE, String jelszoBE, Integer jogosultsagIdBE, String tokenBE) {
+            String emailBE, String jelszoBE, Integer jogosultsagIdBE) {
 
         EntityManagerFactory emf = Persistence.createEntityManagerFactory("com_CodeCraftersWebshop_war_1.0-SNAPSHOTPU");
         EntityManager em = emf.createEntityManager();
@@ -299,7 +282,6 @@ public class Felhasznalo implements Serializable {
             spq.registerStoredProcedureParameter("emailBE", String.class, ParameterMode.IN);
             spq.registerStoredProcedureParameter("jelszoBE", String.class, ParameterMode.IN);
             spq.registerStoredProcedureParameter("jogosultsagIdBE", Integer.class, ParameterMode.IN);
-            spq.registerStoredProcedureParameter("tokenBE", String.class, ParameterMode.IN);
 
             spq.setParameter("felhasznaloNevBE", felhasznaloNevBE);
             spq.setParameter("vezetekNevBE", vezetekNevBE);
@@ -307,7 +289,6 @@ public class Felhasznalo implements Serializable {
             spq.setParameter("emailBE", emailBE);
             spq.setParameter("jelszoBE", jelszoBE);
             spq.setParameter("jogosultsagIdBE", jogosultsagIdBE);
-            spq.setParameter("tokenBE", tokenBE);
 
             spq.execute();
             return true;
