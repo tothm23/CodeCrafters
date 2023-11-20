@@ -9,7 +9,6 @@ import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
-import org.json.JSONArray;
 import org.json.JSONObject;
 
 /**
@@ -28,8 +27,8 @@ public class FelhasznalokResource {
     @POST
     public Response ujFelhasznalo(Felhasznalo f) {
         String result = FelhasznaloService.ujFelhasznalo(f.getFelhasznaloNev(), f.getVezetekNev(),
-                f.getKeresztNev(), f.getSzuletesiDatum(), f.getEmail(), f.getJelszo(),
-                f.getOrszag(), f.getTelefon());
+                f.getKeresztNev(), f.getEmail(), f.getJelszo(),
+                f.getJogosultsagId(), f.getToken());
         return Response.status(Response.Status.CREATED).entity(result)
                 .type(MediaType.APPLICATION_JSON).build();
     }

@@ -24,6 +24,7 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
@@ -31,22 +32,17 @@ import javax.validation.constraints.Size;
  */
 @Entity
 @Table(name = "felhasznalo")
+@XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "Felhasznalo.findAll", query = "SELECT f FROM Felhasznalo f"),
     @NamedQuery(name = "Felhasznalo.findById", query = "SELECT f FROM Felhasznalo f WHERE f.id = :id"),
     @NamedQuery(name = "Felhasznalo.findByFelhasznaloNev", query = "SELECT f FROM Felhasznalo f WHERE f.felhasznaloNev = :felhasznaloNev"),
     @NamedQuery(name = "Felhasznalo.findByVezetekNev", query = "SELECT f FROM Felhasznalo f WHERE f.vezetekNev = :vezetekNev"),
     @NamedQuery(name = "Felhasznalo.findByKeresztNev", query = "SELECT f FROM Felhasznalo f WHERE f.keresztNev = :keresztNev"),
-    @NamedQuery(name = "Felhasznalo.findBySzuletesiDatum", query = "SELECT f FROM Felhasznalo f WHERE f.szuletesiDatum = :szuletesiDatum"),
     @NamedQuery(name = "Felhasznalo.findByEmail", query = "SELECT f FROM Felhasznalo f WHERE f.email = :email"),
-    @NamedQuery(name = "Felhasznalo.findByOrszag", query = "SELECT f FROM Felhasznalo f WHERE f.orszag = :orszag"),
-    @NamedQuery(name = "Felhasznalo.findByTelefon", query = "SELECT f FROM Felhasznalo f WHERE f.telefon = :telefon"),
-    @NamedQuery(name = "Felhasznalo.findByAktiv", query = "SELECT f FROM Felhasznalo f WHERE f.aktiv = :aktiv"),
-    @NamedQuery(name = "Felhasznalo.findByProfilkep", query = "SELECT f FROM Felhasznalo f WHERE f.profilkep = :profilkep"),
     @NamedQuery(name = "Felhasznalo.findByJogosultsagId", query = "SELECT f FROM Felhasznalo f WHERE f.jogosultsagId = :jogosultsagId"),
     @NamedQuery(name = "Felhasznalo.findByLetrehozva", query = "SELECT f FROM Felhasznalo f WHERE f.letrehozva = :letrehozva"),
-    @NamedQuery(name = "Felhasznalo.findByFrissitve", query = "SELECT f FROM Felhasznalo f WHERE f.frissitve = :frissitve"),
-    @NamedQuery(name = "Felhasznalo.findByTorolve", query = "SELECT f FROM Felhasznalo f WHERE f.torolve = :torolve")})
+    @NamedQuery(name = "Felhasznalo.findByFrissitve", query = "SELECT f FROM Felhasznalo f WHERE f.frissitve = :frissitve")})
 public class Felhasznalo implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -70,10 +66,6 @@ public class Felhasznalo implements Serializable {
     @Size(min = 1, max = 100)
     @Column(name = "keresztNev")
     private String keresztNev;
-    @Basic(optional = false)
-    @NotNull
-    @Column(name = "szuletesiDatum")
-    private String szuletesiDatum;
     // @Pattern(regexp="[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?", message="Invalid email")//if the field contains email address consider using this annotation to enforce field validation
     @Basic(optional = false)
     @NotNull
@@ -88,25 +80,14 @@ public class Felhasznalo implements Serializable {
     private String jelszo;
     @Basic(optional = false)
     @NotNull
-    @Size(min = 1, max = 100)
-    @Column(name = "orszag")
-    private String orszag;
-    @Basic(optional = false)
-    @NotNull
-    @Size(min = 1, max = 14)
-    @Column(name = "telefon")
-    private String telefon;
-    @Basic(optional = false)
-    @NotNull
-    @Column(name = "aktiv")
-    private boolean aktiv;
-    @Size(max = 100)
-    @Column(name = "profilkep")
-    private String profilkep;
-    @Basic(optional = false)
-    @NotNull
     @Column(name = "jogosultsagId")
     private int jogosultsagId;
+    @Basic(optional = false)
+    @NotNull
+    @Lob
+    @Size(min = 1, max = 65535)
+    @Column(name = "token")
+    private String token;
     @Basic(optional = false)
     @NotNull
     @Column(name = "letrehozva")
@@ -115,9 +96,6 @@ public class Felhasznalo implements Serializable {
     @Column(name = "frissitve")
     @Temporal(TemporalType.TIMESTAMP)
     private Date frissitve;
-    @Column(name = "torolve")
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date torolve;
 
     public Felhasznalo() {
     }
@@ -126,18 +104,15 @@ public class Felhasznalo implements Serializable {
         this.id = id;
     }
 
-    public Felhasznalo(Integer id, String felhasznaloNev, String vezetekNev, String keresztNev, String szuletesiDatum, String email, String jelszo, String orszag, String telefon, boolean aktiv, int jogosultsagId, Date letrehozva) {
+    public Felhasznalo(Integer id, String felhasznaloNev, String vezetekNev, String keresztNev, String email, String jelszo, int jogosultsagId, String token, Date letrehozva) {
         this.id = id;
         this.felhasznaloNev = felhasznaloNev;
         this.vezetekNev = vezetekNev;
         this.keresztNev = keresztNev;
-        this.szuletesiDatum = szuletesiDatum;
         this.email = email;
         this.jelszo = jelszo;
-        this.orszag = orszag;
-        this.telefon = telefon;
-        this.aktiv = aktiv;
         this.jogosultsagId = jogosultsagId;
+        this.token = token;
         this.letrehozva = letrehozva;
     }
 
@@ -173,14 +148,6 @@ public class Felhasznalo implements Serializable {
         this.keresztNev = keresztNev;
     }
 
-    public String getSzuletesiDatum() {
-        return szuletesiDatum;
-    }
-
-    public void setSzuletesiDatum(String szuletesiDatum) {
-        this.szuletesiDatum = szuletesiDatum;
-    }
-
     public String getEmail() {
         return email;
     }
@@ -197,44 +164,20 @@ public class Felhasznalo implements Serializable {
         this.jelszo = jelszo;
     }
 
-    public String getOrszag() {
-        return orszag;
-    }
-
-    public void setOrszag(String orszag) {
-        this.orszag = orszag;
-    }
-
-    public String getTelefon() {
-        return telefon;
-    }
-
-    public void setTelefon(String telefon) {
-        this.telefon = telefon;
-    }
-
-    public boolean getAktiv() {
-        return aktiv;
-    }
-
-    public void setAktiv(boolean aktiv) {
-        this.aktiv = aktiv;
-    }
-
-    public String getProfilkep() {
-        return profilkep;
-    }
-
-    public void setProfilkep(String profilkep) {
-        this.profilkep = profilkep;
-    }
-
     public int getJogosultsagId() {
         return jogosultsagId;
     }
 
     public void setJogosultsagId(int jogosultsagId) {
         this.jogosultsagId = jogosultsagId;
+    }
+
+    public String getToken() {
+        return token;
+    }
+
+    public void setToken(String token) {
+        this.token = token;
     }
 
     public Date getLetrehozva() {
@@ -253,14 +196,6 @@ public class Felhasznalo implements Serializable {
         this.frissitve = frissitve;
     }
 
-    public Date getTorolve() {
-        return torolve;
-    }
-
-    public void setTorolve(Date torolve) {
-        this.torolve = torolve;
-    }
-
     @Override
     public int hashCode() {
         int hash = 0;
@@ -270,7 +205,6 @@ public class Felhasznalo implements Serializable {
 
     @Override
     public boolean equals(Object object) {
-        // TODO: Warning - this method won't work in the case the id fields are not set
         if (!(object instanceof Felhasznalo)) {
             return false;
         }
@@ -304,14 +238,10 @@ public class Felhasznalo implements Serializable {
                 felhasznalo.put("felhasznaloNev", sor[1]);
                 felhasznalo.put("vezetekNev", sor[2]);
                 felhasznalo.put("keresztNev", sor[3]);
-                felhasznalo.put("szuletesiDatum", sor[4]);
-                felhasznalo.put("email", sor[5]);
-                felhasznalo.put("jelszo", sor[6]);
-                felhasznalo.put("orszag", sor[7]);
-                felhasznalo.put("telefon", sor[8]);
-                felhasznalo.put("aktiv", sor[9]);
-                felhasznalo.put("profilkep", sor[10]);
-                felhasznalo.put("letrehozva", sor[12]);
+                felhasznalo.put("email", sor[4]);
+                felhasznalo.put("jelszo", sor[5]);
+                felhasznalo.put("jogosultsagId", sor[6]);
+                felhasznalo.put("token", sor[7]);
             }
 
         } catch (Exception e) {
@@ -355,7 +285,7 @@ public class Felhasznalo implements Serializable {
     }
 
     public static boolean ujFelhasznalo(String felhasznaloNevBE, String vezetekNevBE, String keresztNev,
-            String szuletesiDatumBE, String emailBE, String jelszoBE, String orszagBE, String telefon) {
+            String emailBE, String jelszoBE, Integer jogosultsagIdBE, String tokenBE) {
 
         EntityManagerFactory emf = Persistence.createEntityManagerFactory("com_CodeCraftersWebshop_war_1.0-SNAPSHOTPU");
         EntityManager em = emf.createEntityManager();
@@ -366,20 +296,18 @@ public class Felhasznalo implements Serializable {
             spq.registerStoredProcedureParameter("felhasznaloNevBE", String.class, ParameterMode.IN);
             spq.registerStoredProcedureParameter("vezetekNevBE", String.class, ParameterMode.IN);
             spq.registerStoredProcedureParameter("keresztNev", String.class, ParameterMode.IN);
-            spq.registerStoredProcedureParameter("szuletesiDatumBE", String.class, ParameterMode.IN);
             spq.registerStoredProcedureParameter("emailBE", String.class, ParameterMode.IN);
             spq.registerStoredProcedureParameter("jelszoBE", String.class, ParameterMode.IN);
-            spq.registerStoredProcedureParameter("orszagBE", String.class, ParameterMode.IN);
-            spq.registerStoredProcedureParameter("telefon", String.class, ParameterMode.IN);
+            spq.registerStoredProcedureParameter("jogosultsagIdBE", Integer.class, ParameterMode.IN);
+            spq.registerStoredProcedureParameter("tokenBE", String.class, ParameterMode.IN);
 
             spq.setParameter("felhasznaloNevBE", felhasznaloNevBE);
             spq.setParameter("vezetekNevBE", vezetekNevBE);
             spq.setParameter("keresztNev", keresztNev);
-            spq.setParameter("szuletesiDatumBE", szuletesiDatumBE);
             spq.setParameter("emailBE", emailBE);
             spq.setParameter("jelszoBE", jelszoBE);
-            spq.setParameter("orszagBE", orszagBE);
-            spq.setParameter("telefon", telefon);
+            spq.setParameter("jogosultsagIdBE", jogosultsagIdBE);
+            spq.setParameter("tokenBE", tokenBE);
 
             spq.execute();
             return true;
