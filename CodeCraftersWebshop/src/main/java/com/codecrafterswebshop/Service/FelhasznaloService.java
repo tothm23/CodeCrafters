@@ -11,10 +11,10 @@ import org.json.JSONObject;
 public class FelhasznaloService {
 
     public static String ujFelhasznalo(String felhasznaloNevBE, String vezetekNevBE, String keresztNev,
-            String emailBE, String jelszoBE, Integer jogosultsagIdBE, String tokenBE) {
+            String emailBE, String jelszoBE, Integer jogosultsagIdBE) {
         try {
             if (Felhasznalo.ujFelhasznalo(felhasznaloNevBE, vezetekNevBE, keresztNev,
-                    emailBE, jelszoBE, jogosultsagIdBE, tokenBE)) {
+                    emailBE, jelszoBE, jogosultsagIdBE)) {
                 return "Felhasználó hozzáadva!";
             } else {
                 return "Hiba a Felhasználó hozzáadásánál!";
