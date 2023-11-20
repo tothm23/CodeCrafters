@@ -25,13 +25,6 @@ public class FelhasznalokResource {
     public FelhasznalokResource() {
     }
 
-    @GET
-    public Response felhasznalok() {
-        JSONArray eredmeny = FelhasznaloService.felhasznalok();
-        return Response.status(Response.Status.OK).entity(eredmeny.toString())
-                .type(MediaType.APPLICATION_JSON).build();
-    }
-
     @POST
     public Response ujFelhasznalo(Felhasznalo f) {
         String result = FelhasznaloService.ujFelhasznalo(f.getFelhasznaloNev(), f.getVezetekNev(),

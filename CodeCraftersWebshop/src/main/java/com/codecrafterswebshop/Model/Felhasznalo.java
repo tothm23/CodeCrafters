@@ -1,7 +1,6 @@
 package com.codecrafterswebshop.Model;
 
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -282,54 +281,6 @@ public class Felhasznalo implements Serializable {
     @Override
     public String toString() {
         return "com.codecrafterswebshop.Model.Felhasznalo[ id=" + id + " ]";
-    }
-
-    public static List<Map<String, Object>> felhasznalok() {
-
-        List<Map<String, Object>> felhasznalok = new ArrayList<>();
-
-        EntityManagerFactory emf = Persistence.createEntityManagerFactory("com_CodeCraftersWebshop_war_1.0-SNAPSHOTPU");
-        EntityManager em = emf.createEntityManager();
-
-        try {
-            StoredProcedureQuery spq = em.createStoredProcedureQuery("felhasznalok");
-
-            List<Object[]> eredmeny = spq.getResultList();
-
-            if (!eredmeny.isEmpty()) {
-
-                for (Object[] sor : eredmeny) {
-                    HashMap<String, Object> felhasznalo = new HashMap<>();
-
-                    felhasznalo.put("id", (Integer) sor[0]);
-                    felhasznalo.put("felhasznaloNev", (String) sor[1]);
-                    felhasznalo.put("vezetekNev", (String) sor[2]);
-                    felhasznalo.put("keresztNev", (String) sor[3]);
-                    felhasznalo.put("szuletesiDatum", (Date) sor[4]);
-                    felhasznalo.put("email", (String) sor[5]);
-                    felhasznalo.put("jelszo", (String) sor[6]);
-                    felhasznalo.put("orszag", (String) sor[7]);
-                    felhasznalo.put("telefon", (String) sor[8]);
-                    felhasznalo.put("aktiv", (Boolean) sor[9]);
-                    felhasznalo.put("profilkep", (String) sor[10]);
-                    felhasznalo.put("letrehozva", (Date) sor[12]);
-
-                    felhasznalok.add(felhasznalo);
-                }
-
-            }
-
-        } catch (Exception e) {
-
-            System.err.println(e.getMessage());
-
-        } finally {
-            em.clear();
-            em.close();
-            emf.close();
-        }
-
-        return felhasznalok;
     }
 
     public static Map<String, Object> felhasznalo(Integer idBE) {
