@@ -223,7 +223,6 @@ public class Felhasznalo implements Serializable {
                 felhasznalo.put("vezetekNev", sor[2]);
                 felhasznalo.put("keresztNev", sor[3]);
                 felhasznalo.put("email", sor[4]);
-                felhasznalo.put("jelszo", sor[5]);
                 felhasznalo.put("jogosultsagId", sor[6]);
             }
 
