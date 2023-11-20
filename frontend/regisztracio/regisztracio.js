@@ -13,24 +13,16 @@ document.addEventListener("DOMContentLoaded", function () {
       const felhasz = document.getElementById("felhasz").value;
       const vezeteknev = document.getElementById("vezeteknev").value;
       const keresztnev = document.getElementById("keresztnev").value;
-      const datum = document.getElementById("datum").value;
       const email = document.getElementById("email").value;
       const jelszo = document.getElementById("jelszo").value;
-      const orszag = document.getElementById("orszag").value;
-      const telefonszam = document.getElementById("telefonszam").value;
 
       const inputdata = {
-          jelszo: jelszo,
-          orszag: orszag,
-          telefon: telefonszam,
-          szuletesiDatum: datum,
           felhasznaloNev: felhasz,
           keresztNev: keresztnev,
           vezetekNev: vezeteknev,
-          profilkep: "",
-          id: 2,
           email: email,
-          aktiv: true,
+          jelszo: jelszo
+
       };
       // regisztráció fetch
       fetch(
