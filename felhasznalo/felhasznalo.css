@@ -45,12 +45,12 @@ img {
 .form-popup {
     width: 100%;
     max-width: 700px;
-    border: 2px solid #fff;
+    border: 2px solid black;
     border-radius: 15px;
     padding: 20px;
     text-align: left;
     border-radius: 20px;
-    background: #241F1F;
+    background: #241f1f;
     margin-bottom: 80px;
 }
 
