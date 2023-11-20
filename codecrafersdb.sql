@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Nov 20, 2023 at 01:40 PM
+-- Generation Time: Nov 20, 2023 at 04:20 PM
 -- Server version: 5.7.24
 -- PHP Version: 8.0.1
 
@@ -319,21 +319,19 @@ VALUES(
     platformIdBE
 )$$
 
-CREATE DEFINER=`root`@`localhost` PROCEDURE `ujFelhasznalo` (IN `felhasznaloNevBE` VARCHAR(100), IN `vezetekNevBE` VARCHAR(100), IN `keresztNev` VARCHAR(100), IN `emailBE` VARCHAR(100), IN `jelszoBE` TEXT, IN `tokenBE` TEXT)   INSERT INTO felhasznalo(
+CREATE DEFINER=`root`@`localhost` PROCEDURE `ujFelhasznalo` (IN `felhasznaloNevBE` VARCHAR(100), IN `vezetekNevBE` VARCHAR(100), IN `keresztNev` VARCHAR(100), IN `emailBE` VARCHAR(100), IN `jelszoBE` TEXT)   INSERT INTO felhasznalo(
 	felhasznalo.felhasznaloNev,
     felhasznalo.vezetekNev,
     felhasznalo.keresztNev,
     felhasznalo.email,
-    felhasznalo.jelszo,
-    felhasznalo.token
+    felhasznalo.jelszo
 )
 VALUES(
 	felhasznaloNevBE,
     vezetekNevBE,
     keresztNev,
     emailBE,
-    SHA1(jelszoBE),
-    tokenBE
+    SHA1(jelszoBE)
 )$$
 
 CREATE DEFINER=`root`@`localhost` PROCEDURE `ujJatek` (IN `nevBE` VARCHAR(100), IN `arBE` INT(9), IN `leirasBE` TEXT, IN `kepBE` VARCHAR(100), IN `korhatarBE` INT(2), IN `akcioBE` INT(3), IN `mennyisegraktaronBE` INT(5), IN `eszkozIdBE` INT(9), IN `platformIdBE` INT(9))   INSERT INTO jatek(
@@ -435,7 +433,6 @@ CREATE TABLE `felhasznalo` (
   `email` varchar(100) NOT NULL,
   `jelszo` text NOT NULL,
   `jogosultsagId` int(9) NOT NULL DEFAULT '1',
-  `token` text NOT NULL,
   `letrehozva` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `frissitve` datetime DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
@@ -444,11 +441,10 @@ CREATE TABLE `felhasznalo` (
 -- Dumping data for table `felhasznalo`
 --
 
-INSERT INTO `felhasznalo` (`id`, `felhasznaloNev`, `vezetekNev`, `keresztNev`, `email`, `jelszo`, `jogosultsagId`, `token`, `letrehozva`, `frissitve`) VALUES
-(2, 'Probafriss', 'Ujnev1', 'Ujnev2', 'proba@gamil.com', 'a58c0c94fba109fa2e93458e184f3007bd2552a1', 1, '', '2023-09-18 11:28:10', '2023-09-25 12:41:04'),
-(3, 'Proba2', 'ASD', 'DSA', 'kerib.113sz@acsjszki.hu', 'b6157765d4e408995d0b67b0956d3c0a3215a57e', 2, '', '2023-09-25 12:33:02', NULL),
-(4, 'Proba3', 'Jancsi', 'Béla', 'jani@gmail.com', 'f1ff673bf872ea25ce8fcd148fdfbe7129e5380a', 1, '', '2023-10-03 11:01:46', NULL),
-(5, 'FelHasznToken', 'Fel', 'Haszn', 'felhaszn@gmail.com', '21ea74394033249e614ee141e7dd5205a0b6a9eb', 1, '123abc', '2023-11-20 14:36:32', NULL);
+INSERT INTO `felhasznalo` (`id`, `felhasznaloNev`, `vezetekNev`, `keresztNev`, `email`, `jelszo`, `jogosultsagId`, `letrehozva`, `frissitve`) VALUES
+(6, 'SunnyDay21', 'Kéri', 'Bence', 'keribence0@gmail.com', '49e6586c9fbf5cdbfb820bde5c0f6800a21b549a', 2, '2023-11-20 17:13:02', NULL),
+(7, 'AdventureSeeker', 'Nagy', 'Péter', 'peter.nagy@example.com', '9c073111b80b0af312f9c9f8bb4baa1c41e86d51', 1, '2023-11-20 17:13:35', NULL),
+(8, 'MusicLover88', 'Tóth', 'Eszter', 'eszter.toth@example.com', '1e0acaff2cd87e52f18dbc6c9b6cad2b62483e49', 1, '2023-11-20 17:16:12', NULL);
 
 -- --------------------------------------------------------
 
@@ -689,7 +685,7 @@ ALTER TABLE `eszkoz`
 -- AUTO_INCREMENT for table `felhasznalo`
 --
 ALTER TABLE `felhasznalo`
-  MODIFY `id` int(9) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(9) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT for table `jatek`
