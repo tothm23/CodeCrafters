@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Nov 19, 2023 at 07:24 PM
+-- Generation Time: Nov 20, 2023 at 01:40 PM
 -- Server version: 5.7.24
 -- PHP Version: 8.0.1
 
@@ -319,25 +319,21 @@ VALUES(
     platformIdBE
 )$$
 
-CREATE DEFINER=`root`@`localhost` PROCEDURE `ujFelhasznalo` (IN `felhasznaloNevBE` VARCHAR(100), IN `vezetekNevBE` VARCHAR(100), IN `keresztNev` VARCHAR(100), IN `szuletesiDatumBE` DATE, IN `emailBE` VARCHAR(100), IN `jelszoBE` TEXT, IN `orszagBE` VARCHAR(100), IN `telefon` VARCHAR(14))   INSERT INTO felhasznalo(
+CREATE DEFINER=`root`@`localhost` PROCEDURE `ujFelhasznalo` (IN `felhasznaloNevBE` VARCHAR(100), IN `vezetekNevBE` VARCHAR(100), IN `keresztNev` VARCHAR(100), IN `emailBE` VARCHAR(100), IN `jelszoBE` TEXT, IN `tokenBE` TEXT)   INSERT INTO felhasznalo(
 	felhasznalo.felhasznaloNev,
     felhasznalo.vezetekNev,
     felhasznalo.keresztNev,
-    felhasznalo.szuletesiDatum,
     felhasznalo.email,
     felhasznalo.jelszo,
-    felhasznalo.orszag,
-    felhasznalo.telefon
+    felhasznalo.token
 )
 VALUES(
 	felhasznaloNevBE,
     vezetekNevBE,
     keresztNev,
-    szuletesiDatumBE,
     emailBE,
     SHA1(jelszoBE),
-    orszagBE,
-    telefon
+    tokenBE
 )$$
 
 CREATE DEFINER=`root`@`localhost` PROCEDURE `ujJatek` (IN `nevBE` VARCHAR(100), IN `arBE` INT(9), IN `leirasBE` TEXT, IN `kepBE` VARCHAR(100), IN `korhatarBE` INT(2), IN `akcioBE` INT(3), IN `mennyisegraktaronBE` INT(5), IN `eszkozIdBE` INT(9), IN `platformIdBE` INT(9))   INSERT INTO jatek(
@@ -451,7 +447,8 @@ CREATE TABLE `felhasznalo` (
 INSERT INTO `felhasznalo` (`id`, `felhasznaloNev`, `vezetekNev`, `keresztNev`, `email`, `jelszo`, `jogosultsagId`, `token`, `letrehozva`, `frissitve`) VALUES
 (2, 'Probafriss', 'Ujnev1', 'Ujnev2', 'proba@gamil.com', 'a58c0c94fba109fa2e93458e184f3007bd2552a1', 1, '', '2023-09-18 11:28:10', '2023-09-25 12:41:04'),
 (3, 'Proba2', 'ASD', 'DSA', 'kerib.113sz@acsjszki.hu', 'b6157765d4e408995d0b67b0956d3c0a3215a57e', 2, '', '2023-09-25 12:33:02', NULL),
-(4, 'Proba3', 'Jancsi', 'Béla', 'jani@gmail.com', 'f1ff673bf872ea25ce8fcd148fdfbe7129e5380a', 1, '', '2023-10-03 11:01:46', NULL);
+(4, 'Proba3', 'Jancsi', 'Béla', 'jani@gmail.com', 'f1ff673bf872ea25ce8fcd148fdfbe7129e5380a', 1, '', '2023-10-03 11:01:46', NULL),
+(5, 'FelHasznToken', 'Fel', 'Haszn', 'felhaszn@gmail.com', '21ea74394033249e614ee141e7dd5205a0b6a9eb', 1, '123abc', '2023-11-20 14:36:32', NULL);
 
 -- --------------------------------------------------------
 
@@ -692,7 +689,7 @@ ALTER TABLE `eszkoz`
 -- AUTO_INCREMENT for table `felhasznalo`
 --
 ALTER TABLE `felhasznalo`
-  MODIFY `id` int(9) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(9) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `jatek`
