@@ -223,7 +223,6 @@ public class Felhasznalo implements Serializable {
                 felhasznalo.put("vezetekNev", sor[2]);
                 felhasznalo.put("keresztNev", sor[3]);
                 felhasznalo.put("email", sor[4]);
-                felhasznalo.put("jogosultsagId", sor[6]);
             }
 
         } catch (Exception e) {
@@ -267,7 +266,7 @@ public class Felhasznalo implements Serializable {
     }
 
     public static boolean ujFelhasznalo(String felhasznaloNevBE, String vezetekNevBE, String keresztNev,
-            String emailBE, String jelszoBE, Integer jogosultsagIdBE) {
+            String emailBE, String jelszoBE) {
 
         EntityManagerFactory emf = Persistence.createEntityManagerFactory("com_CodeCraftersWebshop_war_1.0-SNAPSHOTPU");
         EntityManager em = emf.createEntityManager();
@@ -280,14 +279,12 @@ public class Felhasznalo implements Serializable {
             spq.registerStoredProcedureParameter("keresztNev", String.class, ParameterMode.IN);
             spq.registerStoredProcedureParameter("emailBE", String.class, ParameterMode.IN);
             spq.registerStoredProcedureParameter("jelszoBE", String.class, ParameterMode.IN);
-            spq.registerStoredProcedureParameter("jogosultsagIdBE", Integer.class, ParameterMode.IN);
 
             spq.setParameter("felhasznaloNevBE", felhasznaloNevBE);
             spq.setParameter("vezetekNevBE", vezetekNevBE);
             spq.setParameter("keresztNev", keresztNev);
             spq.setParameter("emailBE", emailBE);
             spq.setParameter("jelszoBE", jelszoBE);
-            spq.setParameter("jogosultsagIdBE", jogosultsagIdBE);
 
             spq.execute();
             return true;
