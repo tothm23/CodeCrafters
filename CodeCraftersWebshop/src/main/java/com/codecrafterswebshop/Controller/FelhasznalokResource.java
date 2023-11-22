@@ -27,8 +27,7 @@ public class FelhasznalokResource {
     @POST
     public Response ujFelhasznalo(Felhasznalo f) {
         String result = FelhasznaloService.ujFelhasznalo(f.getFelhasznaloNev(), f.getVezetekNev(),
-                f.getKeresztNev(), f.getEmail(), f.getJelszo(),
-                f.getJogosultsagId());
+                f.getKeresztNev(), f.getEmail(), f.getJelszo());
         return Response.status(Response.Status.CREATED).entity(result)
                 .type(MediaType.APPLICATION_JSON).build();
     }
