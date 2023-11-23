@@ -302,11 +302,21 @@ public class Felhasznalo implements Serializable {
         }
     }
 
-    public static boolean felhasznaloNevEllenorzes(String felhasznaloNevEllenorzes) throws FelhasznaloException {
-        if (felhasznaloNevEllenorzes.equals("")) {
+    public static boolean felhasznaloNevEllenorzes(String felhasznaloNev) throws FelhasznaloException {
+        if (felhasznaloNev.equals("")) {
             throw new FelhasznaloException("A felhasználó neve lehet üres!");
-        } else if (felhasznaloNevEllenorzes.length() > 100) {
+        } else if (felhasznaloNev.length() > 100) {
             throw new FelhasznaloException("A felhasználó neve nem lehet 100 karakternél hosszabb!");
+        } else {
+            return true;
+        }
+    }
+
+    public static boolean vezetekNevEllenorzes(String vezetekNev) throws FelhasznaloException {
+        if (vezetekNev.equals("")) {
+            throw new FelhasznaloException("A felhasználó vezetékneve lehet üres!");
+        } else if (vezetekNev.length() > 100) {
+            throw new FelhasznaloException("A felhasználó vezetékneve nem lehet 100 karakternél hosszabb!");
         } else {
             return true;
         }

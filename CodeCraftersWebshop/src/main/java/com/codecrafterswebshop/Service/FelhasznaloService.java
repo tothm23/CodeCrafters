@@ -16,6 +16,8 @@ public class FelhasznaloService {
         try {
             if (!Felhasznalo.felhasznaloNevEllenorzes(felhasznaloNevBE)) {
                 return "Hibás felhasználónév!";
+            } else if (!Felhasznalo.vezetekNevEllenorzes(vezetekNevBE)) {
+                return "Hibás vezetéknév!";
             } else if (Felhasznalo.ujFelhasznalo(felhasznaloNevBE, vezetekNevBE, keresztNev,
                     emailBE, jelszoBE)) {
                 return "Felhasználó hozzáadva!";
