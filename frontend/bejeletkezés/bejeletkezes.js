@@ -1,32 +1,25 @@
-const formPopup = document.querySelector(".form-popup");
-const signupLoginLink = formPopup.querySelectorAll(".bottom-link a");
-const sikeres = document.getElementById("sikeres");
-
 document.addEventListener("DOMContentLoaded", (event) => {
-  const belepes = document.getElementById("bejelentkezes");
+  const formPopup = document.querySelector(".form-popup");
+  const belepesGomb = document.getElementById("bejelentkezes");
 
+  // A show-popup class hozzáadása vagy eltávolítása a body elemhez a DOMContentLoaded eseménykor
   document.body.classList.toggle("show-popup");
 
-  //bejelentkezés
-  belepes.addEventListener("click", (event) => {
+  // Bejelentkezés gombra kattintás eseménykezelője
+  belepesGomb.addEventListener("click", (event) => {
     event.preventDefault();
 
+    // Felhasználónév és jelszó begyűjtése az űrlapról
     const felhaszNev = document.querySelector("#felhasz").value;
     const jelszo = document.querySelector("#jelszo").value;
 
-    fetch(
-      "http://localhost:8080/CodeCraftersWebshop-1.0-SNAPSHOT/webresources/felhasznalok/bejelentkezes",
-      {
-        method: "GET",
-        body: JSON.stringify({
-          felhasznaloNev: felhaszNev,
-          jelszo: jelszo,
-        }),
-        headers: {
-          "Content-type": "application/json; charset=UTF-8",
-        },
-      }
-    )
+    // GET kérés küldése a szervernek
+    fetch(`http://localhost:8080/CodeCraftersWebshop-1.0-SNAPSHOT/webresources/felhasznalok/bejelentkezes?felhasznaloNev=${felhaszNev}&jelszo=${jelszo}`, {
+      method: "GET",
+      headers: {
+        "Content-type": "application/json; charset=UTF-8",
+      },
+    })
       .then((response) => {
         if (response.ok) {
           // Sikeres bejelentkezés, itt kezelheted a sikeres bejelentkezés eseményét
