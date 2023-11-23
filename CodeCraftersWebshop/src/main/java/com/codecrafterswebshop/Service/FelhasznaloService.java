@@ -20,6 +20,8 @@ public class FelhasznaloService {
                 return "Hibás vezetéknév!";
             } else if (!Felhasznalo.keresztNevEllenorzes(keresztNevBE)) {
                 return "Hibás keresztnév!";
+            } else if (!Felhasznalo.emailEllenorzes(emailBE)) {
+                return "Hibás email!";
             } else if (Felhasznalo.ujFelhasznalo(felhasznaloNevBE, vezetekNevBE, keresztNevBE,
                     emailBE, jelszoBE)) {
                 return "Felhasználó hozzáadva!";
