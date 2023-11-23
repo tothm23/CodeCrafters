@@ -1,5 +1,6 @@
 package com.codecrafterswebshop.Service;
 
+import com.codecrafterswebshop.Exception.FelhasznaloException;
 import com.codecrafterswebshop.Model.Felhasznalo;
 import java.util.Map;
 import org.json.JSONObject;
@@ -13,13 +14,15 @@ public class FelhasznaloService {
     public static String ujFelhasznalo(String felhasznaloNevBE, String vezetekNevBE, String keresztNev,
             String emailBE, String jelszoBE) {
         try {
-            if (Felhasznalo.ujFelhasznalo(felhasznaloNevBE, vezetekNevBE, keresztNev,
+            if (!Felhasznalo.felhasznaloNevEllenorzes(felhasznaloNevBE)) {
+                return "Hibás felhasználónév!";
+            } else if (Felhasznalo.ujFelhasznalo(felhasznaloNevBE, vezetekNevBE, keresztNev,
                     emailBE, jelszoBE)) {
                 return "Felhasználó hozzáadva!";
             } else {
                 return "Hiba a Felhasználó hozzáadásánál!";
             }
-        } catch (Exception ex) {
+        } catch (FelhasznaloException ex) {
             return ex.getMessage();
         }
     }
