@@ -331,4 +331,16 @@ public class Felhasznalo implements Serializable {
             return true;
         }
     }
+
+    public static boolean emailEllenorzes(String email) throws FelhasznaloException {
+        if (email.equals("")) {
+            throw new FelhasznaloException("A felhasználó emailje lehet üres!");
+        } else if (email.length() > 100) {
+            throw new FelhasznaloException("A felhasználó emailje nem lehet 100 karakternél hosszabb!");
+        } else if (!email.contains("@")) {
+            throw new FelhasznaloException("A felhasználó emailjének tartalmaznia kell a @ karaktert!");
+        } else {
+            return true;
+        }
+    }
 }
