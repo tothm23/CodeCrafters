@@ -343,4 +343,37 @@ public class Felhasznalo implements Serializable {
             return true;
         }
     }
+
+    public static boolean jelszoEllenorzes(String jelszo) throws FelhasznaloException {
+
+        boolean tartalmazSzamot = false;
+        boolean tartalmazBetut = false;
+        boolean tartalmazSpecialiskaraktert = false;
+
+        for (char c : jelszo.toCharArray()) {
+            if (Character.isDigit(c)) {
+                tartalmazSzamot = true;
+            } else if (Character.isLetter(c)) {
+                tartalmazBetut = true;
+            } else if (!Character.isLetterOrDigit(c)) {
+                tartalmazSpecialiskaraktert = true;
+            }
+        }
+
+        if (jelszo.equals("")) {
+            throw new FelhasznaloException("A felhasználó jelszava lehet üres!");
+        } else if (jelszo.length() > 100) {
+            throw new FelhasznaloException("A felhasználó jelszava nem lehet 100 karakternél hosszabb!");
+        } else if (jelszo.length() < 8) {
+            throw new FelhasznaloException("A felhasználó jelszava nem lehet 8 karakternél rövidebb!");
+        } else if (!tartalmazSzamot) {
+            throw new FelhasznaloException("A felhasználó jelszavának tartalmaznia kell számot!");
+        } else if (!tartalmazBetut) {
+            throw new FelhasznaloException("A felhasználó jelszavának tartalmaznia kell betűt!");
+        } else if (!tartalmazSpecialiskaraktert) {
+            throw new FelhasznaloException("A felhasználó jelszavának tartalmaznia kell speciális karaktert!");
+        } else {
+            return true;
+        }
+    }
 }
