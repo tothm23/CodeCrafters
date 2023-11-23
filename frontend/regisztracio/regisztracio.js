@@ -17,11 +17,13 @@ document.addEventListener("DOMContentLoaded", function () {
       const jelszo = document.getElementById("jelszo").value;
 
       const inputdata = {
-          felhasznaloNev: felhasz,
-          keresztNev: keresztnev,
-          vezetekNev: vezeteknev,
-          email: email,
-          jelszo: jelszo
+        felhasznaloNev: felhasz,
+        vezetekNev: vezeteknev,
+        keresztNev: keresztnev,
+        email: email,
+        jelszo: jelszo,
+        jogosultsagId: "2",
+        token: "asd"
 
       };
       // regisztráció fetch
