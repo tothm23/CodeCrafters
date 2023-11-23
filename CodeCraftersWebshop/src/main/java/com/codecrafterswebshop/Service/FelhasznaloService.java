@@ -11,14 +11,16 @@ import org.json.JSONObject;
  */
 public class FelhasznaloService {
 
-    public static String ujFelhasznalo(String felhasznaloNevBE, String vezetekNevBE, String keresztNev,
+    public static String ujFelhasznalo(String felhasznaloNevBE, String vezetekNevBE, String keresztNevBE,
             String emailBE, String jelszoBE) {
         try {
             if (!Felhasznalo.felhasznaloNevEllenorzes(felhasznaloNevBE)) {
                 return "Hibás felhasználónév!";
             } else if (!Felhasznalo.vezetekNevEllenorzes(vezetekNevBE)) {
                 return "Hibás vezetéknév!";
-            } else if (Felhasznalo.ujFelhasznalo(felhasznaloNevBE, vezetekNevBE, keresztNev,
+            } else if (!Felhasznalo.keresztNevEllenorzes(keresztNevBE)) {
+                return "Hibás keresztnév!";
+            } else if (Felhasznalo.ujFelhasznalo(felhasznaloNevBE, vezetekNevBE, keresztNevBE,
                     emailBE, jelszoBE)) {
                 return "Felhasználó hozzáadva!";
             } else {

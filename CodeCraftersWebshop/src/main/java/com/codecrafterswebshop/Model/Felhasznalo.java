@@ -321,4 +321,14 @@ public class Felhasznalo implements Serializable {
             return true;
         }
     }
+
+    public static boolean keresztNevEllenorzes(String keresztNev) throws FelhasznaloException {
+        if (keresztNev.equals("")) {
+            throw new FelhasznaloException("A felhasználó keresztneve lehet üres!");
+        } else if (keresztNev.length() > 100) {
+            throw new FelhasznaloException("A felhasználó keresztneve nem lehet 100 karakternél hosszabb!");
+        } else {
+            return true;
+        }
+    }
 }
