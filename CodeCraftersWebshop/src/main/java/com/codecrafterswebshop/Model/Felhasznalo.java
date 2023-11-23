@@ -1,5 +1,6 @@
 package com.codecrafterswebshop.Model;
 
+import com.codecrafterswebshop.Exception.FelhasznaloException;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.HashMap;
@@ -301,4 +302,13 @@ public class Felhasznalo implements Serializable {
         }
     }
 
+    public static boolean felhasznaloNevEllenorzes(String felhasznaloNevEllenorzes) throws FelhasznaloException {
+        if (felhasznaloNevEllenorzes.equals("")) {
+            throw new FelhasznaloException("A felhasználó neve lehet üres!");
+        } else if (felhasznaloNevEllenorzes.length() > 100) {
+            throw new FelhasznaloException("A felhasználó neve nem lehet 100 karakternél hosszabb!");
+        } else {
+            return true;
+        }
+    }
 }
