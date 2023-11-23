@@ -22,6 +22,8 @@ public class FelhasznaloService {
                 return "Hibás keresztnév!";
             } else if (!Felhasznalo.emailEllenorzes(emailBE)) {
                 return "Hibás email!";
+            } else if (!Felhasznalo.jelszoEllenorzes(jelszoBE)) {
+                return "Hibás jelszó!";
             } else if (Felhasznalo.ujFelhasznalo(felhasznaloNevBE, vezetekNevBE, keresztNevBE,
                     emailBE, jelszoBE)) {
                 return "Felhasználó hozzáadva!";
