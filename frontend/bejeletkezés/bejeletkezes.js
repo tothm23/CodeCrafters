@@ -1,38 +1,40 @@
+// Amikor az oldal betöltődik, várjuk meg a DOMContentLoaded eseményt
 document.addEventListener("DOMContentLoaded", (event) => {
+  // Kiválasztjuk a form-popup osztályú elemet és a bejelentkezes azonosítójú gombot
   const formPopup = document.querySelector(".form-popup");
   const belepesGomb = document.getElementById("bejelentkezes");
 
-  // A show-popup class hozzáadása vagy eltávolítása a body elemhez a DOMContentLoaded eseménykor
-  document.body.classList.toggle("show-popup");
-
-  // Bejelentkezés gombra kattintás eseménykezelője
+  // A bejelentkezes gombra kattintás eseménykezelője
   belepesGomb.addEventListener("click", (event) => {
+    // Megakadályozzuk a gomb alapértelmezett viselkedését (pl. űrlap küldés)
     event.preventDefault();
 
-    // Felhasználónév és jelszó begyűjtése az űrlapról
+    // Begyűjtjük a felhasználónév és jelszó értékeit az űrlapról
     const felhaszNev = document.querySelector("#felhasz").value;
     const jelszo = document.querySelector("#jelszo").value;
 
-    // GET kérés küldése a szervernek
-    fetch(`http://localhost:8080/CodeCraftersWebshop-1.0-SNAPSHOT/webresources/felhasznalok/bejelentkezes?felhasznaloNev=${felhaszNev}&jelszo=${jelszo}`, {
-      method: "GET",
-      headers: {
-        "Content-type": "application/json; charset=UTF-8",
-      },
-    })
-      .then((response) => {
-        if (response.ok) {
-          // Sikeres bejelentkezés, itt kezelheted a sikeres bejelentkezés eseményét
-          console.log("Sikeres bejelentkezés!");
-          window.location.href = "../index.html";
-        } else {
-          // Sikertelen bejelentkezés, itt kezelheted a sikertelen bejelentkezés eseményét
-          console.error("Sikertelen bejelentkezés!");
-        }
-      })
-      .catch((error) => {
-        // Hibakezelés, ha valami nem működik a kérés során
-        console.error("Hiba történt a bejelentkezés során: ", error);
-      });
+    // Felkészülünk a fetch kéréshez szükséges fejlécekre és testre
+    var myHeaders = new Headers();
+    myHeaders.append("Content-Type", "application/json");
+
+    // Az adatokat JSON formátumba alakítjuk
+    var raw = JSON.stringify({
+      felhasznaloNev: felhaszNev,
+      jelszo: jelszo
+    });
+
+    // Fetch kérés beállításai
+    var requestOptions = {
+      method: 'GET',  // A kérés típusa: GET
+      headers: myHeaders,
+      body: raw,  // A kérés testje
+      redirect: 'follow'
+    };
+
+    // Fetch kérés küldése a szervernek
+    fetch("http://localhost:8080/CodeCraftersWebshop-1.0-SNAPSHOT/webresources/felhasznalok/bejelentkezes", requestOptions)
+      .then(response => response.text())
+      .then(result => console.log("sikeres"))
+      .catch(error => console.log('error', error));
   });
 });
