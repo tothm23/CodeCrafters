@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Nov 20, 2023 at 04:20 PM
+-- Generation Time: Nov 24, 2023 at 09:57 PM
 -- Server version: 5.7.24
 -- PHP Version: 8.0.1
 
@@ -505,25 +505,6 @@ INSERT INTO `jogosultsag` (`id`, `jogosultsagNev`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `kategoria`
---
-
-CREATE TABLE `kategoria` (
-  `id` int(9) NOT NULL,
-  `nev` varchar(100) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
---
--- Dumping data for table `kategoria`
---
-
-INSERT INTO `kategoria` (`id`, `nev`) VALUES
-(1, 'Játék'),
-(2, 'Ajándék Kártya');
-
--- --------------------------------------------------------
-
---
 -- Table structure for table `kosar`
 --
 
@@ -543,7 +524,8 @@ INSERT INTO `kosar` (`id`, `felhasznaloId`, `jatekId`, `ajandekKartyaId`, `vegos
 (1, 2, 3, 7, 14690),
 (3, 2, 3, 7, 17999),
 (4, 2, 3, 7, 0),
-(5, 2, 4, 5, 0);
+(5, 2, 4, 5, 0),
+(6, 3, 1, 3, 0);
 
 -- --------------------------------------------------------
 
@@ -633,12 +615,6 @@ ALTER TABLE `jogosultsag`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `kategoria`
---
-ALTER TABLE `kategoria`
-  ADD PRIMARY KEY (`id`);
-
---
 -- Indexes for table `kosar`
 --
 ALTER TABLE `kosar`
@@ -700,16 +676,10 @@ ALTER TABLE `jogosultsag`
   MODIFY `id` int(9) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
--- AUTO_INCREMENT for table `kategoria`
---
-ALTER TABLE `kategoria`
-  MODIFY `id` int(9) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
-
---
 -- AUTO_INCREMENT for table `kosar`
 --
 ALTER TABLE `kosar`
-  MODIFY `id` int(9) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(9) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `platform`
