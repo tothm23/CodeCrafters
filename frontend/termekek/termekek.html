@@ -56,12 +56,10 @@
             data-bs-toggle="dropdown" aria-expanded="false"> Kategória </a>
 
           <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink1">
-            <li class="options"><a class="dropdown-item gomblink" href="termekek.html"
-                id="termekLink">Termékek</a></li>
-            <li class="options"><a class="dropdown-item gomblink" href="termekek.html"
-                id="jatekok">Játékok</a></li>
-            <li class="options"><a class="dropdown-item gomblink" href="termekek.html"
-                id="ajandekKartyak">Ajándék Kártyák</a></li>
+            <li class="options"><a class="dropdown-item gomblink" href="termekek.html" id="termekLink">Termékek</a></li>
+            <li class="options"><a class="dropdown-item gomblink" href="termekek.html" id="jatekok">Játékok</a></li>
+            <li class="options"><a class="dropdown-item gomblink" href="termekek.html" id="ajandekKartyak">Ajándék
+                Kártyák</a></li>
           </ul>
         </div>
 
@@ -70,20 +68,16 @@
             data-bs-toggle="dropdown" aria-expanded="false"> Eszköz </a>
 
           <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink2">
-            <li class="options"><a class="dropdown-item gomblink" href="termekek.html"
-                id="pc">PC</a></li>
-            <li class="options"><a class="dropdown-item gomblink" href="termekek.html"
-                id="xboxOne">Xbox One</a></li>
-            <li class="options"><a class="dropdown-item gomblink" href="termekek.html"
-                id="xboxSeriesS">Xbox Series S</a></li>
-            <li class="options"><a class="dropdown-item gomblink" href="termekek.html"
-                id="xboxSeriesX">Xbox Series X</a></li>
-            <li class="options"><a class="dropdown-item gomblink" href="termekek.html"
-                id="ps4">PS4</a></li>
-            <li class="options"><a class="dropdown-item gomblink" href="termekek.html"
-                id="ps5">PS5</a></li>
-            <li class="options"><a class="dropdown-item gomblink" href="termekek.html"
-                id="nintendoSwitch">Nintendo Switch</a></li>
+            <li class="options"><a class="dropdown-item gomblink" href="termekek.html" id="pc">PC</a></li>
+            <li class="options"><a class="dropdown-item gomblink" href="termekek.html" id="xboxOne">Xbox One</a></li>
+            <li class="options"><a class="dropdown-item gomblink" href="termekek.html" id="xboxSeriesS">Xbox Series
+                S</a></li>
+            <li class="options"><a class="dropdown-item gomblink" href="termekek.html" id="xboxSeriesX">Xbox Series
+                X</a></li>
+            <li class="options"><a class="dropdown-item gomblink" href="termekek.html" id="ps4">PS4</a></li>
+            <li class="options"><a class="dropdown-item gomblink" href="termekek.html" id="ps5">PS5</a></li>
+            <li class="options"><a class="dropdown-item gomblink" href="termekek.html" id="nintendoSwitch">Nintendo
+                Switch</a></li>
           </ul>
         </div>
 
@@ -92,14 +86,11 @@
             data-bs-toggle="dropdown" aria-expanded="false" href="#"> Platform </a>
 
           <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink3">
-            <li class="options"><a class="dropdown-item gomblink" href="termekek.html"
-                id="steam">Steam</a></li>
-            <li class="options"><a class="dropdown-item gomblink" href="termekek.html"
-                id="origin">Origin</a></li>
-            <li class="options"><a class="dropdown-item gomblink" href="termekek.html"
-                id="epicGames">Epic Games</a></li>
-            <li class="options"><a class="dropdown-item gomblink" href="termekek.html"
-                id="ubisoft">Ubisoft</a></li>
+            <li class="options"><a class="dropdown-item gomblink" href="termekek.html" id="steam">Steam</a></li>
+            <li class="options"><a class="dropdown-item gomblink" href="termekek.html" id="origin">Origin</a></li>
+            <li class="options"><a class="dropdown-item gomblink" href="termekek.html" id="epicGames">Epic Games</a>
+            </li>
+            <li class="options"><a class="dropdown-item gomblink" href="termekek.html" id="ubisoft">Ubisoft</a></li>
           </ul>
         </div>
 
@@ -108,8 +99,7 @@
             data-bs-toggle="dropdown" aria-expanded="false" href="#"> Akciós </a>
 
           <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink3">
-            <li class="options"><a class="dropdown-item gomblink" href="termekek.html"
-                id="Akcios">Akciós</a></li>
+            <li class="options"><a class="dropdown-item gomblink" href="termekek.html" id="Akcios">Akciós</a></li>
           </ul>
         </div>
       </div>
@@ -121,12 +111,7 @@
       <h1><b>Termékek</b></h1>
     </header>
 
-    <!-- kosár -->
-    <div id="kosar-box">
-      <a href="../kosar/kosar.html">
-          <button2 id="megjelenitoGomb"><i class="fa-solid fa-cart-shopping"></i></button2>
-      </a>
-    </div>
+   
     <div class="darabszam">0</div>
   </div>
 
@@ -204,15 +189,24 @@
           <label class="form-check-label" for="nintendoSwitchinput"> Nintendo Switch </label>
         </div>
       </div>
-      <!-- vissza -->
-      <div id="vissza-gomb" onclick="felgorget()">
-        <button2><i class="fa-solid fa-arrow-up"></i></button2>
-      </div>
+      
     </div>
 
     <!-- Termékek amit a javascriptel jelenítünk meg-->
-    <div id="termekek"></div>
-
+    <div id="termekek">
+      <div id="jatekok"></div>
+      <div id="ajandekKartyak"></div>
+    </div>
+     <!-- kosár -->
+     <div id="kosar-box">
+      <a href="../kosar/kosar.html">
+        <button2 id="megjelenitoGomb"><i class="fa-solid fa-cart-shopping"></i></button2>
+      </a>
+    </div>
+    <!-- vissza -->
+    <div id="vissza-gomb" onclick="felgorget()">
+      <button2><i class="fa-solid fa-arrow-up"></i></button2>
+    </div>
   </div>
   <div id="lablec">
     <div class="footer-content">
