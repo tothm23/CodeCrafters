@@ -300,6 +300,10 @@ slide
   min-width: 300px;
 }
 
+.akciosar{
+  font-size:20pt;
+}
+
 .slideshow {
   display: flex;
   flex-direction: column;
@@ -320,9 +324,6 @@ slide
   text-align: center;
 }
 
-.card .ar {
-  text-decoration: line-through;
-}
 
 .carousel-inner img {
   border: #000 solid 1px;
