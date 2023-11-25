@@ -1,5 +1,6 @@
 package com.codecrafterswebshop.Model;
 
+import com.codecrafterswebshop.Config.Token;
 import com.codecrafterswebshop.Exception.FelhasznaloException;
 import java.io.Serializable;
 import java.util.Date;
@@ -217,6 +218,9 @@ public class Felhasznalo implements Serializable {
 
             List<Object[]> eredmeny = spq.getResultList();
 
+            Felhasznalo f = new Felhasznalo(idBE);
+            String token = Token.letrehozas(f, 10000);
+
             if (!eredmeny.isEmpty()) {
                 Object[] sor = eredmeny.get(0);
                 felhasznalo.put("id", sor[0]);
@@ -224,6 +228,7 @@ public class Felhasznalo implements Serializable {
                 felhasznalo.put("vezetekNev", sor[2]);
                 felhasznalo.put("keresztNev", sor[3]);
                 felhasznalo.put("email", sor[4]);
+                felhasznalo.put("token", token);
             }
 
         } catch (Exception e) {
