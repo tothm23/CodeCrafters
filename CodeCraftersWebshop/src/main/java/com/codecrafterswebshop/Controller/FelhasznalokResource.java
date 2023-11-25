@@ -3,7 +3,6 @@ package com.codecrafterswebshop.Controller;
 import com.codecrafterswebshop.Model.Felhasznalo;
 import com.codecrafterswebshop.Service.FelhasznaloService;
 import javax.ws.rs.Consumes;
-import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
@@ -32,7 +31,7 @@ public class FelhasznalokResource {
                 .type(MediaType.APPLICATION_JSON).build();
     }
 
-    @GET
+    @POST
     @Path("bejelentkezes")
     public Response felhasznaloBelepes(Felhasznalo f) {
         JSONObject eredmeny = FelhasznaloService.felhasznaloBelepes(f.getFelhasznaloNev(), f.getJelszo());
