@@ -10,7 +10,9 @@ document.addEventListener("DOMContentLoaded", function () {
   let eredetiAdatok;
 
   // Termékek lekérése a szerverről
-  fetch("http://localhost:8080/CodeCraftersWebshop-1.0-SNAPSHOT/webresources/termekek")
+  fetch(
+    "http://localhost:8080/CodeCraftersWebshop-1.0-SNAPSHOT/webresources/termekek"
+  )
     .then((valasz) => valasz.json())
     .then((adat) => {
       eredetiAdatok = adat;
@@ -30,39 +32,47 @@ document.addEventListener("DOMContentLoaded", function () {
     .catch((hiba) => alert(hiba));
 
   // Termékek megjelenítése a HTML-ben
+  function createCard(kepPath, nev, ar, akcio) {
+    const akciosAr = akcio > 0 ? Math.round(ar - (ar / 100) * akcio) : null;
+
+    return `
+      <div class="card my-4">
+          <img src="${kepPath}" class="card-img-top w-50" alt="${nev}">
+          <div class="card-body">
+              <h5 class="card-title">${nev}</h5>
+              <p class="card-text ar">${
+                akciosAr > 0 ? `<del>${ar} Ft</del>` : `${ar} Ft`
+              }</p>
+              ${
+                akciosAr > 0
+                  ? `<p class="card-text akciosar">${akciosAr} Ft</p>`
+                  : ""
+              }
+              <input id="hozzadas" class="my-2 p-2 btn btn-success fs-5" type="button" value="Hozzáadás a kosárhoz" />
+          </div>
+      </div>
+    `; 
+  }
+
   function termekekMegjelenitese(adatok) {
     termekekElem.innerHTML = "";
 
     for (let i = 0; i < adatok.length / 2; i++) {
-      termekekElem.innerHTML += `
-          <div class="card my-4">
-              <img src="../kepek/ajandekkartya/${adatok[i].kep}" class="card-img-top w-50" alt="${adatok[i].nev}">
-              <div class="card-body">
-                  <h5 class="card-title">${adatok[i].nev}</h5>
-                  <p class="card-text ar">${adatok[i].ar} Ft</p>
-                  <p class="card-text akciosar">${Math.round(
-                    adatok[i].ar - (adatok[i].ar / 100) * adatok[i].akcio
-                  )} Ft</p>
-                  <input id="hozzadas" class="my-2 p-2 btn btn-success fs-5" type="button" value="Hozzáadás a kosárhoz" />
-              </div>
-          </div>
-      `;
+      termekekElem.innerHTML += createCard(
+        `../kepek/ajandekkartya/${adatok[i].kep}`,
+        adatok[i].nev,
+        adatok[i].ar,
+        adatok[i].akcio
+      );
     }
 
     for (let i = adatok.length / 2; i < adatok.length; i++) {
-      termekekElem.innerHTML += `
-          <div class="card my-4">
-              <img src="../kepek/jatekok/${adatok[i].kep}" class="card-img-top w-50" alt="${adatok[i].nev}">
-              <div class="card-body">
-                  <h5 class="card-title">${adatok[i].nev}</h5>
-                  <p class="card-text ar">${adatok[i].ar} Ft</p>
-                  <p class="card-text akciosar">${Math.round(
-                    adatok[i].ar - (adatok[i].ar / 100) * adatok[i].akcio
-                  )} Ft</p>
-                  <input id="hozzadas" class="my-2 p-2 btn btn-success fs-5" type="button" value="Hozzáadás a kosárhoz" />
-              </div>
-          </div>
-      `;
+      termekekElem.innerHTML += createCard(
+        `../kepek/jatekok/${adatok[i].kep}`,
+        adatok[i].nev,
+        adatok[i].ar,
+        adatok[i].akcio
+      );
     }
   }
 
@@ -84,57 +94,5 @@ document.addEventListener("DOMContentLoaded", function () {
     // Szűrt termékek megjelenítése
     termekekMegjelenitese(szurtAdatok);
   }
-/*
-  //checkbox manipulálása a navbárból
-  // Eseménykezelő a mynavbar elemekre
 
-  var myNavbarItems = document.querySelectorAll(".mynavbar .gomblink");
-  myNavbarItems.forEach(function (navbarItem) {
-    navbarItem.addEventListener("click", function (event) {
-      // Megtaláljuk az id-t a href-ben
-      var targetId = this.getAttribute("id");
-      // Megtaláljuk a megfelelő checkboxot
-      var checkboxId = targetId + "input";
-      var checkbox = document.getElementById(checkboxId);
-      // Ellenőrizzük, hogy a checkbox megtalálható-e
-      if (checkbox) {
-        // Beállítjuk a checkbox állapotát (kipipáljuk)
-        checkbox.checked = true;
-      }
-    });
-  });
-});
-
-  // Eseménykezelő a mynavbar elemekre
-  var myNavbarItems = document.querySelectorAll(".mynavbar .gomblink");
-  myNavbarItems.forEach(function (navbarItem) {
-    navbarItem.addEventListener("click", function (event) {
-      // Megtaláljuk az id-t a href-ben
-      var targetId = this.getAttribute("id");
-      // Megtaláljuk a megfelelő checkboxot
-      var checkboxId = targetId + "input";
-      var checkbox = document.getElementById(checkboxId);
-      // Ellenőrizzük, hogy a checkbox megtalálható-e
-      if (checkbox) {
-        // Beállítjuk a checkbox állapotát (kipipáljuk)
-        checkbox.checked = true;
-        // Frissítjük az URL-t a kipipált checkbox alapján
-        updateURL();
-      }
-    });
-  // Az alábbi részt hozzáadva az URL frissítése a kipipált checkboxok alapján
-  function updateURL() {
-    const checkboxes = document.querySelectorAll(".form-check-input");
-    const params = [];
-    checkboxes.forEach((checkbox) => {
-      if (checkbox.checked) {
-        params.push(checkbox.id.replace("input", ""));
-      }
-    });
-    const url = new URL("../termekek/termekek.html", window.location.origin);
-    url.searchParams.set("categories", params.join("re"));
-    window.history.pushState({}, "", url);
-  };
-
-*/
 });
