@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Nov 24, 2023 at 09:57 PM
+-- Generation Time: Nov 26, 2023 at 11:33 PM
 -- Server version: 5.7.24
 -- PHP Version: 8.0.1
 
@@ -195,7 +195,7 @@ ON jatek.eszkozId = eszkoz.id
 INNER JOIN platform
 ON jatek.platformId = platform.id$$
 
-CREATE DEFINER=`root`@`localhost` PROCEDURE `kosar` (IN `jatekIdBE` INT(9), IN `ajandekKartyaIdBE` INT(9), IN `kosárIdBE` INT(9), IN `felhasznaloIdBE` INT(9))   BEGIN
+CREATE DEFINER=`root`@`localhost` PROCEDURE `kosar` (IN `jatekIdBE` INT(9), IN `ajandekKartyaIdBE` INT(9), IN `felhasznaloIdBE` INT(9))   BEGIN
 
 DECLARE jatekAr INT(9);
 DECLARE jatekAkcio INT(9);
@@ -219,19 +219,17 @@ SELECT ajandekkartya.akcio INTO ajandekKartyaAkcio
 FROM ajandekkartya
 WHERE ajandekkartya.id = ajandekKartyaIdBE;
 
-UPDATE kosar 
-SET kosar.vegosszeg = jatekAr - (jatekAr * jatekAkcio / 100) + ajandekKartyaAr - (ajandekKartyaAr * ajandekKartyaAkcio / 100)
-WHERE kosar.id = kosárIdBE;
-
 INSERT INTO kosar(
     kosar.felhasznaloId,
     kosar.jatekId,
-    kosar.ajandekKartyaId
+    kosar.ajandekKartyaId,
+    kosar.vegosszeg
 )
 VALUES(
     felhasznaloIdBE,
 	jatekIdBE,
-    ajandekKartyaIdBE
+    ajandekKartyaIdBE,
+    ROUND( jatekAr - (jatekAr * jatekAkcio / 100) + ajandekKartyaAr - (ajandekKartyaAr * ajandekKartyaAkcio / 100), 0)
 );
 
 END$$
@@ -472,12 +470,12 @@ CREATE TABLE `jatek` (
 --
 
 INSERT INTO `jatek` (`id`, `nev`, `ar`, `leiras`, `kep`, `korhatar`, `akcio`, `mennyisegraktaron`, `eszkozId`, `platformId`, `letrehozva`, `frissitve`) VALUES
-(1, 'The Witcher 3: Wild Hunt', 5999, 'A The Witcher 3: Wild Hunt egy fantasy szerepjáték, melyben Geralt of Rivia karakterét irányítva különböző küldetéseket teljesíthetsz egy nyitott világban.', 'witcher3.jpg', 18, 15, 100, 1, 1, '2023-11-11 11:57:24', NULL),
-(2, 'Counter-Strike: Global Offensive', 1499, 'A Counter-Strike: Global Offensive egy taktikai lövöldözős játék, ahol két csapat, a terroristák és az antiterroristák egymás ellen küzdenek.', 'csgo.jpg', 16, 0, 300, 1, 1, '2023-11-11 12:02:56', NULL),
-(3, 'Minecraft', 2999, 'A Minecraft egy sandbox játék, ahol a játékosok kockákból építhetnek és felfedezhetnek egy végtelen világot.', 'minecraft.jpg', 7, 0, 200, 7, 3, '2023-11-11 12:04:14', NULL),
-(4, 'FC 24', 9999, 'A FC 24 egy futballszimulátor játék, ahol a játékosok vezethetik kedvenc csapatukat és részt vehetnek különböző versenyeken.', 'fc24.jpg', 7, 20, 150, 2, 2, '2023-11-11 12:04:14', NULL),
-(5, 'Grand Theft Auto V', 6999, 'A Grand Theft Auto V egy akció-kaland játék, melyben a játékosok Los Santos városában szabadon közlekedhetnek és különböző küldetéseket teljesíthetnek.', 'gta5.jpg', 18, 0, 100, 1, 3, '2023-11-11 12:14:09', NULL),
-(6, 'Red Dead Redemption 2: Ultimate Edition', 28999, 'Amerika, 1899. A vadnyugat hőskora lassan véget ér, ahogy a törvény emberei az utolsó bűnbandákat is levadásszák. Aki nem hajlandó megadni magát, halál fia. Arthur Morgan és a Van der Linde banda egy félresikerült rablási kísérlet miatt menekülni kényszerül Blackwater városából. Miközben szövetségi ügynökök és az ország legjobb fejvadászai lihegnek a nyomukban, a bandának nincs más választása, mint hogy a túlélés érdekében rabolva és fosztogatva átverekedjék magukat Amerika könyörtelen belvidékein. Amikor az egyre élesedő belső ellentétek a banda szétszakításával fenyegetnek, Arthur kénytelen eldönteni, hogy saját elveihez marad hű, vagy a bandához, amely felnevelte.', 'RDR2.jfif', 18, 0, 235, 1, 3, '2023-11-13 21:57:50', NULL),
+(1, 'The Witcher 3: Wild Hunt', 5990, 'A The Witcher 3: Wild Hunt egy fantasy szerepjáték, melyben Geralt of Rivia karakterét irányítva különböző küldetéseket teljesíthetsz egy nyitott világban.', 'witcher3.jpg', 18, 15, 100, 1, 1, '2023-11-11 11:57:24', NULL),
+(2, 'Counter-Strike: Global Offensive', 1490, 'A Counter-Strike: Global Offensive egy taktikai lövöldözős játék, ahol két csapat, a terroristák és az antiterroristák egymás ellen küzdenek.', 'csgo.jpg', 16, 0, 300, 1, 1, '2023-11-11 12:02:56', NULL),
+(3, 'Minecraft', 2990, 'A Minecraft egy sandbox játék, ahol a játékosok kockákból építhetnek és felfedezhetnek egy végtelen világot.', 'minecraft.jpg', 7, 0, 200, 7, 3, '2023-11-11 12:04:14', NULL),
+(4, 'FC 24', 9990, 'A FC 24 egy futballszimulátor játék, ahol a játékosok vezethetik kedvenc csapatukat és részt vehetnek különböző versenyeken.', 'fc24.jpg', 7, 20, 150, 2, 2, '2023-11-11 12:04:14', NULL),
+(5, 'Grand Theft Auto V', 6990, 'A Grand Theft Auto V egy akció-kaland játék, melyben a játékosok Los Santos városában szabadon közlekedhetnek és különböző küldetéseket teljesíthetnek.', 'gta5.jpg', 18, 0, 100, 1, 3, '2023-11-11 12:14:09', NULL),
+(6, 'Red Dead Redemption 2: Ultimate Edition', 28990, 'Amerika, 1899. A vadnyugat hőskora lassan véget ér, ahogy a törvény emberei az utolsó bűnbandákat is levadásszák. Aki nem hajlandó megadni magát, halál fia. Arthur Morgan és a Van der Linde banda egy félresikerült rablási kísérlet miatt menekülni kényszerül Blackwater városából. Miközben szövetségi ügynökök és az ország legjobb fejvadászai lihegnek a nyomukban, a bandának nincs más választása, mint hogy a túlélés érdekében rabolva és fosztogatva átverekedjék magukat Amerika könyörtelen belvidékein. Amikor az egyre élesedő belső ellentétek a banda szétszakításával fenyegetnek, Arthur kénytelen eldönteni, hogy saját elveihez marad hű, vagy a bandához, amely felnevelte.', 'RDR2.jfif', 18, 0, 235, 1, 3, '2023-11-13 21:57:50', NULL),
 (7, 'Alan Wake 2', 17900, 'Az Alan Wake 2 egy túlélőhorror játék, amit a Remedy Entertainment stúdió fejlesztett ki. Ez a 2010-ben megjelent Alan Wake folytatása.', 'AlanWake2.webp', 18, 0, 50, 6, 1, '2023-11-13 22:06:04', NULL),
 (8, 'Star Wars Battlefront 2', 13990, 'A Star Wars Battlefront II-ben lehetőségünk nyílik átvenni az irányítást Iden Versio, a Birodalom jól ismert Inferno Squad-jának parancsnoka felett, hogy a mintegy 30 évtizedet felölelő kampány során megismerhessünk egy izgalmas sztorit a bosszúról, az árulásról és a megváltásról, méghozzá a mozifilmekhez kapcsolódó áthallásokkal és szereplőkkel a középpontban.', 'BF2.webp', 16, 15, 188, 5, 1, '2023-11-13 22:09:22', NULL),
 (9, 'Battlefield 2042', 19990, 'Az Amerikai Egyesült Államok és Oroszország a háború szélére sodródott. Miután a két nagyhatalom peremháborúi már évtizedek óta tartanak, számos tapasztalt veterán harcol a világban, akiknek elege van a fennálló rendszerből. Ezek a specialisták a saját, különleges harci képzettségüket arra használják, hogy alakítsák az emberiség jövőjét. Ebben a futurisztikus háborúban vehetsz részt te is a Battlefield 2042 harcosaként.', 'BF2042.png', 16, 0, 150, 2, 2, '2023-11-13 22:18:27', NULL),
@@ -523,9 +521,12 @@ CREATE TABLE `kosar` (
 INSERT INTO `kosar` (`id`, `felhasznaloId`, `jatekId`, `ajandekKartyaId`, `vegosszeg`) VALUES
 (1, 2, 3, 7, 14690),
 (3, 2, 3, 7, 17999),
-(4, 2, 3, 7, 0),
-(5, 2, 4, 5, 0),
-(6, 3, 1, 3, 0);
+(4, 2, 3, 7, 14690),
+(5, 2, 4, 5, 17799),
+(9, 5, 7, 1, 25400),
+(10, 2, 4, 6, 13989),
+(11, 1, 5, 9, 11480),
+(13, 1, 1, 1, 12592);
 
 -- --------------------------------------------------------
 
@@ -679,7 +680,7 @@ ALTER TABLE `jogosultsag`
 -- AUTO_INCREMENT for table `kosar`
 --
 ALTER TABLE `kosar`
-  MODIFY `id` int(9) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` int(9) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- AUTO_INCREMENT for table `platform`
