@@ -17,7 +17,6 @@ public class TokenFilter implements ContainerRequestFilter {
 
     private static final String AUTH_HEADER = "Authorization";
     private static final String AUTH_HEADER_PREFIX = "Bearer ";
-    private static final String URL_PREFIX = "termekek";
 
     @Override
     public void filter(ContainerRequestContext requestContext) throws IOException {
@@ -27,7 +26,12 @@ public class TokenFilter implements ContainerRequestFilter {
                 .entity("Hozzáférés megtagadva")
                 .type(MediaType.TEXT_PLAIN).build();
 
-        if (requestContext.getUriInfo().getPath().contains(URL_PREFIX)) {
+        if ((requestContext.getUriInfo().getPath().contains("jatek") && requestContext.getMethod().equals("POST"))
+                || (requestContext.getUriInfo().getPath().contains("jatek") && requestContext.getMethod().equals("PUT"))
+                || (requestContext.getUriInfo().getPath().contains("jatek") && requestContext.getMethod().equals("DELETE"))
+                || (requestContext.getUriInfo().getPath().contains("ajandekkartya") && requestContext.getMethod().equals("POST"))
+                || (requestContext.getUriInfo().getPath().contains("ajandekkartya") && requestContext.getMethod().equals("PUT"))
+                || (requestContext.getUriInfo().getPath().contains("ajandekkartya") && requestContext.getMethod().equals("DELETE"))) {
 
             List<String> authFejlec = requestContext.getHeaders().get(AUTH_HEADER);
 

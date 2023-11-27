@@ -110,6 +110,14 @@ public class Felhasznalo implements Serializable {
         this.jogosultsagId = jogosultsagId;
     }
 
+    private Felhasznalo(Integer id, String felhasznaloNev, String vezetekNev, String keresztNev, String email) {
+        this.id = id;
+        this.felhasznaloNev = felhasznaloNev;
+        this.vezetekNev = vezetekNev;
+        this.keresztNev = keresztNev;
+        this.email = email;
+    }
+
     public Integer getId() {
         return id;
     }
@@ -242,7 +250,7 @@ public class Felhasznalo implements Serializable {
         return felhasznalo;
     }
 
-    public static Integer felhasznaloBelepes(String felhasznaloNevBE, String jelszoBE) {
+    public static Felhasznalo felhasznaloBelepes(String felhasznaloNevBE, String jelszoBE) {
 
         EntityManagerFactory emf = Persistence.createEntityManagerFactory("com_CodeCraftersWebshop_war_1.0-SNAPSHOTPU");
         EntityManager em = emf.createEntityManager();
@@ -253,16 +261,26 @@ public class Felhasznalo implements Serializable {
             spq.registerStoredProcedureParameter("felhasznaloNevBE", String.class, ParameterMode.IN);
             spq.registerStoredProcedureParameter("jelszoBE", String.class, ParameterMode.IN);
             spq.registerStoredProcedureParameter("felhasznaloIdKI", Integer.class, ParameterMode.OUT);
+            spq.registerStoredProcedureParameter("felhasznaloNevKI", String.class, ParameterMode.OUT);
+            spq.registerStoredProcedureParameter("vezetekNevKI", String.class, ParameterMode.OUT);
+            spq.registerStoredProcedureParameter("keresztNevKI", String.class, ParameterMode.OUT);
+            spq.registerStoredProcedureParameter("emailKI", String.class, ParameterMode.OUT);
 
             spq.setParameter("felhasznaloNevBE", felhasznaloNevBE);
             spq.setParameter("jelszoBE", jelszoBE);
 
-            System.out.println("Success! ID: " + new Felhasznalo((Integer) spq.getOutputParameterValue("felhasznaloIdKI")).getId());
-            return new Felhasznalo((Integer) spq.getOutputParameterValue("felhasznaloIdKI")).getId();
+            Integer id = (Integer) spq.getOutputParameterValue("felhasznaloIdKI");
+            String felhasznaloNev = (String) spq.getOutputParameterValue("felhasznaloNevKI");
+            String vezetekNev = (String) spq.getOutputParameterValue("vezetekNevKI");
+            String keresztNev = (String) spq.getOutputParameterValue("keresztNevKI");
+            String email = (String) spq.getOutputParameterValue("emailKI");
+
+            Felhasznalo f = new Felhasznalo(id, felhasznaloNev, vezetekNev, keresztNev, email);
+            return f;
 
         } catch (Exception e) {
             System.err.println(e.getMessage());
-            return new Felhasznalo().getId();
+            return new Felhasznalo();
         } finally {
             em.clear();
             em.close();

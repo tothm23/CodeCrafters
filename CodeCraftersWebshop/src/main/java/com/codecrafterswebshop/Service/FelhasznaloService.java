@@ -1,8 +1,8 @@
 package com.codecrafterswebshop.Service;
 
+import com.codecrafterswebshop.Config.Token;
 import com.codecrafterswebshop.Exception.FelhasznaloException;
 import com.codecrafterswebshop.Model.Felhasznalo;
-import java.util.Map;
 import org.json.JSONObject;
 
 /**
@@ -37,12 +37,14 @@ public class FelhasznaloService {
 
     public static JSONObject felhasznaloBelepes(String felhasznaloNevBE, String jelszoBE) {
 
-        Integer id = Felhasznalo.felhasznaloBelepes(felhasznaloNevBE, jelszoBE);
-        Map<String, Object> felhasznalo = Felhasznalo.felhasznalo(id);
         JSONObject obj = new JSONObject();
+        Felhasznalo f = Felhasznalo.felhasznaloBelepes(felhasznaloNevBE, jelszoBE);
+        String token = Token.letrehozas(f, 60000);
 
-        for (Map.Entry<String, Object> set : felhasznalo.entrySet()) {
-            obj.put(set.getKey(), set.getValue());
+        if (f.getId() != null) {
+            obj.put("token", token);
+        } else {
+            obj.put("token", "");
         }
 
         return obj;

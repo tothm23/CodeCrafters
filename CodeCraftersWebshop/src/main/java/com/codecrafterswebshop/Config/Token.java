@@ -25,6 +25,10 @@ public class Token {
         String token = Jwts.builder()
                 .setIssuer("codecrafters")
                 .claim("id", f.getId())
+                .claim("felhasznaloNev", f.getFelhasznaloNev())
+                .claim("vezetekNev", f.getVezetekNev())
+                .claim("keresztNev", f.getKeresztNev())
+                .claim("email", f.getEmail())
                 .setIssuedAt(new Date(nowMillis))
                 .setExpiration(new Date(nowMillis + expirationMillis))
                 .signWith(
@@ -40,7 +44,6 @@ public class Token {
         try {
             String secret = "RXogbGVzeiBhIHRpdGtvcyBrdWxjcw==";
             Jws<Claims> result = Jwts.parser().setSigningKey(TextCodec.BASE64.decode(secret)).parseClaimsJws(token);
-
             return 1;
 
         } catch (ExpiredJwtException | MalformedJwtException | SignatureException | UnsupportedJwtException | IllegalArgumentException ex) {
