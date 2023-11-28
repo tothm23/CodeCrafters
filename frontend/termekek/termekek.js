@@ -112,8 +112,11 @@ document.addEventListener("DOMContentLoaded", function () {
           keresendoSzoveg.includes(elem.nev.toLowerCase())) &&
         elem.ar >= minAr &&
         elem.ar <= maxAr &&
+        //platformra szűrés
         (kivalasztottPlatformok.length === 0 || kivalasztottPlatformok.includes(elem.platform.toLowerCase())) &&
+        //eszközre szűrés
         (kivalasztottEszkozok.length === 0 || kivalasztottEszkozok.includes(elem.eszkoz.toLowerCase())) &&
+        //akciósra szűrés
         (kivalasztottAkcios.checked == false || elem.akcio > 0)
     );
     // Szűrt termékek megjelenítése
