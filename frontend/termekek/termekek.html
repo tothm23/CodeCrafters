@@ -110,91 +110,92 @@
     <header class="main-header">
       <h1><b>Termékek</b></h1>
     </header>
-  </div>
 
-  <div class="main-inner">
-    <!-- Szűrők -->
-    <div class="szurok">
-      <div class="kategoriak">
-        <h2>Kategóriák</h2>
-        <div class="form-check">
-          <input class="form-check-input" type="checkbox" value="jatekok" id="jatekok" />
-          <label class="form-check-label" for="jatekok"> Játékok </label>
-        </div>
-        <div class="form-check">
-          <input class="form-check-input" type="checkbox" value="ajandekKartyak" id="ajandekKartyak" />
-          <label class="form-check-label" for="ajandekKartyak"> Ajándék kártyák </label>
-        </div>
-        <div class="form-check">
-          <input class="form-check-input" type="checkbox" value="Akcios" id="Akcios" />
-          <label class="form-check-label" for="Akcios"> Akciós </label>
+
+    <div class="adatok">
+      <div class="main-inner">
+        <!-- Szűrők -->
+        <div class="szurok">
+          <div class="kategoriak">
+            <h2>Kategóriák</h2>
+            <div class="form-check">
+              <input class="form-check-input" type="checkbox" value="jatekok" id="jatekokCheckbox" />
+              <label class="form-check-label" for="jatekokCheckbox"> Játékok </label>
+            </div>
+            <div class="form-check">
+              <input class="form-check-input" type="checkbox" value="ajandekKartyak" id="ajandekKartyakCheckbox" />
+              <label class="form-check-label" for="ajandekKartyakCheckbox"> Ajándék kártyák </label>
+            </div>
+          </div>
+          <div class="form-check">
+            <input class="form-check-input" type="checkbox" value="Akcios" id="AkciosCheckbox" />
+            <label class="form-check-label" for="AkciosCheckbox"> Akciós </label>
+          </div>
+          <div class="ar">
+            <h2>Ár (HUF)</h2>
+            <input type="number" name="min" placeholder="From" min="0" value />
+            <span style="color: white">-</span>
+            <input type="number" name="max" placeholder="To" max="999999" value />
+          </div>
+          <div class="platform">
+            <h2>Platform</h2>
+            <div class="form-check">
+              <input class="form-check-input" type="checkbox" value="steam" id="steam" />
+              <label class="form-check-label" for="steam"> Steam </label>
+            </div>
+            <div class="form-check">
+              <input class="form-check-input" type="checkbox" value="origin" id="origin" />
+              <label class="form-check-label" for="Origin"> Origin </label>
+            </div>
+            <div class="form-check">
+              <input class="form-check-input" type="checkbox" value="epic Games" id="epicGames" />
+              <label class="form-check-label" for="epicGames"> Epic Games </label>
+            </div>
+            <div class="form-check">
+              <input class="form-check-input" type="checkbox" value="ubisoft" id="ubisoft" />
+              <label class="form-check-label" for="ubisoft"> Ubisoft Connect </label>
+            </div>
+          </div>
+          <div class="eszkoz">
+            <h2>Eszköz</h2>
+            <div class="form-check">
+              <input class="form-check-input" type="checkbox" value="pc" id="pc" />
+              <label class="form-check-label" for="pc"> PC </label>
+            </div>
+            <div class="form-check">
+              <input class="form-check-input" type="checkbox" value="xbox One" id="xboxOne" />
+              <label class="form-check-label" for="xboxOne"> Xbox One </label>
+            </div>
+            <div class="form-check">
+              <input class="form-check-input" type="checkbox" value="xbox Series S" id="xboxSeriesS" />
+              <label class="form-check-label" for="xboxSeriesS"> Xbox Series S </label>
+            </div>
+            <div class="form-check">
+              <input class="form-check-input" type="checkbox" value="xbox Series X" id="xboxSeriesX" />
+              <label class="form-check-label" for="xboxSeriesX"> Xbox Series X </label>
+            </div>
+            <div class="form-check">
+              <input class="form-check-input" type="checkbox" value="PS4" id="PS4" />
+              <label class="form-check-label" for="PS4"> PS4 </label>
+            </div>
+            <div class="form-check">
+              <input class="form-check-input" type="checkbox" value="PS5" id="PS5" />
+              <label class="form-check-label" for="PS5"> PS5 </label>
+            </div>
+            <div class="form-check">
+              <input class="form-check-input" type="checkbox" value="nintendo Switch" id="nintendoSwitch" />
+              <label class="form-check-label" for="nintendoSwitch"> Nintendo Switch </label>
+            </div>
+          </div>
         </div>
       </div>
-      <div class="ar">
-        <h2>Ár (HUF)</h2>
-        <input type="number" name="min" placeholder="From" min="0" value />
-        <span style="color: white">-</span>
-        <input type="number" name="max" placeholder="To" max="999999" value />
-      </div>
-      <div class="platform">
-        <h2>Platform</h2>
-        <div class="form-check">
-          <input class="form-check-input" type="checkbox" value="steam" id="steam" />
-          <label class="form-check-label" for="steam"> Steam </label>
-        </div>
-        <div class="form-check">
-          <input class="form-check-input" type="checkbox" value="origin" id="origin" />
-          <label class="form-check-label" for="Origin"> Origin </label>
-        </div>
-        <div class="form-check">
-          <input class="form-check-input" type="checkbox" value="epicGames" id="epicGames" />
-          <label class="form-check-label" for="epicGames"> Epic Games </label>
-        </div>
-        <div class="form-check">
-          <input class="form-check-input" type="checkbox" value="ubisoft" id="ubisoft" />
-          <label class="form-check-label" for="ubisoft"> Ubisoft Connect </label>
-        </div>
-      </div>
-      <div class="eszkoz">
-        <h2>Eszköz</h2>
-        <div class="form-check">
-          <input class="form-check-input" type="checkbox" value="pc" id="pc" />
-          <label class="form-check-label" for="pc"> PC </label>
-        </div>
-        <div class="form-check">
-          <input class="form-check-input" type="checkbox" value="xboxOne" id="xboxOne" />
-          <label class="form-check-label" for="xboxOne"> Xbox One </label>
-        </div>
-        <div class="form-check">
-          <input class="form-check-input" type="checkbox" value="xboxSeriesS" id="xboxSeriesS" />
-          <label class="form-check-label" for="xboxSeriesS"> Xbox Series S </label>
-        </div>
-        <div class="form-check">
-          <input class="form-check-input" type="checkbox" value="xboxSeriesX" id="xboxSeriesX" />
-          <label class="form-check-label" for="xboxSeriesX"> Xbox Series X </label>
-        </div>
-        <div class="form-check">
-          <input class="form-check-input" type="checkbox" value="PS4" id="PS4" />
-          <label class="form-check-label" for="PS4input"> PS4 </label>
-        </div>
-        <div class="form-check">
-          <input class="form-check-input" type="checkbox" value="PS5" id="PS5" />
-          <label class="form-check-label" for="PS5"> PS5 </label>
-        </div>
-        <div class="form-check">
-          <input class="form-check-input" type="checkbox" value="nintendoSwitch" id="nintendoSwitch" />
-          <label class="form-check-label" for="nintendoSwitch"> Nintendo Switch </label>
-        </div>
+      <!-- Termékek amit a javascriptel jelenítünk meg-->
+      <div id="termekContainer">
+        <div class="termek-lista" id="jatekok"></div>
+        <div class="termek-lista" id="ajandekKartyak"></div>
       </div>
     </div>
-    <!-- Termékek amit a javascriptel jelenítünk meg-->
-    <div id="termekContainer">
-      <div class="termek-lista" id="jatekok"></div>
-      <div class="termek-lista" id="ajandekKartyak"></div>
-    </div>
   </div>
-
-
   <!-- kosár -->
   <div id="kosar-box">
     <a href="../kosar/kosar.html">
