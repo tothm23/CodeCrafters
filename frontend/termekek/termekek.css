@@ -150,24 +150,26 @@ h2 {
   padding-top: 5px;
 }
 
-#termekek {
-  width: 50%;
+#termekContainer {
   align-self: flex-start;
+  display: flex;
   flex-direction: column;
   padding-left: 30px;
+  padding: 5px;
 }
 
-.termekkartyak ,.termekekjatek{
+.termek-lista{
   width: 100%;
-  border: #000 solid 1px;
   border-radius: 15px;
-  background-color: #241f1f;
   color: white;
-  display: flex;
   margin: 5px;
+  max-width: 450px;
 }
-.adatok {
-  margin: 5px;
-  display: flex;
-  flex-direction: column;
+
+.card {
+  border: #000 solid 1px;
+  margin-right: 10px;
+}
+.card img{
+  border: #000 solid 1px;
 }
