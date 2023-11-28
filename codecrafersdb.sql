@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Nov 26, 2023 at 11:33 PM
+-- Generation Time: Nov 28, 2023 at 09:25 PM
 -- Server version: 5.7.24
 -- PHP Version: 8.0.1
 
@@ -409,13 +409,13 @@ CREATE TABLE `eszkoz` (
 --
 
 INSERT INTO `eszkoz` (`id`, `nev`) VALUES
+(7, 'Nintendo Switch'),
 (1, 'PC'),
-(2, 'XBOX One'),
-(3, 'XBOX Series S'),
-(4, 'XBOX Series X'),
 (5, 'PS4'),
 (6, 'PS5'),
-(7, 'Nintendo Switch');
+(2, 'XBOX One'),
+(3, 'XBOX Series S'),
+(4, 'XBOX Series X');
 
 -- --------------------------------------------------------
 
@@ -526,7 +526,8 @@ INSERT INTO `kosar` (`id`, `felhasznaloId`, `jatekId`, `ajandekKartyaId`, `vegos
 (9, 5, 7, 1, 25400),
 (10, 2, 4, 6, 13989),
 (11, 1, 5, 9, 11480),
-(13, 1, 1, 1, 12592);
+(13, 1, 1, 1, 12592),
+(14, 1, 1, 5, 15092);
 
 -- --------------------------------------------------------
 
@@ -544,9 +545,9 @@ CREATE TABLE `platform` (
 --
 
 INSERT INTO `platform` (`id`, `nev`) VALUES
-(1, 'Steam'),
-(2, 'Origin'),
 (3, 'Epic Games'),
+(2, 'Origin'),
+(1, 'Steam'),
 (4, 'Ubisoft');
 
 -- --------------------------------------------------------
@@ -586,6 +587,7 @@ CREATE TABLE `termekkulcsok` (
 --
 ALTER TABLE `ajandekkartya`
   ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `nev` (`nev`,`kep`),
   ADD KEY `platformId` (`platformId`),
   ADD KEY `eszkozId` (`eszkozId`);
 
@@ -593,13 +595,16 @@ ALTER TABLE `ajandekkartya`
 -- Indexes for table `eszkoz`
 --
 ALTER TABLE `eszkoz`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `nev` (`nev`);
 
 --
 -- Indexes for table `felhasznalo`
 --
 ALTER TABLE `felhasznalo`
   ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `felhasznaloNev` (`felhasznaloNev`),
+  ADD UNIQUE KEY `email` (`email`),
   ADD KEY `jogosultsagId` (`jogosultsagId`);
 
 --
@@ -607,6 +612,7 @@ ALTER TABLE `felhasznalo`
 --
 ALTER TABLE `jatek`
   ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `nev` (`nev`,`kep`),
   ADD KEY `kategoriaId` (`eszkozId`,`platformId`);
 
 --
@@ -626,7 +632,8 @@ ALTER TABLE `kosar`
 -- Indexes for table `platform`
 --
 ALTER TABLE `platform`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `nev` (`nev`);
 
 --
 -- Indexes for table `rendeles`
@@ -680,7 +687,7 @@ ALTER TABLE `jogosultsag`
 -- AUTO_INCREMENT for table `kosar`
 --
 ALTER TABLE `kosar`
-  MODIFY `id` int(9) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `id` int(9) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
 -- AUTO_INCREMENT for table `platform`
