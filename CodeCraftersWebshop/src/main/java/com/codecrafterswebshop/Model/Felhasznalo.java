@@ -313,10 +313,21 @@ public class Felhasznalo implements Serializable {
     }
 
     public static boolean vezetekNevEllenorzes(String vezetekNev) throws FelhasznaloException {
+
+        boolean tartalmazSpecialiskaraktert = false;
+
+        for (char c : vezetekNev.toCharArray()) {
+            if (!Character.isLetterOrDigit(c)) {
+                tartalmazSpecialiskaraktert = true;
+            }
+        }
+
         if (vezetekNev.equals("")) {
             throw new FelhasznaloException("A felhasználó vezetékneve lehet üres!");
         } else if (vezetekNev.length() > 100) {
             throw new FelhasznaloException("A felhasználó vezetékneve nem lehet 100 karakternél hosszabb!");
+        } else if (tartalmazSpecialiskaraktert) {
+            throw new FelhasznaloException("A felhasználó vezetékneve nem tartalmazhat speciális karaktert!");
         } else {
             return true;
         }
