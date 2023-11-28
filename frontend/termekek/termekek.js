@@ -39,8 +39,9 @@ document.addEventListener("DOMContentLoaded", function () {
     .catch((hiba) => alert(hiba));
 
   // Termékek megjelenítése a HTML-ben
-  function createCard(kepPath, nev, ar, akcio, kategoria) {
+  function createCard(kepPath, nev, ar, akcio, kategoria,url) {
     const akciosAr = akcio > 0 ? Math.round(ar - (ar / 100) * akcio) : null;
+    // 
     if (
       (kategoria.toLowerCase() === "ajandekkartyak" && document.getElementById("ajandekKartyakCheckbox").checked==true) ||
       (kategoria.toLowerCase() === "jatekok" && document.getElementById("jatekokCheckbox").checked==true) || 
@@ -48,7 +49,7 @@ document.addEventListener("DOMContentLoaded", function () {
     ) {
       return `
       <div class="card my-4 ${kategoria}">
-        <img src="${kepPath}" class="card-img-top w-50" alt="${nev}">
+        <a href="${url}"><img src="${kepPath}" class="card-img-top w-50" alt="${nev}"></a>
         <div class="card-body">
           <h5 class="card-title">${nev}</h5>
           <p class="card-text ar">${
@@ -77,7 +78,8 @@ document.addEventListener("DOMContentLoaded", function () {
         adatok[i].nev,
         adatok[i].ar,
         adatok[i].akcio,
-        "ajandekKartyak"
+        "ajandekKartyak",
+        "../ajandekkartya/ajandekkartya.html"
       );
     }
 
@@ -87,7 +89,8 @@ document.addEventListener("DOMContentLoaded", function () {
         adatok[i].nev,
         adatok[i].ar,
         adatok[i].akcio,
-        "jatekok"
+        "jatekok",
+        "../jatek/jatek.html"
       );
     }
   }
