@@ -328,8 +328,8 @@ slide
 .carousel-inner img {
   border: #000 solid 1px;
   min-width: 300px;
-  max-width: 300px;
-  min-height: 600px;
+  max-width: 600px;
+  min-height: 300px;
   max-height: 600px;
 }
 

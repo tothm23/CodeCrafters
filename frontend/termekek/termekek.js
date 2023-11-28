@@ -1,10 +1,11 @@
 document.addEventListener("DOMContentLoaded", function () {
   // HTML elemek kiválasztása
-  const termekekElem = document.getElementById("termekek");
   const keresoInput = document.querySelector('.navbar input[type="search"]');
   const minArInput = document.querySelector('.ar input[name="min"]');
   const maxArInput = document.querySelector('.ar input[name="max"]');
   const form = document.querySelector(".navbar form");
+  const checkboxok = document.querySelectorAll('.form-check-input');
+    
 
   // Eredeti adatok tárolása
   let eredetiAdatok;
@@ -27,7 +28,10 @@ document.addEventListener("DOMContentLoaded", function () {
       });
 
       minArInput.addEventListener("input", szurokAlkalmazasa);
-      maxArInput.addEventListener("input", szurokAlkalmazasa);
+            maxArInput.addEventListener("input", szurokAlkalmazasa);
+            checkboxok.forEach(function (checkbox) {
+                checkbox.addEventListener('change', szurokAlkalmazasa);
+            });
     })
     .catch((hiba) => alert(hiba));
 
@@ -37,28 +41,34 @@ document.addEventListener("DOMContentLoaded", function () {
 
     return `
       <div class="card my-4">
-          <img src="${kepPath}" class="card-img-top w-50" alt="${nev}">
-          <div class="card-body">
-              <h5 class="card-title">${nev}</h5>
-              <p class="card-text ar">${
-                akciosAr > 0 ? `<del>${ar} Ft</del>` : `${ar} Ft`
-              }</p>
-              ${
-                akciosAr > 0
-                  ? `<p class="card-text akciosar">${akciosAr} Ft</p>`
-                  : ""
-              }
-              <input id="hozzadas" class="my-2 p-2 btn btn-success fs-5" type="button" value="Hozzáadás a kosárhoz" />
-          </div>
+        <img src="${kepPath}" class="card-img-top w-50" alt="${nev}">
+        <div class="card-body">
+          <h5 class="card-title">${nev}</h5>
+          <p class="card-text ar">${
+            akciosAr > 0 ? `<del>${ar} Ft</del>` : `${ar} Ft`
+          }</p>
+          ${
+            akciosAr > 0
+              ? `<p class="card-text akciosar">${akciosAr} Ft</p>`
+              : ""
+          }
+          <input id="hozzadas" class="my-2 p-2 btn btn-success fs-5" type="button" value="Hozzáadás a kosárhoz" />
+        </div>
       </div>
-    `; 
+    `;
   }
 
   function termekekMegjelenitese(adatok) {
-    termekekElem.innerHTML = "";
+    const jatekokElem = document.querySelector(".termek-lista#jatekok");
+    const ajandekKartyakElem = document.querySelector(
+      ".termek-lista#ajandekKartyak"
+    );
+
+    jatekokElem.innerHTML = "";
+    ajandekKartyakElem.innerHTML = "";
 
     for (let i = 0; i < adatok.length / 2; i++) {
-      termekekElem.innerHTML += createCard(
+      jatekokElem.innerHTML += createCard(
         `../kepek/ajandekkartya/${adatok[i].kep}`,
         adatok[i].nev,
         adatok[i].ar,
@@ -67,7 +77,7 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
     for (let i = adatok.length / 2; i < adatok.length; i++) {
-      termekekElem.innerHTML += createCard(
+      ajandekKartyakElem.innerHTML += createCard(
         `../kepek/jatekok/${adatok[i].kep}`,
         adatok[i].nev,
         adatok[i].ar,
@@ -79,20 +89,28 @@ document.addEventListener("DOMContentLoaded", function () {
   // Szűrők alkalmazása és terméklista frissítése
   function szurokAlkalmazasa() {
     const keresendoSzoveg = keresoInput.value.toLowerCase();
+
     const minAr = parseFloat(minArInput.value) || 0;
     const maxAr = parseFloat(maxArInput.value) || Infinity;
+
+    const kivalasztottKategoriak = Array.from(document.querySelectorAll('.kategoriak input:checked')).map(checkbox => checkbox.value);
+    const kivalasztottPlatformok = Array.from(document.querySelectorAll('.platform input:checked')).map(checkbox => checkbox.value);
+    const kivalasztottEszkozok = Array.from(document.querySelectorAll('.eszkoz input:checked')).map(checkbox => checkbox.value);
+
 
     // Szűrt adatok kiválasztása az eredeti adatok közül
     const szurtAdatok = eredetiAdatok.filter(
       (elem) =>
-        (elem.nev.toLowerCase().includes(keresendoSzoveg) ||
-          keresendoSzoveg.includes(elem.nev.toLowerCase())) &&
-        elem.ar >= minAr &&
-        elem.ar <= maxAr
+                (elem.nev.toLowerCase().includes(keresendoSzoveg) ||
+                keresendoSzoveg.includes(elem.nev.toLowerCase())) &&
+                elem.ar >= minAr &&
+                elem.ar <= maxAr &&
+                (kivalasztottKategoriak.length === 0 || kivalasztottKategoriak.includes(elem.kategoria)) &&
+                (kivalasztottPlatformok.length === 0 || kivalasztottPlatformok.includes(elem.platform.toLowerCase())) &&
+                (kivalasztottEszkozok.length === 0 || kivalasztottEszkozok.includes(elem.eszkoz.toLowerCase()))
     );
 
     // Szűrt termékek megjelenítése
     termekekMegjelenitese(szurtAdatok);
   }
-
 });
