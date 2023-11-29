@@ -355,12 +355,36 @@ public class Felhasznalo implements Serializable {
     }
 
     public static boolean emailEllenorzes(String email) throws FelhasznaloException {
+        EntityManagerFactory emf = Persistence.createEntityManagerFactory("com_CodeCraftersWebshop_war_1.0-SNAPSHOTPU");
+        EntityManager em = emf.createEntityManager();
+
+        int db = 0;
+        try {
+            StoredProcedureQuery spq = em.createStoredProcedureQuery("felhasznaloEmailEllenorzes");
+
+            spq.registerStoredProcedureParameter("emailBE", String.class, ParameterMode.IN);
+            spq.registerStoredProcedureParameter("dbKI", Integer.class, ParameterMode.OUT);
+
+            spq.setParameter("emailBE", email);
+            db = (Integer) spq.getOutputParameterValue("dbKI");
+
+        } catch (Exception e) {
+            System.err.println(e.getMessage());
+
+        } finally {
+            em.clear();
+            em.close();
+            emf.close();
+        }
+
         if (email.equals("")) {
             throw new FelhasznaloException("A felhasználó emailje lehet üres!");
         } else if (email.length() > 100) {
             throw new FelhasznaloException("A felhasználó emailje nem lehet 100 karakternél hosszabb!");
         } else if (!email.contains("@")) {
             throw new FelhasznaloException("A felhasználó emailjének tartalmaznia kell a @ karaktert!");
+        } else if (db > 0) {
+            throw new FelhasznaloException("A felhasználó emailje már létezik!");
         } else {
             return true;
         }
