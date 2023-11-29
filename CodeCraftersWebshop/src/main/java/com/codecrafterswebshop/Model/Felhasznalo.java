@@ -303,10 +303,34 @@ public class Felhasznalo implements Serializable {
     }
 
     public static boolean felhasznaloNevEllenorzes(String felhasznaloNev) throws FelhasznaloException {
+        EntityManagerFactory emf = Persistence.createEntityManagerFactory("com_CodeCraftersWebshop_war_1.0-SNAPSHOTPU");
+        EntityManager em = emf.createEntityManager();
+
+        int db = 0;
+        try {
+            StoredProcedureQuery spq = em.createStoredProcedureQuery("felhasznaloNevEllenorzes");
+
+            spq.registerStoredProcedureParameter("nevBE", String.class, ParameterMode.IN);
+            spq.registerStoredProcedureParameter("dbKI", Integer.class, ParameterMode.OUT);
+
+            spq.setParameter("nevBE", felhasznaloNev);
+            db = (Integer) spq.getOutputParameterValue("dbKI");
+
+        } catch (Exception e) {
+            System.err.println(e.getMessage());
+
+        } finally {
+            em.clear();
+            em.close();
+            emf.close();
+        }
+
         if (felhasznaloNev.equals("")) {
             throw new FelhasznaloException("A felhasználó neve lehet üres!");
         } else if (felhasznaloNev.length() > 100) {
             throw new FelhasznaloException("A felhasználó neve nem lehet 100 karakternél hosszabb!");
+        } else if (db > 0) {
+            throw new FelhasznaloException("A felhasználó neve már létezik!");
         } else {
             return true;
         }
