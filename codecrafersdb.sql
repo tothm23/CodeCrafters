@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Nov 29, 2023 at 10:18 AM
+-- Generation Time: Nov 29, 2023 at 11:04 AM
 -- Server version: 5.7.24
 -- PHP Version: 8.0.1
 
@@ -87,6 +87,14 @@ ON ajandekkartya.eszkozId = eszkoz.id
 INNER JOIN platform
 ON ajandekkartya.platformId = platform.id$$
 
+CREATE DEFINER=`root`@`localhost` PROCEDURE `ajandekKartyaKepEllenorzes` (IN `kepBE` VARCHAR(100), OUT `dbKI` INT(1))   SELECT COUNT(ajandekkartya.id) INTO dbKI
+FROM ajandekkartya
+WHERE ajandekkartya.kep = kepBE$$
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `ajandekKartyaNevEllenorzes` (IN `nevBE` VARCHAR(100), OUT `dbKI` INT(1))   SELECT COUNT(ajandekkartya.id) INTO dbKI
+FROM ajandekkartya
+WHERE ajandekkartya.nev = nevBE$$
+
 CREATE DEFINER=`root`@`localhost` PROCEDURE `carouselRandomKepek` ()   SELECT jatek.kep
 FROM jatek
 ORDER BY RAND()
@@ -100,6 +108,10 @@ CREATE DEFINER=`root`@`localhost` PROCEDURE `csokkenoArJatek` ()   SELECT *
 FROM jatek
 ORDER BY jatek.ar DESC$$
 
+CREATE DEFINER=`root`@`localhost` PROCEDURE `eszkozNevEllenorzes` (IN `nevBE` VARCHAR(100), OUT `dbKI` INT(1))   SELECT COUNT(eszkoz.id) INTO dbKI
+FROM eszkoz
+WHERE eszkoz.nev = nevBE$$
+
 CREATE DEFINER=`root`@`localhost` PROCEDURE `felhasznalo` (IN `idBE` INT(9))   SELECT *
 FROM felhasznalo
 WHERE felhasznalo.id = idBE$$
@@ -108,6 +120,10 @@ CREATE DEFINER=`root`@`localhost` PROCEDURE `felhasznaloBelepes` (IN `felhasznal
 FROM felhasznalo
 WHERE felhasznalo.felhasznaloNev = felhasznaloNevBE AND felhasznalo.jelszo = SHA1(jelszoBE)
 INTO felhasznaloIdKI$$
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `felhasznaloEmailEllenorzes` (IN `emailBE` VARCHAR(100), OUT `dbKI` INT(1))   SELECT COUNT(felhasznalo.id) INTO dbKI
+FROM felhasznalo
+WHERE felhasznalo.email = emailBE$$
 
 CREATE DEFINER=`root`@`localhost` PROCEDURE `felhasznalok` ()   SELECT *
 FROM felhasznalo$$
@@ -121,6 +137,10 @@ CREATE DEFINER=`root`@`localhost` PROCEDURE `felhasznaloKosar` (IN `felhasznaloI
 FROM kosar
 LEFT JOIN felhasznalo
 ON kosar.felhasznaloId = felhasznalo.id$$
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `felhasznaloNevEllenorzes` (IN `nevBE` VARCHAR(100), OUT `dbKI` INT(1))   SELECT COUNT(felhasznalo.id) INTO dbKI
+FROM felhasznalo
+WHERE felhasznalo.felhasznaloNev = nevBE$$
 
 CREATE DEFINER=`root`@`localhost` PROCEDURE `frissitesAjandekKartya` (IN `idBE` INT(9), IN `nevBE` VARCHAR(100), IN `arBE` INT(9), IN `leirasBE` TEXT, IN `kepBE` VARCHAR(100), IN `akcioBE` INT(3), IN `mennyisegraktaronBE` INT(5), IN `eszkozIdBE` INT(9), IN `platformIdBE` INT(9))   UPDATE ajandekkartya
 SET ajandekkartya.nev = nevBE,
@@ -175,6 +195,14 @@ INNER JOIN platform
 ON jatek.platformId = platform.id
 
 WHERE jatek.id = idBe$$
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `jatekKepEllenorzes` (IN `kepBE` VARCHAR(100), OUT `dbKI` INT(1))   SELECT COUNT(jatek.id) INTO dbKI
+FROM jatek
+WHERE jatek.kep = kepBE$$
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `jatekNevEllenorzes` (IN `nevBE` VARCHAR(100), OUT `dbKI` INT(1))   SELECT COUNT(jatek.id) INTO dbKI
+FROM jatek
+WHERE jatek.nev = nevBE$$
 
 CREATE DEFINER=`root`@`localhost` PROCEDURE `jatekok` ()   SELECT 
 	jatek.id,
@@ -282,6 +310,10 @@ INNER JOIN platform
 ON ajandekkartya.platformId = platform.id;
 
 END$$
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `platformNevEllenorzes` (IN `nevBE` VARCHAR(100), OUT `dbKI` INT(1))   SELECT COUNT(platform.id) INTO dbKI
+FROM platform
+WHERE platform.nev = nevBE$$
 
 CREATE DEFINER=`root`@`localhost` PROCEDURE `torlesAjandekKartya` (IN `idBE` INT(9))   DELETE 
 FROM ajandekkartya
