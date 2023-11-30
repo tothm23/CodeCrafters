@@ -20,8 +20,9 @@ fetch(`${link}/${id}`)
   .then((response) => response.json())
   .then((data) => {
     if (data.id) {
-      // kep.innerHTML = data.nev;
-      // kep.setAttribute("src", data.kep);
+      kep.innerHTML = data.nev;
+      var src='../kepek/ajandekkartya/'+data.kep
+      kep.setAttribute("src", src);
 
       nev.innerHTML = data.nev;
       eszkoz.innerHTML = data.eszkoz;
