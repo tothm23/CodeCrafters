@@ -21,9 +21,10 @@ fetch(`${link}/${id}`)
   .then((response) => response.json())
   .then((data) => {
     if (data.id) {
-      // kep.innerHTML = data.nev;
-      // kep.setAttribute("src", data.kep);
-
+      kep.innerHTML = data.nev;
+      var src='../kepek/jatekok/'+data.kep;
+      kep.setAttribute("src", src);
+      
       nev.innerHTML = data.nev;
       eszkoz.innerHTML = data.eszkoz;
       platform.innerHTML = data.platform;
