@@ -537,8 +537,32 @@ public class Jatek implements Serializable {
     }
 
     public static boolean kepEllenorzes(String kep) throws JatekException {
+        EntityManagerFactory emf = Persistence.createEntityManagerFactory("com_CodeCraftersWebshop_war_1.0-SNAPSHOTPU");
+        EntityManager em = emf.createEntityManager();
+
+        int db = 0;
+        try {
+            StoredProcedureQuery spq = em.createStoredProcedureQuery("jatekKepEllenorzes");
+
+            spq.registerStoredProcedureParameter("kepBE", String.class, ParameterMode.IN);
+            spq.registerStoredProcedureParameter("dbKI", Integer.class, ParameterMode.OUT);
+
+            spq.setParameter("kepBE", kep);
+            db = (Integer) spq.getOutputParameterValue("dbKI");
+
+        } catch (Exception e) {
+            System.err.println(e.getMessage());
+
+        } finally {
+            em.clear();
+            em.close();
+            emf.close();
+        }
+
         if (kep.equals("")) {
             throw new JatekException("A játék képe lehet üres!");
+        } else if (db > 0) {
+            throw new JatekException("A játék képe már létezik!");
         } else {
             return true;
         }
