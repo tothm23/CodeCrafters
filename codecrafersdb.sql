@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Nov 30, 2023 at 07:13 PM
+-- Generation Time: Dec 01, 2023 at 10:27 AM
 -- Server version: 5.7.24
 -- PHP Version: 8.0.1
 
@@ -142,6 +142,10 @@ ON kosar.jatekId = jatek.id
 
 WHERE kosar.felhasznaloId = felhasznaloIdBE;
 
+SELECT SUM(kosar.vegosszeg) AS "vegosszeg"
+FROM kosar
+WHERE kosar.felhasznaloId = felhasznaloIdBE;
+
 END$$
 
 CREATE DEFINER=`root`@`localhost` PROCEDURE `felhasznaloNevEllenorzes` (IN `nevBE` VARCHAR(100), OUT `dbKI` INT(1))   SELECT COUNT(felhasznalo.id) INTO dbKI
@@ -228,6 +232,13 @@ ON jatek.eszkozId = eszkoz.id
 
 INNER JOIN platform
 ON jatek.platformId = platform.id$$
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `jatekTorlesKosarbol` (IN `jatekIdBE` INT(9))   BEGIN
+
+DELETE FROM kosar
+WHERE kosar.jatekId = jatekIdBE;
+
+END$$
 
 CREATE DEFINER=`root`@`localhost` PROCEDURE `kosar` (IN `jatekIdBE` INT(9), IN `felhasznaloIdBE` INT(9))   BEGIN
 
