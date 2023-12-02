@@ -296,7 +296,7 @@ slide
 .slide{
   margin-left: 100px;
   margin-right: 100px;
-  max-width: 700px;
+  max-width: 900px;
   min-width: 300px;
 }
 
@@ -340,7 +340,9 @@ slide
   border-radius: 10px;
 }
 
+
 /* lábléc */
+
 #lablec {
   height: 100px;
   background: #241f1f;
@@ -351,6 +353,9 @@ slide
   color: #fff;
   padding: 10px;
   width: 100%;
+  position: relative;
+  /*position: absolute;*/
+  bottom: 0;
 }
 
 @media only screen and (max-width: 700px) {

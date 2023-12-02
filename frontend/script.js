@@ -14,10 +14,10 @@ fetch(
       carouselInner.innerHTML += `
         <div class="carousel-item">
           <div class="card ">
-            <img src="./kepek/jatekok/${
+            <a href="./jatek/jatek.html?id=${adat[i].id}"><img src="./kepek/jatekok/${
               adat[i].kep
             }" class="d-block w-100" alt="${adat[i].nev}">
-                  
+            </a>
             <div class="card-body">
               <h5 class="card-title">${adat[i].nev}</h5>
               ${
