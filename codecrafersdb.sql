@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Dec 02, 2023 at 05:03 PM
+-- Generation Time: Dec 02, 2023 at 09:30 PM
 -- Server version: 5.7.24
 -- PHP Version: 8.0.1
 
@@ -133,7 +133,7 @@ CREATE DEFINER=`root`@`localhost` PROCEDURE `felhasznaloKosar` (IN `felhasznaloI
 SELECT 
 	kosar.felhasznaloId,
 	jatek.nev AS "jatekNev",
-    jatek.ar AS "jatekAr",
+    kosar.vegosszeg AS "jatekAr",
     jatek.kep AS "jatekKep"
 FROM kosar
 
@@ -350,6 +350,30 @@ WHERE felhasznalo.felhasznaloNev = felhasznaloNevBE AND felhasznalo.jelszo = SHA
 CREATE DEFINER=`root`@`localhost` PROCEDURE `torlesJatek` (IN `idBE` INT(9))   DELETE
 FROM jatek
 WHERE jatek.id = idBE$$
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `torlesJatekKosarbol` (IN `felhasznaloIdBE` INT(9), IN `jatekIdBE` INT(9))   BEGIN
+
+DELETE 
+FROM kosar
+WHERE kosar.felhasznaloId = felhasznaloIdBE AND kosar.jatekId = jatekIdBE;
+
+SELECT 
+	kosar.felhasznaloId,
+	jatek.nev AS "jatekNev",
+    kosar.vegosszeg AS "jatekAr",
+    jatek.kep AS "jatekKep"
+FROM kosar
+
+INNER JOIN jatek
+ON kosar.jatekId = jatek.id
+
+WHERE kosar.felhasznaloId = felhasznaloIdBE;
+
+SELECT SUM(kosar.vegosszeg) AS "vegosszeg"
+FROM kosar
+WHERE kosar.felhasznaloId = felhasznaloIdBE;
+
+END$$
 
 CREATE DEFINER=`root`@`localhost` PROCEDURE `ujAjandekKartya` (IN `nevBE` VARCHAR(100), IN `arBE` INT(9), IN `leirasBE` TEXT, IN `kepBE` VARCHAR(100), IN `akcioBE` INT(3), IN `mennyisegraktaronBE` INT(5), IN `eszkozIdBE` INT(9), IN `platformIdBE` INT(9))   INSERT INTO ajandekkartya(
 	ajandekkartya.nev,
@@ -594,7 +618,6 @@ INSERT INTO `kosar` (`id`, `felhasznaloId`, `jatekId`, `vegosszeg`) VALUES
 (18, 2, 7, 17900),
 (19, 1, 3, 2990),
 (20, 3, 3, 2990),
-(21, 1, 8, 11892),
 (22, 1, 9, 19990);
 
 -- --------------------------------------------------------
@@ -760,7 +783,7 @@ ALTER TABLE `jogosultsag`
 -- AUTO_INCREMENT for table `kosar`
 --
 ALTER TABLE `kosar`
-  MODIFY `id` int(9) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
+  MODIFY `id` int(9) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
 
 --
 -- AUTO_INCREMENT for table `platform`
