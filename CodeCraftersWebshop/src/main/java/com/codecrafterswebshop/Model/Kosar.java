@@ -1,14 +1,23 @@
 package com.codecrafterswebshop.Model;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.ParameterMode;
+import javax.persistence.Persistence;
+import javax.persistence.StoredProcedureQuery;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.xml.bind.annotation.XmlRootElement;
@@ -113,6 +122,46 @@ public class Kosar implements Serializable {
     @Override
     public String toString() {
         return "com.codecrafterswebshop.Model.Kosar[ id=" + id + " ]";
+    }
+
+    public static List<Map<String, Object>> felhasznaloKosar(Integer felhasznaloIdBE) {
+        List<Map<String, Object>> kosarak = new ArrayList<>();
+
+        EntityManagerFactory emf = Persistence.createEntityManagerFactory("com_CodeCraftersWebshop_war_1.0-SNAPSHOTPU");
+        EntityManager em = emf.createEntityManager();
+
+        try {
+            StoredProcedureQuery spq = em.createStoredProcedureQuery("felhasznaloKosar");
+
+            spq.registerStoredProcedureParameter("felhasznaloIdBE", Integer.class, ParameterMode.IN);
+            spq.setParameter("felhasznaloIdBE", felhasznaloIdBE);
+
+            List<Object[]> eredmeny = spq.getResultList();
+
+            if (!eredmeny.isEmpty()) {
+
+                for (Object[] sor : eredmeny) {
+                    HashMap<String, Object> kosar = new HashMap<>();
+
+                    kosar.put("nev", (String) sor[1]);
+                    kosar.put("vegosszeg", (Integer) sor[2]);
+                    kosar.put("kep", (String) sor[3]);
+
+                    kosarak.add(kosar);
+                }
+
+            }
+
+        } catch (Exception e) {
+            System.err.println(e.getMessage());
+        } finally {
+            em.clear();
+            em.close();
+            emf.close();
+        }
+
+        return kosarak;
+
     }
 
 }

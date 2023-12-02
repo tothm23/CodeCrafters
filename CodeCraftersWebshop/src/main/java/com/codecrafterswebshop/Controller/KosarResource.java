@@ -1,6 +1,14 @@
 package com.codecrafterswebshop.Controller;
 
+import com.codecrafterswebshop.Service.KosarService;
+import javax.ws.rs.Consumes;
+import javax.ws.rs.GET;
 import javax.ws.rs.Path;
+import javax.ws.rs.PathParam;
+import javax.ws.rs.Produces;
+import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
+import org.json.JSONArray;
 
 /**
  * REST Web Service
@@ -8,9 +16,18 @@ import javax.ws.rs.Path;
  * @author tothm23
  */
 @Path("kosar")
+@Produces(MediaType.APPLICATION_JSON)
+@Consumes(MediaType.APPLICATION_JSON)
 public class KosarResource {
 
     public KosarResource() {
     }
 
+    @GET
+    @Path("{felhasznaloId}")
+    public Response kosar(@PathParam("felhasznaloId") Integer id) {
+        JSONArray eredmeny = KosarService.felhasznaloKosar(id);
+        return Response.status(Response.Status.OK).entity(eredmeny.toString())
+                .type(MediaType.APPLICATION_JSON).build();
+    }
 }
