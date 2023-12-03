@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Dec 02, 2023 at 09:30 PM
+-- Generation Time: Dec 03, 2023 at 03:37 PM
 -- Server version: 5.7.24
 -- PHP Version: 8.0.1
 
@@ -125,6 +125,10 @@ CREATE DEFINER=`root`@`localhost` PROCEDURE `felhasznaloEmailEllenorzes` (IN `em
 FROM felhasznalo
 WHERE felhasznalo.email = emailBE$$
 
+CREATE DEFINER=`root`@`localhost` PROCEDURE `felhasznaloIdEllenorzes` (IN `felhasznaloIdBE` INT(9), OUT `dbKI` INT(1))   SELECT COUNT(felhasznalo.id) INTO dbKI
+FROM felhasznalo
+WHERE felhasznalo.id = felhasznaloIdBE$$
+
 CREATE DEFINER=`root`@`localhost` PROCEDURE `felhasznalok` ()   SELECT *
 FROM felhasznalo$$
 
@@ -206,6 +210,10 @@ ON jatek.platformId = platform.id
 
 WHERE jatek.id = idBe$$
 
+CREATE DEFINER=`root`@`localhost` PROCEDURE `jatekIdEllenorzes` (IN `jatekIdBE` INT(9), OUT `dbKI` INT(1))   SELECT COUNT(jatek.id) INTO dbKI
+FROM jatek
+WHERE jatek.id = jatekIdBE$$
+
 CREATE DEFINER=`root`@`localhost` PROCEDURE `jatekKepEllenorzes` (IN `kepBE` VARCHAR(100), OUT `dbKI` INT(1))   SELECT COUNT(jatek.id) INTO dbKI
 FROM jatek
 WHERE jatek.kep = kepBE$$
@@ -232,13 +240,6 @@ ON jatek.eszkozId = eszkoz.id
 
 INNER JOIN platform
 ON jatek.platformId = platform.id$$
-
-CREATE DEFINER=`root`@`localhost` PROCEDURE `jatekTorlesKosarbol` (IN `jatekIdBE` INT(9))   BEGIN
-
-DELETE FROM kosar
-WHERE kosar.jatekId = jatekIdBE;
-
-END$$
 
 CREATE DEFINER=`root`@`localhost` PROCEDURE `kosar` (IN `jatekIdBE` INT(9), IN `felhasznaloIdBE` INT(9))   BEGIN
 
@@ -351,29 +352,9 @@ CREATE DEFINER=`root`@`localhost` PROCEDURE `torlesJatek` (IN `idBE` INT(9))   D
 FROM jatek
 WHERE jatek.id = idBE$$
 
-CREATE DEFINER=`root`@`localhost` PROCEDURE `torlesJatekKosarbol` (IN `felhasznaloIdBE` INT(9), IN `jatekIdBE` INT(9))   BEGIN
-
-DELETE 
+CREATE DEFINER=`root`@`localhost` PROCEDURE `torlesJatekKosarbol` (IN `felhasznaloIdBE` INT(9), IN `jatekIdBE` INT(9))   DELETE 
 FROM kosar
-WHERE kosar.felhasznaloId = felhasznaloIdBE AND kosar.jatekId = jatekIdBE;
-
-SELECT 
-	kosar.felhasznaloId,
-	jatek.nev AS "jatekNev",
-    kosar.vegosszeg AS "jatekAr",
-    jatek.kep AS "jatekKep"
-FROM kosar
-
-INNER JOIN jatek
-ON kosar.jatekId = jatek.id
-
-WHERE kosar.felhasznaloId = felhasznaloIdBE;
-
-SELECT SUM(kosar.vegosszeg) AS "vegosszeg"
-FROM kosar
-WHERE kosar.felhasznaloId = felhasznaloIdBE;
-
-END$$
+WHERE kosar.felhasznaloId = felhasznaloIdBE AND kosar.jatekId = jatekIdBE$$
 
 CREATE DEFINER=`root`@`localhost` PROCEDURE `ujAjandekKartya` (IN `nevBE` VARCHAR(100), IN `arBE` INT(9), IN `leirasBE` TEXT, IN `kepBE` VARCHAR(100), IN `akcioBE` INT(3), IN `mennyisegraktaronBE` INT(5), IN `eszkozIdBE` INT(9), IN `platformIdBE` INT(9))   INSERT INTO ajandekkartya(
 	ajandekkartya.nev,
@@ -783,7 +764,7 @@ ALTER TABLE `jogosultsag`
 -- AUTO_INCREMENT for table `kosar`
 --
 ALTER TABLE `kosar`
-  MODIFY `id` int(9) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
+  MODIFY `id` int(9) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
 
 --
 -- AUTO_INCREMENT for table `platform`
