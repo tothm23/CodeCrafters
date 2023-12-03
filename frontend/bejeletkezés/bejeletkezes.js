@@ -24,18 +24,20 @@ document.addEventListener("DOMContentLoaded", (event) => {
     };
 
     fetch("http://localhost:8080/CodeCraftersWebshop-1.0-SNAPSHOT/webresources/felhasznalok/bejelentkezes", requestOptions)
-      .then(response => response.text())
-      .then(result => {
+    .then(response => response.json())
+    .then(result => {
         // Sikeres bejelentkezés esetén tárold el az adatokat a local storage-ba
-        localStorage.setItem("felhasznaloNev", felhaszNev);
-        localStorage.setItem("bejelentkezve", "true");
+        localStorage.setItem("felhasznaloNev", result.felhasznaloNev);
+        localStorage.setItem("keresztNev", result.keresztNev);
+        localStorage.setItem("id", result.id);
+        localStorage.setItem("vezetekNev", result.vezetekNev);
+        localStorage.setItem("email", result.email);
         console.log("Sikeres bejelentkezés");
-
-        // Egyéb további műveletek vagy átirányítás stb.
-      })
-      .catch(error => {
-        console.log('Hiba történt:', error);
-        // Hiba kezelése, pl. felhasználó értesítése
-      });
+      
+    }) 
+    .catch(error => {
+      console.log('Hiba történt:', error);
+      // Hiba kezelése, pl. felhasználó értesítése
+    });
   });
 });
