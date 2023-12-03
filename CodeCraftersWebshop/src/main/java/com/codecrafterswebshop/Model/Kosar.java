@@ -313,4 +313,34 @@ public class Kosar implements Serializable {
         }
     }
 
+    public static boolean jatekIdKosarEllenorzes(Integer jatekIdBE) throws KosarException {
+        EntityManagerFactory emf = Persistence.createEntityManagerFactory("com_CodeCraftersWebshop_war_1.0-SNAPSHOTPU");
+        EntityManager em = emf.createEntityManager();
+
+        int db = 0;
+        try {
+            StoredProcedureQuery spq = em.createStoredProcedureQuery("jatekIdKosarEllenorzes");
+
+            spq.registerStoredProcedureParameter("jatekIdBE", Integer.class, ParameterMode.IN);
+            spq.registerStoredProcedureParameter("dbKI", Integer.class, ParameterMode.OUT);
+
+            spq.setParameter("jatekIdBE", jatekIdBE);
+            db = (Integer) spq.getOutputParameterValue("dbKI");
+
+        } catch (Exception e) {
+            System.err.println(e.getMessage());
+
+        } finally {
+            em.clear();
+            em.close();
+            emf.close();
+        }
+
+        if (db < 1) {
+            throw new KosarException("A felhasználó nem tett ilyen játékot a kosárba!");
+        } else {
+            return true;
+        }
+    }
+
 }

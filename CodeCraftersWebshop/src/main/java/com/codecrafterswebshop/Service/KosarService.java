@@ -50,6 +50,8 @@ public class KosarService {
         try {
             if (!Kosar.felhasznaloIdKosarEllenorzes(felhasznaloIdBE)) {
                 return "Hibás felhasznaloId!";
+            } else if (!Kosar.jatekIdKosarEllenorzes(jatekIdBE)) {
+                return "Hibás jatekId!";
             } else if (Kosar.torlesJatekKosarbol(felhasznaloIdBE, jatekIdBE)) {
                 return "Játék törölve a kosárból!";
             } else {
