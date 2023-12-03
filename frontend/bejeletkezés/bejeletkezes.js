@@ -27,17 +27,27 @@ document.addEventListener("DOMContentLoaded", (event) => {
     .then(response => response.json())
     .then(result => {
         // Sikeres bejelentkezés esetén tárold el az adatokat a local storage-ba
-        localStorage.setItem("felhasznaloNev", result.felhasznaloNev);
-        localStorage.setItem("keresztNev", result.keresztNev);
-        localStorage.setItem("id", result.id);
-        localStorage.setItem("vezetekNev", result.vezetekNev);
-        localStorage.setItem("email", result.email);
-        console.log("Sikeres bejelentkezés");
+        if(result.id){
+          var valszObjektum={
+            "felhasznaloNev": result.felhasznaloNev,
+            "keresztNev": result.keresztNev,
+            "id": result.id,
+            "vezetekNev": result.vezetekNev,
+            "email": result.email
+
+          };
+          localStorage.setItem("bejelentkezes",JSON.stringify(valszObjektum));
+          alert("Sikeres bejelentkezés");
+        }
+        else{
+          alert("Sikertelen bejelentkezés");
+        }
       
     }) 
     .catch(error => {
       console.log('Hiba történt:', error);
       // Hiba kezelése, pl. felhasználó értesítése
+      alert("Hiba történt")
     });
   });
 });
