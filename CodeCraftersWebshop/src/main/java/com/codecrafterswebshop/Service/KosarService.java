@@ -45,4 +45,16 @@ public class KosarService {
             return ex.getMessage();
         }
     }
+
+    public static String torlesJatekKosarbol(Integer felhasznaloIdBE, Integer jatekIdBE) {
+        try {
+            if (Kosar.torlesJatekKosarbol(felhasznaloIdBE, jatekIdBE)) {
+                return "Játék törölve a kosárból!";
+            } else {
+                return "Hiba a Játék törlésénél!";
+            }
+        } catch (Exception ex) {
+            return ex.getMessage();
+        }
+    }
 }
