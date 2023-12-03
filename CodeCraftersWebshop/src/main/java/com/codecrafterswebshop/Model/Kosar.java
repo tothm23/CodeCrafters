@@ -1,5 +1,6 @@
 package com.codecrafterswebshop.Model;
 
+import com.codecrafterswebshop.Exception.KosarException;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -190,6 +191,36 @@ public class Kosar implements Serializable {
             em.clear();
             em.close();
             emf.close();
+        }
+    }
+
+    public static boolean jatekIdEllenorzes(Integer jatekIdBE) throws KosarException {
+        EntityManagerFactory emf = Persistence.createEntityManagerFactory("com_CodeCraftersWebshop_war_1.0-SNAPSHOTPU");
+        EntityManager em = emf.createEntityManager();
+
+        int db = 0;
+        try {
+            StoredProcedureQuery spq = em.createStoredProcedureQuery("jatekIdEllenorzes");
+
+            spq.registerStoredProcedureParameter("jatekIdBE", Integer.class, ParameterMode.IN);
+            spq.registerStoredProcedureParameter("dbKI", Integer.class, ParameterMode.OUT);
+
+            spq.setParameter("jatekIdBE", jatekIdBE);
+            db = (Integer) spq.getOutputParameterValue("dbKI");
+
+        } catch (Exception e) {
+            System.err.println(e.getMessage());
+
+        } finally {
+            em.clear();
+            em.close();
+            emf.close();
+        }
+
+        if (db < 1) {
+            throw new KosarException("A játék nem létezik!");
+        } else {
+            return true;
         }
     }
 

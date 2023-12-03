@@ -1,5 +1,6 @@
 package com.codecrafterswebshop.Service;
 
+import com.codecrafterswebshop.Exception.KosarException;
 import com.codecrafterswebshop.Model.Kosar;
 import java.util.List;
 import java.util.Map;
@@ -31,12 +32,14 @@ public class KosarService {
 
     public static String kosar(Integer jatekIdBE, Integer felhasznaloIdBE) {
         try {
-            if (Kosar.kosar(jatekIdBE, felhasznaloIdBE)) {
+            if (!Kosar.jatekIdEllenorzes(jatekIdBE)) {
+                return "Hibás jatekId!";
+            } else if (Kosar.kosar(jatekIdBE, felhasznaloIdBE)) {
                 return "Játék hozzáadva a kosárhoz!";
             } else {
                 return "Hiba a Játék hozzáadásánál!";
             }
-        } catch (Exception ex) {
+        } catch (KosarException ex) {
             return ex.getMessage();
         }
     }
