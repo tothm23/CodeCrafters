@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Dec 03, 2023 at 03:37 PM
+-- Generation Time: Dec 03, 2023 at 05:37 PM
 -- Server version: 5.7.24
 -- PHP Version: 8.0.1
 
@@ -129,6 +129,10 @@ CREATE DEFINER=`root`@`localhost` PROCEDURE `felhasznaloIdEllenorzes` (IN `felha
 FROM felhasznalo
 WHERE felhasznalo.id = felhasznaloIdBE$$
 
+CREATE DEFINER=`root`@`localhost` PROCEDURE `felhasznaloIdKosarEllenorzes` (IN `felhasznaloIdBE` INT(9), OUT `dbKI` INT(1))   SELECT COUNT(kosar.felhasznaloId) INTO dbKI
+FROM kosar
+WHERE kosar.felhasznaloId = felhasznaloIdBE$$
+
 CREATE DEFINER=`root`@`localhost` PROCEDURE `felhasznalok` ()   SELECT *
 FROM felhasznalo$$
 
@@ -213,6 +217,10 @@ WHERE jatek.id = idBe$$
 CREATE DEFINER=`root`@`localhost` PROCEDURE `jatekIdEllenorzes` (IN `jatekIdBE` INT(9), OUT `dbKI` INT(1))   SELECT COUNT(jatek.id) INTO dbKI
 FROM jatek
 WHERE jatek.id = jatekIdBE$$
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `jatekIdKosarEllenorzes` (IN `jatekIdBE` INT(9), OUT `dbKI` INT(1))   SELECT COUNT(kosar.jatekId) INTO dbKI
+FROM kosar
+WHERE kosar.jatekId = jatekIdBE$$
 
 CREATE DEFINER=`root`@`localhost` PROCEDURE `jatekKepEllenorzes` (IN `kepBE` VARCHAR(100), OUT `dbKI` INT(1))   SELECT COUNT(jatek.id) INTO dbKI
 FROM jatek
