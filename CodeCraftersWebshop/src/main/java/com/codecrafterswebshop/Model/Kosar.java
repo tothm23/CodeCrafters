@@ -164,4 +164,33 @@ public class Kosar implements Serializable {
 
     }
 
+    public static boolean kosar(Integer jatekIdBE, Integer felhasznaloIdBE) {
+
+        EntityManagerFactory emf = Persistence.createEntityManagerFactory("com_CodeCraftersWebshop_war_1.0-SNAPSHOTPU");
+        EntityManager em = emf.createEntityManager();
+
+        try {
+            StoredProcedureQuery spq = em.createStoredProcedureQuery("kosar");
+
+            spq.registerStoredProcedureParameter("jatekIdBE", Integer.class, ParameterMode.IN);
+            spq.registerStoredProcedureParameter("felhasznaloIdBE", Integer.class, ParameterMode.IN);
+
+            spq.setParameter("jatekIdBE", jatekIdBE);
+            spq.setParameter("felhasznaloIdBE", felhasznaloIdBE);
+
+            spq.execute();
+            return true;
+
+        } catch (Exception e) {
+
+            System.err.println(e.getMessage());
+            return false;
+
+        } finally {
+            em.clear();
+            em.close();
+            emf.close();
+        }
+    }
+
 }

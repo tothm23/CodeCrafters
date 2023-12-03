@@ -28,4 +28,16 @@ public class KosarService {
 
         return jsonArray;
     }
+
+    public static String kosar(Integer jatekIdBE, Integer felhasznaloIdBE) {
+        try {
+            if (Kosar.kosar(jatekIdBE, felhasznaloIdBE)) {
+                return "Játék hozzáadva a kosárhoz!";
+            } else {
+                return "Hiba a Játék hozzáadásánál!";
+            }
+        } catch (Exception ex) {
+            return ex.getMessage();
+        }
+    }
 }
