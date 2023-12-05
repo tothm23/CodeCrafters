@@ -6,9 +6,6 @@ document.addEventListener("DOMContentLoaded", function () {
   const form = document.querySelector(".navbar form");
   const checkboxok = document.querySelectorAll(".form-check-input");
   const jatekokElem = document.querySelector(".termek-lista#jatekok");
-  const ajandekKartyakElem = document.querySelector(
-    ".termek-lista#ajandekKartyak"
-  );
 
   // Eredeti adatok tárolása
   let eredetiAdatok;
@@ -39,16 +36,11 @@ document.addEventListener("DOMContentLoaded", function () {
     .catch((hiba) => alert(hiba));
 
   // Termékek megjelenítése a HTML-ben
-  function createCard(kepPath, nev, ar, akcio,id,kategoria,url) {
+  function createCard(kepPath, nev, ar, akcio,id,url) {
     const akciosAr = akcio > 0 ? Math.round(ar - (ar / 100) * akcio) : null;
     // 
-    if (
-      (kategoria.toLowerCase() === "ajandekkartyak" && document.getElementById("ajandekKartyakCheckbox").checked==true) ||
-      (kategoria.toLowerCase() === "jatekok" && document.getElementById("jatekokCheckbox").checked==true) || 
-      (document.getElementById("jatekokCheckbox").checked==false && document.getElementById("ajandekKartyakCheckbox").checked==false) 
-    ) {
-      return `
-      <div class="card my-4 ${kategoria}">
+    return `
+      <div class="card my-4">
         <a href="${url}?id=${id}"><img src="${kepPath}" class="card-img-top w-50" alt="${nev}"></a>
         <div class="card-body">
           <h5 class="card-title">${nev}</h5>
@@ -64,25 +56,10 @@ document.addEventListener("DOMContentLoaded", function () {
         </div>
       </div>
     `;
-    } else {
-      return ""; // Üres string, mert nem kell kártyát létrehozni
-    }
   }
 
   function termekekMegjelenitese(adatok) {
     jatekokElem.innerHTML = "";
-    ajandekKartyakElem.innerHTML = "";
-    for (let i = 0; i < adatok.length / 2; i++) {
-      ajandekKartyakElem.innerHTML += createCard(
-        `../kepek/ajandekkartya/${adatok[i].kep}`,
-        adatok[i].nev,
-        adatok[i].ar,
-        adatok[i].akcio,
-        adatok[i].id,
-        "ajandekKartyak",
-        "../ajandekkartya/ajandekkartya.html"
-      );
-    }
 
     for (let i = adatok.length / 2; i < adatok.length; i++) {
       jatekokElem.innerHTML += createCard(
@@ -91,7 +68,6 @@ document.addEventListener("DOMContentLoaded", function () {
         adatok[i].ar,
         adatok[i].akcio,
         adatok[i].id,
-        "jatekok",
         "../jatek/jatek.html"
       );
     }
