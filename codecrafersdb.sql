@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Dec 03, 2023 at 05:37 PM
+-- Generation Time: Dec 05, 2023 at 11:21 AM
 -- Server version: 5.7.24
 -- PHP Version: 8.0.1
 
@@ -49,60 +49,10 @@ ON jatek.platformId = platform.id
 ORDER BY RAND()
 LIMIT 3$$
 
-CREATE DEFINER=`root`@`localhost` PROCEDURE `ajandekKartya` (IN `ajandekKartyaIdBE` INT(9))   SELECT 
-    ajandekkartya.id,
-    ajandekkartya.nev AS "ajandekKartyaNev",
-    ajandekkartya.ar,
-    ajandekkartya.leiras,
-    ajandekkartya.kep,
-    ajandekkartya.akcio,
-    ajandekkartya.mennyisegraktaron,
-    eszkoz.nev AS "eszkozNev",
-    platform.nev AS "platformNev"
-FROM ajandekkartya
-
-INNER JOIN eszkoz
-ON ajandekkartya.eszkozId = eszkoz.id
-
-INNER JOIN platform
-ON ajandekkartya.platformId = platform.id
-
-WHERE ajandekkartya.id = ajandekKartyaIdBE$$
-
-CREATE DEFINER=`root`@`localhost` PROCEDURE `ajandekKartyak` ()   SELECT 
-    ajandekkartya.id,
-    ajandekkartya.nev AS "ajandekKartyaNev",
-    ajandekkartya.ar,
-    ajandekkartya.leiras,
-    ajandekkartya.kep,
-    ajandekkartya.akcio,
-    ajandekkartya.mennyisegraktaron,
-    eszkoz.nev AS "eszkozNev",
-    platform.nev AS "platformNev"
-FROM ajandekkartya
-
-INNER JOIN eszkoz
-ON ajandekkartya.eszkozId = eszkoz.id
-
-INNER JOIN platform
-ON ajandekkartya.platformId = platform.id$$
-
-CREATE DEFINER=`root`@`localhost` PROCEDURE `ajandekKartyaKepEllenorzes` (IN `kepBE` VARCHAR(100), OUT `dbKI` INT(1))   SELECT COUNT(ajandekkartya.id) INTO dbKI
-FROM ajandekkartya
-WHERE ajandekkartya.kep = kepBE$$
-
-CREATE DEFINER=`root`@`localhost` PROCEDURE `ajandekKartyaNevEllenorzes` (IN `nevBE` VARCHAR(100), OUT `dbKI` INT(1))   SELECT COUNT(ajandekkartya.id) INTO dbKI
-FROM ajandekkartya
-WHERE ajandekkartya.nev = nevBE$$
-
 CREATE DEFINER=`root`@`localhost` PROCEDURE `carouselRandomKepek` ()   SELECT jatek.kep
 FROM jatek
 ORDER BY RAND()
 LIMIT 3$$
-
-CREATE DEFINER=`root`@`localhost` PROCEDURE `csokkenoArAjandekKartya` ()   SELECT *
-FROM ajandekkartya
-ORDER BY ajandekkartya.ar DESC$$
 
 CREATE DEFINER=`root`@`localhost` PROCEDURE `csokkenoArJatek` ()   SELECT *
 FROM jatek
@@ -159,18 +109,6 @@ END$$
 CREATE DEFINER=`root`@`localhost` PROCEDURE `felhasznaloNevEllenorzes` (IN `nevBE` VARCHAR(100), OUT `dbKI` INT(1))   SELECT COUNT(felhasznalo.id) INTO dbKI
 FROM felhasznalo
 WHERE felhasznalo.felhasznaloNev = nevBE$$
-
-CREATE DEFINER=`root`@`localhost` PROCEDURE `frissitesAjandekKartya` (IN `idBE` INT(9), IN `nevBE` VARCHAR(100), IN `arBE` INT(9), IN `leirasBE` TEXT, IN `kepBE` VARCHAR(100), IN `akcioBE` INT(3), IN `mennyisegraktaronBE` INT(5), IN `eszkozIdBE` INT(9), IN `platformIdBE` INT(9))   UPDATE ajandekkartya
-SET ajandekkartya.nev = nevBE,
-	ajandekkartya.ar = arBE,
-    ajandekkartya.leiras = leirasBE,
-    ajandekkartya.kep = kepBE,
-    ajandekkartya.akcio = akcioBE,
-    ajandekkartya.mennyisegraktaron = mennyisegraktaronBE,
-    ajandekkartya.eszkozId = eszkozIdBE,
-    ajandekkartya.platformId = platformIdBE,
-    ajandekkartya.frissitve = CURRENT_TIMESTAMP
-WHERE ajandekkartya.id = idBE$$
 
 CREATE DEFINER=`root`@`localhost` PROCEDURE `frissitesFelhasznalo` (IN `felhasznaloNevBE` VARCHAR(100), IN `vezetekNevBE` VARCHAR(100), IN `keresztNev` VARCHAR(100), IN `emailBE` VARCHAR(100), IN `jelszoBE` TEXT)   UPDATE felhasznalo
 SET felhasznalo.felhasznaloNev = felhasznaloNevBE,
@@ -275,10 +213,6 @@ VALUES(
 
 END$$
 
-CREATE DEFINER=`root`@`localhost` PROCEDURE `novekvoArAjandekKartya` ()   SELECT *
-FROM ajandekkartya
-ORDER BY ajandekkartya.ar ASC$$
-
 CREATE DEFINER=`root`@`localhost` PROCEDURE `novekvoArJatek` ()   SELECT *
 FROM jatek
 ORDER BY jatek.ar ASC$$
@@ -347,10 +281,6 @@ VALUES(
 
 END$$
 
-CREATE DEFINER=`root`@`localhost` PROCEDURE `torlesAjandekKartya` (IN `idBE` INT(9))   DELETE 
-FROM ajandekkartya
-WHERE ajandekkartya.id = idBE$$
-
 CREATE DEFINER=`root`@`localhost` PROCEDURE `torlesFelhasznalo` (IN `felhasznaloNevBE` VARCHAR(100), IN `jelszoBE` TEXT)   UPDATE felhasznalo
 SET felhasznalo.aktiv = 1,
 	felhasznalo.torolve = CURRENT_TIMESTAMP
@@ -363,27 +293,6 @@ WHERE jatek.id = idBE$$
 CREATE DEFINER=`root`@`localhost` PROCEDURE `torlesJatekKosarbol` (IN `felhasznaloIdBE` INT(9), IN `jatekIdBE` INT(9))   DELETE 
 FROM kosar
 WHERE kosar.felhasznaloId = felhasznaloIdBE AND kosar.jatekId = jatekIdBE$$
-
-CREATE DEFINER=`root`@`localhost` PROCEDURE `ujAjandekKartya` (IN `nevBE` VARCHAR(100), IN `arBE` INT(9), IN `leirasBE` TEXT, IN `kepBE` VARCHAR(100), IN `akcioBE` INT(3), IN `mennyisegraktaronBE` INT(5), IN `eszkozIdBE` INT(9), IN `platformIdBE` INT(9))   INSERT INTO ajandekkartya(
-	ajandekkartya.nev,
-    ajandekkartya.ar,
-    ajandekkartya.leiras,
-    ajandekkartya.kep,
-    ajandekkartya.akcio,
-    ajandekkartya.mennyisegraktaron,
-    ajandekkartya.eszkozId,
-    ajandekkartya.platformId
-)
-VALUES(
-	nevBE,
-    arBE,
-    leirasBE,
-    kepBE,
-    akcioBE,
-    mennyisegraktaronBE,
-    eszkozIdBE,
-    platformIdBE
-)$$
 
 CREATE DEFINER=`root`@`localhost` PROCEDURE `ujFelhasznalo` (IN `felhasznaloNevBE` VARCHAR(100), IN `vezetekNevBE` VARCHAR(100), IN `keresztNev` VARCHAR(100), IN `emailBE` VARCHAR(100), IN `jelszoBE` TEXT)   INSERT INTO felhasznalo(
 	felhasznalo.felhasznaloNev,
@@ -424,42 +333,6 @@ VALUES(
 )$$
 
 DELIMITER ;
-
--- --------------------------------------------------------
-
---
--- Table structure for table `ajandekkartya`
---
-
-CREATE TABLE `ajandekkartya` (
-  `id` int(9) NOT NULL,
-  `nev` varchar(100) NOT NULL,
-  `ar` int(9) NOT NULL,
-  `leiras` text NOT NULL,
-  `kep` varchar(100) NOT NULL,
-  `akcio` int(3) NOT NULL DEFAULT '0',
-  `mennyisegraktaron` int(5) NOT NULL,
-  `eszkozId` int(9) NOT NULL,
-  `platformId` int(9) NOT NULL,
-  `letrehozva` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `frissitve` datetime DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
---
--- Dumping data for table `ajandekkartya`
---
-
-INSERT INTO `ajandekkartya` (`id`, `nev`, `ar`, `leiras`, `kep`, `akcio`, `mennyisegraktaron`, `eszkozId`, `platformId`, `letrehozva`, `frissitve`) VALUES
-(1, 'PlayStation Store Ajándékkártya 7500 Ft', 7500, 'A kártyát felhasználva játékok, filmek, interaktív könyvek, játék kiegészítések és számos más érdekes letölthető tartalom vár, hogy kedvenc Sony konzolodra (legyen az PS4, PS5) beszerezd őket! Témák, háttérképek, kosztümök - válogass kedvedre, úgy, hogy még a kanapédból sem állsz fel. A virtuális vásárlási utalvány ajándéknak is ideális!', '7500PScard.jpg', 0, 500, 5, 1, '2023-11-11 12:52:17', NULL),
-(2, 'PlayStation Store Ajándékkártya 30000 Ft', 30000, 'A kártyát felhasználva játékok, filmek, interaktív könyvek, játék kiegészítések és számos más érdekes letölthető tartalom vár, hogy kedvenc Sony konzolodra (legyen az PS4, PS5) beszerezd őket! Témák, háttérképek, kosztümök - válogass kedvedre, úgy, hogy még a kanapédból sem állsz fel. A virtuális vásárlási utalvány ajándéknak is ideális!', '30000PScard.jpg', 15, 200, 5, 1, '2023-09-18 17:44:16', '2023-09-18 17:44:56'),
-(3, 'Grand Theft Auto Online: Great White Shark Card', 5000, 'A Great White Shark kártyán 1 250 000 virtuális GTA dollárt találsz, melyet kedved szerint elkölthetsz a Grand Theft Auto Online játékban.', 'white-shark-card.jpg', 0, 100, 1, 1, '2023-09-25 12:34:39', '2023-09-25 12:42:04'),
-(4, 'Grand Theft Auto Online: Whale Shark Card', 12000, 'A Whale Shark kártyán 3 500 000 virtuális GTA dollárt találsz, melyet kedved szerint elkölthetsz a Grand Theft Auto Online játékban.', 'whale-shark-card.jpg', 10, 150, 1, 1, '2023-11-11 12:59:53', NULL),
-(5, 'FC 24 2800 FUT Points', 10000, 'A kártyán 2800 FUT Point-ot találsz, melyet kedved szerint elkölthetsz az FC 24 játékban.', '2800FUTpoints.jpg', 0, 0, 1, 2, '2023-11-11 13:02:51', NULL),
-(6, '5990 forintos XBOX ajándékkártya digitális kód', 5990, 'Használd Xbox ajándékkártyád játékok és alkalmazások vásárlásakor Xbox konzolhoz. Az ajándékkártya felhasználásához először váltsd be azt saját Xbox konzolodon. Az ajándékkártya bármeddig felhasználható, még a beváltást követően is.', '5990XBOXcard.jpg', 0, 66, 2, 4, '2023-11-13 21:35:14', NULL),
-(7, '12990 forintos XBOX ajándékkártya digitális kód', 12990, 'Használd Xbox ajándékkártyád játékok és alkalmazások vásárlásakor Xbox konzolhoz. Az ajándékkártya felhasználásához először váltsd be azt saját Xbox konzolodon. Az ajándékkártya bármeddig felhasználható, még a beváltást követően is.', '12990XBOXcard.jpg', 10, 175, 2, 4, '2023-11-13 21:41:57', NULL),
-(8, 'FC 24 5900 FC Points', 19990, 'A kártyán 5900 FUT Point-ot találsz, melyet kedved szerint elkölthetsz az FC 24 játékban.', '5900FUTpoints.jpg', 0, 210, 1, 2, '2023-11-13 21:47:38', NULL),
-(9, 'Battlefield 2042 Coins - 1100 BFC', 4490, 'Vásárolj 1100 BFC-t! Ez a játékbeli valuta új kozmetikai elemek vásárlására használható fegyverekhez, járművekhez és a játékban elérhető Battle Pass elemeihez.', '1100BFC.jpg', 0, 125, 2, 4, '2023-11-13 22:38:12', NULL),
-(10, 'Steam 50€ ajándékkártya', 18890, 'A Steam digitális ajándékkártyát csak a Steamen lehet felhasználni, hogy meghatározott összeget adj hozzá a Steam Wallet fiókodhoz. A 30 eurós Steam kártya 30 eurót utal át közvetlenül a Steam pénztárcádba. Amint a pénz megérkezett a fiókodba, vásárolhatsz a Steam áruházban.', 'Steam50card.jpeg', 0, 350, 1, 1, '2023-11-13 22:50:31', NULL);
 
 -- --------------------------------------------------------
 
@@ -659,7 +532,6 @@ INSERT INTO `rendeles` (`id`, `felhasznaloId`, `vegosszeg`, `feladva`) VALUES
 CREATE TABLE `termekkulcsok` (
   `id` int(9) NOT NULL,
   `termekKulcs` char(50) NOT NULL,
-  `ajandekKartyaId` int(9) NOT NULL,
   `jatekId` int(9) NOT NULL,
   `eladva` tinyint(1) NOT NULL DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
@@ -667,15 +539,6 @@ CREATE TABLE `termekkulcsok` (
 --
 -- Indexes for dumped tables
 --
-
---
--- Indexes for table `ajandekkartya`
---
-ALTER TABLE `ajandekkartya`
-  ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `Egyedi` (`nev`,`kep`),
-  ADD KEY `platformId` (`platformId`),
-  ADD KEY `eszkozId` (`eszkozId`);
 
 --
 -- Indexes for table `eszkoz`
@@ -732,17 +595,11 @@ ALTER TABLE `rendeles`
 --
 ALTER TABLE `termekkulcsok`
   ADD PRIMARY KEY (`id`),
-  ADD KEY `ajandekKartyaId` (`ajandekKartyaId`,`jatekId`);
+  ADD KEY `ajandekKartyaId` (`jatekId`);
 
 --
 -- AUTO_INCREMENT for dumped tables
 --
-
---
--- AUTO_INCREMENT for table `ajandekkartya`
---
-ALTER TABLE `ajandekkartya`
-  MODIFY `id` int(9) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT for table `eszkoz`
