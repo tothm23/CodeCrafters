@@ -61,7 +61,7 @@ document.addEventListener("DOMContentLoaded", function () {
   function termekekMegjelenitese(adatok) {
     jatekokElem.innerHTML = "";
 
-    for (let i = adatok.length / 2; i < adatok.length; i++) {
+    for (let i = adatok.length; i < adatok.length; i++) {
       jatekokElem.innerHTML += createCard(
         `../kepek/jatekok/${adatok[i].kep}`,
         adatok[i].nev,
