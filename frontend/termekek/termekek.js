@@ -38,7 +38,7 @@ document.addEventListener("DOMContentLoaded", function () {
   // Termékek megjelenítése a HTML-ben
   function createCard(kepPath, nev, ar, akcio,id,url) {
     const akciosAr = akcio > 0 ? Math.round(ar - (ar / 100) * akcio) : null;
-    // 
+    
     return `
       <div class="card my-4">
         <a href="${url}?id=${id}"><img src="${kepPath}" class="card-img-top" alt="${nev}"></a>
@@ -61,7 +61,7 @@ document.addEventListener("DOMContentLoaded", function () {
   function termekekMegjelenitese(adatok) {
     jatekokElem.innerHTML = "";
 
-    for (let i = adatok.length; i < adatok.length; i++) {
+    for (let i = 0; i < adatok.length; i++) {
       jatekokElem.innerHTML += createCard(
         `../kepek/jatekok/${adatok[i].kep}`,
         adatok[i].nev,
