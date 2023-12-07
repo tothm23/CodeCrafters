@@ -41,7 +41,7 @@ document.addEventListener("DOMContentLoaded", function () {
     // 
     return `
       <div class="card my-4">
-        <a href="${url}?id=${id}"><img src="${kepPath}" class="card-img-top w-50" alt="${nev}"></a>
+        <a href="${url}?id=${id}"><img src="${kepPath}" class="card-img-top" alt="${nev}"></a>
         <div class="card-body">
           <h5 class="card-title">${nev}</h5>
           <p class="card-text ar">${

@@ -170,6 +170,10 @@ h2 {
   border: #000 solid 1px;
   margin-right: 10px;
 }
+.card a{
+  padding: 0px;
+  margin: 0px;
+}
 .card img{
   border: #000 solid 1px;
 }
