@@ -62,9 +62,23 @@ fetch(`${link}/${id}`)
       }
 
       eredeti_ar.innerHTML = data.ar + " Ft";
+      //Ár megjelenítése
 
-      // Akciós ár egész számra kerekítve
-      akcios_ar.innerHTML = Math.round(data.ar - (data.ar / 100) * data.akcio) + " Ft";
+      if(data.akcio > 0){
+        eredeti_ar.innerHTML=`<p class="card-text ar" style="text-decoration: line-through;">${data.ar} Ft</p>`; 
+      }
+      else{
+        eredeti_ar.innerHTML=`<p class="card-text ar">${data.ar} Ft</p>`;
+      }
+      
+      if(data.akcio > 0){
+        // Akciós ár egész számra kerekítve
+        akcios_ar.innerHTML = `<p class="card-text akciosar">${Math.round(data.ar - (data.ar / 100) * data.akcio)} Ft</p>`;
+      }
+      else{ 
+        akcios_ar.innerHTML = "";
+      }
+      
       leiras.innerHTML = data.leiras;
     } else {
       alert("A játék nem található!");
