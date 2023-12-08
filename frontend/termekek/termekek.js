@@ -40,7 +40,7 @@ document.addEventListener("DOMContentLoaded", function () {
     const akciosAr = akcio > 0 ? Math.round(ar - (ar / 100) * akcio) : null;
     
     return `
-      <div class="card my-4">
+      <div class="card my-4 col">
         <a href="${url}?id=${id}"><img src="${kepPath}" class="card-img-top" alt="${nev}"></a>
         <div class="card-body">
           <h5 class="card-title">${nev}</h5>
@@ -61,15 +61,26 @@ document.addEventListener("DOMContentLoaded", function () {
   function termekekMegjelenitese(adatok) {
     jatekokElem.innerHTML = "";
 
-    for (let i = 0; i < adatok.length; i++) {
-      jatekokElem.innerHTML += createCard(
+    for (let i = 0; i < adatok.length; i+=3) {
+      jatekokElem.innerHTML +='<div class=row>'+ 
+      (createCard(
         `../kepek/jatekok/${adatok[i].kep}`,
         adatok[i].nev,
         adatok[i].ar,
         adatok[i].akcio,
         adatok[i].id,
         "../jatek/jatek.html"
-      );
+      ))
+      +
+      (createCard(
+        `../kepek/jatekok/${adatok[i+1].kep}`,
+        adatok[i+1].nev,
+        adatok[i+1].ar,
+        adatok[i+1].akcio,
+        adatok[i+1].id,
+        "../jatek/jatek.html"
+      ))+
+      '</div>';
     }
   }
 
