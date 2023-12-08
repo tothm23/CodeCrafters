@@ -322,38 +322,9 @@ slide
     border-radius: 5px;
   }
 
-  .mynavbar {
-    justify-content: center;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-  }
-
-  .my-bar-btn {
-    margin-top: 5px;
-    margin-left: 5px;
-    margin-right: 5px;
-    min-width: 100%;
-    display: flex;
-    flex-direction: column;
-    align-items: baseline;
-    flex: 1;
-    text-align: center;
-  }
-
-  .my-bar-btn ul {
-    min-width: 100%;
-    text-align: center;
-    align-items: center;
-  }
-
   .card {
     min-width: 100%;
     flex-direction: column;
-  }
-
-  .card-body {
-    min-width: 100%;
   }
 
   .bottom {

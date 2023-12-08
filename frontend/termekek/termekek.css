@@ -156,23 +156,33 @@ h2 {
   flex-direction: column;
   padding-left: 30px;
   padding: 5px;
+  width: 100%;
+  margin: 5px;
 }
+
 
 .termek-lista{
   width: 100%;
-  border-radius: 15px;
   color: white;
   margin: 5px;
-  max-width: 450px;
+}
+
+.card-body{
+  width: 100%;
+  background-color: rgb(36, 31, 31,75%);
 }
 
 .card {
   border: #000 solid 1px;
   margin-right: 10px;
+  padding: 5px;
+  max-width: 700px;
+  min-width: 300px;
+  flex-direction: row;
 }
 .card a{
-  padding: 0px;
-  margin: 0px;
+  width: 100%;
+
 }
 .card img{
   border: #000 solid 1px;
