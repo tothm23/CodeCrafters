@@ -61,8 +61,8 @@ document.addEventListener("DOMContentLoaded", function () {
   function termekekMegjelenitese(adatok) {
     jatekokElem.innerHTML = "";
 
-    for (let i = 0; i < adatok.length; i+=2) {
-      jatekokElem.innerHTML +='<div class=row>'+ 
+    for (let i = 0; i < adatok.length; i++) {
+      jatekokElem.innerHTML +=/*'<div class=row>'*/+ 
       (createCard(
         `../kepek/jatekok/${adatok[i].kep}`,
         adatok[i].nev,
@@ -71,7 +71,7 @@ document.addEventListener("DOMContentLoaded", function () {
         adatok[i].id,
         "../jatek/jatek.html"
       ))
-      +
+      /*+
       (createCard(
         `../kepek/jatekok/${adatok[i+1].kep}`,
         adatok[i+1].nev,
@@ -80,7 +80,7 @@ document.addEventListener("DOMContentLoaded", function () {
         adatok[i+1].id,
         "../jatek/jatek.html"
       ))+
-      '</div>';
+      '</div>'*/;
     }
   }
 
