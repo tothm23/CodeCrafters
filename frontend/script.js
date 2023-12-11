@@ -1,3 +1,23 @@
+document.addEventListener("DOMContentLoaded", function () {
+  const keresoInput = document.querySelector('.navbar input[type="search"]');
+  const form = document.querySelector(".navbar form");
+  const aktualisPath = window.location.pathname;
+  // Eseményfigyelők hozzáadása a keresőhöz és az ármezőkhöz
+  form.addEventListener("submit", function (esemeny) {
+    // A keresőszöveg tárolása a localStorage-ban
+    localStorage.setItem('keresesSzoveg', keresoInput.value.toLowerCase());
+    
+    if(aktualisPath=="/frontend/index.html"){
+    // Most már tovább navigálhatsz az új oldalra
+    window.open("./termekek/termekek.html");
+    }
+    else if(aktualisPath=="/frontend/jatek/jatek.html"){
+      window.open("../termekek/termekek.html");
+    }
+    else{
+    }
+  });
+});
 // GET kérés
 fetch(
   "http://localhost:8080/CodeCraftersWebshop-1.0-SNAPSHOT/webresources/fooldal"
@@ -44,14 +64,6 @@ fetch(
     }
   })
   .catch((hiba) => alert(hiba));
-
-//kosar gomb
-let dbszam = document.getElementsByClassName("darabszam");
-var hozzadasButton = document.getElementById("hozzadas");
-hozzadasButton.addEventListener("click", function () {
-  dbszam.style.display = block;
-  dbszam.innerHTML = parseInt(dbszam.innerHTML) + 1;
-});
 
 // vissza gomb
 let mybutton = document.getElementById("vissza-gomb");
