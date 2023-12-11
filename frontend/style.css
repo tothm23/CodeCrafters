@@ -7,6 +7,7 @@
 
 body {
   background-color: #404040;
+  min-width: 425px;
 }
 
 .container {
@@ -16,6 +17,12 @@ body {
   background-color: #404040;
   padding: 0px;
   justify-content: space-between;
+}
+
+.navbar-nav{
+  display: flex;
+  flex-grow: 1;
+  width: 100%;
 }
 
 /*nav*/
@@ -33,11 +40,12 @@ body {
   margin-top: 30px;
 }
 
-.navsearchbar {
-  width: 100%;
+.navbar-collapse{
+  max-width: 100%;
   display: flex;
-  justify-content: space-between;
+  flex-grow: 1;
   align-items: center;
+  flex-direction: column;
 }
 
 /*kereső*/
@@ -46,9 +54,7 @@ body {
   display: flex;
   align-items: center;
   border-radius: 10px;
-  margin: 5px;
-  max-width: 700px;
-  min-width: 200px;
+  max-width: 1000px;
 }
 
 .searchbar form {
@@ -140,21 +146,6 @@ body {
   color: white;
 }
 
-.darabszam {
-  border: #000 solid 1px;
-  border-radius: 50%;
-  width: 20px;
-  height: 20px;
-  color: white;
-  font-size: 10pt;
-  position: fixed;
-  top: 295px;
-  right: 4vh;
-  text-align: center;
-  background: red;
-  display: none;
-}
-
 /* vissza az oldal tetejére */
 #vissza-gomb {
   background-color: #bb4930;
@@ -183,18 +174,20 @@ body {
 
 .log_reg {
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
+  justify-content: space-between;
   margin-right: 20px;
 }
 
 .log_reg button {
   color: #000000;
   background-color: #ffffff;
-  border-radius: 5px;
+  border-radius: 10px;
   height: 30px;
   margin: 5px;
-  padding-left: 10px;
-  padding-right: 10px;
+  padding: 20px;
+  flex-direction: row;
+  justify-content: space-between;
 }
 
 .log_reg a {
@@ -303,32 +296,15 @@ slide
   padding: 10px;
   width: 100%;
 }
-
-@media only screen and (max-width: 700px) {
-  .navsearchbar {
-    flex-direction: column;
-  }
-
-  .searchbar form {
-    flex-direction: column;
-  }
-
-  .searchbar form input {
-    margin-bottom: 5px;
-    border-radius: 5px;
-  }
-
-  .searchbar button {
-    border-radius: 5px;
-  }
-
-  .card {
-    min-width: 100%;
-    flex-direction: column;
-  }
-
-  .bottom {
-    display: flex;
+/*
+@media screen and (max-width: 600px){
+  .card{
     flex-direction: column;
   }
 }
+
+@media screen and (min-width: 1000px){
+  .log_reg{
+    flex-direction: column;
+  }
+}*/
