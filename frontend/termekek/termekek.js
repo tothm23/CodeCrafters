@@ -40,7 +40,7 @@ document.addEventListener("DOMContentLoaded", function () {
     const akciosAr = akcio > 0 ? Math.round(ar - (ar / 100) * akcio) : null;
     
     return `
-      <div class="card my-4 col">
+      <div class="card my-4 flex-column flex-lg-row">
         <a href="${url}?id=${id}"><img src="${kepPath}" class="card-img-top" alt="${nev}"></a>
         <div class="card-body">
           <h5 class="card-title">${nev}</h5>
