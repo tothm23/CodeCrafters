@@ -47,6 +47,9 @@ document.addEventListener("DOMContentLoaded", function () {
         .then((adat) => {
           alert('Sikeres kérés! Válasz: ' + adat); // Sikeres kérés!
           console.log('Adatok érkeztek:', adat);
+          if(adat=="Felhasználó hozzáadva!"){
+            window.location.href = "../index.html";
+          }
         })
         .catch((hiba) => {
           alert('Hiba történt a kérés során: ' + hiba); // Alert hiba

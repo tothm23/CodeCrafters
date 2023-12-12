@@ -38,6 +38,7 @@ document.addEventListener("DOMContentLoaded", (event) => {
           };
           localStorage.setItem("bejelentkezes",JSON.stringify(valszObjektum));
           alert("Sikeres bejelentkezés");
+          window.location.href = "../index.html";
         }
         else{
           alert("Sikertelen bejelentkezés");
