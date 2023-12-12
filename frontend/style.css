@@ -39,6 +39,10 @@ body {
   margin-top: 30px;
 }
 
+.navbar-nav{
+ justify-content: space-between;  
+}
+
 .navbar-collapse{
   max-width: 100%;
   display: flex;
@@ -189,7 +193,7 @@ body {
 }
 
 .log_reg button:hover {
-  background-color: #7d7d7d;
+  background-color: #cdcdcd;
   
 }
 

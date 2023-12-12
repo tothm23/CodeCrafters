@@ -69,81 +69,84 @@
     </header>
 
     <div class="adatok">
-      <div class="main-inner">
-        <!-- Szűrők -->
-        <button class="btn btn-primary" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasWithBothOptions" aria-controls="offcanvasWithBothOptions">Enable both scrolling & backdrop</button>
-        <div class="offcanvas offcanvas-start" data-bs-scroll="true" tabindex="-1" id="offcanvasWithBothOptions" aria-labelledby="offcanvasWithBothOptionsLabel">
-          <div class="offcanvas-header">
-            <h5 class="offcanvas-title" id="offcanvasWithBothOptionsLabel">Backdroped with scrolling</h5>
-            <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
-          </div>
-          <div class="offcanvas-body">
-            <div class="szurok">
-              <h2>Kategóriák</h2>
-              <div class="form-check">
-                <input class="form-check-input" type="checkbox" value="Akcios" id="AkciosCheckbox" />
-                <label class="form-check-label" for="AkciosCheckbox"> Akciós </label>
-              </div>
-              <div class="ar">
-                <h2>Ár (HUF)</h2>
+      <!-- offcanvas -->
+      <button class="btn btn-primary d-block d-md-none" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasWithBothOptions" aria-controls="offcanvasWithBothOptions">Szűrők</button>
+      <div class="offcanvas offcanvas-start" data-bs-scroll="true" tabindex="-1" id="offcanvasWithBothOptions" aria-labelledby="offcanvasWithBothOptionsLabel">
+        <div class="offcanvas-header">
+          <h5 class="offcanvas-title text-light" id="offcanvasWithBothOptionsLabel">Szűrők</h5>
+          <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+        </div>
+        <div class="offcanvas-body">
+          <div class="szurok">
+            <h2>Kategóriák</h2>
+            <div class="form-check">
+              <input class="form-check-input" type="checkbox" value="Akcios" id="AkciosCheckbox" />
+              <label class="form-check-label" for="AkciosCheckbox"> Akciós </label>
+            </div>
+            <div class="ar">
+              <h2>Ár (HUF)</h2>
+              <div class="arszures">
                 <input type="number" name="min" placeholder="From" min="0" value />
                 <span style="color: white">-</span>
                 <input type="number" name="max" placeholder="To" max="999999" value />
               </div>
-              <div class="platform">
-                <h2>Platform</h2>
-                <div class="form-check">
-                  <input class="form-check-input" type="checkbox" value="steam" id="steam" />
-                  <label class="form-check-label" for="steam"> Steam </label>
-                </div>
-                <div class="form-check">
-                  <input class="form-check-input" type="checkbox" value="origin" id="origin" />
-                  <label class="form-check-label" for="Origin"> Origin </label>
-                </div>
-                <div class="form-check">
-                  <input class="form-check-input" type="checkbox" value="epic Games" id="epicGames" />
-                  <label class="form-check-label" for="epicGames"> Epic Games </label>
-                </div>
-                <div class="form-check">
-                  <input class="form-check-input" type="checkbox" value="ubisoft" id="ubisoft" />
-                  <label class="form-check-label" for="ubisoft"> Ubisoft Connect </label>
-                </div>
+            </div>
+            <div class="platform">
+              <h2>Platform</h2>
+              <div class="form-check">
+                <input class="form-check-input" type="checkbox" value="steam" id="steam" />
+                <label class="form-check-label" for="steam"> Steam </label>
               </div>
-              <div class="eszkoz">
-                <h2>Eszköz</h2>
-                <div class="form-check">
-                  <input class="form-check-input" type="checkbox" value="pc" id="pc" />
-                  <label class="form-check-label" for="pc"> PC </label>
-                </div>
-                <div class="form-check">
-                  <input class="form-check-input" type="checkbox" value="xbox One" id="xboxOne" />
-                  <label class="form-check-label" for="xboxOne"> Xbox One </label>
-                </div>
-                <div class="form-check">
-                  <input class="form-check-input" type="checkbox" value="xbox Series S" id="xboxSeriesS" />
-                  <label class="form-check-label" for="xboxSeriesS"> Xbox Series S </label>
-                </div>
-                <div class="form-check">
-                  <input class="form-check-input" type="checkbox" value="xbox Series X" id="xboxSeriesX" />
-                  <label class="form-check-label" for="xboxSeriesX"> Xbox Series X </label>
-                </div>
-                <div class="form-check">
-                  <input class="form-check-input" type="checkbox" value="PS4" id="PS4" />
-                  <label class="form-check-label" for="PS4"> PS4 </label>
-                </div>
-                <div class="form-check">
-                  <input class="form-check-input" type="checkbox" value="PS5" id="PS5" />
-                  <label class="form-check-label" for="PS5"> PS5 </label>
-                </div>
-                <div class="form-check">
-                  <input class="form-check-input" type="checkbox" value="nintendo Switch" id="nintendoSwitch" />
-                  <label class="form-check-label" for="nintendoSwitch"> Nintendo Switch </label>
-                </div>
+              <div class="form-check">
+                <input class="form-check-input" type="checkbox" value="origin" id="origin" />
+                <label class="form-check-label" for="Origin"> Origin </label>
+              </div>
+              <div class="form-check">
+                <input class="form-check-input" type="checkbox" value="epic Games" id="epicGames" />
+                <label class="form-check-label" for="epicGames"> Epic Games </label>
+              </div>
+              <div class="form-check">
+                <input class="form-check-input" type="checkbox" value="ubisoft" id="ubisoft" />
+                <label class="form-check-label" for="ubisoft"> Ubisoft Connect </label>
+              </div>
+            </div>
+            <div class="eszkoz">
+              <h2>Eszköz</h2>
+              <div class="form-check">
+                <input class="form-check-input" type="checkbox" value="pc" id="pc" />
+                <label class="form-check-label" for="pc"> PC </label>
+              </div>
+              <div class="form-check">
+                <input class="form-check-input" type="checkbox" value="xbox One" id="xboxOne" />
+                <label class="form-check-label" for="xboxOne"> Xbox One </label>
+              </div>
+              <div class="form-check">
+                <input class="form-check-input" type="checkbox" value="xbox Series S" id="xboxSeriesS" />
+                <label class="form-check-label" for="xboxSeriesS"> Xbox Series S </label>
+              </div>
+              <div class="form-check">
+                <input class="form-check-input" type="checkbox" value="xbox Series X" id="xboxSeriesX" />
+                <label class="form-check-label" for="xboxSeriesX"> Xbox Series X </label>
+              </div>
+              <div class="form-check">
+                <input class="form-check-input" type="checkbox" value="PS4" id="PS4" />
+                <label class="form-check-label" for="PS4"> PS4 </label>
+              </div>
+              <div class="form-check">
+                <input class="form-check-input" type="checkbox" value="PS5" id="PS5" />
+                <label class="form-check-label" for="PS5"> PS5 </label>
+              </div>
+              <div class="form-check">
+                <input class="form-check-input" type="checkbox" value="nintendo Switch" id="nintendoSwitch" />
+                <label class="form-check-label" for="nintendoSwitch"> Nintendo Switch </label>
               </div>
             </div>
           </div>
         </div>
-        <div class="szurok">
+      </div>
+      <div class="main-inner">
+        <!-- Szűrők -->
+        <div class="szurok d-none d-md-block">
           <h2>Kategóriák</h2>
           <div class="form-check">
             <input class="form-check-input" type="checkbox" value="Akcios" id="AkciosCheckbox" />
@@ -151,9 +154,11 @@
           </div>
           <div class="ar">
             <h2>Ár (HUF)</h2>
-            <input type="number" name="min" placeholder="From" min="0" value />
-            <span style="color: white">-</span>
-            <input type="number" name="max" placeholder="To" max="999999" value />
+            <div class="arszures">
+              <input type="number" name="min" placeholder="From" min="0" value />
+              <span style="color: white">-</span>
+              <input type="number" name="max" placeholder="To" max="999999" value />
+            </div>
           </div>
           <div class="platform">
             <h2>Platform</h2>

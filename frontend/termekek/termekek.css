@@ -31,10 +31,9 @@
 }
 
 .main {
-  padding-left: 50px;
-  padding-right: 50px;
   display: flex;
   flex-direction: column;
+  padding: 5px;
 }
 
 .main-header {
@@ -51,6 +50,21 @@ h1 {
 .main-inner {
   display: flex;
   align-items: baseline;
+  justify-content: space-between;
+  padding: 5px;
+}
+
+.adatok .btn-primary{
+  background: #241f1f;
+  box-shadow: none;
+  border: none;
+}
+.offcanvas{
+  padding: 0px;
+  background: #241f1f;
+}
+.offcanvas .szurok{
+border: none;
 }
 
 .szurok {
@@ -58,15 +72,13 @@ h1 {
   flex-direction: column;
   min-width: 250px;
   background-color: #241f1f;
-  padding: 10px;
+  padding: 20px;
   border-radius: 10px;
   border: #000 solid 1px;
 }
-.form-check {
-  border-radius: 10px;
-  background-color: #404040;
-  border: #000 solid 1px;
-}
+
+
+
 .form-check-input {
   width: 25px;
   height: 25px;
@@ -82,14 +94,8 @@ h1 {
   box-shadow: none;
 }
 
-.kategoriak {
-  padding-bottom: 10px;
-  margin-bottom: 10px;
-  border-bottom: 1px solid white;
-}
-
 h2 {
-  font-size: 16px;
+  font-size: 20px;
   padding-top: 5px;
   padding-bottom: 10px;
   color: white;
@@ -104,9 +110,13 @@ h2 {
   padding: 10px;
   margin: 10px;
   border-bottom: 1px solid white;
-  display: flex;
-  flex-direction: column;
   align-items: center;
+}
+
+.arszures{
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
 }
 
 .ar input {
@@ -134,7 +144,7 @@ h2 {
   display: flex;
   flex-direction: row;
   user-select: none;
-  justify-content: center;
+  justify-content: left;
   padding-top: 20px;
   padding-bottom: 20px;
 }
@@ -154,17 +164,14 @@ h2 {
   align-self: flex-start;
   display: flex;
   flex-direction: column;
-  padding-left: 30px;
-  padding: 5px;
   width: 100%;
-  margin: 5px;
 }
 
 
 .termek-lista{
   width: 100%;
   color: white;
-  margin: 5px;
+  padding: 5px;
 }
 
 .card-body{
@@ -174,8 +181,6 @@ h2 {
 
 .card {
   border: #000 solid 1px;
-  margin-right: 10px;
-  padding: 5px;
   max-width: 700px;
   min-width: 300px;
   flex-direction: row;
