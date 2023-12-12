@@ -3,6 +3,8 @@ document.addEventListener("DOMContentLoaded", function () {
   const keresoInput = document.querySelector('.navbar input[type="search"]');
   const minArInput = document.querySelector('.ar input[name="min"]');
   const maxArInput = document.querySelector('.ar input[name="max"]');
+  const minArInput2 = document.querySelector('.ar2 input[name="min"]');
+  const maxArInput2 = document.querySelector('.ar2 input[name="max"]');
   const form = document.querySelector(".navbar form");
   const checkboxok = document.querySelectorAll(".form-check-input");
   const jatekokElem = document.querySelector(".termek-lista#jatekok");
@@ -15,6 +17,39 @@ document.addEventListener("DOMContentLoaded", function () {
     keresoInput.value = keresoSzoveg;
   }
 
+  // Eseményfigyelők hozzáadása a keresőhöz és az ármezőkhöz
+  form.addEventListener("submit", function (esemeny) {
+    esemeny.preventDefault();
+    szurokAlkalmazasa();
+  });
+
+
+  minArInput.addEventListener("input", function () {
+    minArInput2.value = minArInput.value;
+    szurokAlkalmazasa();
+  });
+  
+  minArInput2.addEventListener("input", function () {
+    minArInput.value = minArInput2.value;
+    szurokAlkalmazasa();
+  });
+  
+  maxArInput.addEventListener("input", function () {
+    maxArInput2.value = maxArInput.value;
+    szurokAlkalmazasa();
+  });
+  
+  maxArInput2.addEventListener("input", function () {
+    maxArInput.value = maxArInput2.value;
+    szurokAlkalmazasa();
+  });
+  
+
+
+  checkboxok.forEach(function (checkbox) {
+    checkbox.addEventListener("change", szurokAlkalmazasa);
+  });
+
   // Termékek lekérése a szerverről
   fetch(
       "http://localhost:8080/CodeCraftersWebshop-1.0-SNAPSHOT/webresources/termekek"
@@ -25,19 +60,8 @@ document.addEventListener("DOMContentLoaded", function () {
 
       // Kezdeti terméklista megjelenítése
       termekekMegjelenitese(adat);
-      // Eseményfigyelők hozzáadása a keresőhöz és az ármezőkhöz
-      form.addEventListener("submit", function (esemeny) {
-        esemeny.preventDefault();
-        szurokAlkalmazasa();
-      });
       // Az oldal betöltésekor alkalmazza a szűrőket de csak mikor a betöltöt addatal egyenlő hogy ne fusson le mindig
       if (keresoSzoveg == keresoInput.value) szurokAlkalmazasa();
-      minArInput.addEventListener("input", szurokAlkalmazasa);
-      maxArInput.addEventListener("input", szurokAlkalmazasa);
-      checkboxok.forEach(function (checkbox) {
-        checkbox.addEventListener("change", szurokAlkalmazasa);
-      });
-      
     })
     .catch((hiba) => alert(hiba));
 
@@ -85,7 +109,7 @@ document.addEventListener("DOMContentLoaded", function () {
     const keresendoSzoveg = keresoInput.value.toLowerCase();
     const minAr = parseFloat(minArInput.value) || 0;
     const maxAr = parseFloat(maxArInput.value) || Infinity;
-
+    console.log("min:" + minAr + " max:" + maxAr);
     const kivalasztottPlatformok = Array.from(document.querySelectorAll('.platform input:checked'))
       .map(checkbox => checkbox.value.toLowerCase());
 
