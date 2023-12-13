@@ -79,7 +79,7 @@ fetch(`${link}/${id}`)
       else{ 
         akcios_ar.innerHTML = "";
       }
-      hozzadasgomb.innerHTML=hozzaadasGomb();
+      hozzadasgomb.innerHTML=hozzaadasGomb(id);
       
       leiras.innerHTML = data.leiras;
     } else {

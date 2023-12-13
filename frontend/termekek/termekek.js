@@ -68,7 +68,7 @@ document.addEventListener("DOMContentLoaded", function () {
     const akciosAr = akcio > 0 ? Math.round(ar - (ar / 100) * akcio) : null;
 
     return `
-      <div ${id} class="card my-4 flex-column flex-lg-row">
+      <div class="card my-4 flex-column flex-lg-row">
         <a href="${url}?id=${id}"><img src="${kepPath}" class="card-img-top" alt="${nev}"></a>
         <div class="card-body">
           <h5 class="card-title">${nev}</h5>
@@ -80,7 +80,7 @@ document.addEventListener("DOMContentLoaded", function () {
               ? `<p class="card-text akciosar">${akciosAr} Ft</p>`
               : ""
           }
-          ${hozzaadasGomb()}
+          ${hozzaadasGomb(id)}
         </div>
       </div>
     `;
