@@ -1,43 +1,42 @@
-function kosarTetelek(title, price) {
-    var cartRow = document.createElement('div');
-    cartRow.classList.add('kosar-row');
+document.addEventListener('DOMContentLoaded', function () {
+            const Kosartartalma = document.getElementById('cart-items');
 
-    var cartItems = document.querySelector('.kosar-tetelek');
-    var cartItemTitles = cartItems.querySelectorAll('.kosar-tetel .cart-item-title');
+            // Kinyerjük a bejelentkezési adatokat a localStorage-ból
+            const bejelentkezettFelhasznalo = JSON.parse(localStorage.getItem("bejelentkezes"));
+            
+            console.log(bejelentkezettFelhasznalo.id);
+            // Ellenőrizzük, hogy van-e bejelentkezett felhasználó
+            if ( /*bejelentkezettFelhasznalo &&*/ bejelentkezettFelhasznalo.id) {
+                // Ha van bejelentkezett felhasználó, akkor használd az id-t a fetch hívásban
+                fetch(`http://localhost:8080/CodeCraftersWebshop-1.0-SNAPSHOT/webresources/kosar/${bejelentkezettFelhasznalo.id}`,)
+                    .then(response => response.json())
+                    .then(result => {
+                        // Itt további kezelése a kapott adatoknak
+                        kosartartalma(result);
+                        console.log(result);
+                    })
+                    .catch(error => console.error(error));
+            } else {
+                // Ha nincs bejelentkezett felhasználó, valamilyen hiba kezelése vagy irányítás
+                console.error("Nincs bejelentkezett felhasználó");
+            }
 
-    for (var i = 0; i < cartItemTitles.length; i++) {
-        if (cartItemTitles[i].innerText == title) {
-            alert('Ez a tétel már hozzá lett adva a kosárhoz.');
-            return;
+            function kosartartalma(adatok) {
+                Kosartartalma.innerHTML = "";
+
+                for (let i = 0; i < adatok.length; i++) {
+                    Kosartartalma.innerHTML += `
+            <div class="kosar-row">
+                <div class="kosar-tetel kosar-column">
+                    <img class="kosar-tetel-kep" src="../kepek/jatekok/${adatok[i].kep}" width="100" height="100">
+                    <span class="kosar-tetel-nev">${adatok[i].nev}</span>
+                </div>
+                <span class="kosar-ar kosar-column">${adatok[i].vegosszeg}</span>
+                <div class="kosar-torles kosar-column"> 
+                    <button class="btn btn-danger" type="button">X</button>
+                </div>
+            </div>
+        `;
         }
     }
-
-    var cartRowContents = `
-        <div class="kosar-tetel kosar-column">
-            <span class="cart-item-title">${title}</span>
-        </div>
-        <span class="kosar-ar kosar-column">${price} FT</span>
-        <div class="kosar-mennyiseg kosar-column">
-            <input class="kosar-mennyiseg-input" type="number" value="1" min="1">
-            <button class="btn btn-danger" type="button">TÖRLÉS</button>
-        </div>`;
-
-    cartRow.innerHTML = cartRowContents;
-    cartItems.appendChild(cartRow);
-
-    var removeButton = cartRow.querySelector('.btn-danger');
-    var quantityInput = cartRow.querySelector('.kosar-mennyiseg-input');
-
-    removeButton.addEventListener('click', removeCartItem);
-    quantityInput.addEventListener('change', quantityChanged);
-}
-
-// Példa adat
-kosarTetelek('Játék1', 2999);
-kosarTetelek('Játék2', 3999);
-kosarTetelek('Játék3', 4999);
-
-//Problémák:
-// - csak az első adatot jeleníti meg
-// - mennyiség nem updateli a végösszeget
-// - törlés gomb nem működik
+});
