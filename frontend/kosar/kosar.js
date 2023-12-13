@@ -26,8 +26,9 @@ document.addEventListener('DOMContentLoaded', function () {
         Kosartartalma.innerHTML = "";
 
         for (let i = 0; i < adatok.length; i++) {
+            //{adatok[i].id}
             Kosartartalma.innerHTML += `
-            <div class="kosar-row" data-id="${adatok[i].id}">
+            <div class="kosar-row" data-id="1">
                 <div class="kosar-tetel kosar-column">
                     <img class="kosar-tetel-kep" src="../kepek/jatekok/${adatok[i].kep}" width="100" height="100">
                     <span class="kosar-tetel-nev">${adatok[i].nev}</span>
@@ -42,14 +43,34 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
     document.addEventListener("click", function (event) {
-        if (event.target && event.target.classList.contains("torol")) {
-            const jatekId = event.target.closest('.kosar-row').dataset.id;
-    
-            //a törléshez szükséges műveleteket
-            
-        }
+        console.log("Click");
+        var kosarElem = event.target.closest('.kosar-row');
+            // Olvassa ki az ID-t a data-id attribútumból
+            var jatekid = kosarElem.getAttribute('data-id');
+            var raw = {
+                felhasznaloId: bejelentkezettFelhasznalo.id,
+                jatekId: jatekid
+            };
+            console.log("termek id:", jatekid);
+            var requestOptions = {
+                method: 'DELETE',
+                body: JSON.stringify(raw),
+                redirect: 'follow'
+            };
+            const url=`http://localhost:8080/CodeCraftersWebshop-1.0-SNAPSHOT/webresources/kosar?felhasznaloId=${bejelentkezettFelhasznalo.id}&jatekId=${jatekid}`;
+            fetch(url, requestOptions)
+                .then(response => response.text())
+                .then(result => console.log(result))
+                .catch(error => console.log('error', error));
+
+            // Törölt elem eltávolítása a DOM-ból
+            const torlendoElem = event.target.closest('.kosar-row');
+            torlendoElem.remove();
+
+            // Frissítsd a végösszeget a módosított kosarat figyelembe véve
+            vegosszegkiszamitasa(getRemainingCartItems());
+        
     });
-    
 
     function vegosszegkiszamitasa(adatok) {
         vegosszeg.innerHTML = "";
