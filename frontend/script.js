@@ -97,10 +97,9 @@ document.addEventListener("DOMContentLoaded", function () {
     if (event.target && event.target.id === "hozzadas") {
       const jatekId = event.target.getAttribute("data-jatek-id");
 
-      // Execute the code to send a POST request to your server
+      if(jatekId)
       var myHeaders = new Headers();
       myHeaders.append("Content-Type", "application/json");
-
       var raw = JSON.stringify({
         jatekId: jatekId,
         felhasznaloId: bejelentkezettFelhasznalo.id
