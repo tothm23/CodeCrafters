@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Dec 05, 2023 at 11:21 AM
+-- Generation Time: Dec 13, 2023 at 10:36 AM
 -- Server version: 5.7.24
 -- PHP Version: 8.0.1
 
@@ -281,6 +281,33 @@ VALUES(
 
 END$$
 
+CREATE DEFINER=`root`@`localhost` PROCEDURE `rendeles2` (IN `felhasznaloIdBE` INT(9))   BEGIN
+
+DECLARE vegosszeg INT(9);
+
+SELECT SUM(kosar.vegosszeg) INTO vegosszeg
+FROM kosar
+WHERE kosar.felhasznaloId = felhasznaloIdBE;
+
+INSERT INTO rendeles(
+    rendeles.felhasznaloId,
+    rendeles.vegosszeg
+)
+VALUES(
+    felhasznaloIdBE,
+	vegosszeg
+);
+
+SELECT 
+	kosar.jatekId,
+	termekkulcsok.termekKulcs
+FROM kosar
+INNER JOIN termekkulcsok
+ON kosar.jatekId = termekkulcsok.jatekId
+WHERE kosar.felhasznaloId = felhasznaloIdBE;
+
+END$$
+
 CREATE DEFINER=`root`@`localhost` PROCEDURE `torlesFelhasznalo` (IN `felhasznaloNevBE` VARCHAR(100), IN `jelszoBE` TEXT)   UPDATE felhasznalo
 SET felhasznalo.aktiv = 1,
 	felhasznalo.torolve = CURRENT_TIMESTAMP
@@ -381,9 +408,9 @@ CREATE TABLE `felhasznalo` (
 --
 
 INSERT INTO `felhasznalo` (`id`, `felhasznaloNev`, `vezetekNev`, `keresztNev`, `email`, `jelszo`, `jogosultsagId`, `letrehozva`, `frissitve`) VALUES
-(6, 'SunnyDay21', 'Kéri', 'Bence', 'keribence0@gmail.com', '49e6586c9fbf5cdbfb820bde5c0f6800a21b549a', 2, '2023-11-20 17:13:02', NULL),
-(7, 'AdventureSeeker', 'Nagy', 'Péter', 'peter.nagy@example.com', '9c073111b80b0af312f9c9f8bb4baa1c41e86d51', 1, '2023-11-20 17:13:35', NULL),
-(8, 'MusicLover88', 'Tóth', 'Eszter', 'eszter.toth@example.com', '1e0acaff2cd87e52f18dbc6c9b6cad2b62483e49', 1, '2023-11-20 17:16:12', NULL);
+(1, 'SunnyDay21', 'Kéri', 'Bence', 'keribence0@gmail.com', '49e6586c9fbf5cdbfb820bde5c0f6800a21b549a', 2, '2023-11-20 17:13:02', NULL),
+(2, 'AdventureSeeker', 'Nagy', 'Péter', 'peter.nagy@example.com', '9c073111b80b0af312f9c9f8bb4baa1c41e86d51', 1, '2023-11-20 17:13:35', NULL),
+(3, 'MusicLover88', 'Tóth', 'Eszter', 'eszter.toth@example.com', '1e0acaff2cd87e52f18dbc6c9b6cad2b62483e49', 1, '2023-11-20 17:16:12', NULL);
 
 -- --------------------------------------------------------
 
@@ -521,7 +548,8 @@ CREATE TABLE `rendeles` (
 --
 
 INSERT INTO `rendeles` (`id`, `felhasznaloId`, `vegosszeg`, `feladva`) VALUES
-(3, 1, 42864, '2023-11-30 20:08:36');
+(3, 1, 42864, '2023-11-30 20:08:36'),
+(4, 3, 8082, '2023-12-05 20:50:32');
 
 -- --------------------------------------------------------
 
@@ -535,6 +563,18 @@ CREATE TABLE `termekkulcsok` (
   `jatekId` int(9) NOT NULL,
   `eladva` tinyint(1) NOT NULL DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `termekkulcsok`
+--
+
+INSERT INTO `termekkulcsok` (`id`, `termekKulcs`, `jatekId`, `eladva`) VALUES
+(1, 'a1de-2jg2-jas7', 1, 0),
+(2, 'b2fg-1hd3-k9s8', 1, 0),
+(3, 'c3hs-4tj6-l5g9', 1, 0),
+(4, 'd4ke-3li7-m2f0', 3, 0),
+(5, 'e5mf-6nk8-o1h3', 3, 0),
+(6, 'f6og-7pli-8v9u', 3, 0);
 
 --
 -- Indexes for dumped tables
@@ -611,7 +651,7 @@ ALTER TABLE `eszkoz`
 -- AUTO_INCREMENT for table `felhasznalo`
 --
 ALTER TABLE `felhasznalo`
-  MODIFY `id` int(9) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id` int(9) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `jatek`
@@ -641,13 +681,13 @@ ALTER TABLE `platform`
 -- AUTO_INCREMENT for table `rendeles`
 --
 ALTER TABLE `rendeles`
-  MODIFY `id` int(9) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(9) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `termekkulcsok`
 --
 ALTER TABLE `termekkulcsok`
-  MODIFY `id` int(9) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(9) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
