@@ -278,13 +278,12 @@ slide
   max-height: 600px;
 }
 
-#hozzadas {
+#hozzadas ,#hozzadas:focus ,#hozzadas:hover{
   background-color: #95e72d;
   color: #000;
   border: 0;
   border-radius: 10px;
 }
-
 
 /* lábléc */
 .lab{

@@ -44,8 +44,6 @@ document.addEventListener("DOMContentLoaded", function () {
     szurokAlkalmazasa();
   });
   
-
-
   checkboxok.forEach(function (checkbox) {
     checkbox.addEventListener("change", szurokAlkalmazasa);
   });
@@ -70,7 +68,7 @@ document.addEventListener("DOMContentLoaded", function () {
     const akciosAr = akcio > 0 ? Math.round(ar - (ar / 100) * akcio) : null;
 
     return `
-      <div class="card my-4 flex-column flex-lg-row">
+      <div ${id} class="card my-4 flex-column flex-lg-row">
         <a href="${url}?id=${id}"><img src="${kepPath}" class="card-img-top" alt="${nev}"></a>
         <div class="card-body">
           <h5 class="card-title">${nev}</h5>
@@ -82,7 +80,7 @@ document.addEventListener("DOMContentLoaded", function () {
               ? `<p class="card-text akciosar">${akciosAr} Ft</p>`
               : ""
           }
-          <input id="hozzadas" class="my-2 p-2 btn btn-success fs-5" type="button" value="Hozzáadás a kosárhoz" />
+          ${hozzaadasGomb()}
         </div>
       </div>
     `;

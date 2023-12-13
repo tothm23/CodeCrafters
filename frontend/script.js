@@ -1,27 +1,31 @@
+const bejelentkezettFelhasznalo = JSON.parse(localStorage.getItem("bejelentkezes"));
+const hozzaadasGombok = document.querySelector("#hozzadas");
+
 document.addEventListener("DOMContentLoaded", function () {
   const keresoInput = document.querySelector('.navbar input[type="search"]');
   const form = document.querySelector(".navbar form");
   const aktualisPath = window.location.pathname;
+  console.log(aktualisPath);
+  //kijelentkezés essetén
+  //localStorage.removeItem("bejelentkezes");
+  console.log(bejelentkezettFelhasznalo.id);
   // Eseményfigyelők hozzáadása a keresőhöz és az ármezőkhöz
   form.addEventListener("submit", function (esemeny) {
     // A keresőszöveg tárolása a localStorage-ban
     localStorage.setItem('keresesSzoveg', keresoInput.value.toLowerCase());
-    
-    if(aktualisPath=="/frontend/index.html"){
-    // Most már tovább navigálhatsz az új oldalra
-    window.open("./termekek/termekek.html");
-    }
-    else if(aktualisPath=="/frontend/jatek/jatek.html"){
+
+    if (aktualisPath == "/frontend/index.html") {
+      // Most már tovább navigálhatsz az új oldalra
+      window.open("./termekek/termekek.html");
+    } else if (aktualisPath == "/frontend/jatek/jatek.html") {
       window.open("../termekek/termekek.html");
-    }
-    else{
-    }
+    } else {}
   });
 });
 // GET kérés
 fetch(
-  "http://localhost:8080/CodeCraftersWebshop-1.0-SNAPSHOT/webresources/fooldal"
-)
+    "http://localhost:8080/CodeCraftersWebshop-1.0-SNAPSHOT/webresources/fooldal"
+  )
   .then((valasz) => valasz.json())
   .then((adat) => {
     var carouselInner = document.getElementById("gameCarousel");
@@ -30,9 +34,8 @@ fetch(
       var akciosAr = Math.round(
         adat[i].ar - (adat[i].ar / 100) * adat[i].akcio
       );
-
       carouselInner.innerHTML += `
-        <div class="carousel-item">
+        <div id=${adat[i].id} class="carousel-item">
           <div class="card flex-column flex-lg-row">
             <a href="./jatek/jatek.html?id=${adat[i].id}"><img src="./kepek/jatekok/${
               adat[i].kep
@@ -50,12 +53,11 @@ fetch(
                   ? `<p class="card-text akciosar">${akciosAr} Ft</p>`
                   : ""
               }
-              <input id="hozzadas" class="my-2 p-2 btn btn-success fs-5" type="button" value="Hozzáadás a kosárhoz" />
+              ${hozzaadasGomb()}
             </div>  
           </div>
         </div>
       `;
-
       // Kiválasztjuk az első carousel-item-et
       var elsoCarouselElem = document.querySelector(".carousel-item");
 
@@ -82,3 +84,37 @@ function felgorget() {
     behavior: "smooth",
   });
 }
+
+function hozzaadasGomb() {
+  if (bejelentkezettFelhasznalo) {
+    return `<input id="hozzadas" class="my-2 p-2 btn btn-success fs-5" type="button" value="Hozzáadás a kosárhoz" />`;
+    }
+   else {
+    return `<input id="hozzadas" class="my-2 p-2 btn btn-success fs-5" type="button" disabled value="Hozzáadás a kosárhoz" />`;
+    }
+  
+};
+
+hozzaadasGombok.addEventListener("click", function(esemeny){
+  console.log("katt");
+  var myHeaders = new Headers();
+  myHeaders.append("Content-Type", "application/json");
+  
+  var raw = JSON.stringify({
+    "jatekId": document.getElementById('id').value,
+    "felhasznaloId":bejelentkezettFelhasznalo.id
+  });  
+  console.log(raw);
+  var requestOptions = {
+    method: 'POST',
+    headers: myHeaders,
+    body: raw,
+    redirect: 'follow'
+  };
+  
+  fetch("http://localhost:8080/CodeCraftersWebshop-1.0-SNAPSHOT/webresources/kosar", requestOptions)
+    .then(response => response.text())
+    .then(result => console.log(result))
+    .catch(error => console.log('error', error));
+
+});

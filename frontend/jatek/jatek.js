@@ -9,6 +9,7 @@ const elerheto = document.getElementById("elerheto");
 const eredeti_ar = document.getElementById("eredeti-ar");
 const akcios_ar = document.getElementById("akcios-ar");
 const leiras = document.getElementById("leiras");
+const hozzadasgomb = document.getElementById("hozzadasgomb");
 
 // Kiolvassa a paraméterek az URL-ből
 let parameterek = new URL(document.location).searchParams;
@@ -78,6 +79,7 @@ fetch(`${link}/${id}`)
       else{ 
         akcios_ar.innerHTML = "";
       }
+      hozzadasgomb.innerHTML=hozzaadasGomb();
       
       leiras.innerHTML = data.leiras;
     } else {
