@@ -59,7 +59,6 @@ body {
 }
 
 .card-text {
-    font-size: 1.2em;
     color: white;
     padding: 5px;
 }
@@ -69,9 +68,13 @@ body {
     background-color: #df3333;
     border: #241f1f solid 1px;
     font-size: 20pt;
+    justify-self: end;
 }
 .w-lg-auto{
- max-width: 100px;
+ max-width: 80px;
+}
+.h-lg-auto{
+    max-height: 120px;
 }
 .card .btn:hover {
     background-color: #e21717;
@@ -111,6 +114,10 @@ body {
 .btn-vissza:hover {
     border: 1px solid white;
     background-color: #404040;
+}
+
+.btn-vissza a {
+    color: #fff;
 }
 
 .btn-rendeles {

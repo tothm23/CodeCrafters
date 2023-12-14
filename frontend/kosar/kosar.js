@@ -23,9 +23,9 @@ function kosartartalma(adatok) {
         Kosartartalma.innerHTML +=`
         <div class="card d-flex flex-row justify-content-center h-auto h-lg-120" data-id="${adatok[i].jatekId}">
             <img class="card-img-top img-fluid justify-content-center" src="../kepek/jatekok/${adatok[i].kep}" alt="${adatok[i].nev}">
-            <div class="card-body d-flex flex-column flex-md-row">
-                <p class="card-text">${adatok[i].nev}</p>
-                <p class="card-text">${adatok[i].vegosszeg} Ft</p>
+            <div class="card-body d-flex flex-row justify-align-content-between border-10">
+                <p class="card-text text-lg-center">${adatok[i].nev}</p>
+                <p class="card-text d-none d-lg-block">${adatok[i].vegosszeg} Ft</p>
                 <button id="torol" class="btn btn-danger h-50 h-lg-auto w-50 w-lg-auto" type="button">X</button>
             </div>
         </div>
@@ -60,7 +60,9 @@ document.addEventListener("click", function torlse (event) {
     
 });
 
-
+function goBack() {
+    window.history.back();
+  }
 
 function vegosszegkiszamitasa(adatok) {
     vegosszeg.innerHTML = "";
