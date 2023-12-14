@@ -17,7 +17,6 @@ body {
 .container {
     max-width: 800px;
     margin: auto;
-    border: black 1px solid;
 }
 .header {
     font-weight: bold;
