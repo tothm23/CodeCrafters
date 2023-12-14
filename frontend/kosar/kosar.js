@@ -20,11 +20,10 @@ function kosartartalma(adatok) {
     Kosartartalma.innerHTML = "";
 
     for (let i = 0; i < adatok.length; i++) {
-        //;
         Kosartartalma.innerHTML +=`
-        <div class="card d-flex flex-md-row flex-column" data-id="${adatok[i].jatekId}">
-            <img class="card-img-top img-fluid" src="../kepek/jatekok/${adatok[i].kep}" alt="${adatok[i].nev}">
-            <div class="card-body w-100">
+        <div class="card d-flex flex-column flex-md-row justify-content-center" data-id="${adatok[i].jatekId}">
+            <img class="card-img-top" src="../kepek/jatekok/${adatok[i].kep}" alt="${adatok[i].nev}">
+            <div class="card-body d-flex flex-column flex-md-row">
                 <p class="card-text">${adatok[i].nev}</p>
                 <p class="card-text">${adatok[i].vegosszeg} Ft</p>
                 <button id="torol" class="btn btn-danger" type="button">X</button>

@@ -11,11 +11,7 @@ body {
     margin: 0;
     padding: 0;
     min-height: 100%;
-    background-color: #404040;
-}
-
-.content-section {
-    margin: 1em;
+    background-color: #241f1f;
 }
 
 .container {
@@ -23,27 +19,39 @@ body {
     margin: 0 auto;
     padding: 0 1.5em;
 }
-
-
-
-.kosar-header {
+.header {
     font-weight: bold;
-    font-size: 1.25em;
+    font-size: 20pt;
+    padding: 20px;
     color: white;
+    text-align: center;
 }
 
 .card {
+    min-height: 120px;
     width: 100%;
     display: flex;
     border: 1px solid black;
     margin-bottom: 1.5em;
-    border-radius: 10px;
-    background-color: #241f1f;
+    border-radius: 15px;
+    background-color: #404040;
+    padding: 0px;
 }
 
-.img-fluid {
-    width: 100%;
-    min-width: 100px;
+.card-body{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.card button{
+    padding: 0px;
+}
+
+img{
+    height: fit-content;
+    max-height: 300px;
+    max-width: fit-content;
 }
 
 .card-text {
@@ -52,14 +60,26 @@ body {
 }
 
 .card .btn {
-    max-height: 100px;
-    max-width: 100px;
+    width: 80px;
+    height: 120px;
+    margin-left: 10px;
+    background-color: #df3333;
+    font-size: 20pt;
+    border: black 1px solid;
+}
+
+.card .btn:hover {
+    background-color: #e21717;
 }
 
 .kosar-vegosszeg {
     text-align: end;
     margin-top: 10px;
     margin-right: 10px;
+}
+
+#vegosszeg{
+    font-size: xx-large;
 }
 
 .kosar-vegosszeg-title {
@@ -70,22 +90,23 @@ body {
 }
 
 .kosar-btns {
+    display: flex;
     justify-content: space-between;
 }
 
 .btn-vissza {
     color: white;
-    background-color: #404040;
+    background-color: inherit;
     border: 1px solid white;
     border-radius: 10px;
     font-weight: bold;
-    margin: 40px auto 80px auto;
+    margin: 40px 0px 80px 0px;
     font-size: 1.75em;
 }
 
 .btn-vissza:hover {
     border: 1px solid white;
-    background-color: black;
+    background-color: #404040;
 }
 
 .btn-rendeles {
@@ -94,7 +115,7 @@ body {
     border: 1px solid black;
     border-radius: 10px;
     font-weight: bold;
-    margin: 40px auto 80px auto;
+    margin: 40px 0px 80px 0px;
     font-size: 1.75em;
 }
 
