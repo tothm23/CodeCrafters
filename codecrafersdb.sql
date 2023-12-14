@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Dec 14, 2023 at 12:31 PM
+-- Generation Time: Dec 14, 2023 at 02:27 PM
 -- Server version: 5.7.24
 -- PHP Version: 8.0.1
 
@@ -99,10 +99,6 @@ FROM kosar
 INNER JOIN jatek
 ON kosar.jatekId = jatek.id
 
-WHERE kosar.felhasznaloId = felhasznaloIdBE;
-
-SELECT SUM(kosar.vegosszeg) AS "vegosszeg"
-FROM kosar
 WHERE kosar.felhasznaloId = felhasznaloIdBE;
 
 END$$
