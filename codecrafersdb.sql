@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Dec 14, 2023 at 10:47 AM
+-- Generation Time: Dec 14, 2023 at 12:31 PM
 -- Server version: 5.7.24
 -- PHP Version: 8.0.1
 
@@ -280,31 +280,12 @@ VALUES(
 	vegosszeg
 );
 
-END$$
-
-CREATE DEFINER=`root`@`localhost` PROCEDURE `rendeles2` (IN `felhasznaloIdBE` INT(9))   BEGIN
-
-DECLARE vegosszeg INT(9);
-
-SELECT SUM(kosar.vegosszeg) INTO vegosszeg
-FROM kosar
-WHERE kosar.felhasznaloId = felhasznaloIdBE;
-
-INSERT INTO rendeles(
-    rendeles.felhasznaloId,
-    rendeles.vegosszeg
-)
-VALUES(
-    felhasznaloIdBE,
-	vegosszeg
-);
-
 SELECT 
 	kosar.jatekId,
-	termekkulcsok.termekKulcs
+    termekkulcs.kulcs
 FROM kosar
-INNER JOIN termekkulcsok
-ON kosar.jatekId = termekkulcsok.jatekId
+INNER JOIN termekkulcs
+ON kosar.jatekId = termekkulcs.jatekId
 WHERE kosar.felhasznaloId = felhasznaloIdBE;
 
 END$$
@@ -506,9 +487,9 @@ INSERT INTO `kosar` (`id`, `felhasznaloId`, `jatekId`, `vegosszeg`) VALUES
 (16, 3, 1, 5092),
 (17, 1, 4, 7992),
 (18, 2, 7, 17900),
-(19, 1, 3, 2990),
 (20, 3, 3, 2990),
-(22, 1, 9, 19990);
+(23, 1, 10, 6660),
+(25, 1, 13, 2990);
 
 -- --------------------------------------------------------
 
@@ -549,33 +530,51 @@ CREATE TABLE `rendeles` (
 --
 
 INSERT INTO `rendeles` (`id`, `felhasznaloId`, `vegosszeg`, `feladva`) VALUES
-(3, 1, 42864, '2023-11-30 20:08:36'),
-(4, 3, 8082, '2023-12-05 20:50:32');
+(1, 3, 8082, '2023-12-14 13:30:17');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `termekkulcsok`
+-- Table structure for table `termekkulcs`
 --
 
-CREATE TABLE `termekkulcsok` (
+CREATE TABLE `termekkulcs` (
   `id` int(9) NOT NULL,
-  `termekKulcs` char(50) NOT NULL,
-  `jatekId` int(9) NOT NULL,
-  `eladva` tinyint(1) NOT NULL DEFAULT '0'
+  `kulcs` char(50) NOT NULL,
+  `jatekId` int(9) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `termekkulcsok`
+-- Dumping data for table `termekkulcs`
 --
 
-INSERT INTO `termekkulcsok` (`id`, `termekKulcs`, `jatekId`, `eladva`) VALUES
-(1, 'a1de-2jg2-jas7', 1, 0),
-(2, 'b2fg-1hd3-k9s8', 1, 0),
-(3, 'c3hs-4tj6-l5g9', 1, 0),
-(4, 'd4ke-3li7-m2f0', 3, 0),
-(5, 'e5mf-6nk8-o1h3', 3, 0),
-(6, 'f6og-7pli-8v9u', 3, 0);
+INSERT INTO `termekkulcs` (`id`, `kulcs`, `jatekId`) VALUES
+(1, 'a1de-2jg2-jas7', 1),
+(2, 'b2fg-1hd3-k9s8', 2),
+(3, 'k1op-2qr3-3st4', 3),
+(4, 'l2uv-3wx4-4yz5', 4),
+(5, 'm3ab-4cd5-5ef6', 5),
+(6, 'n4gh-5ij6-6kl7', 6),
+(7, 'o5mn-6op7-7qr8', 7),
+(8, 'p6st-7uv8-8wx9', 8),
+(9, 'q7yz-8ab0-9cd1', 9),
+(10, 'r8ef-9gh0-0ij2', 10),
+(11, 's9kl-0mn1-op2q', 11),
+(12, 't0qr-1st2-2uv3', 12),
+(13, 'u1wx-2yz3-3ab4', 13),
+(14, 'v2cd-3ef4-4gh5', 14),
+(15, 'w3ij-4kl5-5mn6', 15),
+(16, 'x4op-5qr6-6st7', 16),
+(17, 'y5uv-6wx7-7yz8', 17),
+(18, 'z6ab-7cd8-8ef9', 18),
+(19, 'a7gh-8ij9-9kl0', 19),
+(20, 'b8mn-9op0-0qr1', 20),
+(21, 'c9st-0uv1-1wx2', 21),
+(22, 'd0yz-1ab2-2cd3', 22),
+(23, 'e1ef-2gh3-3ij4', 23),
+(24, 'f2kl-3mn4-4op5', 24),
+(25, 'g3qr-4st5-5uv6', 25),
+(26, 'h4ij-5kl6-6mn7', 26);
 
 --
 -- Indexes for dumped tables
@@ -632,10 +631,12 @@ ALTER TABLE `rendeles`
   ADD KEY `felhasznaloId` (`felhasznaloId`);
 
 --
--- Indexes for table `termekkulcsok`
+-- Indexes for table `termekkulcs`
 --
-ALTER TABLE `termekkulcsok`
+ALTER TABLE `termekkulcs`
   ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `kulcs` (`kulcs`),
+  ADD UNIQUE KEY `jatekId` (`jatekId`),
   ADD KEY `ajandekKartyaId` (`jatekId`);
 
 --
@@ -670,7 +671,7 @@ ALTER TABLE `jogosultsag`
 -- AUTO_INCREMENT for table `kosar`
 --
 ALTER TABLE `kosar`
-  MODIFY `id` int(9) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
+  MODIFY `id` int(9) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
 
 --
 -- AUTO_INCREMENT for table `platform`
@@ -682,13 +683,13 @@ ALTER TABLE `platform`
 -- AUTO_INCREMENT for table `rendeles`
 --
 ALTER TABLE `rendeles`
-  MODIFY `id` int(9) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(9) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
--- AUTO_INCREMENT for table `termekkulcsok`
+-- AUTO_INCREMENT for table `termekkulcs`
 --
-ALTER TABLE `termekkulcsok`
-  MODIFY `id` int(9) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+ALTER TABLE `termekkulcs`
+  MODIFY `id` int(9) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
