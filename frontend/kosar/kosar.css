@@ -11,12 +11,20 @@ body {
     margin: 0;
     padding: 0;
     min-height: 100%;
-    background-color: #241f1f;
+    background-color: #404040;
 }
 
 .container {
     max-width: 800px;
     margin: auto;
+}
+
+.kosar{
+    margin-top: 50px;
+    margin-bottom: 50px;
+    border: black solid 1px;
+    border-radius: 15px;
+    background-color: #241f1f;
 }
 .header {
     font-weight: bold;
@@ -98,7 +106,8 @@ body {
 
 .kosar-btns {
     display: flex;
-    justify-content: space-between;
+    margin-top: 1em;
+    justify-content: space-around;
 }
 
 .btn-vissza {
@@ -109,6 +118,7 @@ body {
     font-weight: bold;
     margin: 40px 0px 80px 0px;
     font-size: 1.75em;
+    width: 150px;
 }
 
 .btn-vissza:hover {
@@ -128,6 +138,7 @@ body {
     font-weight: bold;
     margin: 40px 0px 80px 0px;
     font-size: 1.75em;
+    width: 150px;
 }
 
 .btn-rendeles:hover,
@@ -135,19 +146,4 @@ body {
     color: black;
     border: 1px solid black;
     background-color: rgb(139, 185, 45);
-}
-
-/* lábléc */
-#lablec {
-    position: relative;
-    height: 100px;
-    background: #241f1f;
-    color: white;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    color: #fff;
-    padding: 10px;
-    width: 100%;
-    bottom: 0;
 }
