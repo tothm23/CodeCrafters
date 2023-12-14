@@ -160,17 +160,17 @@ h2 {
   flex-direction: row;
 }
 
-.card-body{
+.main .card-body{
   flex-grow: 1;
   width: 100%;
   background-color: #241f1f;
 }
 
-.card a{
+.main .card a{
   width: 100%;
 
 }
-.card img{
+.main .card img{
   max-width: 350px;
   border: #000 solid 1px;
 }

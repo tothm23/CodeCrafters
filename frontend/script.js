@@ -78,6 +78,7 @@ document.addEventListener("DOMContentLoaded", function () {
   const felhasznaloful = document.getElementById("felhasznalo-box");
   const aktualisPath = window.location.pathname;
   const kijelentkezés=document.getElementById("felhasznalo_kilep");
+  const fnev=document.getElementById("felhasznalo");
   //kijelentkezés essetén
   kijelentkezés.addEventListener("click", function(){
     localStorage.removeItem("bejelentkezes");
@@ -101,6 +102,8 @@ document.addEventListener("DOMContentLoaded", function () {
     console.log(bejelentkezettFelhasznalo.id);
     log_reg.style.display="none";
     felhasznaloful.style.display="flex";
+    fnev.innerHTML="";
+    fnev.innerHTML+=bejelentkezettFelhasznalo.felhasznaloNev;
   }
   else{
     log_reg.style.display="flex";

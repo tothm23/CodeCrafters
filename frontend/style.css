@@ -285,7 +285,7 @@ slide
   align-items: center;
 }
 
-.slideshow .card {
+.slideshow .card,.main .card {
   background-color: #241f1f;
   color: white;
   display: flex;

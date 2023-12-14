@@ -6,7 +6,8 @@
     color: white;
 }
 
-html, body {
+html,
+body {
     margin: 0;
     padding: 0;
     min-height: 100%;
@@ -23,21 +24,7 @@ html, body {
     padding: 0 1.5em;
 }
 
-.section-header {
-    font-weight: normal;
-    color: white;
-    text-align: center;
-    font-size: 2.5em;
-    margin-top: 1em;
-    margin-bottom: 1em;
-}
 
-.btn {
-    text-align: center;
-    vertical-align: middle;
-    padding: .67em .67em;
-    cursor: pointer;
-}
 
 .kosar-header {
     font-weight: bold;
@@ -45,13 +32,8 @@ html, body {
     color: white;
 }
 
-.kosar-column {
-    display: flex;
-    align-items: center;
-    margin-right: 1.5em;
-}
-
-.kosar-row {
+.card {
+    width: 100%;
     display: flex;
     border: 1px solid black;
     margin-bottom: 1.5em;
@@ -59,50 +41,19 @@ html, body {
     background-color: #241f1f;
 }
 
-.kosar-tetel {
-    width: 50%;
-}
-
-.kosar-ar {
-    width: 30%;
-    font-size: 1.2em;
-    color: white;
-}
-
-.kosar-torles {
-    width: 20%;
-}
-
-.kosar-tetel-nev {
-    color: white;
-    margin-left: .5em;
-    font-size: 1.2em;
-}
-
-.kosar-tetel-kep {
-    width: 115px;
-    height: 100%;
-    border-radius: 10px;
-}
-
-.btn-danger {
-    color: white;
-    background-color: #EB5757;
-    border: none;
-    border-radius: 10px;
-    font-weight: bold;
-    font-size: 60px;
-    height: 100%;
+.img-fluid {
     width: 100%;
+    min-width: 100px;
 }
 
-.btn-danger:hover {
-    background-color: #CC4C4C;
+.card-text {
+    font-size: 1.2em;
+    color: white;
 }
 
-.kosar-column:last-child {
-    border: none;
-    margin-right: 0px;
+.card .btn {
+    max-height: 100px;
+    max-width: 100px;
 }
 
 .kosar-vegosszeg {
@@ -118,22 +69,11 @@ html, body {
     margin-right: 20px;
 }
 
-.kosar-vegosszeg-ar {
-    color: white;
-    font-size: 1.5em;
-    font-weight: bold;
-}
-
 .kosar-btns {
-    display: flex;
+    justify-content: space-between;
 }
 
-.btn-primary {
-    padding-left: 40px;
-    padding-right: 40px;
-}
-
-.btn-vissza{
+.btn-vissza {
     color: white;
     background-color: #404040;
     border: 1px solid white;
@@ -158,7 +98,8 @@ html, body {
     font-size: 1.75em;
 }
 
-.btn-rendeles:hover ,.btn-rendeles:focus{
+.btn-rendeles:hover,
+.btn-rendeles:focus {
     color: black;
     border: 1px solid black;
     background-color: rgb(139, 185, 45);

@@ -21,24 +21,22 @@ function kosartartalma(adatok) {
 
     for (let i = 0; i < adatok.length; i++) {
         //;
-        Kosartartalma.innerHTML += `
-            <div class="kosar-row" data-id="${adatok[i].jatekId}">
-                <div class="kosar-tetel kosar-column">
-                    <img class="kosar-tetel-kep" src="../kepek/jatekok/${adatok[i].kep}" width="100" height="100">
-                    <span class="kosar-tetel-nev">${adatok[i].nev}</span>
-                </div>
-                <span class="kosar-ar kosar-column">${adatok[i].vegosszeg} Ft </span>
-                <div class="kosar-torles kosar-column"> 
-                    <button id="torol" class="btn btn-danger" type="button">X</button>
-                </div>
+        Kosartartalma.innerHTML +=`
+        <div class="card d-flex flex-md-row flex-column" data-id="${adatok[i].jatekId}">
+            <img class="card-img-top img-fluid" src="../kepek/jatekok/${adatok[i].kep}" alt="${adatok[i].nev}">
+            <div class="card-body w-100">
+                <p class="card-text">${adatok[i].nev}</p>
+                <p class="card-text">${adatok[i].vegosszeg} Ft</p>
+                <button id="torol" class="btn btn-danger" type="button">X</button>
             </div>
-        `;
+        </div>
+    `;
     }
 }
 
 document.addEventListener("click", function torlse (event) {
     console.log("Click");
-    var kosarElem = event.target.closest('.kosar-row');
+    var kosarElem = event.target.closest('.card');
     // Olvassa ki az ID-t a data-id attribútumból
     var jatekid = kosarElem.getAttribute('data-id');
     console.log("termek id:", jatekid);

@@ -81,34 +81,37 @@
     </nav>
     <!-- főoldal -->
     <div class="container w-75">
-      <div class="row">
-        <!-- kép -->
-        <div class="col-6">
-          <img id="kep" class="img-fluid rounded rounded-3" src="" alt="" />
-        </div>
-
-        <!-- információk -->
-        <div class="col-6">
-          <div class="col-12 szoveg-doboz">
-            <p id="nev" class="fs-2 text-center p-3"></p>
+      <div class="container-lg">
+        <div class="row flex-column flex-lg-row">
+          <!-- kép -->
+          <div class="col-lg-6">
+            <img id="kep" class="img-fluid rounded rounded-3" src="" alt="" />
           </div>
-          <div class="col-12 szoveg-doboz">
-            <div class="row p-3">
-              <div class="col-5">
-                <p class="fs-5">Eszköz: <span id="eszkoz" class="fw-bold"></span></p>
-                <p class="fs-5">Platform: <span id="platform" class="fw-bold"></span></p>
-                <p class="fs-5">Korhatár: <span id="korhatar" class="p-2"></span></p>
-                <p class="fs-5" id="elerheto"></p>
-              </div>
-              <div class="col-7 d-flex flex-column justify-content-center">
-                <p id="eredeti-ar" class="m-0 fs-3"></p>
-                <p id="akcios-ar" class="m-0 fs-1"></p>
-                <span id="hozzadasgomb"></span>
+      
+          <!-- információk -->
+          <div class="col-lg-6">
+            <div class="col-lg-12 szoveg-doboz">
+              <p id="nev" class="fs-2 text-center p-3"></p>
+            </div>
+            <div class="col-lg-12 szoveg-doboz">
+              <div class="row p-3">
+                <div class="col-12 col-md-5">
+                  <p class="fs-5">Eszköz: <span id="eszkoz" class="fw-bold"></span></p>
+                  <p class="fs-5">Platform: <span id="platform" class="fw-bold"></span></p>
+                  <p class="fs-5">Korhatár: <span id="korhatar" class="p-2"></span></p>
+                  <p class="fs-5" id="elerheto"></p>
+                </div>
+                <div class="col-12 col-md-7 d-flex flex-column justify-content-center">
+                  <p id="eredeti-ar" class="m-0 fs-3"></p>
+                  <p id="akcios-ar" class="m-0 fs-1"></p>
+                  <span id="hozzadasgomb"></span>
+                </div>
               </div>
             </div>
           </div>
         </div>
       </div>
+      
 
       <!-- leírás -->
       <div class="row">
@@ -124,7 +127,6 @@
             <button2 id="megjelenitoGomb"><i class="fa-solid fa-cart-shopping"></i></button2>
         </a>
       </div>
-      <div class="darabszam">0</div>
     </div>
   </div>
 
