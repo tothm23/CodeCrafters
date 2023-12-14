@@ -74,11 +74,16 @@ function hozzaadasGomb(id) {
 document.addEventListener("DOMContentLoaded", function () {
   const keresoInput = document.querySelector('.navbar input[type="search"]');
   const form = document.querySelector(".navbar form");
+  const log_reg = document.getElementById("log_reg");
+  const felhasznaloful = document.getElementById("felhasznalo-box");
   const aktualisPath = window.location.pathname;
-  console.log(aktualisPath);
+  const kijelentkezés=document.getElementById("felhasznalo_kilep");
   //kijelentkezés essetén
-  //localStorage.removeItem("bejelentkezes");
-  console.log(bejelentkezettFelhasznalo.id);
+  kijelentkezés.addEventListener("click", function(){
+    localStorage.removeItem("bejelentkezes");
+    log_reg.style.display="flex";
+    felhasznaloful.style.display="none";
+  });
   // Eseményfigyelők hozzáadása a keresőhöz és az ármezőkhöz
   form.addEventListener("submit", function (esemeny) {
     // A keresőszöveg tárolása a localStorage-ban
@@ -92,6 +97,15 @@ document.addEventListener("DOMContentLoaded", function () {
     } else {}
   });
 
+  if(bejelentkezettFelhasznalo){
+    console.log(bejelentkezettFelhasznalo.id);
+    log_reg.style.display="none";
+    felhasznaloful.style.display="flex";
+  }
+  else{
+    log_reg.style.display="flex";
+    felhasznaloful.style.display="none";
+  }
 
   document.addEventListener("click", function (event) {
     if (event.target && event.target.id === "hozzadas") {

@@ -15,16 +15,17 @@
 
 <body>
   <div class="container">
-   <!-- navigáció -->
-   <nav class="nav navbar navbar-expand-lg navbar-light">
-    <div class="container-fluid">
-      <a class="keplink" href="../index.html"><img src="../kepek/logo.png" /></a>
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-        <div class="navbar-nav">
-          
+    <!-- navigáció -->
+    <nav class="nav navbar navbar-expand-lg navbar-light">
+      <div class="container-fluid">
+        <a class="keplink" href="../index.html"><img src="../kepek/logo.png" /></a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup"
+          aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+          <div class="navbar-nav">
+
             <nav class="searchbar">
               <div class="container-fluid">
                 <form class="d-flex">
@@ -47,20 +48,21 @@
                 </form>
               </div>
             </nav>
-    
-            <div class="log_reg flex-lg-column flex-row">
-              <button type="button"><a class="gomblink" href="../bejeletkezés/bejelentkezes.html">Bejelentkezés</a></button>
-              <button type="button"><a class="gomblink" href="../regisztracio/regisztracio.html">Regisztráció</a></button>
-            </div>
-    
-            <div id="felhasznalo-box">
-              <img src="../kepek/felhasznalo.png" id="felhasznalo-kep" alt="Mákosguba55" />
-              <p id="felhasznalo">Mákosguba55</p>
+
+            <div id="log_reg" class="flex-lg-column flex-row">
+              <button type="button"><a class="gomblink"
+                  href="../bejeletkezés/bejelentkezes.html">Bejelentkezés</a></button>
+              <button type="button"><a class="gomblink"
+                  href="../regisztracio/regisztracio.html">Regisztráció</a></button>
             </div>
           </div>
         </div>
       </div>
-  </nav>
+      <div id="felhasznalo-box" class="justify-content-end">
+        <img src="../kepek/felhasznalo.png" id="felhasznalo-kep" alt="Mákosguba55" />
+        <p id="felhasznalo">Mákosguba55</p>
+      </div>
+    </nav>
   </div>
   <!-- az oldal -->
   <div class="main">
@@ -70,11 +72,14 @@
 
     <div class="adatok">
       <!-- offcanvas -->
-      <button class="btn btn-primary d-block d-md-none" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasWithBothOptions" aria-controls="offcanvasWithBothOptions">Szűrők</button>
-      <div class="offcanvas offcanvas-start d-block d-md-none overflow-auto" tabindex="-1" id="offcanvasWithBothOptions" aria-labelledby="offcanvasWithBothOptionsLabel">
+      <button class="btn btn-primary d-block d-md-none" type="button" data-bs-toggle="offcanvas"
+        data-bs-target="#offcanvasWithBothOptions" aria-controls="offcanvasWithBothOptions">Szűrők</button>
+      <div class="offcanvas offcanvas-start d-block d-md-none overflow-auto" tabindex="-1" id="offcanvasWithBothOptions"
+        aria-labelledby="offcanvasWithBothOptionsLabel">
         <div class="offcanvas-header">
           <h5 class="offcanvas-title text-light" id="offcanvasWithBothOptionsLabel">Szűrők</h5>
-          <button type="button" class="btn-close btn-close-white text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+          <button type="button" class="btn-close btn-close-white text-reset" data-bs-dismiss="offcanvas"
+            aria-label="Close"></button>
         </div>
         <div class="offcanvas-body">
           <div class="szurok">
@@ -235,8 +240,8 @@
     </div>
   </div>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
-    integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
-    crossorigin="anonymous"></script>
+    integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous">
+  </script>
   <script src="termekek.js"></script>
   <script src="../script.js"></script>
 </body>

@@ -18,29 +18,30 @@ body {
   justify-content: space-between;
 }
 
-.navbar-nav{
-  display: flex;
-  flex-grow: 1;
-  width: 100%;
-}
-
 /*nav*/
 .nav {
   width: 100%;
-  padding-top: 20px;
-  padding-bottom: 20px;
-  padding-left: 30px;
-  padding-right: 30px;
+  padding-top: 0px;
+  padding-bottom: 0px;
+  padding-left: 0px;
+  padding-right: 0px;
   background-color: #bb4930;
   display: flex;
-  flex-direction: column;
-  align-items: center;
+  flex-direction: row;
+  align-items: end;
   border: #000 solid 1px;
   margin-top: 30px;
 }
 
 .navbar-nav{
- justify-content: space-between;  
+ justify-content: space-between;
+  display: flex;
+  flex-grow: 1;
+  width: 100%;
+  padding-top: 20px;
+  padding-bottom: 20px;
+  padding-left: 30px;
+  padding-right: 30px;
 }
 
 .navbar-collapse{
@@ -98,21 +99,36 @@ body {
   color: inherit;
 }
 
-#felhasznalo-box {
-  background-color: #241f1f;
-  width: 15vh;
-  height: 12.5vh;
-  margin-top: 2.5vh;
-  border-top-left-radius: 4vh;
-
+#felhasznalo-box{
   display: flex;
   align-items: center;
   justify-content: center;
   flex-direction: column;
-
-  border: #000 1px solid;
-  display: none;
 }
+
+#felhasznalo-gomb {
+  background-color: #241f1f;
+  min-width: 150px;
+  border-top-left-radius: 30px;
+}
+
+#felhasznalo-box .card {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  background-color: inherit;
+}
+
+#felhasznalo-box li{
+list-style: none;
+}
+
+
+#felhasznalo-box a{
+  text-decoration: none;
+  align-items: center;
+  }
 
 #felhasznalo-kep {
   width: 50px;
@@ -175,13 +191,13 @@ body {
 
 /*gombok*/
 
-.log_reg {
+#log_reg {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
 }
 
-.log_reg button {
+#log_reg button {
   color: #000000;
   background-color: #ffffff;
   border-radius: 10px;
@@ -192,12 +208,12 @@ body {
   justify-content: space-between;
 }
 
-.log_reg button:hover {
+#log_reg button:hover {
   background-color: #cdcdcd;
   
 }
 
-.log_reg a {
+#log_reg a {
   text-align: center;
 }
 
@@ -256,7 +272,7 @@ slide
   align-items: center;
 }
 
-.card {
+.slideshow .card {
   background-color: #241f1f;
   color: white;
   display: flex;
