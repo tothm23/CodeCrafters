@@ -77,13 +77,22 @@ document.addEventListener("DOMContentLoaded", function () {
   const log_reg = document.getElementById("log_reg");
   const felhasznaloful = document.getElementById("felhasznalo-box");
   const aktualisPath = window.location.pathname;
-  const kijelentkezés=document.getElementById("felhasznalo_kilep");
+  const kijelentkezés_gomb=document.getElementById("felhasznalo_kilep");
+  const beallitasok_gomb=document.getElementById("beallitasok");
   const fnev=document.getElementById("felhasznalo");
   //kijelentkezés essetén
-  kijelentkezés.addEventListener("click", function(){
+  kijelentkezés_gomb.addEventListener("click", function(){
     localStorage.removeItem("bejelentkezes");
     log_reg.style.display="flex";
     felhasznaloful.style.display="none";
+  });
+  beallitasok_gomb.addEventListener("click", function(){
+    if (aktualisPath == "/frontend/index.html") {
+      // Most már tovább navigálhatsz az új oldalra
+      window.open("./felhasznalo/felhasznalo.html");
+    } else{
+      window.open("../felhasznalo/felhasznalo.html");
+    }
   });
   // Eseményfigyelők hozzáadása a keresőhöz és az ármezőkhöz
   form.addEventListener("submit", function (esemeny) {
