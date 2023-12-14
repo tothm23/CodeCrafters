@@ -60,10 +60,6 @@ document.addEventListener("click", function torlse (event) {
     
 });
 
-function goBack() {
-    window.history.back();
-  }
-
 function vegosszegkiszamitasa(adatok) {
     vegosszeg.innerHTML = "";
     let osszesitettar = 0;
