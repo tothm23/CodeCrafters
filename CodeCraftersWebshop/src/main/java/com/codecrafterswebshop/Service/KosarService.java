@@ -20,6 +20,7 @@ public class KosarService {
 
         for (Map<String, Object> kosar : kosarak) {
             JSONObject obj = new JSONObject();
+            obj.put("jatekId", kosar.get("jatekId"));
             obj.put("nev", kosar.get("nev"));
             obj.put("vegosszeg", kosar.get("vegosszeg"));
             obj.put("kep", kosar.get("kep"));

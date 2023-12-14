@@ -144,9 +144,10 @@ public class Kosar implements Serializable {
                 for (Object[] sor : eredmeny) {
                     HashMap<String, Object> kosar = new HashMap<>();
 
-                    kosar.put("nev", (String) sor[1]);
-                    kosar.put("vegosszeg", (Integer) sor[2]);
-                    kosar.put("kep", (String) sor[3]);
+                    kosar.put("jatekId", (Integer) sor[1]);
+                    kosar.put("nev", (String) sor[2]);
+                    kosar.put("vegosszeg", (Integer) sor[3]);
+                    kosar.put("kep", (String) sor[4]);
 
                     kosarak.add(kosar);
                 }
