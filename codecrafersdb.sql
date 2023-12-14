@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Dec 13, 2023 at 10:36 AM
+-- Generation Time: Dec 14, 2023 at 10:47 AM
 -- Server version: 5.7.24
 -- PHP Version: 8.0.1
 
@@ -90,6 +90,7 @@ CREATE DEFINER=`root`@`localhost` PROCEDURE `felhasznaloKosar` (IN `felhasznaloI
 
 SELECT 
 	kosar.felhasznaloId,
+    jatek.id as "jatekId",
 	jatek.nev AS "jatekNev",
     kosar.vegosszeg AS "jatekAr",
     jatek.kep AS "jatekKep"
