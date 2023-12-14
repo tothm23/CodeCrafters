@@ -19,6 +19,10 @@ img{
     max-width: 100px;
 }
 
+#felhasznalo-vezeteknev,#felhasznalo-keresztnev{
+    margin: 1px;
+}
+
 .form-popup {
     width: 100%;
     max-width: 700px;
@@ -100,19 +104,4 @@ form {
 
 #torles:hover {
     background-color: #CC4C4C;
-}
-
-/* lábléc */
-#lablec {
-    position: fixed;
-    height: 100px;
-    background: #241f1f;
-    color: white;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    color: #fff;
-    padding: 10px;
-    width: 100%;
-    bottom: 0;
 }
