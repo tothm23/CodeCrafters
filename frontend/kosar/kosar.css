@@ -15,9 +15,9 @@ body {
 }
 
 .container {
-    max-width: 900px;
-    margin: 0 auto;
-    padding: 0 1.5em;
+    max-width: 800px;
+    margin: auto;
+    border: black 1px solid;
 }
 .header {
     font-weight: bold;
@@ -28,52 +28,57 @@ body {
 }
 
 .card {
-    min-height: 120px;
+    min-width: 300px;
     width: 100%;
     display: flex;
-    border: 1px solid black;
     margin-bottom: 1.5em;
-    border-radius: 15px;
     background-color: #404040;
     padding: 0px;
+    border: black 1px solid;
+    border-radius: 30px;
+    padding-right: 10px;
 }
 
 .card-body{
     display: flex;
     justify-content: space-between;
     align-items: center;
+    padding: 0px;
+    
+
 }
 
 .card button{
-    padding: 0px;
+    font-weight: bolder;
 }
 
-img{
-    height: fit-content;
-    max-height: 300px;
-    max-width: fit-content;
+.img-fluid{
+    max-height: fit-content;
+    max-width: 150px;
+    border-top-left-radius: 30px;
+    border-bottom-left-radius: 30px;
 }
 
 .card-text {
     font-size: 1.2em;
     color: white;
+    padding: 5px;
 }
 
 .card .btn {
-    width: 80px;
-    height: 120px;
     margin-left: 10px;
     background-color: #df3333;
+    border: #241f1f solid 1px;
     font-size: 20pt;
-    border: black 1px solid;
 }
-
+.w-lg-auto{
+ max-width: 100px;
+}
 .card .btn:hover {
     background-color: #e21717;
 }
 
 .kosar-vegosszeg {
-    text-align: end;
     margin-top: 10px;
     margin-right: 10px;
 }
