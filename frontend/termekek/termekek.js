@@ -5,10 +5,30 @@ document.addEventListener("DOMContentLoaded", function () {
   const maxArInput = document.querySelector('.ar input[name="max"]');
   const minArInput2 = document.querySelector('.ar2 input[name="min"]');
   const maxArInput2 = document.querySelector('.ar2 input[name="max"]');
+
   const form = document.querySelector(".navbar form");
+
   const checkboxok = document.querySelectorAll(".form-check-input");
+  const checkboxok2 = document.querySelectorAll(".form-check-input2");
+  
   const jatekokElem = document.querySelector(".termek-lista#jatekok");
   const keresoSzoveg = localStorage.getItem('keresesSzoveg');
+
+  const kivalasztottAkcios = document.getElementById("AkciosCheckbox");
+  const kivalasztottAkcios2 = document.getElementById("AkciosCheckbox2");
+
+  kivalasztottAkcios.addEventListener("change", function (e) {
+    if (kivalasztottAkcios.checked == true) kivalasztottAkcios2.checked = true;
+    else kivalasztottAkcios2.checked = false;
+
+  });
+
+  kivalasztottAkcios2.addEventListener("change", function (e) {
+    if (kivalasztottAkcios2.checked == true) kivalasztottAkcios.checked = true;
+    else if (kivalasztottAkcios2.checked == false) kivalasztottAkcios.checked = false;
+
+  });
+
 
   // Eredeti adatok tárolása
   let eredetiAdatok;
@@ -28,22 +48,22 @@ document.addEventListener("DOMContentLoaded", function () {
     minArInput2.value = minArInput.value;
     szurokAlkalmazasa();
   });
-  
+
   minArInput2.addEventListener("input", function () {
     minArInput.value = minArInput2.value;
     szurokAlkalmazasa();
   });
-  
+
   maxArInput.addEventListener("input", function () {
     maxArInput2.value = maxArInput.value;
     szurokAlkalmazasa();
   });
-  
+
   maxArInput2.addEventListener("input", function () {
     maxArInput.value = maxArInput2.value;
     szurokAlkalmazasa();
   });
-  
+
   checkboxok.forEach(function (checkbox) {
     checkbox.addEventListener("change", szurokAlkalmazasa);
   });
@@ -113,8 +133,6 @@ document.addEventListener("DOMContentLoaded", function () {
 
     const kivalasztottEszkozok = Array.from(document.querySelectorAll('.eszkoz input:checked'))
       .map(checkbox => checkbox.value.toLowerCase());
-    const kivalasztottAkcios = document.getElementById("AkciosCheckbox");
-
     // Csak akkor alkalmazza a szűrést, ha a checkbox be van jelölve
     const szurtAdatok = eredetiAdatok.filter(
       (elem) =>

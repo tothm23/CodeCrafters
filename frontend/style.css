@@ -112,11 +112,13 @@ body {
 #felhasznalo-gomb {
   background-color: inherit;
   min-width: 150px;
+  border: none;
   border-top-left-radius: 30px;
   display: flex;
   align-items: center;
   justify-content: center;
   flex-direction: column;
+  font-weight: bold;
 }
 
 #felhasznalo-box ul{
@@ -125,21 +127,16 @@ list-style: none;
 #felhasznalo-box .card{
 background-color: inherit;
 color: white;
+font-weight: bold;
 }
 
-#felhasznalo-box a {
-  padding: 5px;
-  text-decoration: none;
-  text-align: center;
+#felhasznalo-box li {
   color: white;
-  width: 100%;
+
 }
 
-#felhasznalo-box a:hover {
-  text-decoration: none;
-  text-align: center;
+#felhasznalo-box li:hover {
   color: #ff4444;
-  background: #100e0e;
 }
 
 
