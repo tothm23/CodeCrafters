@@ -4,23 +4,31 @@ const bejelentkezettFelhasznalo = JSON.parse(localStorage.getItem("bejelentkezes
 
 document.addEventListener('DOMContentLoaded', function () {
     adatok_innerHtml();
-    //felhasznalo jelszavának egyezésének figyelése submit után 
+
     const felhasznalo_form = document.querySelector("form");
+
     felhasznalo_form.addEventListener("submit", function (event) {
         event.preventDefault();
-
         const jelszo = document.getElementById("jelszo").value;
         const jelszoujra = document.getElementById("jelszoegyezes").value;
 
-        // Menti a módosításokat, ha a jelszavak egyeznek
-        if (jelszo != jelszoujra) {
+        //felhasznalo jelszavának egyezésének figyelése
+        if (jelszo !== jelszoujra) {
             alert("A jelszavak nem egyeznek!");
         } else {
-            // Ide kerülhet a logika a változtatások mentéséhez, ha a jelszavak egyeznek
-            console.log("Változtatások mentve!");
+            // A gomb, amire kattintottál
+            const clickedButton = event.submitter; 
+            if (clickedButton.id === "mentes") {
+                // Mentési logika
+                console.log("Mentes");
+            } else if (clickedButton.id === "torles") {
+                // Törlés logika
+                console.log("Torles");
+            }
         }
     });
 });
+
 
 
 function adatok_innerHtml() {
