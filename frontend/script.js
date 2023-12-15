@@ -96,16 +96,21 @@ document.addEventListener("DOMContentLoaded", function () {
   });
   // Eseményfigyelők hozzáadása a keresőhöz és az ármezőkhöz
   form.addEventListener("submit", function (esemeny) {
+    esemeny.preventDefault();
+
     // A keresőszöveg tárolása a localStorage-ban
     localStorage.setItem('keresesSzoveg', keresoInput.value.toLowerCase());
 
     if (aktualisPath == "/frontend/index.html") {
-      // Most már tovább navigálhatsz az új oldalra
-      window.open("./termekek/termekek.html");
+        // Tovább navigálunk az új oldalra
+        window.location.href = "./termekek/termekek.html";
     } else if (aktualisPath == "/frontend/jatek/jatek.html") {
-      window.open("../termekek/termekek.html");
-    } else {}
-  });
+        window.location.href = "../termekek/termekek.html";
+    } else {
+        // Egyéb esetek kezelése (opcionális)
+    }
+});
+
 
   if(bejelentkezettFelhasznalo){
     console.log(bejelentkezettFelhasznalo.id);
@@ -121,6 +126,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
   document.addEventListener("click", function (event) {
     if (event.target && event.target.id === "hozzadas") {
+      event.target.value="Kosárban";
       const jatekId = event.target.getAttribute("data-jatek-id");
 
       if(jatekId)
