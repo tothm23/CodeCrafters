@@ -126,7 +126,9 @@ document.addEventListener("DOMContentLoaded", function () {
 
   document.addEventListener("click", function (event) {
     if (event.target && event.target.id === "hozzadas") {
+      //ha hozzáadjuk a kosárhoz akkor disbaled és a value megváltozik kosárbanra
       event.target.value="Kosárban";
+      event.target.disabled=true;
       const jatekId = event.target.getAttribute("data-jatek-id");
 
       if(jatekId)
