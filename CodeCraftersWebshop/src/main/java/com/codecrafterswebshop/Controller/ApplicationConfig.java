@@ -23,6 +23,7 @@ public class ApplicationConfig extends Application {
         resources.add(com.codecrafterswebshop.Controller.FooldalResource.class);
         resources.add(com.codecrafterswebshop.Controller.JatekResource.class);
         resources.add(com.codecrafterswebshop.Controller.KosarResource.class);
+        resources.add(com.codecrafterswebshop.Controller.RendelesResource.class);
         resources.add(com.codecrafterswebshop.Controller.TermekekResource.class);
     }
 
