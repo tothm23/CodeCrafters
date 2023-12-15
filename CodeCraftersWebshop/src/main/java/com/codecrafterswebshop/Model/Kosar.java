@@ -224,6 +224,71 @@ public class Kosar implements Serializable {
         }
     }
 
+    public static boolean rendeles(Integer felhasznaloIdBE) {
+
+        EntityManagerFactory emf = Persistence.createEntityManagerFactory("com_CodeCraftersWebshop_war_1.0-SNAPSHOTPU");
+        EntityManager em = emf.createEntityManager();
+
+        try {
+            StoredProcedureQuery spq = em.createStoredProcedureQuery("rendeles");
+
+            spq.registerStoredProcedureParameter("felhasznaloIdBE", Integer.class, ParameterMode.IN);
+            spq.setParameter("felhasznaloIdBE", felhasznaloIdBE);
+
+            spq.execute();
+            return true;
+
+        } catch (Exception e) {
+
+            System.err.println(e.getMessage());
+            return false;
+
+        } finally {
+            em.clear();
+            em.close();
+            emf.close();
+        }
+    }
+
+    public static List<Map<String, Object>> termekkulcs(Integer felhasznaloIdBE) {
+
+        List<Map<String, Object>> termekkulcsok = new ArrayList<>();
+
+        EntityManagerFactory emf = Persistence.createEntityManagerFactory("com_CodeCraftersWebshop_war_1.0-SNAPSHOTPU");
+        EntityManager em = emf.createEntityManager();
+
+        try {
+            StoredProcedureQuery spq = em.createStoredProcedureQuery("termekkulcs");
+
+            spq.registerStoredProcedureParameter("felhasznaloIdBE", Integer.class, ParameterMode.IN);
+            spq.setParameter("felhasznaloIdBE", felhasznaloIdBE);
+
+            List<Object[]> eredmeny = spq.getResultList();
+
+            if (!eredmeny.isEmpty()) {
+
+                for (Object[] sor : eredmeny) {
+                    HashMap<String, Object> termekkulcs = new HashMap<>();
+
+                    termekkulcs.put("jatekId", (Integer) sor[0]);
+                    termekkulcs.put("kulcs", (String) sor[1]);
+
+                    termekkulcsok.add(termekkulcs);
+                }
+
+            }
+
+        } catch (Exception e) {
+            System.err.println(e.getMessage());
+        } finally {
+            em.clear();
+            em.close();
+            emf.close();
+        }
+
+        return termekkulcsok;
+    }
+
     public static boolean jatekIdEllenorzes(Integer jatekIdBE) throws KosarException {
         EntityManagerFactory emf = Persistence.createEntityManagerFactory("com_CodeCraftersWebshop_war_1.0-SNAPSHOTPU");
         EntityManager em = emf.createEntityManager();
