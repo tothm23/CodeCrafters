@@ -9,14 +9,13 @@ document.addEventListener("DOMContentLoaded", function () {
   const form = document.querySelector(".navbar form");
 
   const checkboxok = document.querySelectorAll(".form-check-input");
-  const checkboxok2 = document.querySelectorAll(".form-check-input2");
   
   const jatekokElem = document.querySelector(".termek-lista#jatekok");
   const keresoSzoveg = localStorage.getItem('keresesSzoveg');
 
   const kivalasztottAkcios = document.getElementById("AkciosCheckbox");
   const kivalasztottAkcios2 = document.getElementById("AkciosCheckbox2");
-
+  //akcio input mindig egy forma  
   kivalasztottAkcios.addEventListener("change", function (e) {
     if (kivalasztottAkcios.checked == true) kivalasztottAkcios2.checked = true;
     else kivalasztottAkcios2.checked = false;

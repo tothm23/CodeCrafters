@@ -4,27 +4,24 @@ const bejelentkezettFelhasznalo = JSON.parse(localStorage.getItem("bejelentkezes
 
 document.addEventListener('DOMContentLoaded', function () {
     adatok_innerHtml();
-    const jelszo = document.getElementById("jelszo").value;
-    const jelszoujra = document.getElementById("jelszoegyezes").value;
-    //menti a módósításokat
-    document.getElementById("mentes").addEventListener("submit", function (event) {
+    //felhasznalo jelszavának egyezésének figyelése submit után 
+    const felhasznalo_form = document.querySelector("form");
+    felhasznalo_form.addEventListener("submit", function (event) {
         event.preventDefault();
-    if (jelszo != jelszoujra) {
-        alert("A jelszavak nem egyeznek!");
-    }
-    else{
-    }
-    });
-    //törli a felhasználót
-    document.getElementById("torles").addEventListener("submit", function (event) {
-        event.preventDefault();
-    if (jelszo != jelszoujra) {
-        alert("A jelszavak nem egyeznek!");
-    }
-    else{
-    }
+
+        const jelszo = document.getElementById("jelszo").value;
+        const jelszoujra = document.getElementById("jelszoegyezes").value;
+
+        // Menti a módosításokat, ha a jelszavak egyeznek
+        if (jelszo != jelszoujra) {
+            alert("A jelszavak nem egyeznek!");
+        } else {
+            // Ide kerülhet a logika a változtatások mentéséhez, ha a jelszavak egyeznek
+            console.log("Változtatások mentve!");
+        }
     });
 });
+
 
 function adatok_innerHtml() {
     felhaszadatai.innerHTML +=
@@ -67,7 +64,7 @@ function adatok_innerHtml() {
                         <label for="jelszoegyezes" class="form-label">Jelszó Újra</label>
                         <input type="password" class="form-control" id="jelszoegyezes" required>
                     </div>
-                    <div class="felhasznalo-btns">
+                    <div id="mentes-torles" class="felhasznalo-btns">
                         <button class="btn btn-primary w-100 mt-3 mx-auto" id="mentes" type="submit">Mentés</button>
                         <button class="btn btn-danger w-100 mt-3 mx-auto" id="torles" type="submit">Törlés</button>
                     </div>
