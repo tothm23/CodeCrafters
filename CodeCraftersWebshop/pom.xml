@@ -32,6 +32,11 @@
             <version>20230227</version>
             <type>jar</type>
         </dependency>
+        <dependency>
+            <groupId>com.sun.mail</groupId>
+            <artifactId>javax.mail</artifactId>
+            <version>1.5.3</version>
+        </dependency>
     </dependencies>
 
     <build>

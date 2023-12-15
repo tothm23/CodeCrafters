@@ -250,7 +250,7 @@ public class Kosar implements Serializable {
         }
     }
 
-    public static List<Map<String, Object>> termekkulcs(Integer felhasznaloIdBE) {
+    public static List<Map<String, Object>> termekKulcs(Integer felhasznaloIdBE) {
 
         List<Map<String, Object>> termekkulcsok = new ArrayList<>();
 
@@ -258,7 +258,7 @@ public class Kosar implements Serializable {
         EntityManager em = emf.createEntityManager();
 
         try {
-            StoredProcedureQuery spq = em.createStoredProcedureQuery("termekkulcs");
+            StoredProcedureQuery spq = em.createStoredProcedureQuery("termekKulcs");
 
             spq.registerStoredProcedureParameter("felhasznaloIdBE", Integer.class, ParameterMode.IN);
             spq.setParameter("felhasznaloIdBE", felhasznaloIdBE);
@@ -270,8 +270,10 @@ public class Kosar implements Serializable {
                 for (Object[] sor : eredmeny) {
                     HashMap<String, Object> termekkulcs = new HashMap<>();
 
-                    termekkulcs.put("jatekId", (Integer) sor[0]);
-                    termekkulcs.put("kulcs", (String) sor[1]);
+                    termekkulcs.put("email", (String) sor[1]);
+                    termekkulcs.put("nev", (String) sor[2]);
+                    termekkulcs.put("vegosszeg", (Integer) sor[3]);
+                    termekkulcs.put("kulcs", (String) sor[4]);
 
                     termekkulcsok.add(termekkulcs);
                 }
