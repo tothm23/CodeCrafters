@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Dec 14, 2023 at 02:27 PM
+-- Generation Time: Dec 15, 2023 at 11:23 AM
 -- Server version: 5.7.24
 -- PHP Version: 8.0.1
 
@@ -273,18 +273,25 @@ INSERT INTO rendeles(
 )
 VALUES(
     felhasznaloIdBE,
-	vegosszeg
+    vegosszeg
 );
 
-SELECT 
-	kosar.jatekId,
+END$$
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `termekkulcs` (IN `felhasznaloIdBE` INT(9))   SELECT 
+    kosar.jatekId,
+    jatek.nev AS "jatekNev",
+    kosar.vegosszeg AS "jatekAr",
     termekkulcs.kulcs
 FROM kosar
+
+INNER JOIN jatek
+ON kosar.jatekId = jatek.id
+
 INNER JOIN termekkulcs
 ON kosar.jatekId = termekkulcs.jatekId
-WHERE kosar.felhasznaloId = felhasznaloIdBE;
 
-END$$
+WHERE kosar.felhasznaloId = felhasznaloIdBE$$
 
 CREATE DEFINER=`root`@`localhost` PROCEDURE `torlesFelhasznalo` (IN `felhasznaloNevBE` VARCHAR(100), IN `jelszoBE` TEXT)   UPDATE felhasznalo
 SET felhasznalo.aktiv = 1,
@@ -526,7 +533,8 @@ CREATE TABLE `rendeles` (
 --
 
 INSERT INTO `rendeles` (`id`, `felhasznaloId`, `vegosszeg`, `feladva`) VALUES
-(1, 3, 8082, '2023-12-14 13:30:17');
+(1, 3, 8082, '2023-12-14 13:30:17'),
+(2, 3, 8082, '2023-12-15 12:00:24');
 
 -- --------------------------------------------------------
 
@@ -667,7 +675,7 @@ ALTER TABLE `jogosultsag`
 -- AUTO_INCREMENT for table `kosar`
 --
 ALTER TABLE `kosar`
-  MODIFY `id` int(9) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
+  MODIFY `id` int(9) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
 
 --
 -- AUTO_INCREMENT for table `platform`
@@ -679,7 +687,7 @@ ALTER TABLE `platform`
 -- AUTO_INCREMENT for table `rendeles`
 --
 ALTER TABLE `rendeles`
-  MODIFY `id` int(9) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(9) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `termekkulcs`
