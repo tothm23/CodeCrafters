@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Dec 15, 2023 at 11:23 AM
+-- Generation Time: Dec 15, 2023 at 02:39 PM
 -- Server version: 5.7.24
 -- PHP Version: 8.0.1
 
@@ -107,11 +107,11 @@ CREATE DEFINER=`root`@`localhost` PROCEDURE `felhasznaloNevEllenorzes` (IN `nevB
 FROM felhasznalo
 WHERE felhasznalo.felhasznaloNev = nevBE$$
 
-CREATE DEFINER=`root`@`localhost` PROCEDURE `frissitesFelhasznalo` (IN `felhasznaloNevBE` VARCHAR(100), IN `vezetekNevBE` VARCHAR(100), IN `keresztNev` VARCHAR(100), IN `emailBE` VARCHAR(100), IN `jelszoBE` TEXT)   UPDATE felhasznalo
+CREATE DEFINER=`root`@`localhost` PROCEDURE `frissitesFelhasznalo` (IN `felhasznaloNevBE` VARCHAR(100), IN `vezetekNevBE` VARCHAR(100), IN `keresztNevBE` VARCHAR(100), IN `ujJelszoBE` TEXT, IN `jelszoBE` TEXT)   UPDATE felhasznalo
 SET felhasznalo.felhasznaloNev = felhasznaloNevBE,
 	felhasznalo.vezetekNev = vezetekNevBE,
-    felhasznalo.keresztNev = keresztNev,
-    felhasznalo.email = emailBE,
+    felhasznalo.keresztNev = keresztNevBE,
+  	felhasznalo.jelszo = SHA1(ujJelszoBE),
     felhasznalo.frissitve = CURRENT_TIMESTAMP
 WHERE felhasznalo.jelszo = SHA1(jelszoBE)$$
 
@@ -278,12 +278,16 @@ VALUES(
 
 END$$
 
-CREATE DEFINER=`root`@`localhost` PROCEDURE `termekkulcs` (IN `felhasznaloIdBE` INT(9))   SELECT 
+CREATE DEFINER=`root`@`localhost` PROCEDURE `termekKulcs` (IN `felhasznaloIdBE` INT(9))   SELECT 
     kosar.jatekId,
+    felhasznalo.email,
     jatek.nev AS "jatekNev",
     kosar.vegosszeg AS "jatekAr",
     termekkulcs.kulcs
 FROM kosar
+
+INNER JOIN felhasznalo
+ON kosar.felhasznaloId = felhasznalo.id
 
 INNER JOIN jatek
 ON kosar.jatekId = jatek.id
@@ -293,10 +297,8 @@ ON kosar.jatekId = termekkulcs.jatekId
 
 WHERE kosar.felhasznaloId = felhasznaloIdBE$$
 
-CREATE DEFINER=`root`@`localhost` PROCEDURE `torlesFelhasznalo` (IN `felhasznaloNevBE` VARCHAR(100), IN `jelszoBE` TEXT)   UPDATE felhasznalo
-SET felhasznalo.aktiv = 1,
-	felhasznalo.torolve = CURRENT_TIMESTAMP
-WHERE felhasznalo.felhasznaloNev = felhasznaloNevBE AND felhasznalo.jelszo = SHA1(jelszoBE)$$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `torlesFelhasznalo` (IN `felhasznaloIdBE` INT(9))   DELETE FROM felhasznalo
+WHERE felhasznalo.id = felhasznaloIdBE$$
 
 CREATE DEFINER=`root`@`localhost` PROCEDURE `torlesJatek` (IN `idBE` INT(9))   DELETE
 FROM jatek
@@ -395,7 +397,7 @@ CREATE TABLE `felhasznalo` (
 INSERT INTO `felhasznalo` (`id`, `felhasznaloNev`, `vezetekNev`, `keresztNev`, `email`, `jelszo`, `jogosultsagId`, `letrehozva`, `frissitve`) VALUES
 (1, 'SunnyDay21', 'Kéri', 'Bence', 'keribence0@gmail.com', '49e6586c9fbf5cdbfb820bde5c0f6800a21b549a', 2, '2023-11-20 17:13:02', NULL),
 (2, 'AdventureSeeker', 'Nagy', 'Péter', 'peter.nagy@example.com', '9c073111b80b0af312f9c9f8bb4baa1c41e86d51', 1, '2023-11-20 17:13:35', NULL),
-(3, 'MusicLover88', 'Tóth', 'Eszter', 'eszter.toth@example.com', '1e0acaff2cd87e52f18dbc6c9b6cad2b62483e49', 1, '2023-11-20 17:16:12', NULL);
+(3, 'MusicLover88', 'Tóth', 'Eszter', 'eszter.toth@example.com', '1e0acaff2cd87e52f18dbc6c9b6cad2b62483e49', 1, '2023-12-15 15:06:49', NULL);
 
 -- --------------------------------------------------------
 
@@ -453,25 +455,6 @@ INSERT INTO `jatek` (`id`, `nev`, `ar`, `leiras`, `kep`, `korhatar`, `akcio`, `m
 -- --------------------------------------------------------
 
 --
--- Table structure for table `jogosultsag`
---
-
-CREATE TABLE `jogosultsag` (
-  `id` int(9) NOT NULL,
-  `jogosultsagNev` varchar(100) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
---
--- Dumping data for table `jogosultsag`
---
-
-INSERT INTO `jogosultsag` (`id`, `jogosultsagNev`) VALUES
-(1, 'user'),
-(2, 'admin');
-
--- --------------------------------------------------------
-
---
 -- Table structure for table `kosar`
 --
 
@@ -481,18 +464,6 @@ CREATE TABLE `kosar` (
   `jatekId` int(9) NOT NULL,
   `vegosszeg` int(9) NOT NULL DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
---
--- Dumping data for table `kosar`
---
-
-INSERT INTO `kosar` (`id`, `felhasznaloId`, `jatekId`, `vegosszeg`) VALUES
-(16, 3, 1, 5092),
-(17, 1, 4, 7992),
-(18, 2, 7, 17900),
-(20, 3, 3, 2990),
-(23, 1, 10, 6660),
-(25, 1, 13, 2990);
 
 -- --------------------------------------------------------
 
@@ -527,14 +498,6 @@ CREATE TABLE `rendeles` (
   `vegosszeg` int(9) NOT NULL,
   `feladva` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
---
--- Dumping data for table `rendeles`
---
-
-INSERT INTO `rendeles` (`id`, `felhasznaloId`, `vegosszeg`, `feladva`) VALUES
-(1, 3, 8082, '2023-12-14 13:30:17'),
-(2, 3, 8082, '2023-12-15 12:00:24');
 
 -- --------------------------------------------------------
 
@@ -608,12 +571,6 @@ ALTER TABLE `jatek`
   ADD KEY `kategoriaId` (`eszkozId`,`platformId`);
 
 --
--- Indexes for table `jogosultsag`
---
-ALTER TABLE `jogosultsag`
-  ADD PRIMARY KEY (`id`);
-
---
 -- Indexes for table `kosar`
 --
 ALTER TABLE `kosar`
@@ -666,16 +623,10 @@ ALTER TABLE `jatek`
   MODIFY `id` int(9) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
 
 --
--- AUTO_INCREMENT for table `jogosultsag`
---
-ALTER TABLE `jogosultsag`
-  MODIFY `id` int(9) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
-
---
 -- AUTO_INCREMENT for table `kosar`
 --
 ALTER TABLE `kosar`
-  MODIFY `id` int(9) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
+  MODIFY `id` int(9) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `platform`
@@ -687,7 +638,7 @@ ALTER TABLE `platform`
 -- AUTO_INCREMENT for table `rendeles`
 --
 ALTER TABLE `rendeles`
-  MODIFY `id` int(9) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(9) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `termekkulcs`
