@@ -33,10 +33,9 @@
             <type>jar</type>
         </dependency>
         <dependency>
-            <groupId>com.courier</groupId>
-            <artifactId>courier-java</artifactId>
-            <version>2.2.0</version>
-            <type>jar</type>
+            <groupId>com.sun.mail</groupId>
+            <artifactId>javax.mail</artifactId>
+            <version>1.5.3</version>
         </dependency>
     </dependencies>
 

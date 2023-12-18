@@ -4,7 +4,6 @@ import com.codecrafterswebshop.Exception.KosarException;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import javax.persistence.Basic;
@@ -269,13 +268,12 @@ public class Kosar implements Serializable {
             if (!eredmeny.isEmpty()) {
 
                 for (Object[] sor : eredmeny) {
-                    LinkedHashMap<String, Object> termekkulcs = new LinkedHashMap<>();
+                    HashMap<String, Object> termekkulcs = new HashMap<>();
 
                     termekkulcs.put("email", (String) sor[1]);
-                    termekkulcs.put("felhasznaloNev", (String) sor[2]);
-                    termekkulcs.put("nev", (String) sor[3]);
-                    termekkulcs.put("vegosszeg", (Integer) sor[4]);
-                    termekkulcs.put("kulcs", (String) sor[5]);
+                    termekkulcs.put("nev", (String) sor[2]);
+                    termekkulcs.put("vegosszeg", (Integer) sor[3]);
+                    termekkulcs.put("kulcs", (String) sor[4]);
 
                     termekkulcsok.add(termekkulcs);
                 }
