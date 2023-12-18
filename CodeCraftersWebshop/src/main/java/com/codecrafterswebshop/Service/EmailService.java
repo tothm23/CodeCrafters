@@ -18,23 +18,60 @@ import javax.mail.internet.MimeMessage;
  */
 public class EmailService {
 
-    public static boolean email(String cimzett, List<Map<String, Object>> termekkulcsok) {
+    public static String cimzett(List<Map<String, Object>> termekkulcsok) {
+        String cimzett = "";
 
-        Properties props = new Properties();
-        props.put("mail.smtp.host", "smtp.gmail.com");
-        props.put("mail.smtp.port", "587");
-        props.put("mail.smtp.auth", "true");
-        props.put("mail.smtp.starttls.enable", "true");
+        for (Map<String, Object> termek : termekkulcsok) {
+            for (Map.Entry<String, Object> entry : termek.entrySet()) {
 
-        Session session;
-        session = Session.getInstance(props, new Authenticator() {
-            @Override
-            protected PasswordAuthentication getPasswordAuthentication() {
-                return new PasswordAuthentication("tothm.214sz@acsjszki.hu", "TothH2**3");
+                if (entry.getKey().equals("email")) {
+                    cimzett = (String) entry.getValue();
+                    break;
+                }
             }
-        });
 
-        String html1 = "<!DOCTYPE html>\n"
+        }
+
+        return cimzett;
+    }
+
+    public static String felhasznaloNev(List<Map<String, Object>> termekkulcsok) {
+        String felhasznaloNev = "";
+
+        for (Map<String, Object> termek : termekkulcsok) {
+            for (Map.Entry<String, Object> entry : termek.entrySet()) {
+
+                if (entry.getKey().equals("felhasznaloNev")) {
+                    felhasznaloNev = (String) entry.getValue();
+                    break;
+                }
+            }
+
+        }
+
+        return felhasznaloNev;
+    }
+
+    public static int vegosszeg(List<Map<String, Object>> termekkulcsok) {
+        int vegosszeg = 0;
+
+        for (Map<String, Object> termek : termekkulcsok) {
+            for (Map.Entry<String, Object> entry : termek.entrySet()) {
+
+                if (entry.getKey().equals("vegosszeg")) {
+                    vegosszeg += (Integer) entry.getValue();
+                }
+            }
+
+        }
+
+        return vegosszeg;
+    }
+
+    public static String html(List<Map<String, Object>> termekkulcsok) {
+        StringBuilder sb = new StringBuilder();
+
+        sb.append("<!DOCTYPE html>\n"
                 + "<html lang=\"hu\">\n"
                 + "  <head>\n"
                 + "    <meta charset=\"UTF-8\" />\n"
@@ -63,92 +100,117 @@ public class EmailService {
                 + "        font-weight: bold;\n"
                 + "        font-size: 20pt;\n"
                 + "        padding: 20px;\n"
-                + "        text-align: center;\n"
                 + "      }\n"
                 + "\n"
-                + "      .card {\n"
-                + "        display: flex;\n"
-                + "        align-items: center;\n"
-                + "        justify-content: space-between;\n"
+                + "      .szoveg {\n"
+                + "        margin: 10px 20px;\n"
+                + "      }\n"
                 + "\n"
+                + "      table {\n"
+                + "        border-collapse: collapse;\n"
+                + "        border-radius: 20px;\n"
+                + "\n"
+                + "        margin: 40px auto;\n"
                 + "        background-color: #404040;\n"
-                + "        padding: 20px;\n"
-                + "        margin: 20px;\n"
-                + "\n"
-                + "        border: black 1px solid;\n"
-                + "        border-radius: 30px;\n"
+                + "        color: white;\n"
                 + "      }\n"
                 + "\n"
-                + "      .kosar-vegosszeg {\n"
+                + "      th {\n"
+                + "        padding: 20px 20px 10px;\n"
+                + "        text-align: left;\n"
+                + "      }\n"
+                + "\n"
+                + "      td {\n"
+                + "        padding: 10px 20px;\n"
+                + "      }\n"
+                + "\n"
+                + "      .szoveg-jobbra{\n"
                 + "        margin: 20px;\n"
                 + "        text-align: right;\n"
                 + "      }\n"
                 + "\n"
-                + "      #kosar-vegosszeg-title {\n"
-                + "        font-weight: lighter;\n"
-                + "        font-size: 1.5em;\n"
-                + "        margin-right: 20px;\n"
-                + "        font-size: x-large;\n"
-                + "      }\n"
-                + "\n"
-                + "      #vegosszeg {\n"
-                + "        font-size: xx-large;\n"
-                + "      }\n"
+                + "      \n"
                 + "    </style>\n"
                 + "  </head>\n"
                 + "\n"
                 + "  <body>\n"
                 + "    <div class=\"kosar\">\n"
-                + "      <h2 class=\"header\">A rendelés tartalma</h2>\n"
-                + "\n";
+                + "      <h1 class=\"header\">Kedves ").append(felhasznaloNev(termekkulcsok)).append("!</h1>\n"
+                + "      <p class=\"szoveg\">Köszönjük a rendelését! Az alábbiakban látható a rendelés összesítése:</p>\n"
+                + "\n"
+                + "      <table>\n"
+                + "        <tr>");
 
-        String jatek = "";
+        for (String key : termekkulcsok.get(0).keySet()) {
+
+            if (key.equals("nev")) {
+                sb.append("<th>").append("Játék").append("</th>");
+            }
+            if (key.equals("vegosszeg")) {
+                sb.append("<th>").append("Ár").append("</th>");
+            }
+            if (key.equals("kulcs")) {
+                sb.append("<th>").append("Termékkulcs").append("</th>");
+            }
+
+        }
+
+        sb.append("</tr>");
 
         for (Map<String, Object> termek : termekkulcsok) {
+            sb.append("<tr>");
             for (Map.Entry<String, Object> entry : termek.entrySet()) {
-                System.out.println(entry.getKey() + " : " + entry.getValue());
-
-                if (entry.getKey().equals("nev")) {
-                    jatek
-                            += "      <div class=\"card\">\n"
-                            + "        <div>" + entry.getValue() + "</div>\n"
-                            + "        <div>" + "" + "</div>\n"
-                            + "      </div>\n";
-                } else if (entry.getKey().equals("vegosszeg")) {
-                    jatek
-                            += "      <div class=\"card\">\n"
-                            + "        <div>" + "" + "</div>\n"
-                            + "        <div>" + entry.getValue() + "Ft</div>\n"
-                            + "      </div>\n";
+                if (entry.getKey().equals("nev") || entry.getKey().equals("vegosszeg")) {
+                    sb.append("<td>").append(entry.getValue()).append("</td>");
                 }
+                if (entry.getKey().equals("kulcs")) {
+                    sb.append("<td><b>").append(entry.getValue()).append("</b></td>");
+                }
+
             }
+            sb.append("</tr>");
         }
 
-        for (int i = 1; i < 4; i++) {
-
-        }
-
-        String html2 = "\n"
-                + "      <div class=\"kosar-vegosszeg\">\n"
-                + "        <strong id=\"kosar-vegosszeg-title\">Összesen:</strong>\n"
-                + "        <span id=\"vegosszeg\">30 000 FT</span>\n"
-                + "      </div>\n"
+        sb.append(" </table>\n"
+                + "\n"
+                + "      <h2 class=\"szoveg-jobbra\">Összesen: <b id=\"vegosszeg\">").append(vegosszeg(termekkulcsok)).append(" FT</b></h2>\n"
+                + "\n"
+                + "      <p class=\"szoveg\">Üdvözlettel,</p>\n"
+                + "      <p class=\"szoveg\">CodeCrafters</p>\n"
                 + "    </div>\n"
                 + "  </body>\n"
-                + "</html>";
+                + "</html>");
+
+        return new String(sb);
+    }
+
+    public static boolean email(List<Map<String, Object>> termekkulcsok) {
+
+        Properties props = new Properties();
+        props.put("mail.smtp.host", "smtp.gmail.com");
+        props.put("mail.smtp.port", "587");
+        props.put("mail.smtp.auth", "true");
+        props.put("mail.smtp.starttls.enable", "true");
+
+        Session session;
+        session = Session.getInstance(props, new Authenticator() {
+            @Override
+            protected PasswordAuthentication getPasswordAuthentication() {
+                return new PasswordAuthentication("gaminghours32@gmail.com", "psmumawhditzojgl");
+            }
+        });
 
         try {
             MimeMessage message = new MimeMessage(session);
-            message.addRecipient(Message.RecipientType.TO, new InternetAddress(cimzett, true));
-            message.setSubject("Próba");
-            message.setContent(html1 + jatek + html2, "text/html");
+            message.addRecipient(Message.RecipientType.TO, new InternetAddress(cimzett(termekkulcsok), true));
+            message.setSubject("Megrendelésed összeállítottuk");
+            message.setContent(html(termekkulcsok), "text/html");
             Transport.send(message);
 
             return true;
 
         } catch (MessagingException me) {
             System.out.println("Hiba történt. " + me.getMessage());
-
         }
 
         return false;
