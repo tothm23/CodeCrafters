@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Dec 15, 2023 at 02:39 PM
+-- Generation Time: Dec 19, 2023 at 05:39 PM
 -- Server version: 5.7.24
 -- PHP Version: 8.0.1
 
@@ -107,13 +107,13 @@ CREATE DEFINER=`root`@`localhost` PROCEDURE `felhasznaloNevEllenorzes` (IN `nevB
 FROM felhasznalo
 WHERE felhasznalo.felhasznaloNev = nevBE$$
 
-CREATE DEFINER=`root`@`localhost` PROCEDURE `frissitesFelhasznalo` (IN `felhasznaloNevBE` VARCHAR(100), IN `vezetekNevBE` VARCHAR(100), IN `keresztNevBE` VARCHAR(100), IN `ujJelszoBE` TEXT, IN `jelszoBE` TEXT)   UPDATE felhasznalo
+CREATE DEFINER=`root`@`localhost` PROCEDURE `frissitesFelhasznalo` (IN `idBE` INT(9), IN `felhasznaloNevBE` VARCHAR(100), IN `vezetekNevBE` VARCHAR(100), IN `keresztNevBE` VARCHAR(100), IN `jelszoBE` TEXT)   UPDATE felhasznalo
 SET felhasznalo.felhasznaloNev = felhasznaloNevBE,
 	felhasznalo.vezetekNev = vezetekNevBE,
     felhasznalo.keresztNev = keresztNevBE,
-  	felhasznalo.jelszo = SHA1(ujJelszoBE),
+  	felhasznalo.jelszo = SHA1(jelszoBE),
     felhasznalo.frissitve = CURRENT_TIMESTAMP
-WHERE felhasznalo.jelszo = SHA1(jelszoBE)$$
+WHERE felhasznalo.id = idBE$$
 
 CREATE DEFINER=`root`@`localhost` PROCEDURE `frissitesJatek` (IN `idBE` INT(9), IN `nevBE` VARCHAR(100), IN `arBE` INT(9), IN `leirasBE` TEXT, IN `kepBE` VARCHAR(100), IN `korhatarBE` INT(2), IN `akcioBE` INT(3), IN `mennyisegraktaronBE` INT(5), IN `eszkozIdBE` INT(9), IN `platformIdBE` INT(9))   UPDATE jatek
 SET jatek.nev = nevBE,
@@ -281,6 +281,7 @@ END$$
 CREATE DEFINER=`root`@`localhost` PROCEDURE `termekKulcs` (IN `felhasznaloIdBE` INT(9))   SELECT 
     kosar.jatekId,
     felhasznalo.email,
+    felhasznalo.felhasznaloNev,
     jatek.nev AS "jatekNev",
     kosar.vegosszeg AS "jatekAr",
     termekkulcs.kulcs
