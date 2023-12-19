@@ -35,6 +35,20 @@ public class FelhasznaloService {
         }
     }
 
+    public static String frissitesFelhasznalo(Integer id, String felhasznaloNevBE, String vezetekNevBE, String keresztNevBE,
+            String jelszoBE) {
+        try {
+            if (Felhasznalo.frissitesFelhasznalo(id, felhasznaloNevBE, vezetekNevBE, keresztNevBE,
+                    jelszoBE)) {
+                return "Felhasználó frissítve!";
+            } else {
+                return "Hiba a Felhasználó frissítésénél!";
+            }
+        } catch (Exception ex) {
+            return ex.getMessage();
+        }
+    }
+
     public static JSONObject felhasznaloBelepes(String felhasznaloNevBE, String jelszoBE) {
 
         Integer id = Felhasznalo.felhasznaloBelepes(felhasznaloNevBE, jelszoBE);

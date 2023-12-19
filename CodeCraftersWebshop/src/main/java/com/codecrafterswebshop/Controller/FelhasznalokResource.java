@@ -4,7 +4,9 @@ import com.codecrafterswebshop.Model.Felhasznalo;
 import com.codecrafterswebshop.Service.FelhasznaloService;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.POST;
+import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
+import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
@@ -28,6 +30,15 @@ public class FelhasznalokResource {
         String result = FelhasznaloService.ujFelhasznalo(f.getFelhasznaloNev(), f.getVezetekNev(),
                 f.getKeresztNev(), f.getEmail(), f.getJelszo());
         return Response.status(Response.Status.CREATED).entity(result)
+                .type(MediaType.APPLICATION_JSON).build();
+    }
+
+    @PUT
+    @Path("{felhasznaloId}")
+    public Response frissitesFelhasznalo(Felhasznalo f, @PathParam("felhasznaloId") Integer id) {
+        String eredmeny = FelhasznaloService.frissitesFelhasznalo(id, f.getFelhasznaloNev(), f.getVezetekNev(),
+                f.getKeresztNev(), f.getJelszo());
+        return Response.status(Response.Status.OK).entity(eredmeny)
                 .type(MediaType.APPLICATION_JSON).build();
     }
 
