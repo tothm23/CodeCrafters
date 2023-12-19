@@ -337,6 +337,32 @@ public class Felhasznalo implements Serializable {
         }
     }
 
+    public static boolean torlesFelhasznalo(Integer felhasznaloIdBE) {
+
+        EntityManagerFactory emf = Persistence.createEntityManagerFactory("com_CodeCraftersWebshop_war_1.0-SNAPSHOTPU");
+        EntityManager em = emf.createEntityManager();
+
+        try {
+            StoredProcedureQuery spq = em.createStoredProcedureQuery("torlesFelhasznalo");
+
+            spq.registerStoredProcedureParameter("felhasznaloIdBE", Integer.class, ParameterMode.IN);
+            spq.setParameter("felhasznaloIdBE", felhasznaloIdBE);
+
+            spq.execute();
+            return true;
+
+        } catch (Exception e) {
+
+            System.err.println(e.getMessage());
+            return false;
+
+        } finally {
+            em.clear();
+            em.close();
+            emf.close();
+        }
+    }
+
     public static boolean felhasznaloNevEllenorzes(String felhasznaloNev) throws FelhasznaloException {
         EntityManagerFactory emf = Persistence.createEntityManagerFactory("com_CodeCraftersWebshop_war_1.0-SNAPSHOTPU");
         EntityManager em = emf.createEntityManager();

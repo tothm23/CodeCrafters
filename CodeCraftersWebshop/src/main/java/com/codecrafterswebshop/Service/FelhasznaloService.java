@@ -49,6 +49,18 @@ public class FelhasznaloService {
         }
     }
 
+    public static String torlesFelhasznalo(Integer id) {
+        try {
+            if (Felhasznalo.torlesFelhasznalo(id)) {
+                return "Felhasználó törölve!";
+            } else {
+                return "Hiba a Felhasználó törlésénél!";
+            }
+        } catch (Exception ex) {
+            return ex.getMessage();
+        }
+    }
+
     public static JSONObject felhasznaloBelepes(String felhasznaloNevBE, String jelszoBE) {
 
         Integer id = Felhasznalo.felhasznaloBelepes(felhasznaloNevBE, jelszoBE);
