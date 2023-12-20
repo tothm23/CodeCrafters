@@ -1,9 +1,20 @@
 const bejelentkezettFelhasznalo = JSON.parse(localStorage.getItem("bejelentkezes"));
+const log_reg = document.getElementById("log_reg");
+const felhasznaloful = document.getElementById("felhasznalo-box");
 
-if (bejelentkezettFelhasznalo) {
-  let kosarid = [];
-  getkosar(kosarid);
+let kosarid = [];
+
+
+if(bejelentkezettFelhasznalo){
+  log_reg.display="none";
+  felhasznaloful.display="flex";
+  getkosar(kosarid);  
 }
+else{
+  log_reg.display="flex";
+  felhasznaloful.display="none";
+}
+
 // GET kérés
 fetch(
     "http://localhost:8080/CodeCraftersWebshop-1.0-SNAPSHOT/webresources/fooldal"
@@ -106,8 +117,6 @@ function hozzaadasGomb(id) {
 document.addEventListener("DOMContentLoaded", function () {
   const keresoInput = document.querySelector('.navbar input[type="search"]');
   const form = document.querySelector(".navbar form");
-  const log_reg = document.getElementById("log_reg");
-  const felhasznaloful = document.getElementById("felhasznalo-box");
   const aktualisPath = window.location.pathname;
   const kijelentkezés_gomb = document.getElementById("felhasznalo_kilep");
   const beallitasok_gomb = document.getElementById("beallitasok");
