@@ -85,10 +85,8 @@ function felgorget() {
 function hozzaadasGomb(id) {
   var vanilyen_ID=false;
   for(let i = 0; i < kosarid.length; i++) {
-    console.log(id,"for i:",kosarid[i]);
     if (kosarid[i] === id) {
       vanilyen_ID=true;
-      console.log("vanilyen");
     }
     
   }
