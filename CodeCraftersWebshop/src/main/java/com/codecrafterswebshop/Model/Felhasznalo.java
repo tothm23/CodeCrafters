@@ -249,7 +249,7 @@ public class Felhasznalo implements Serializable {
 
         return felhasznalo;
     }
-
+z
     public static Felhasznalo felhasznaloBelepes(String felhasznaloNevBE, String jelszoBE) {
 
         EntityManagerFactory emf = Persistence.createEntityManagerFactory("com_CodeCraftersWebshop_war_1.0-SNAPSHOTPU");
@@ -325,43 +325,173 @@ public class Felhasznalo implements Serializable {
         }
     }
 
+    public static boolean frissitesFelhasznalo(Integer idBE, String felhasznaloNevBE, String vezetekNevBE, String keresztNev, String jelszoBE) {
+
+        EntityManagerFactory emf = Persistence.createEntityManagerFactory("com_CodeCraftersWebshop_war_1.0-SNAPSHOTPU");
+        EntityManager em = emf.createEntityManager();
+
+        try {
+            StoredProcedureQuery spq = em.createStoredProcedureQuery("frissitesFelhasznalo");
+
+            spq.registerStoredProcedureParameter("idBE", Integer.class, ParameterMode.IN);
+            spq.registerStoredProcedureParameter("felhasznaloNevBE", String.class, ParameterMode.IN);
+            spq.registerStoredProcedureParameter("vezetekNevBE", String.class, ParameterMode.IN);
+            spq.registerStoredProcedureParameter("keresztNev", String.class, ParameterMode.IN);
+            spq.registerStoredProcedureParameter("jelszoBE", String.class, ParameterMode.IN);
+
+            spq.setParameter("idBE", idBE);
+            spq.setParameter("felhasznaloNevBE", felhasznaloNevBE);
+            spq.setParameter("vezetekNevBE", vezetekNevBE);
+            spq.setParameter("keresztNev", keresztNev);
+            spq.setParameter("jelszoBE", jelszoBE);
+
+            spq.execute();
+            return true;
+
+        } catch (Exception e) {
+
+            System.err.println(e.getMessage());
+            return false;
+
+        } finally {
+            em.clear();
+            em.close();
+            emf.close();
+        }
+    }
+
+    public static boolean torlesFelhasznalo(Integer felhasznaloIdBE) {
+
+        EntityManagerFactory emf = Persistence.createEntityManagerFactory("com_CodeCraftersWebshop_war_1.0-SNAPSHOTPU");
+        EntityManager em = emf.createEntityManager();
+
+        try {
+            StoredProcedureQuery spq = em.createStoredProcedureQuery("torlesFelhasznalo");
+
+            spq.registerStoredProcedureParameter("felhasznaloIdBE", Integer.class, ParameterMode.IN);
+            spq.setParameter("felhasznaloIdBE", felhasznaloIdBE);
+
+            spq.execute();
+            return true;
+
+        } catch (Exception e) {
+
+            System.err.println(e.getMessage());
+            return false;
+
+        } finally {
+            em.clear();
+            em.close();
+            emf.close();
+        }
+    }
+
     public static boolean felhasznaloNevEllenorzes(String felhasznaloNev) throws FelhasznaloException {
+        EntityManagerFactory emf = Persistence.createEntityManagerFactory("com_CodeCraftersWebshop_war_1.0-SNAPSHOTPU");
+        EntityManager em = emf.createEntityManager();
+
+        int db = 0;
+        try {
+            StoredProcedureQuery spq = em.createStoredProcedureQuery("felhasznaloNevEllenorzes");
+
+            spq.registerStoredProcedureParameter("nevBE", String.class, ParameterMode.IN);
+            spq.registerStoredProcedureParameter("dbKI", Integer.class, ParameterMode.OUT);
+
+            spq.setParameter("nevBE", felhasznaloNev);
+            db = (Integer) spq.getOutputParameterValue("dbKI");
+
+        } catch (Exception e) {
+            System.err.println(e.getMessage());
+
+        } finally {
+            em.clear();
+            em.close();
+            emf.close();
+        }
+
         if (felhasznaloNev.equals("")) {
             throw new FelhasznaloException("A felhasználó neve lehet üres!");
         } else if (felhasznaloNev.length() > 100) {
             throw new FelhasznaloException("A felhasználó neve nem lehet 100 karakternél hosszabb!");
+        } else if (db > 0) {
+            throw new FelhasznaloException("A felhasználó neve már létezik!");
         } else {
             return true;
         }
     }
 
     public static boolean vezetekNevEllenorzes(String vezetekNev) throws FelhasznaloException {
+      
+        boolean tartalmazSpecialiskaraktert = false;
+
+        for (char c : vezetekNev.toCharArray()) {
+            if (!Character.isLetterOrDigit(c)) {
+                tartalmazSpecialiskaraktert = true;
+            }
+        }
         if (vezetekNev.equals("")) {
             throw new FelhasznaloException("A felhasználó vezetékneve lehet üres!");
         } else if (vezetekNev.length() > 100) {
             throw new FelhasznaloException("A felhasználó vezetékneve nem lehet 100 karakternél hosszabb!");
+        } else if (tartalmazSpecialiskaraktert) {
+            throw new FelhasznaloException("A felhasználó vezetékneve nem tartalmazhat speciális karaktert!");
         } else {
             return true;
         }
     }
 
     public static boolean keresztNevEllenorzes(String keresztNev) throws FelhasznaloException {
+
+        boolean tartalmazSpecialiskaraktert = false;
+
+        for (char c : keresztNev.toCharArray()) {
+            if (!Character.isLetterOrDigit(c)) {
+                tartalmazSpecialiskaraktert = true;
+            }
+        }
+
         if (keresztNev.equals("")) {
             throw new FelhasznaloException("A felhasználó keresztneve lehet üres!");
         } else if (keresztNev.length() > 100) {
             throw new FelhasznaloException("A felhasználó keresztneve nem lehet 100 karakternél hosszabb!");
+        } else if (tartalmazSpecialiskaraktert) {
+            throw new FelhasznaloException("A felhasználó keresztneve nem tartalmazhat speciális karaktert!");
         } else {
             return true;
         }
     }
 
     public static boolean emailEllenorzes(String email) throws FelhasznaloException {
+        EntityManagerFactory emf = Persistence.createEntityManagerFactory("com_CodeCraftersWebshop_war_1.0-SNAPSHOTPU");
+        EntityManager em = emf.createEntityManager();
+
+        int db = 0;
+        try {
+            StoredProcedureQuery spq = em.createStoredProcedureQuery("felhasznaloEmailEllenorzes");
+
+            spq.registerStoredProcedureParameter("emailBE", String.class, ParameterMode.IN);
+            spq.registerStoredProcedureParameter("dbKI", Integer.class, ParameterMode.OUT);
+
+            spq.setParameter("emailBE", email);
+            db = (Integer) spq.getOutputParameterValue("dbKI");
+
+        } catch (Exception e) {
+            System.err.println(e.getMessage());
+
+        } finally {
+            em.clear();
+            em.close();
+            emf.close();
+        }
+
         if (email.equals("")) {
             throw new FelhasznaloException("A felhasználó emailje lehet üres!");
         } else if (email.length() > 100) {
             throw new FelhasznaloException("A felhasználó emailje nem lehet 100 karakternél hosszabb!");
         } else if (!email.contains("@")) {
             throw new FelhasznaloException("A felhasználó emailjének tartalmaznia kell a @ karaktert!");
+        } else if (db > 0) {
+            throw new FelhasznaloException("A felhasználó emailje már létezik!");
         } else {
             return true;
         }

@@ -20,10 +20,11 @@ public class ApplicationConfig extends Application {
     private void addRestResourceClasses(Set<Class<?>> resources) {
         resources.add(com.codecrafterswebshop.Config.CorsFilter.class);
         resources.add(com.codecrafterswebshop.Config.TokenFilter.class);
-        resources.add(com.codecrafterswebshop.Controller.AjandekkartyaResource.class);
         resources.add(com.codecrafterswebshop.Controller.FelhasznalokResource.class);
         resources.add(com.codecrafterswebshop.Controller.FooldalResource.class);
         resources.add(com.codecrafterswebshop.Controller.JatekResource.class);
+        resources.add(com.codecrafterswebshop.Controller.KosarResource.class);
+        resources.add(com.codecrafterswebshop.Controller.RendelesResource.class);
         resources.add(com.codecrafterswebshop.Controller.TermekekResource.class);
     }
 

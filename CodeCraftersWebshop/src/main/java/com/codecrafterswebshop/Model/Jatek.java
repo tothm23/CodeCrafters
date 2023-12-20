@@ -487,10 +487,34 @@ public class Jatek implements Serializable {
     }
 
     public static boolean nevEllenorzes(String nev) throws JatekException {
+        EntityManagerFactory emf = Persistence.createEntityManagerFactory("com_CodeCraftersWebshop_war_1.0-SNAPSHOTPU");
+        EntityManager em = emf.createEntityManager();
+
+        int db = 0;
+        try {
+            StoredProcedureQuery spq = em.createStoredProcedureQuery("jatekNevEllenorzes");
+
+            spq.registerStoredProcedureParameter("nevBE", String.class, ParameterMode.IN);
+            spq.registerStoredProcedureParameter("dbKI", Integer.class, ParameterMode.OUT);
+
+            spq.setParameter("nevBE", nev);
+            db = (Integer) spq.getOutputParameterValue("dbKI");
+
+        } catch (Exception e) {
+            System.err.println(e.getMessage());
+
+        } finally {
+            em.clear();
+            em.close();
+            emf.close();
+        }
+
         if (nev.equals("")) {
             throw new JatekException("A játék neve lehet üres!");
         } else if (nev.length() > 100) {
             throw new JatekException("A játék neve nem lehet 100 karakternél hosszabb!");
+        } else if (db > 0) {
+            throw new JatekException("A játék neve már létezik!");
         } else {
             return true;
         }
@@ -513,8 +537,32 @@ public class Jatek implements Serializable {
     }
 
     public static boolean kepEllenorzes(String kep) throws JatekException {
+        EntityManagerFactory emf = Persistence.createEntityManagerFactory("com_CodeCraftersWebshop_war_1.0-SNAPSHOTPU");
+        EntityManager em = emf.createEntityManager();
+
+        int db = 0;
+        try {
+            StoredProcedureQuery spq = em.createStoredProcedureQuery("jatekKepEllenorzes");
+
+            spq.registerStoredProcedureParameter("kepBE", String.class, ParameterMode.IN);
+            spq.registerStoredProcedureParameter("dbKI", Integer.class, ParameterMode.OUT);
+
+            spq.setParameter("kepBE", kep);
+            db = (Integer) spq.getOutputParameterValue("dbKI");
+
+        } catch (Exception e) {
+            System.err.println(e.getMessage());
+
+        } finally {
+            em.clear();
+            em.close();
+            emf.close();
+        }
+
         if (kep.equals("")) {
             throw new JatekException("A játék képe lehet üres!");
+        } else if (db > 0) {
+            throw new JatekException("A játék képe már létezik!");
         } else {
             return true;
         }
