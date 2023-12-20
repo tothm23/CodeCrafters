@@ -9,6 +9,10 @@ document.addEventListener('DOMContentLoaded', function () {
 
     felhasznalo_form.addEventListener("submit", function (event) {
         event.preventDefault();
+        const felhaszInput = document.getElementById("felhasz").value;
+        const vezeteknevInput = document.getElementById("vezeteknev").value;
+        const keresztnevInput = document.getElementById("keresztnev").value;
+        const emailInput = document.getElementById("email").value;
         const jelszo = document.getElementById("jelszo").value;
         const jelszoujra = document.getElementById("jelszoegyezes").value;
 
@@ -17,10 +21,34 @@ document.addEventListener('DOMContentLoaded', function () {
             alert("A jelszavak nem egyeznek!");
         } else {
             // A gomb, amire kattintottál
-            const clickedButton = event.submitter; 
+            const clickedButton = event.submitter;
             if (clickedButton.id === "mentes") {
                 // Mentési logika
+                var myHeaders = new Headers();
+                myHeaders.append("Content-Type", "application/json");
+                var raw = JSON.stringify({
+                    "felhasznaloNev": felhaszInput,
+                    "vezetekNev": vezeteknevInput,
+                    "keresztNev": keresztnevInput,
+                    "jelszo": jelszo
+                });
+
+                var requestOptions = {
+                    method: 'PUT',
+                    headers: myHeaders,
+                    body: raw,
+                    redirect: 'follow'
+                };
+
+                fetch(`http://localhost:8080/CodeCraftersWebshop-1.0-SNAPSHOT/webresources/felhasznalok/${bejelentkezettFelhasznalo.id}`, requestOptions)
+                    .then(response => response.text())
+                    .then(result => console.log(result))
+                    .catch(error => console.log('error', error));
                 console.log("Mentes");
+                console.log(bejelentkezettFelhasznalo);
+                //még a local storageba nincsen el mentve a változtatás
+
+
             } else if (clickedButton.id === "torles") {
                 // Törlés logika
                 console.log("Torles");
