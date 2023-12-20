@@ -1,5 +1,8 @@
 package com.codecrafterswebshop.Service;
 
+// import com.codecrafterswebshop.Config.Token;
+import com.codecrafterswebshop.Exception.FelhasznaloException;
+import com.codecrafterswebshop.Model.Felhasznalo;
 import com.codecrafterswebshop.Exception.FelhasznaloException;
 import com.codecrafterswebshop.Model.Felhasznalo;
 import java.util.Map;
@@ -35,6 +38,18 @@ public class FelhasznaloService {
         }
     }
 
+/*
+    public static JSONObject felhasznaloBelepes(String felhasznaloNevBE, String jelszoBE) {
+
+        JSONObject obj = new JSONObject();
+        Felhasznalo f = Felhasznalo.felhasznaloBelepes(felhasznaloNevBE, jelszoBE);
+        String token = Token.letrehozas(f, 60000);
+
+        if (f.getId() != null) {
+            obj.put("token", token);
+        } else {
+            obj.put("token", "");
+*/
     public static String frissitesFelhasznalo(Integer id, String felhasznaloNevBE, String vezetekNevBE, String keresztNevBE,
             String jelszoBE) {
         try {

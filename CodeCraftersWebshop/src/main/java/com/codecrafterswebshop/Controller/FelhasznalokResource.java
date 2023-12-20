@@ -3,6 +3,8 @@ package com.codecrafterswebshop.Controller;
 import com.codecrafterswebshop.Model.Felhasznalo;
 import com.codecrafterswebshop.Service.FelhasznaloService;
 import javax.ws.rs.Consumes;
+import javax.ws.rs.POST;
+import javax.ws.rs.Path;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.POST;
 import javax.ws.rs.PUT;

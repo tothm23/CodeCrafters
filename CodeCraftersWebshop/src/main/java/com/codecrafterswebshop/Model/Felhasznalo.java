@@ -1,5 +1,6 @@
 package com.codecrafterswebshop.Model;
 
+import com.codecrafterswebshop.Config.Token;
 import com.codecrafterswebshop.Exception.FelhasznaloException;
 import java.io.Serializable;
 import java.util.Date;
@@ -107,6 +108,14 @@ public class Felhasznalo implements Serializable {
         this.email = email;
         this.jelszo = jelszo;
         this.jogosultsagId = jogosultsagId;
+    }
+
+    private Felhasznalo(Integer id, String felhasznaloNev, String vezetekNev, String keresztNev, String email) {
+        this.id = id;
+        this.felhasznaloNev = felhasznaloNev;
+        this.vezetekNev = vezetekNev;
+        this.keresztNev = keresztNev;
+        this.email = email;
     }
 
     public Integer getId() {
@@ -217,6 +226,9 @@ public class Felhasznalo implements Serializable {
 
             List<Object[]> eredmeny = spq.getResultList();
 
+            Felhasznalo f = new Felhasznalo(idBE);
+            String token = Token.letrehozas(f, 10000);
+
             if (!eredmeny.isEmpty()) {
                 Object[] sor = eredmeny.get(0);
                 felhasznalo.put("id", sor[0]);
@@ -224,6 +236,7 @@ public class Felhasznalo implements Serializable {
                 felhasznalo.put("vezetekNev", sor[2]);
                 felhasznalo.put("keresztNev", sor[3]);
                 felhasznalo.put("email", sor[4]);
+                felhasznalo.put("token", token);
             }
 
         } catch (Exception e) {
@@ -236,8 +249,8 @@ public class Felhasznalo implements Serializable {
 
         return felhasznalo;
     }
-
-    public static Integer felhasznaloBelepes(String felhasznaloNevBE, String jelszoBE) {
+z
+    public static Felhasznalo felhasznaloBelepes(String felhasznaloNevBE, String jelszoBE) {
 
         EntityManagerFactory emf = Persistence.createEntityManagerFactory("com_CodeCraftersWebshop_war_1.0-SNAPSHOTPU");
         EntityManager em = emf.createEntityManager();
@@ -248,16 +261,26 @@ public class Felhasznalo implements Serializable {
             spq.registerStoredProcedureParameter("felhasznaloNevBE", String.class, ParameterMode.IN);
             spq.registerStoredProcedureParameter("jelszoBE", String.class, ParameterMode.IN);
             spq.registerStoredProcedureParameter("felhasznaloIdKI", Integer.class, ParameterMode.OUT);
+            spq.registerStoredProcedureParameter("felhasznaloNevKI", String.class, ParameterMode.OUT);
+            spq.registerStoredProcedureParameter("vezetekNevKI", String.class, ParameterMode.OUT);
+            spq.registerStoredProcedureParameter("keresztNevKI", String.class, ParameterMode.OUT);
+            spq.registerStoredProcedureParameter("emailKI", String.class, ParameterMode.OUT);
 
             spq.setParameter("felhasznaloNevBE", felhasznaloNevBE);
             spq.setParameter("jelszoBE", jelszoBE);
 
-            System.out.println("Success! ID: " + new Felhasznalo((Integer) spq.getOutputParameterValue("felhasznaloIdKI")).getId());
-            return new Felhasznalo((Integer) spq.getOutputParameterValue("felhasznaloIdKI")).getId();
+            Integer id = (Integer) spq.getOutputParameterValue("felhasznaloIdKI");
+            String felhasznaloNev = (String) spq.getOutputParameterValue("felhasznaloNevKI");
+            String vezetekNev = (String) spq.getOutputParameterValue("vezetekNevKI");
+            String keresztNev = (String) spq.getOutputParameterValue("keresztNevKI");
+            String email = (String) spq.getOutputParameterValue("emailKI");
+
+            Felhasznalo f = new Felhasznalo(id, felhasznaloNev, vezetekNev, keresztNev, email);
+            return f;
 
         } catch (Exception e) {
             System.err.println(e.getMessage());
-            return new Felhasznalo().getId();
+            return new Felhasznalo();
         } finally {
             em.clear();
             em.close();
@@ -398,7 +421,7 @@ public class Felhasznalo implements Serializable {
     }
 
     public static boolean vezetekNevEllenorzes(String vezetekNev) throws FelhasznaloException {
-
+      
         boolean tartalmazSpecialiskaraktert = false;
 
         for (char c : vezetekNev.toCharArray()) {
@@ -406,7 +429,6 @@ public class Felhasznalo implements Serializable {
                 tartalmazSpecialiskaraktert = true;
             }
         }
-
         if (vezetekNev.equals("")) {
             throw new FelhasznaloException("A felhasználó vezetékneve lehet üres!");
         } else if (vezetekNev.length() > 100) {
