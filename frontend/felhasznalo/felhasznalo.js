@@ -46,23 +46,46 @@ document.addEventListener('DOMContentLoaded', function () {
                     .catch(error => console.log('error', error));
                 console.log("Felhasználó frissítve");
                 alert("Felhasználó frissítve");
-                
-                let valszObjektum={
+
+                let valszObjektum = {
                     "felhasznaloNev": felhaszInput,
-                    "email":bejelentkezettFelhasznalo.email,
-                    "id":bejelentkezettFelhasznalo.id,
+                    "email": bejelentkezettFelhasznalo.email,
+                    "id": bejelentkezettFelhasznalo.id,
                     "vezetekNev": vezeteknevInput,
                     "keresztNev": keresztnevInput,
                     "jelszo": jelszo
                 }
-                bejelentkezettFelhasznalo=localStorage.setItem("bejelentkezes",JSON.stringify(valszObjektum));
+                bejelentkezettFelhasznalo = localStorage.setItem("bejelentkezes", JSON.stringify(valszObjektum));
                 console.log(bejelentkezettFelhasznalo);
                 //még a local storageba nincsen el mentve a változtatás
 
 
             } else if (clickedButton.id === "torles") {
                 // Törlés logika
-                console.log("Torles");
+                var myHeaders = new Headers();
+                myHeaders.append("Content-Type", "application/json");
+
+                var raw = JSON.stringify({
+                    "felhasznaloNev": felhaszInput,
+                    "vezetekNev": vezeteknevInput,
+                    "keresztNev": keresztnevInput,
+                    "jelszo": jelszo
+                });
+
+                var requestOptions = {
+                    method: 'DELETE',
+                    headers: myHeaders,
+                    body: raw,
+                    redirect: 'follow'
+                };
+
+                fetch(`http://localhost:8080/CodeCraftersWebshop-1.0-SNAPSHOT/webresources/felhasznalok/${bejelentkezettFelhasznalo.id}`, requestOptions)
+                    .then(response => response.text())
+                    .then(result => console.log(result))
+                    .catch(error => console.log('error', error));
+                console.log("A felhasználó törölve!");
+                localStorage.removeItem('bejelentkezes');
+                alert("A felhasználó törölve!");
             }
         }
     });

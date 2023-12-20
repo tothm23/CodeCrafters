@@ -1,8 +1,9 @@
 const bejelentkezettFelhasznalo = JSON.parse(localStorage.getItem("bejelentkezes"));
 
-let kosarid = [];
-getkosar(kosarid);
-
+if (bejelentkezettFelhasznalo) {
+  let kosarid = [];
+  getkosar(kosarid);
+}
 // GET kérés
 fetch(
     "http://localhost:8080/CodeCraftersWebshop-1.0-SNAPSHOT/webresources/fooldal"
@@ -83,19 +84,20 @@ function felgorget() {
 }
 
 function hozzaadasGomb(id) {
-  var vanilyen_ID=false;
-  for(let i = 0; i < kosarid.length; i++) {
-    if (kosarid[i] === id) {
-      vanilyen_ID=true;
+  var vanilyen_ID = false;
+  if (bejelentkezettFelhasznalo) {
+    for (let i = 0; i < kosarid.length; i++) {
+      if (kosarid[i] === id) {
+        vanilyen_ID = true;
+      }
     }
-    
-  }
-  if (bejelentkezettFelhasznalo && vanilyen_ID==true) {
-    return `<input id="hozzadas" data-jatek-id="${id}" class="my-2 p-2 btn btn-success fs-5" type="button" disabled value="Kosárban" />`;
-  }else if(bejelentkezettFelhasznalo && vanilyen_ID==false){
-    return `<input id="hozzadas" data-jatek-id="${id}" class="my-2 p-2 btn btn-success fs-5" type="button" value="Hozzáadás a kosárhoz" />`;
-  } 
-  else {
+    if (vanilyen_ID) {
+      return `<input id="hozzadas" data-jatek-id="${id}" class="my-2 p-2 btn btn-success fs-5" type="button" disabled value="Kosárban" />`;
+    } else {
+      return `<input id="hozzadas" data-jatek-id="${id}" class="my-2 p-2 btn btn-success fs-5" type="button" value="Hozzáadás a kosárhoz" />`;
+
+    }
+  } else {
     return `<input id="hozzadas" data-jatek-id="${id}" class="my-2 p-2 btn btn-success fs-5" type="button" disabled value="Hozzáadás a kosárhoz" />`;
   }
 
