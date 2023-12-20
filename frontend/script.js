@@ -1,4 +1,8 @@
 const bejelentkezettFelhasznalo = JSON.parse(localStorage.getItem("bejelentkezes"));
+
+let kosarid = [];
+getkosar(kosarid);
+
 // GET kérés
 fetch(
     "http://localhost:8080/CodeCraftersWebshop-1.0-SNAPSHOT/webresources/fooldal"
@@ -44,6 +48,22 @@ fetch(
   })
   .catch((hiba) => alert(hiba));
 
+//get kosár
+function getkosar(gombid) {
+  fetch(`http://localhost:8080/CodeCraftersWebshop-1.0-SNAPSHOT/webresources/kosar/${bejelentkezettFelhasznalo.id}`, {
+      method: 'GET'
+    })
+    .then(response => response.json())
+    .then(result => {
+      // Ellenőrizze, hogy a válasz tartalmazza-e a várt tulajdonságokat
+      console.log('Eredmény:', result);
+      for (let i = 0; i < result.length; i++) {
+        gombid[i] = result[i].jatekId;
+        console.log(gombid[i], result[i].jatekId);
+        console.log(kosarid[0], kosarid[1], kosarid[2]);
+      }
+    }).catch(error => console.error(error));
+}
 // vissza gomb
 let mybutton = document.getElementById("vissza-gomb");
 
@@ -63,9 +83,21 @@ function felgorget() {
 }
 
 function hozzaadasGomb(id) {
-  if (bejelentkezettFelhasznalo) {
+  var vanilyen_ID=false;
+  for(let i = 0; i < kosarid.length; i++) {
+    console.log(id,"for i:",kosarid[i]);
+    if (kosarid[i] === id) {
+      vanilyen_ID=true;
+      console.log("vanilyen");
+    }
+    
+  }
+  if (bejelentkezettFelhasznalo && vanilyen_ID==true) {
+    return `<input id="hozzadas" data-jatek-id="${id}" class="my-2 p-2 btn btn-success fs-5" type="button" disabled value="Kosárban" />`;
+  }else if(bejelentkezettFelhasznalo && vanilyen_ID==false){
     return `<input id="hozzadas" data-jatek-id="${id}" class="my-2 p-2 btn btn-success fs-5" type="button" value="Hozzáadás a kosárhoz" />`;
-  } else {
+  } 
+  else {
     return `<input id="hozzadas" data-jatek-id="${id}" class="my-2 p-2 btn btn-success fs-5" type="button" disabled value="Hozzáadás a kosárhoz" />`;
   }
 
@@ -77,20 +109,20 @@ document.addEventListener("DOMContentLoaded", function () {
   const log_reg = document.getElementById("log_reg");
   const felhasznaloful = document.getElementById("felhasznalo-box");
   const aktualisPath = window.location.pathname;
-  const kijelentkezés_gomb=document.getElementById("felhasznalo_kilep");
-  const beallitasok_gomb=document.getElementById("beallitasok");
-  const fnev=document.getElementById("felhasznalo");
+  const kijelentkezés_gomb = document.getElementById("felhasznalo_kilep");
+  const beallitasok_gomb = document.getElementById("beallitasok");
+  const fnev = document.getElementById("felhasznalo");
   //kijelentkezés essetén
-  kijelentkezés_gomb.addEventListener("click", function(){
+  kijelentkezés_gomb.addEventListener("click", function () {
     localStorage.removeItem("bejelentkezes");
-    log_reg.style.display="flex";
-    felhasznaloful.style.display="none";
+    log_reg.style.display = "flex";
+    felhasznaloful.style.display = "none";
   });
-  beallitasok_gomb.addEventListener("click", function(){
+  beallitasok_gomb.addEventListener("click", function () {
     if (aktualisPath == "/frontend/index.html") {
       // Most már tovább navigálhatsz az új oldalra
       window.open("./felhasznalo/felhasznalo.html");
-    } else{
+    } else {
       window.open("../felhasznalo/felhasznalo.html");
     }
   });
@@ -102,37 +134,36 @@ document.addEventListener("DOMContentLoaded", function () {
     localStorage.setItem('keresesSzoveg', keresoInput.value.toLowerCase());
 
     if (aktualisPath == "/frontend/index.html") {
-        // Tovább navigálunk az új oldalra
-        window.location.href = "./termekek/termekek.html";
+      // Tovább navigálunk az új oldalra
+      window.location.href = "./termekek/termekek.html";
     } else if (aktualisPath == "/frontend/jatek/jatek.html") {
-        window.location.href = "../termekek/termekek.html";
+      window.location.href = "../termekek/termekek.html";
     } else {
-        // Egyéb esetek kezelése (opcionális)
+      // Egyéb esetek kezelése (opcionális)
     }
-});
+  });
 
 
-  if(bejelentkezettFelhasznalo){
+  if (bejelentkezettFelhasznalo) {
     console.log(bejelentkezettFelhasznalo.id);
-    log_reg.style.display="none";
-    felhasznaloful.style.display="flex";
-    fnev.innerHTML="";
-    fnev.innerHTML+=bejelentkezettFelhasznalo.felhasznaloNev;
-  }
-  else{
-    log_reg.style.display="flex";
-    felhasznaloful.style.display="none";
+    log_reg.style.display = "none";
+    felhasznaloful.style.display = "flex";
+    fnev.innerHTML = "";
+    fnev.innerHTML += bejelentkezettFelhasznalo.felhasznaloNev;
+  } else {
+    log_reg.style.display = "flex";
+    felhasznaloful.style.display = "none";
   }
 
   document.addEventListener("click", function (event) {
     if (event.target && event.target.id === "hozzadas") {
       //ha hozzáadjuk a kosárhoz akkor disbaled és a value megváltozik kosárbanra
-      event.target.value="Kosárban";
-      event.target.disabled=true;
+      event.target.value = "Kosárban";
+      event.target.disabled = true;
       const jatekId = event.target.getAttribute("data-jatek-id");
 
-      if(jatekId)
-      var myHeaders = new Headers();
+      if (jatekId)
+        var myHeaders = new Headers();
       myHeaders.append("Content-Type", "application/json");
       var raw = JSON.stringify({
         jatekId: jatekId,
