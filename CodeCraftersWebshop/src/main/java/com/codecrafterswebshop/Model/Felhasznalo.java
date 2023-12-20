@@ -110,12 +110,13 @@ public class Felhasznalo implements Serializable {
         this.jogosultsagId = jogosultsagId;
     }
 
-    private Felhasznalo(Integer id, String felhasznaloNev, String vezetekNev, String keresztNev, String email) {
+    private Felhasznalo(Integer id, String felhasznaloNev, String vezetekNev, String keresztNev, String email, int jogosultsagId) {
         this.id = id;
         this.felhasznaloNev = felhasznaloNev;
         this.vezetekNev = vezetekNev;
         this.keresztNev = keresztNev;
         this.email = email;
+        this.jogosultsagId = jogosultsagId;
     }
 
     public Integer getId() {
@@ -226,9 +227,6 @@ public class Felhasznalo implements Serializable {
 
             List<Object[]> eredmeny = spq.getResultList();
 
-            Felhasznalo f = new Felhasznalo(idBE);
-            String token = Token.letrehozas(f, 10000);
-
             if (!eredmeny.isEmpty()) {
                 Object[] sor = eredmeny.get(0);
                 felhasznalo.put("id", sor[0]);
@@ -236,7 +234,7 @@ public class Felhasznalo implements Serializable {
                 felhasznalo.put("vezetekNev", sor[2]);
                 felhasznalo.put("keresztNev", sor[3]);
                 felhasznalo.put("email", sor[4]);
-                felhasznalo.put("token", token);
+                felhasznalo.put("jogosultsagId", sor[5]);
             }
 
         } catch (Exception e) {
@@ -249,7 +247,7 @@ public class Felhasznalo implements Serializable {
 
         return felhasznalo;
     }
-z
+
     public static Felhasznalo felhasznaloBelepes(String felhasznaloNevBE, String jelszoBE) {
 
         EntityManagerFactory emf = Persistence.createEntityManagerFactory("com_CodeCraftersWebshop_war_1.0-SNAPSHOTPU");
@@ -265,6 +263,7 @@ z
             spq.registerStoredProcedureParameter("vezetekNevKI", String.class, ParameterMode.OUT);
             spq.registerStoredProcedureParameter("keresztNevKI", String.class, ParameterMode.OUT);
             spq.registerStoredProcedureParameter("emailKI", String.class, ParameterMode.OUT);
+            spq.registerStoredProcedureParameter("jogosultsagIdKI", Integer.class, ParameterMode.OUT);
 
             spq.setParameter("felhasznaloNevBE", felhasznaloNevBE);
             spq.setParameter("jelszoBE", jelszoBE);
@@ -274,8 +273,9 @@ z
             String vezetekNev = (String) spq.getOutputParameterValue("vezetekNevKI");
             String keresztNev = (String) spq.getOutputParameterValue("keresztNevKI");
             String email = (String) spq.getOutputParameterValue("emailKI");
+            Integer jogosultsagId = (Integer) spq.getOutputParameterValue("jogosultsagIdKI");
 
-            Felhasznalo f = new Felhasznalo(id, felhasznaloNev, vezetekNev, keresztNev, email);
+            Felhasznalo f = new Felhasznalo(id, felhasznaloNev, vezetekNev, keresztNev, email, jogosultsagId);
             return f;
 
         } catch (Exception e) {
@@ -421,7 +421,7 @@ z
     }
 
     public static boolean vezetekNevEllenorzes(String vezetekNev) throws FelhasznaloException {
-      
+
         boolean tartalmazSpecialiskaraktert = false;
 
         for (char c : vezetekNev.toCharArray()) {

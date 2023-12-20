@@ -2,17 +2,19 @@ package com.codecrafterswebshop.Controller;
 
 import java.util.Set;
 import javax.ws.rs.core.Application;
+import javax.ws.rs.ApplicationPath;
+import java.util.HashSet;
 
 /**
  *
  * @author tothm23
  */
-@javax.ws.rs.ApplicationPath("webresources")
+@ApplicationPath("webresources")
 public class ApplicationConfig extends Application {
 
     @Override
     public Set<Class<?>> getClasses() {
-        Set<Class<?>> resources = new java.util.HashSet<>();
+        Set<Class<?>> resources = new HashSet<>();
         addRestResourceClasses(resources);
         return resources;
     }

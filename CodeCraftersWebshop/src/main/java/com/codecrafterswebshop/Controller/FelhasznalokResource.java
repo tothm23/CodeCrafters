@@ -3,8 +3,6 @@ package com.codecrafterswebshop.Controller;
 import com.codecrafterswebshop.Model.Felhasznalo;
 import com.codecrafterswebshop.Service.FelhasznaloService;
 import javax.ws.rs.Consumes;
-import javax.ws.rs.POST;
-import javax.ws.rs.Path;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.POST;
 import javax.ws.rs.PUT;
@@ -30,9 +28,17 @@ public class FelhasznalokResource {
 
     @POST
     public Response ujFelhasznalo(Felhasznalo f) {
-        String result = FelhasznaloService.ujFelhasznalo(f.getFelhasznaloNev(), f.getVezetekNev(),
+        String eredmeny = FelhasznaloService.ujFelhasznalo(f.getFelhasznaloNev(), f.getVezetekNev(),
                 f.getKeresztNev(), f.getEmail(), f.getJelszo());
-        return Response.status(Response.Status.CREATED).entity(result)
+        return Response.status(Response.Status.CREATED).entity(eredmeny)
+                .type(MediaType.APPLICATION_JSON).build();
+    }
+
+    @POST
+    @Path("bejelentkezes")
+    public Response felhasznaloBelepes(Felhasznalo f) {
+        JSONObject eredmeny = FelhasznaloService.felhasznaloBelepes(f.getFelhasznaloNev(), f.getJelszo());
+        return Response.status(Response.Status.OK).entity(eredmeny.toString())
                 .type(MediaType.APPLICATION_JSON).build();
     }
 
@@ -45,14 +51,6 @@ public class FelhasznalokResource {
                 .type(MediaType.APPLICATION_JSON).build();
     }
 
-    @POST
-    @Path("bejelentkezes")
-    public Response felhasznaloBelepes(Felhasznalo f) {
-        JSONObject eredmeny = FelhasznaloService.felhasznaloBelepes(f.getFelhasznaloNev(), f.getJelszo());
-        return Response.status(Response.Status.OK).entity(eredmeny.toString())
-                .type(MediaType.APPLICATION_JSON).build();
-    }
-    
     @DELETE
     @Path("{felhasznaloId}")
     public Response torlesFelhasznalo(@PathParam("felhasznaloId") Integer id) {

@@ -28,10 +28,7 @@ public class TokenFilter implements ContainerRequestFilter {
 
         if ((requestContext.getUriInfo().getPath().contains("jatek") && requestContext.getMethod().equals("POST"))
                 || (requestContext.getUriInfo().getPath().contains("jatek") && requestContext.getMethod().equals("PUT"))
-                || (requestContext.getUriInfo().getPath().contains("jatek") && requestContext.getMethod().equals("DELETE"))
-                || (requestContext.getUriInfo().getPath().contains("ajandekkartya") && requestContext.getMethod().equals("POST"))
-                || (requestContext.getUriInfo().getPath().contains("ajandekkartya") && requestContext.getMethod().equals("PUT"))
-                || (requestContext.getUriInfo().getPath().contains("ajandekkartya") && requestContext.getMethod().equals("DELETE"))) {
+                || (requestContext.getUriInfo().getPath().contains("jatek") && requestContext.getMethod().equals("DELETE"))) {
 
             List<String> authFejlec = requestContext.getHeaders().get(AUTH_HEADER);
 

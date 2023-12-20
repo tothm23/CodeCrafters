@@ -29,6 +29,7 @@ public class Token {
                 .claim("vezetekNev", f.getVezetekNev())
                 .claim("keresztNev", f.getKeresztNev())
                 .claim("email", f.getEmail())
+                .claim("jogosultsagId", f.getJogosultsagId())
                 .setIssuedAt(new Date(nowMillis))
                 .setExpiration(new Date(nowMillis + expirationMillis))
                 .signWith(
