@@ -142,7 +142,7 @@ body {
 }
 
 .btn-rendeles:hover,
-.btn-rendeles:focus {
+.btn-rendeles:focus ,.btn-rendeles:disabled{
     color: black;
     border: 1px solid black;
     background-color: rgb(139, 185, 45);
