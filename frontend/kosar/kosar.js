@@ -1,6 +1,7 @@
 document.addEventListener('DOMContentLoaded', function () {
     const Kosartartalma = document.getElementById('kosartartalma');
     const vegosszeg = document.getElementById('vegosszeg');
+    const rendelesgomb=document.getElementById('rendeles_btn');
     // Kinyerjük a bejelentkezési adatokat a localStorage-ból
     const bejelentkezettFelhasznalo = JSON.parse(localStorage.getItem("bejelentkezes"));
     // Ellenőrizzük, hogy van-e bejelentkezett felhasználó
@@ -33,12 +34,17 @@ function kosartartalma(adatok) {
     }
 }
 
-document.addEventListener("click", function torlse (event) {
+document.addEventListener("click", function torlese (event) {
     console.log("Click");
     var kosarElem = event.target.closest('.card');
     // Olvassa ki az ID-t a data-id attribútumból
     var jatekid = kosarElem.getAttribute('data-id');
     console.log("termek id:", jatekid);
+    kosartorlese(jatekid);
+    
+});
+
+function kosartorlese(jatekid){
     var requestOptions = {
         method: 'DELETE',
         redirect: 'follow'
@@ -46,18 +52,39 @@ document.addEventListener("click", function torlse (event) {
     const url = `http://localhost:8080/CodeCraftersWebshop-1.0-SNAPSHOT/webresources/kosar?felhasznaloId=${bejelentkezettFelhasznalo.id}&jatekId=${jatekid}`;
     fetch(url, requestOptions)
         .then(response => response.text())
-        .then(result => console.log(result))
+        .then(result => {
+            console.log(result);
+            kosarGet();
+        
+        })
         .catch(error => console.log('error', error));
+}
 
-    //az elem újra töltése
-    var idozito = setTimeout(function() {
-        // Az eseménykezelő hívása
-        kosarGet();
-    
-        // Az időzítő törlése, így többször nem fut le
-        idozito = null;
-    }, 100);
-    
+rendelesgomb.addEventListener('click',function(){
+    var myHeaders = new Headers();
+myHeaders.append("Content-Type", "application/json");
+
+var raw = JSON.stringify({
+  "felhasznaloId": bejelentkezettFelhasznalo.id
+});
+
+var requestOptions = {
+  method: 'POST',
+  headers: myHeaders,
+  body: raw,
+  redirect: 'follow'
+};
+
+fetch("http://localhost:8080/CodeCraftersWebshop-1.0-SNAPSHOT/webresources/rendeles", requestOptions)
+  .then(response => response.text())
+  .then(result => {
+    console.log(result);
+    for (let i = 0; i < kosarGet().length; i++) {
+        kosartorlese(i);
+    }
+    })
+  .catch(error => console.log('error', error));
+
 });
 
 function vegosszegkiszamitasa(adatok) {
