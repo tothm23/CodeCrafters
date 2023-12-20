@@ -1,6 +1,6 @@
 const felhaszadatai = document.getElementById('felhasznalo-adatai');
 const form_inner = document.getElementById('forminner');
-const bejelentkezettFelhasznalo = JSON.parse(localStorage.getItem("bejelentkezes"));
+let bejelentkezettFelhasznalo = JSON.parse(localStorage.getItem("bejelentkezes"));
 
 document.addEventListener('DOMContentLoaded', function () {
     adatok_innerHtml();
@@ -44,7 +44,18 @@ document.addEventListener('DOMContentLoaded', function () {
                     .then(response => response.text())
                     .then(result => console.log(result))
                     .catch(error => console.log('error', error));
-                console.log("Mentes");
+                console.log("Felhasználó frissítve");
+                alert("Felhasználó frissítve");
+                
+                let valszObjektum={
+                    "felhasznaloNev": felhaszInput,
+                    "email":bejelentkezettFelhasznalo.email,
+                    "id":bejelentkezettFelhasznalo.id,
+                    "vezetekNev": vezeteknevInput,
+                    "keresztNev": keresztnevInput,
+                    "jelszo": jelszo
+                }
+                bejelentkezettFelhasznalo=localStorage.setItem("bejelentkezes",JSON.stringify(valszObjektum));
                 console.log(bejelentkezettFelhasznalo);
                 //még a local storageba nincsen el mentve a változtatás
 
