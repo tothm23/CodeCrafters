@@ -15,9 +15,6 @@ import org.json.JSONArray;
 @Path("termekek")
 public class TermekekResource {
 
-    public TermekekResource() {
-    }
-
     @GET
     public Response termekek() {
         JSONArray eredmeny = TermekekService.termekek();

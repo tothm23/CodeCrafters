@@ -3,6 +3,7 @@ package com.codecrafterswebshop.Controller;
 import com.codecrafterswebshop.Service.FooldalService;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
+import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import org.json.JSONArray;
@@ -13,10 +14,8 @@ import org.json.JSONArray;
  * @author tothm23
  */
 @Path("fooldal")
+@Produces(MediaType.APPLICATION_JSON)
 public class FooldalResource {
-
-    public FooldalResource() {
-    }
 
     @GET
     public Response _3veletlenjatek() {

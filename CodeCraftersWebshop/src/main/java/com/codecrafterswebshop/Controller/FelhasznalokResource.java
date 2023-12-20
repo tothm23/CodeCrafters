@@ -23,9 +23,6 @@ import org.json.JSONObject;
 @Consumes(MediaType.APPLICATION_JSON)
 public class FelhasznalokResource {
 
-    public FelhasznalokResource() {
-    }
-
     @POST
     public Response ujFelhasznalo(Felhasznalo f) {
         String eredmeny = FelhasznaloService.ujFelhasznalo(f.getFelhasznaloNev(), f.getVezetekNev(),

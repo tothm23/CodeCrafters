@@ -24,9 +24,6 @@ import org.json.JSONArray;
 @Consumes(MediaType.APPLICATION_JSON)
 public class KosarResource {
 
-    public KosarResource() {
-    }
-
     @GET
     @Path("{felhasznaloId}")
     public Response felhasznaloKosar(@PathParam("felhasznaloId") Integer id) {

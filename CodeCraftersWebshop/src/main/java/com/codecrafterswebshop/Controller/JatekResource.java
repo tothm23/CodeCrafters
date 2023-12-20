@@ -24,9 +24,6 @@ import org.json.JSONObject;
 @Consumes(MediaType.APPLICATION_JSON)
 public class JatekResource {
 
-    public JatekResource() {
-    }
-
     @GET
     @Path("{jatekId}")
     public Response jatek(@PathParam("jatekId") Integer id) {
@@ -37,11 +34,11 @@ public class JatekResource {
 
     @POST
     public Response ujJatek(Jatek j) {
-        String result = JatekService.ujJatek(j.getNev(), j.getAr(),
+        String eredmeny = JatekService.ujJatek(j.getNev(), j.getAr(),
                 j.getLeiras(), j.getKep(), j.getKorhatar(), j.getAkcio(), j.getMennyisegraktaron(),
                 j.getEszkozId(), j.getPlatformId()
         );
-        return Response.status(Response.Status.CREATED).entity(result)
+        return Response.status(Response.Status.CREATED).entity(eredmeny)
                 .type(MediaType.APPLICATION_JSON).build();
     }
 
