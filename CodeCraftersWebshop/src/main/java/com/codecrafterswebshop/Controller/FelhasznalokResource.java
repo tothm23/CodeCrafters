@@ -54,8 +54,11 @@ public class FelhasznalokResource {
     @DELETE
     @Path("{felhasznaloId}")
     public Response torlesFelhasznalo(@PathParam("felhasznaloId") Integer id) {
-        String eredmeny = FelhasznaloService.torlesFelhasznalo(id);
-        return Response.status(Response.Status.OK).entity(eredmeny)
+        JSONObject eredmeny = FelhasznaloService.felhasznalo(id);
+        String torles = FelhasznaloService.torlesFelhasznalo(id);
+
+        return eredmeny.length() == 0 ? Response.status(Response.Status.NOT_FOUND).entity(torles)
+                .type(MediaType.APPLICATION_JSON).build() : Response.status(Response.Status.OK).entity(torles)
                 .type(MediaType.APPLICATION_JSON).build();
     }
 

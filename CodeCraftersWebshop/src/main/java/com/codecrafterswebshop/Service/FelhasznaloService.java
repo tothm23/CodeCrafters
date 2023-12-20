@@ -3,6 +3,7 @@ package com.codecrafterswebshop.Service;
 import com.codecrafterswebshop.Config.Token;
 import com.codecrafterswebshop.Exception.FelhasznaloException;
 import com.codecrafterswebshop.Model.Felhasznalo;
+import java.util.Map;
 import org.json.JSONObject;
 
 /**
@@ -10,6 +11,17 @@ import org.json.JSONObject;
  * @author tothm23
  */
 public class FelhasznaloService {
+
+    public static JSONObject felhasznalo(Integer idBe) {
+        Map<String, Object> felhasznalo = Felhasznalo.felhasznalo(idBe);
+        JSONObject obj = new JSONObject();
+
+        for (Map.Entry<String, Object> set : felhasznalo.entrySet()) {
+            obj.put(set.getKey(), set.getValue());
+        }
+
+        return obj;
+    }
 
     public static String ujFelhasznalo(String felhasznaloNevBE, String vezetekNevBE, String keresztNevBE,
             String emailBE, String jelszoBE) {
@@ -64,9 +76,11 @@ public class FelhasznaloService {
         }
     }
 
-    public static String torlesFelhasznalo(Integer id) {
+    public static String torlesFelhasznalo(Integer idBe) {
         try {
-            if (Felhasznalo.torlesFelhasznalo(id)) {
+            if (felhasznalo(idBe).length() == 0) {
+                return "A Felhasználó nem található!";
+            } else if (Felhasznalo.torlesFelhasznalo(idBe)) {
                 return "Felhasználó törölve!";
             } else {
                 return "Hiba a Felhasználó törlésénél!";
