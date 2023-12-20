@@ -45,9 +45,12 @@ public class FelhasznalokResource {
     @PUT
     @Path("{felhasznaloId}")
     public Response frissitesFelhasznalo(Felhasznalo f, @PathParam("felhasznaloId") Integer id) {
-        String eredmeny = FelhasznaloService.frissitesFelhasznalo(id, f.getFelhasznaloNev(), f.getVezetekNev(),
+        JSONObject eredmeny = FelhasznaloService.felhasznalo(id);
+        String frisssites = FelhasznaloService.frissitesFelhasznalo(id, f.getFelhasznaloNev(), f.getVezetekNev(),
                 f.getKeresztNev(), f.getJelszo());
-        return Response.status(Response.Status.OK).entity(eredmeny)
+
+        return eredmeny.length() == 0 ? Response.status(Response.Status.NOT_FOUND).entity(frisssites)
+                .type(MediaType.APPLICATION_JSON).build() : Response.status(Response.Status.OK).entity(frisssites)
                 .type(MediaType.APPLICATION_JSON).build();
     }
 

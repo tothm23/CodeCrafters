@@ -62,10 +62,12 @@ public class FelhasznaloService {
         return obj;
     }
 
-    public static String frissitesFelhasznalo(Integer id, String felhasznaloNevBE, String vezetekNevBE, String keresztNevBE,
+    public static String frissitesFelhasznalo(Integer idBe, String felhasznaloNevBE, String vezetekNevBE, String keresztNevBE,
             String jelszoBE) {
         try {
-            if (Felhasznalo.frissitesFelhasznalo(id, felhasznaloNevBE, vezetekNevBE, keresztNevBE,
+            if (felhasznalo(idBe).length() == 0) {
+                return "A Felhasználó nem található!";
+            } else if (Felhasznalo.frissitesFelhasznalo(idBe, felhasznaloNevBE, vezetekNevBE, keresztNevBE,
                     jelszoBE)) {
                 return "Felhasználó frissítve!";
             } else {
