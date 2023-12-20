@@ -37,9 +37,7 @@ public class TokenFilter implements ContainerRequestFilter {
                 String authToken = authFejlec.get(0);
                 authToken = authToken.replaceFirst(AUTH_HEADER_PREFIX, "");
 
-                if (Token.dekodolas(authToken) == 1) {
-                    return;
-                } else if (Token.dekodolas(authToken) == 2) {
+                if (Token.dekodolas(authToken) == 2) {
                     requestContext.abortWith(jogosulatlan);
                 }
 
