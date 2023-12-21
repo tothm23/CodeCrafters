@@ -55,8 +55,7 @@ public class JatekService {
         try {
             if (jatek(idBE).length() == 0) {
                 return "Hiba a Játék frissítésénél!";
-            }
-            if (Jatek.frissitesJatek(idBE, nevBE, arBE, leirasBE, kepBE, korhatarBE, akcioBE,
+            } else if (Jatek.frissitesJatek(idBE, nevBE, arBE, leirasBE, kepBE, korhatarBE, akcioBE,
                     mennyisegraktaronBE, eszkozIdBE, platformIdBE)) {
                 return "Játék frissítve!";
             } else {
@@ -70,9 +69,8 @@ public class JatekService {
     public static String torlesJatek(Integer idBE) {
         try {
             if (jatek(idBE).length() == 0) {
-                return "Hiba a Játék frissítésénél!";
-            }
-            if (Jatek.torlesJatek(idBE)) {
+                return "Hiba a Játék törlésénél!";
+            } else if (Jatek.torlesJatek(idBE)) {
                 return "Játék törölve!";
             } else {
                 return "Hiba a Játék törlésénél!";
