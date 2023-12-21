@@ -4,7 +4,7 @@ import com.codecrafterswebshop.Config.Database;
 import com.codecrafterswebshop.Exception.FelhasznaloException;
 import java.io.Serializable;
 import java.util.Date;
-import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import javax.persistence.Basic;
@@ -212,7 +212,7 @@ public class Felhasznalo implements Serializable {
 
     public static Map<String, Object> felhasznalo(Integer idBE) {
 
-        Map<String, Object> felhasznalo = new HashMap<>();
+        Map<String, Object> felhasznalo = new LinkedHashMap<>();
 
         EntityManagerFactory emf = Persistence.createEntityManagerFactory(Database.getPersistenceUnitNev());
         EntityManager em = emf.createEntityManager();

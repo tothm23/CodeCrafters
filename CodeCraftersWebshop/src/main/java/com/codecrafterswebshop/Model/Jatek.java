@@ -5,7 +5,7 @@ import com.codecrafterswebshop.Exception.JatekException;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import javax.persistence.Basic;
@@ -257,7 +257,7 @@ public class Jatek implements Serializable {
             if (!eredmeny.isEmpty()) {
 
                 for (Object[] sor : eredmeny) {
-                    HashMap<String, Object> jatek = new HashMap<>();
+                    LinkedHashMap<String, Object> jatek = new LinkedHashMap<>();
 
                     jatek.put("id", (Integer) sor[0]);
                     jatek.put("nev", (String) sor[1]);
@@ -301,7 +301,7 @@ public class Jatek implements Serializable {
             if (!eredmeny.isEmpty()) {
 
                 for (Object[] sor : eredmeny) {
-                    HashMap<String, Object> jatek = new HashMap<>();
+                    LinkedHashMap<String, Object> jatek = new LinkedHashMap<>();
 
                     jatek.put("id", (Integer) sor[0]);
                     jatek.put("nev", (String) sor[1]);
@@ -333,7 +333,7 @@ public class Jatek implements Serializable {
 
     public static Map<String, Object> jatek(Integer idBe) {
 
-        Map<String, Object> jatek = new HashMap<>();
+        Map<String, Object> jatek = new LinkedHashMap<>();
 
         EntityManagerFactory emf = Persistence.createEntityManagerFactory(Database.getPersistenceUnitNev());
         EntityManager em = emf.createEntityManager();
