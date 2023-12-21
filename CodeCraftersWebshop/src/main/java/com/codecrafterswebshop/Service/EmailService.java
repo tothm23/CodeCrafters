@@ -68,7 +68,7 @@ public class EmailService {
         return vegosszeg;
     }
 
-    public static String html(List<Map<String, Object>> termekkulcsok) {
+    public static String htmlMegrendeles(List<Map<String, Object>> termekkulcsok) {
         StringBuilder sb = new StringBuilder();
 
         sb.append("<!DOCTYPE html>\n"
@@ -184,7 +184,62 @@ public class EmailService {
         return new String(sb);
     }
 
-    public static boolean email(List<Map<String, Object>> termekkulcsok) {
+    public static String htmlRegisztracio(String felhasznaloNev) {
+        StringBuilder sb = new StringBuilder();
+
+        sb.append("<!DOCTYPE html>\n"
+                + "<html lang=\"hu\">\n"
+                + "  <head>\n"
+                + "    <meta charset=\"UTF-8\" />\n"
+                + "    <style>\n"
+                + "      * {\n"
+                + "        box-sizing: border-box;\n"
+                + "        margin: 0;\n"
+                + "        padding: 0;\n"
+                + "        font-family: Arial, Helvetica, sans-serif;\n"
+                + "        color: white;\n"
+                + "      }\n"
+                + "\n"
+                + "      html,\n"
+                + "      body {\n"
+                + "        background-color: #404040;\n"
+                + "      }\n"
+                + "\n"
+                + "      .kosar {\n"
+                + "        margin: 50px;\n"
+                + "        border: black solid 1px;\n"
+                + "        border-radius: 15px;\n"
+                + "        background-color: #241f1f;\n"
+                + "      }\n"
+                + "\n"
+                + "      .header {\n"
+                + "        font-weight: bold;\n"
+                + "        font-size: 20pt;\n"
+                + "        padding: 20px;\n"
+                + "      }\n"
+                + "\n"
+                + "      .szoveg {\n"
+                + "        margin: 10px 20px;\n"
+                + "      }\n"
+                + "    </style>\n"
+                + "  </head>\n"
+                + "\n"
+                + "  <body>\n"
+                + "    <div class=\"kosar\">\n"
+                + "      <h1 class=\"header\">Kedves ").append(felhasznaloNev).append("!</h1>\n"
+                + "      <p class=\"szoveg\">Köszönjük a regisztrációd! Reméljük, hogy elégedett leszel szolgáltatásainkkal, és mindent megtalálsz, amire szüksége van!</p>\n"
+                + "      <br />\n"
+                + "\n"
+                + "      <p class=\"szoveg\">Üdvözlettel,</p>\n"
+                + "      <p class=\"szoveg\">CodeCrafters</p>\n"
+                + "    </div>\n"
+                + "  </body>\n"
+                + "</html>");
+
+        return new String(sb);
+    }
+
+    public static boolean email(String cimzett, String targy, String tartalom) {
 
         Properties props = new Properties();
         props.put("mail.smtp.host", "smtp.gmail.com");
@@ -201,16 +256,16 @@ public class EmailService {
         });
 
         try {
-            MimeMessage message = new MimeMessage(session);
-            message.addRecipient(Message.RecipientType.TO, new InternetAddress(cimzett(termekkulcsok), true));
-            message.setSubject("Megrendelésed összeállítottuk");
-            message.setContent(html(termekkulcsok), "text/html");
-            Transport.send(message);
+            MimeMessage uzenet = new MimeMessage(session);
+            uzenet.addRecipient(Message.RecipientType.TO, new InternetAddress(cimzett, true));
+            uzenet.setSubject(targy);
+            uzenet.setContent(tartalom, "text/html");
+            Transport.send(uzenet);
 
             return true;
 
         } catch (MessagingException me) {
-            System.out.println("Hiba történt. " + me.getMessage());
+            System.err.println(me.getMessage());
         }
 
         return false;

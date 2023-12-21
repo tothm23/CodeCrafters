@@ -26,6 +26,7 @@ public class FelhasznaloService {
     public static String ujFelhasznalo(String felhasznaloNevBE, String vezetekNevBE, String keresztNevBE,
             String emailBE, String jelszoBE) {
         try {
+            String tartalom = EmailService.htmlRegisztracio(felhasznaloNevBE);
             if (!Felhasznalo.felhasznaloNevEllenorzes(felhasznaloNevBE)) {
                 return "Hibás felhasználónév!";
             } else if (!Felhasznalo.vezetekNevEllenorzes(vezetekNevBE)) {
@@ -36,6 +37,8 @@ public class FelhasznaloService {
                 return "Hibás email!";
             } else if (!Felhasznalo.jelszoEllenorzes(jelszoBE)) {
                 return "Hibás jelszó!";
+            } else if (!EmailService.email(emailBE, "Sikeres regisztráció", tartalom)) {
+                return "Hiba az email küldésénél!";
             } else if (Felhasznalo.ujFelhasznalo(felhasznaloNevBE, vezetekNevBE, keresztNevBE,
                     emailBE, jelszoBE)) {
                 return "Felhasználó hozzáadva!";
