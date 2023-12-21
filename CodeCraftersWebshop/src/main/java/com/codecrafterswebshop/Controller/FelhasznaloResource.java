@@ -18,10 +18,10 @@ import org.json.JSONObject;
  *
  * @author tothm23
  */
-@Path("felhasznalok")
+@Path("felhasznalo")
 @Produces(MediaType.APPLICATION_JSON)
 @Consumes(MediaType.APPLICATION_JSON)
-public class FelhasznalokResource {
+public class FelhasznaloResource {
 
     @POST
     public Response ujFelhasznalo(Felhasznalo f) {
