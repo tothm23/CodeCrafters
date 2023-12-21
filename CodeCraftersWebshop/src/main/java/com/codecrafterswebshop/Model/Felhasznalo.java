@@ -1,5 +1,6 @@
 package com.codecrafterswebshop.Model;
 
+import com.codecrafterswebshop.Config.Database;
 import com.codecrafterswebshop.Exception.FelhasznaloException;
 import java.io.Serializable;
 import java.util.Date;
@@ -213,7 +214,7 @@ public class Felhasznalo implements Serializable {
 
         Map<String, Object> felhasznalo = new HashMap<>();
 
-        EntityManagerFactory emf = Persistence.createEntityManagerFactory("com_CodeCraftersWebshop_war_1.0-SNAPSHOTPU");
+        EntityManagerFactory emf = Persistence.createEntityManagerFactory(Database.getPersistenceUnitNev());
         EntityManager em = emf.createEntityManager();
 
         try {
@@ -247,7 +248,7 @@ public class Felhasznalo implements Serializable {
 
     public static Felhasznalo felhasznaloBelepes(String felhasznaloNevBE, String jelszoBE) {
 
-        EntityManagerFactory emf = Persistence.createEntityManagerFactory("com_CodeCraftersWebshop_war_1.0-SNAPSHOTPU");
+        EntityManagerFactory emf = Persistence.createEntityManagerFactory(Database.getPersistenceUnitNev());
         EntityManager em = emf.createEntityManager();
 
         try {
@@ -289,7 +290,7 @@ public class Felhasznalo implements Serializable {
     public static boolean ujFelhasznalo(String felhasznaloNevBE, String vezetekNevBE, String keresztNev,
             String emailBE, String jelszoBE) {
 
-        EntityManagerFactory emf = Persistence.createEntityManagerFactory("com_CodeCraftersWebshop_war_1.0-SNAPSHOTPU");
+        EntityManagerFactory emf = Persistence.createEntityManagerFactory(Database.getPersistenceUnitNev());
         EntityManager em = emf.createEntityManager();
 
         try {
@@ -324,7 +325,7 @@ public class Felhasznalo implements Serializable {
 
     public static boolean frissitesFelhasznalo(Integer idBE, String felhasznaloNevBE, String vezetekNevBE, String keresztNev, String jelszoBE) {
 
-        EntityManagerFactory emf = Persistence.createEntityManagerFactory("com_CodeCraftersWebshop_war_1.0-SNAPSHOTPU");
+        EntityManagerFactory emf = Persistence.createEntityManagerFactory(Database.getPersistenceUnitNev());
         EntityManager em = emf.createEntityManager();
 
         try {
@@ -359,7 +360,7 @@ public class Felhasznalo implements Serializable {
 
     public static boolean torlesFelhasznalo(Integer felhasznaloIdBE) {
 
-        EntityManagerFactory emf = Persistence.createEntityManagerFactory("com_CodeCraftersWebshop_war_1.0-SNAPSHOTPU");
+        EntityManagerFactory emf = Persistence.createEntityManagerFactory(Database.getPersistenceUnitNev());
         EntityManager em = emf.createEntityManager();
 
         try {
@@ -384,7 +385,7 @@ public class Felhasznalo implements Serializable {
     }
 
     public static boolean felhasznaloNevEllenorzes(String felhasznaloNev) throws FelhasznaloException {
-        EntityManagerFactory emf = Persistence.createEntityManagerFactory("com_CodeCraftersWebshop_war_1.0-SNAPSHOTPU");
+        EntityManagerFactory emf = Persistence.createEntityManagerFactory(Database.getPersistenceUnitNev());
         EntityManager em = emf.createEntityManager();
 
         int db = 0;
@@ -459,7 +460,7 @@ public class Felhasznalo implements Serializable {
     }
 
     public static boolean emailEllenorzes(String email) throws FelhasznaloException {
-        EntityManagerFactory emf = Persistence.createEntityManagerFactory("com_CodeCraftersWebshop_war_1.0-SNAPSHOTPU");
+        EntityManagerFactory emf = Persistence.createEntityManagerFactory(Database.getPersistenceUnitNev());
         EntityManager em = emf.createEntityManager();
 
         int db = 0;

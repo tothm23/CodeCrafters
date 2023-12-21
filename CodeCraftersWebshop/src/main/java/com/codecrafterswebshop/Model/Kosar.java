@@ -1,5 +1,6 @@
 package com.codecrafterswebshop.Model;
 
+import com.codecrafterswebshop.Config.Database;
 import com.codecrafterswebshop.Exception.KosarException;
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -127,7 +128,7 @@ public class Kosar implements Serializable {
     public static List<Map<String, Object>> felhasznaloKosar(Integer felhasznaloIdBE) {
         List<Map<String, Object>> kosarak = new ArrayList<>();
 
-        EntityManagerFactory emf = Persistence.createEntityManagerFactory("com_CodeCraftersWebshop_war_1.0-SNAPSHOTPU");
+        EntityManagerFactory emf = Persistence.createEntityManagerFactory(Database.getPersistenceUnitNev());
         EntityManager em = emf.createEntityManager();
 
         try {
@@ -167,7 +168,7 @@ public class Kosar implements Serializable {
 
     public static boolean kosar(Integer jatekIdBE, Integer felhasznaloIdBE) {
 
-        EntityManagerFactory emf = Persistence.createEntityManagerFactory("com_CodeCraftersWebshop_war_1.0-SNAPSHOTPU");
+        EntityManagerFactory emf = Persistence.createEntityManagerFactory(Database.getPersistenceUnitNev());
         EntityManager em = emf.createEntityManager();
 
         try {
@@ -196,7 +197,7 @@ public class Kosar implements Serializable {
 
     public static boolean torlesJatekKosarbol(Integer felhasznaloIdBE, Integer jatekIdBE) {
 
-        EntityManagerFactory emf = Persistence.createEntityManagerFactory("com_CodeCraftersWebshop_war_1.0-SNAPSHOTPU");
+        EntityManagerFactory emf = Persistence.createEntityManagerFactory(Database.getPersistenceUnitNev());
         EntityManager em = emf.createEntityManager();
 
         try {
@@ -225,7 +226,7 @@ public class Kosar implements Serializable {
 
     public static boolean rendeles(Integer felhasznaloIdBE) {
 
-        EntityManagerFactory emf = Persistence.createEntityManagerFactory("com_CodeCraftersWebshop_war_1.0-SNAPSHOTPU");
+        EntityManagerFactory emf = Persistence.createEntityManagerFactory(Database.getPersistenceUnitNev());
         EntityManager em = emf.createEntityManager();
 
         try {
@@ -253,7 +254,7 @@ public class Kosar implements Serializable {
 
         List<Map<String, Object>> termekkulcsok = new ArrayList<>();
 
-        EntityManagerFactory emf = Persistence.createEntityManagerFactory("com_CodeCraftersWebshop_war_1.0-SNAPSHOTPU");
+        EntityManagerFactory emf = Persistence.createEntityManagerFactory(Database.getPersistenceUnitNev());
         EntityManager em = emf.createEntityManager();
 
         try {
@@ -292,7 +293,7 @@ public class Kosar implements Serializable {
     }
 
     public static boolean jatekIdEllenorzes(Integer jatekIdBE) throws KosarException {
-        EntityManagerFactory emf = Persistence.createEntityManagerFactory("com_CodeCraftersWebshop_war_1.0-SNAPSHOTPU");
+        EntityManagerFactory emf = Persistence.createEntityManagerFactory(Database.getPersistenceUnitNev());
         EntityManager em = emf.createEntityManager();
 
         int db = 0;
@@ -322,7 +323,7 @@ public class Kosar implements Serializable {
     }
 
     public static boolean felhasznaloIdEllenorzes(Integer felhasznaloIdBE) throws KosarException {
-        EntityManagerFactory emf = Persistence.createEntityManagerFactory("com_CodeCraftersWebshop_war_1.0-SNAPSHOTPU");
+        EntityManagerFactory emf = Persistence.createEntityManagerFactory(Database.getPersistenceUnitNev());
         EntityManager em = emf.createEntityManager();
 
         int db = 0;
@@ -352,7 +353,7 @@ public class Kosar implements Serializable {
     }
 
     public static boolean felhasznaloIdKosarEllenorzes(Integer felhasznaloIdBE) throws KosarException {
-        EntityManagerFactory emf = Persistence.createEntityManagerFactory("com_CodeCraftersWebshop_war_1.0-SNAPSHOTPU");
+        EntityManagerFactory emf = Persistence.createEntityManagerFactory(Database.getPersistenceUnitNev());
         EntityManager em = emf.createEntityManager();
 
         int db = 0;
@@ -382,7 +383,7 @@ public class Kosar implements Serializable {
     }
 
     public static boolean jatekIdKosarEllenorzes(Integer jatekIdBE) throws KosarException {
-        EntityManagerFactory emf = Persistence.createEntityManagerFactory("com_CodeCraftersWebshop_war_1.0-SNAPSHOTPU");
+        EntityManagerFactory emf = Persistence.createEntityManagerFactory(Database.getPersistenceUnitNev());
         EntityManager em = emf.createEntityManager();
 
         int db = 0;

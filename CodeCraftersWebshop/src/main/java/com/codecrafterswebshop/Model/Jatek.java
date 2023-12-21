@@ -1,5 +1,6 @@
 package com.codecrafterswebshop.Model;
 
+import com.codecrafterswebshop.Config.Database;
 import com.codecrafterswebshop.Exception.JatekException;
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -245,7 +246,7 @@ public class Jatek implements Serializable {
     public static List<Map<String, Object>> jatekok() {
         List<Map<String, Object>> jatekok = new ArrayList<>();
 
-        EntityManagerFactory emf = Persistence.createEntityManagerFactory("com_CodeCraftersWebshop_war_1.0-SNAPSHOTPU");
+        EntityManagerFactory emf = Persistence.createEntityManagerFactory(Database.getPersistenceUnitNev());
         EntityManager em = emf.createEntityManager();
 
         try {
@@ -289,7 +290,7 @@ public class Jatek implements Serializable {
     public static List<Map<String, Object>> _3veletlenjatek() {
         List<Map<String, Object>> jatekok = new ArrayList<>();
 
-        EntityManagerFactory emf = Persistence.createEntityManagerFactory("com_CodeCraftersWebshop_war_1.0-SNAPSHOTPU");
+        EntityManagerFactory emf = Persistence.createEntityManagerFactory(Database.getPersistenceUnitNev());
         EntityManager em = emf.createEntityManager();
 
         try {
@@ -334,7 +335,7 @@ public class Jatek implements Serializable {
 
         Map<String, Object> jatek = new HashMap<>();
 
-        EntityManagerFactory emf = Persistence.createEntityManagerFactory("com_CodeCraftersWebshop_war_1.0-SNAPSHOTPU");
+        EntityManagerFactory emf = Persistence.createEntityManagerFactory(Database.getPersistenceUnitNev());
         EntityManager em = emf.createEntityManager();
 
         try {
@@ -373,7 +374,7 @@ public class Jatek implements Serializable {
     public static boolean ujJatek(String nevBE, Integer arBE, String leirasBE,
             String kepBE, Integer korhatarBE, Integer akcioBE, Integer mennyisegraktaronBE, Integer eszkozIdBE, Integer platformIdBE) {
 
-        EntityManagerFactory emf = Persistence.createEntityManagerFactory("com_CodeCraftersWebshop_war_1.0-SNAPSHOTPU");
+        EntityManagerFactory emf = Persistence.createEntityManagerFactory(Database.getPersistenceUnitNev());
         EntityManager em = emf.createEntityManager();
 
         try {
@@ -417,7 +418,7 @@ public class Jatek implements Serializable {
     public static boolean frissitesJatek(Integer idBE, String nevBE, Integer arBE, String leirasBE,
             String kepBE, Integer korhatarBE, Integer akcioBE, Integer mennyisegraktaronBE, Integer eszkozIdBE, Integer platformIdBE) {
 
-        EntityManagerFactory emf = Persistence.createEntityManagerFactory("com_CodeCraftersWebshop_war_1.0-SNAPSHOTPU");
+        EntityManagerFactory emf = Persistence.createEntityManagerFactory(Database.getPersistenceUnitNev());
         EntityManager em = emf.createEntityManager();
 
         try {
@@ -462,7 +463,7 @@ public class Jatek implements Serializable {
 
     public static boolean torlesJatek(Integer idIN) {
 
-        EntityManagerFactory emf = Persistence.createEntityManagerFactory("com_CodeCraftersWebshop_war_1.0-SNAPSHOTPU");
+        EntityManagerFactory emf = Persistence.createEntityManagerFactory(Database.getPersistenceUnitNev());
         EntityManager em = emf.createEntityManager();
 
         try {
@@ -487,7 +488,7 @@ public class Jatek implements Serializable {
     }
 
     public static boolean nevEllenorzes(String nev) throws JatekException {
-        EntityManagerFactory emf = Persistence.createEntityManagerFactory("com_CodeCraftersWebshop_war_1.0-SNAPSHOTPU");
+        EntityManagerFactory emf = Persistence.createEntityManagerFactory(Database.getPersistenceUnitNev());
         EntityManager em = emf.createEntityManager();
 
         int db = 0;
@@ -537,7 +538,7 @@ public class Jatek implements Serializable {
     }
 
     public static boolean kepEllenorzes(String kep) throws JatekException {
-        EntityManagerFactory emf = Persistence.createEntityManagerFactory("com_CodeCraftersWebshop_war_1.0-SNAPSHOTPU");
+        EntityManagerFactory emf = Persistence.createEntityManagerFactory(Database.getPersistenceUnitNev());
         EntityManager em = emf.createEntityManager();
 
         int db = 0;
