@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Dec 19, 2023 at 05:39 PM
+-- Generation Time: Dec 21, 2023 at 11:30 PM
 -- Server version: 5.7.24
 -- PHP Version: 8.0.1
 
@@ -62,14 +62,32 @@ CREATE DEFINER=`root`@`localhost` PROCEDURE `eszkozNevEllenorzes` (IN `nevBE` VA
 FROM eszkoz
 WHERE eszkoz.nev = nevBE$$
 
-CREATE DEFINER=`root`@`localhost` PROCEDURE `felhasznalo` (IN `idBE` INT(9))   SELECT *
+CREATE DEFINER=`root`@`localhost` PROCEDURE `felhasznalo` (IN `idBE` INT(9))   SELECT 
+	felhasznalo.id,
+    felhasznalo.felhasznaloNev,
+    felhasznalo.vezetekNev,
+    felhasznalo.keresztNev,
+    felhasznalo.email,
+    felhasznalo.jogosultsagId
 FROM felhasznalo
 WHERE felhasznalo.id = idBE$$
 
-CREATE DEFINER=`root`@`localhost` PROCEDURE `felhasznaloBelepes` (IN `felhasznaloNevBE` VARCHAR(100), IN `jelszoBE` TEXT, OUT `felhasznaloIdKI` INT(9))   SELECT felhasznalo.id
+CREATE DEFINER=`root`@`localhost` PROCEDURE `felhasznaloBelepes` (IN `felhasznaloNevBE` VARCHAR(100), IN `jelszoBE` TEXT, OUT `felhasznaloIdKI` INT(9), OUT `felhasznaloNevKI` VARCHAR(100), OUT `vezetekNevKI` VARCHAR(100), OUT `keresztNevKI` VARCHAR(100), OUT `emailKI` VARCHAR(100), OUT `jogosultsagIdKI` INT(9))   SELECT 
+	felhasznalo.id,
+    felhasznalo.felhasznaloNev,
+    felhasznalo.vezetekNev,
+    felhasznalo.keresztNev,
+    felhasznalo.email,
+    felhasznalo.jogosultsagId
+INTO
+	felhasznaloIdKI,
+    felhasznaloNevKI,
+    vezetekNevKI,
+    keresztNevKI,
+    emailKI,
+    jogosultsagIdKI
 FROM felhasznalo
-WHERE felhasznalo.felhasznaloNev = felhasznaloNevBE AND felhasznalo.jelszo = SHA1(jelszoBE)
-INTO felhasznaloIdKI$$
+WHERE felhasznalo.felhasznaloNev = felhasznaloNevBE AND felhasznalo.jelszo = SHA1(jelszoBE)$$
 
 CREATE DEFINER=`root`@`localhost` PROCEDURE `felhasznaloEmailEllenorzes` (IN `emailBE` VARCHAR(100), OUT `dbKI` INT(1))   SELECT COUNT(felhasznalo.id) INTO dbKI
 FROM felhasznalo
