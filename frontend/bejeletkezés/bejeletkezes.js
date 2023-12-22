@@ -27,16 +27,21 @@ document.addEventListener("DOMContentLoaded", (event) => {
     .then(response => response.json())
     .then(result => {
         // Sikeres bejelentkezés esetén tárold el az adatokat a local storage-ba
-        if(result.id){
-          var valszObjektum={
-            "felhasznaloNev": result.felhasznaloNev,
-            "keresztNev": result.keresztNev,
-            "id": result.id,
-            "vezetekNev": result.vezetekNev,
-            "email": result.email
+        if(result.token!=""){
+        //token
+        function parseJwt (token) {
+            var base64Url = token.split('.')[1];
+            var base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
+            var jsonPayload = decodeURIComponent(window.atob(base64).split('').map(function(c) {
+                return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
+            }).join(''));
+        
+            return JSON.parse(jsonPayload);
+        }
 
-          };
-          localStorage.setItem("bejelentkezes",JSON.stringify(valszObjektum));
+        let valszObjektum=(JSON.stringify(parseJwt
+          (result.token)));
+          localStorage.setItem("bejelentkezes",valszObjektum);
           alert("Sikeres bejelentkezés");
           window.location.href = "../index.html";
         }

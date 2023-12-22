@@ -26,8 +26,7 @@ document.addEventListener("DOMContentLoaded", function () {
         keresztNev: keresztnev,
         email: email,
         jelszo: jelszo,
-        jogosultsagId: "2",
-        token: "asd"
+        jogosultsagId: "2"
 
       };
       // regisztráció fetch
@@ -41,18 +40,14 @@ document.addEventListener("DOMContentLoaded", function () {
           }
         )
         .then((valasz) => {
-          console.log('Válasz érkezett:', valasz);
           return valasz.text();
         })
         .then((adat) => {
-          alert('Sikeres kérés! Válasz: ' + adat); // Sikeres kérés!
-          console.log('Adatok érkeztek:', adat);
           if(adat=="Felhasználó hozzáadva!"){
             window.location.href = "../index.html";
           }
         })
         .catch((hiba) => {
-          alert('Hiba történt a kérés során: ' + hiba); // Alert hiba
           console.error('Hiba:', hiba);
         });
     }
