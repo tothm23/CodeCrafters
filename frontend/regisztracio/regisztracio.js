@@ -32,7 +32,7 @@ document.addEventListener("DOMContentLoaded", function () {
       };
       // regisztráció fetch
       fetch(
-          "http://localhost:8080/CodeCraftersWebshop-1.0-SNAPSHOT/webresources/felhasznalok", {
+          "http://localhost:8080/CodeCraftersWebshop-1.0-SNAPSHOT/webresources/felhasznalo", {
             method: "POST",
             body: JSON.stringify(inputdata),
             headers: {

@@ -40,7 +40,7 @@ document.addEventListener('DOMContentLoaded', function () {
                     redirect: 'follow'
                 };
 
-                fetch(`http://localhost:8080/CodeCraftersWebshop-1.0-SNAPSHOT/webresources/felhasznalok/${bejelentkezettFelhasznalo.id}`, requestOptions)
+                fetch(`http://localhost:8080/CodeCraftersWebshop-1.0-SNAPSHOT/webresources/felhasznalo/${bejelentkezettFelhasznalo.id}`, requestOptions)
                     .then(response => response.text())
                     .then(result => console.log(result))
                     .catch(error => console.log('error', error));
@@ -79,7 +79,7 @@ document.addEventListener('DOMContentLoaded', function () {
                     redirect: 'follow'
                 };
 
-                fetch(`http://localhost:8080/CodeCraftersWebshop-1.0-SNAPSHOT/webresources/felhasznalok/${bejelentkezettFelhasznalo.id}`, requestOptions)
+                fetch(`http://localhost:8080/CodeCraftersWebshop-1.0-SNAPSHOT/webresources/felhasznalo/${bejelentkezettFelhasznalo.id}`, requestOptions)
                     .then(response => response.text())
                     .then(result => console.log(result))
                     .catch(error => console.log('error', error));

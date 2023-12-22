@@ -23,7 +23,7 @@ document.addEventListener("DOMContentLoaded", (event) => {
       redirect: 'follow'
     };
 
-    fetch("http://localhost:8080/CodeCraftersWebshop-1.0-SNAPSHOT/webresources/felhasznalok/bejelentkezes", requestOptions)
+    fetch("http://localhost:8080/CodeCraftersWebshop-1.0-SNAPSHOT/webresources/felhasznalo/bejelentkezes", requestOptions)
     .then(response => response.json())
     .then(result => {
         // Sikeres bejelentkezés esetén tárold el az adatokat a local storage-ba
