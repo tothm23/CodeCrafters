@@ -27,12 +27,16 @@ public class FelhasznaloService {
             String emailBE, String jelszoBE) {
         try {
             String tartalom = EmailService.htmlRegisztracio(felhasznaloNevBE);
-            if (!Felhasznalo.felhasznaloNevEllenorzes(felhasznaloNevBE)) {
+            if (!Felhasznalo.felhasznaloNevEgyediEllenorzes(felhasznaloNevBE)) {
+                return "Hibás felhasználónév!";
+            } else if (!Felhasznalo.felhasznaloNevEllenorzes(felhasznaloNevBE)) {
                 return "Hibás felhasználónév!";
             } else if (!Felhasznalo.vezetekNevEllenorzes(vezetekNevBE)) {
                 return "Hibás vezetéknév!";
             } else if (!Felhasznalo.keresztNevEllenorzes(keresztNevBE)) {
                 return "Hibás keresztnév!";
+            } else if (!Felhasznalo.emailEgyediEllenorzes(emailBE)) {
+                return "Hibás email!";
             } else if (!Felhasznalo.emailEllenorzes(emailBE)) {
                 return "Hibás email!";
             } else if (!Felhasznalo.jelszoEllenorzes(jelszoBE)) {

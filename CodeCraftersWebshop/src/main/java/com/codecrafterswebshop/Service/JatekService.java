@@ -25,12 +25,17 @@ public class JatekService {
     public static String ujJatek(String nevBE, Integer arBE, String leirasBE,
             String kepBE, Integer korhatarBE, Integer akcioBE, Integer mennyisegraktaronBE, Integer eszkozIdBE, Integer platformIdBE) {
         try {
-            if (!Jatek.nevEllenorzes(nevBE)) {
+
+            if (!Jatek.nevEgyediEllenorzes(nevBE)) {
+                return "Hibás név!";
+            } else if (!Jatek.nevEllenorzes(nevBE)) {
                 return "Hibás név!";
             } else if (!Jatek.arEllenorzes(arBE)) {
                 return "Hibás ár!";
             } else if (!Jatek.leirasEllenorzes(leirasBE)) {
                 return "Hibás leírás!";
+            } else if (!Jatek.kepEgyediEllenorzes(kepBE)) {
+                return "Hibás kép!";
             } else if (!Jatek.kepEllenorzes(kepBE)) {
                 return "Hibás kép!";
             } else if (!Jatek.korhatarEllenorzes(korhatarBE)) {

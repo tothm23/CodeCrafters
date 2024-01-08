@@ -384,7 +384,7 @@ public class Felhasznalo implements Serializable {
         }
     }
 
-    public static boolean felhasznaloNevEllenorzes(String felhasznaloNev) throws FelhasznaloException {
+    public static boolean felhasznaloNevEgyediEllenorzes(String felhasznaloNev) throws FelhasznaloException {
         EntityManagerFactory emf = Persistence.createEntityManagerFactory(Database.getPersistenceUnitNev());
         EntityManager em = emf.createEntityManager();
 
@@ -407,12 +407,18 @@ public class Felhasznalo implements Serializable {
             emf.close();
         }
 
+        if (db > 0) {
+            throw new FelhasznaloException("A felhasználó neve már létezik!");
+        } else {
+            return true;
+        }
+    }
+
+    public static boolean felhasznaloNevEllenorzes(String felhasznaloNev) throws FelhasznaloException {
         if (felhasznaloNev.equals("")) {
-            throw new FelhasznaloException("A felhasználó neve lehet üres!");
+            throw new FelhasznaloException("A felhasználó neve nem lehet üres!");
         } else if (felhasznaloNev.length() > 100) {
             throw new FelhasznaloException("A felhasználó neve nem lehet 100 karakternél hosszabb!");
-        } else if (db > 0) {
-            throw new FelhasznaloException("A felhasználó neve már létezik!");
         } else {
             return true;
         }
@@ -427,8 +433,9 @@ public class Felhasznalo implements Serializable {
                 tartalmazSpecialiskaraktert = true;
             }
         }
+
         if (vezetekNev.equals("")) {
-            throw new FelhasznaloException("A felhasználó vezetékneve lehet üres!");
+            throw new FelhasznaloException("A felhasználó vezetékneve nem lehet üres!");
         } else if (vezetekNev.length() > 100) {
             throw new FelhasznaloException("A felhasználó vezetékneve nem lehet 100 karakternél hosszabb!");
         } else if (tartalmazSpecialiskaraktert) {
@@ -449,7 +456,7 @@ public class Felhasznalo implements Serializable {
         }
 
         if (keresztNev.equals("")) {
-            throw new FelhasznaloException("A felhasználó keresztneve lehet üres!");
+            throw new FelhasznaloException("A felhasználó keresztneve nem lehet üres!");
         } else if (keresztNev.length() > 100) {
             throw new FelhasznaloException("A felhasználó keresztneve nem lehet 100 karakternél hosszabb!");
         } else if (tartalmazSpecialiskaraktert) {
@@ -459,7 +466,7 @@ public class Felhasznalo implements Serializable {
         }
     }
 
-    public static boolean emailEllenorzes(String email) throws FelhasznaloException {
+    public static boolean emailEgyediEllenorzes(String email) throws FelhasznaloException {
         EntityManagerFactory emf = Persistence.createEntityManagerFactory(Database.getPersistenceUnitNev());
         EntityManager em = emf.createEntityManager();
 
@@ -482,14 +489,20 @@ public class Felhasznalo implements Serializable {
             emf.close();
         }
 
+        if (db > 0) {
+            throw new FelhasznaloException("A felhasználó emailje már létezik!");
+        } else {
+            return true;
+        }
+    }
+
+    public static boolean emailEllenorzes(String email) throws FelhasznaloException {
         if (email.equals("")) {
-            throw new FelhasznaloException("A felhasználó emailje lehet üres!");
+            throw new FelhasznaloException("A felhasználó emailje nem lehet üres!");
         } else if (email.length() > 100) {
             throw new FelhasznaloException("A felhasználó emailje nem lehet 100 karakternél hosszabb!");
         } else if (!email.contains("@")) {
             throw new FelhasznaloException("A felhasználó emailjének tartalmaznia kell a @ karaktert!");
-        } else if (db > 0) {
-            throw new FelhasznaloException("A felhasználó emailje már létezik!");
         } else {
             return true;
         }
@@ -512,7 +525,7 @@ public class Felhasznalo implements Serializable {
         }
 
         if (jelszo.equals("")) {
-            throw new FelhasznaloException("A felhasználó jelszava lehet üres!");
+            throw new FelhasznaloException("A felhasználó jelszava nem lehet üres!");
         } else if (jelszo.length() > 100) {
             throw new FelhasznaloException("A felhasználó jelszava nem lehet 100 karakternél hosszabb!");
         } else if (jelszo.length() < 8) {
