@@ -1,0 +1,261 @@
+{
+	"info": {
+		"_postman_id": "0d1212b8-d4ce-408e-9c9c-2f4bd3c7f3dc",
+		"name": "codecrafters",
+		"description": "Webáruház videójátékoknak",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json",
+		"_exporter_id": "29325685"
+	},
+	"item": [
+		{
+			"name": "jatek",
+			"item": [
+				{
+					"name": "ujJatek",
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {}
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJjb2RlY3JhZnRlcnMiLCJpZCI6MTIsImZlbGhhc3puYWxvTmV2IjoidG90aG0yMyIsInZlemV0ZWtOZXYiOiJUw7N0aCIsImtlcmVzenROZXYiOiJNaWzDoW4iLCJlbWFpbCI6InRvdGhtQGdtYWlsLmNvbSIsImpvZ29zdWx0c2FnSWQiOjEsImlhdCI6MTcwNDcxMjIxMywiZXhwIjoxNzA0NzEyODEzfQ.-myzFc-02tj0lL_IBD6y_PDfyQFzatHKev2_UV21t4o"
+							}
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"nev\": \"Netbeans játék\",\n    \"ar\": 1500,\n    \"leiras\": \"Egy játék a Netbeansből\",\n    \"kep\": \"kepek/netbeans.jpg\",\n    \"korhatar\": 18,\n    \"akcio\": 20,\n    \"mennyisegraktaron\": 1,\n    \"eszkozId\": 1,\n    \"platformId\": 2\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://localhost:8080/CodeCraftersWebshop-1.0-SNAPSHOT/webresources/jatek"
+					},
+					"response": []
+				},
+				{
+					"name": "torlesJatek",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJjb2RlY3JhZnRlcnMiLCJpZCI6MSwiZmVsaGFzem5hbG9OZXYiOiJ0b3RobTIzIiwidmV6ZXRla05ldiI6IkEiLCJrZXJlc3p0TmV2IjoiQiIsImVtYWlsIjoidG90aG0uMjE0c3pAYWNzanN6a2kuaHUiLCJqb2dvc3VsdHNhZ0lkIjoyLCJpYXQiOjE3MDMyNDA2NzMsImV4cCI6MTcwMzI0MTI3M30.9OBpSH_m_RVkYbZTaqSaVMlx0srgnB_Tk9gYqTO7Q50"
+							}
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": "http://localhost:8080/CodeCraftersWebshop-1.0-SNAPSHOT/webresources/jatek/5"
+					},
+					"response": []
+				},
+				{
+					"name": "jatek",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": "http://localhost:8080/CodeCraftersWebshop-1.0-SNAPSHOT/webresources/jatek/1"
+					},
+					"response": []
+				},
+				{
+					"name": "frissitesJatek",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJjb2RlY3JhZnRlcnMiLCJpZCI6MTIsImZlbGhhc3puYWxvTmV2IjoidG90aG0yMyIsInZlemV0ZWtOZXYiOiJUw7N0aCIsImtlcmVzenROZXYiOiJNaWzDoW4iLCJlbWFpbCI6InRvdGhtQGdtYWlsLmNvbSIsImpvZ29zdWx0c2FnSWQiOjEsImlhdCI6MTcwNDcxMjIxMywiZXhwIjoxNzA0NzEyODEzfQ.-myzFc-02tj0lL_IBD6y_PDfyQFzatHKev2_UV21t4o"
+							}
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"nev\": \"Netbeans frissített játék\",\n    \"ar\": 91500,\n    \"leiras\": \"Egy frissített játék a Netbeansből\",\n    \"kep\": \"kepek/netbeans.jpg\",\n    \"korhatar\": 18,\n    \"akcio\": 20,\n    \"mennyisegraktaron\": 1,\n    \"kategoriaId\": 3,\n    \"eszkozId\": 1,\n    \"platformId\": 2\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://localhost:8080/CodeCraftersWebshop-1.0-SNAPSHOT/webresources/jatek/2"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "felhasznalo",
+			"item": [
+				{
+					"name": "ujFelhasznalo",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"felhasznaloNev\": \"tothm23\",\n    \"vezetekNev\": \"Tóth\",\n    \"keresztNev\": \"Milán\",\n    \"email\": \"tothm@gmail.com\",\n    \"jelszo\": \"asdASD123!\",\n    \"jogosultsagId\": \"2\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://localhost:8080/CodeCraftersWebshop-1.0-SNAPSHOT/webresources/felhasznalo"
+					},
+					"response": []
+				},
+				{
+					"name": "felhasznaloBelepes",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"felhasznaloNev\": \"tothm23\",\n    \"jelszo\": \"asdASD123!\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://localhost:8080/CodeCraftersWebshop-1.0-SNAPSHOT/webresources/felhasznalo/bejelentkezes"
+					},
+					"response": []
+				},
+				{
+					"name": "frissitesFelhasznalo",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"felhasznaloNev\": \"elekdezso23\",\n    \"vezetekNev\": \"Elek\",\n    \"keresztNev\": \"Dezső\",\n    \"jelszo\": \"asdASD123!\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://localhost:8080/CodeCraftersWebshop-1.0-SNAPSHOT/webresources/felhasznalo/2"
+					},
+					"response": []
+				},
+				{
+					"name": "torlesFelhasznalo",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": "http://localhost:8080/CodeCraftersWebshop-1.0-SNAPSHOT/webresources/felhasznalo/3"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "kosar",
+			"item": [
+				{
+					"name": "felhasznaloKosar",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": "http://localhost:8080/CodeCraftersWebshop-1.0-SNAPSHOT/webresources/kosar/1"
+					},
+					"response": []
+				},
+				{
+					"name": "kosar",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"jatekId\": 2,\n    \"felhasznaloId\": 1\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://localhost:8080/CodeCraftersWebshop-1.0-SNAPSHOT/webresources/kosar"
+					},
+					"response": []
+				},
+				{
+					"name": "torlesJatekKosarbol",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/CodeCraftersWebshop-1.0-SNAPSHOT/webresources/kosar?felhasznaloId=1&jatekId=17",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"CodeCraftersWebshop-1.0-SNAPSHOT",
+								"webresources",
+								"kosar"
+							],
+							"query": [
+								{
+									"key": "felhasznaloId",
+									"value": "1"
+								},
+								{
+									"key": "jatekId",
+									"value": "17"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "termekek",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [],
+				"url": "http://localhost:8080/CodeCraftersWebshop-1.0-SNAPSHOT/webresources/termekek"
+			},
+			"response": []
+		},
+		{
+			"name": "fooldal",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": "http://localhost:8080/CodeCraftersWebshop-1.0-SNAPSHOT/webresources/fooldal"
+			},
+			"response": []
+		},
+		{
+			"name": "rendeles",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"felhasznaloId\": 1\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "http://localhost:8080/CodeCraftersWebshop-1.0-SNAPSHOT/webresources/rendeles"
+			},
+			"response": []
+		}
+	]
+}
