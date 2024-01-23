@@ -1,53 +1,42 @@
-const bejelentkezettFelhasznalo = JSON.parse(localStorage.getItem("bejelentkezes"));
+const logged_user = JSON.parse(localStorage.getItem("bejelentkezes"));
 const log_reg = document.getElementById("log_reg");
-const felhasznaloful = document.getElementById("felhasznalo-box");
+const userbox = document.getElementById("felhasznalo-box");
 
-let kosarid = [];
-
-
-if(bejelentkezettFelhasznalo){
-  log_reg.display="none";
-  felhasznaloful.display="flex";
-  getkosar(kosarid);  
-}
-else{
-  log_reg.display="flex";
-  felhasznaloful.display="none";
-}
+let cart_id = [];
 
 // GET kérés
 fetch(
     "http://localhost:8080/CodeCraftersWebshop-1.0-SNAPSHOT/webresources/fooldal"
   )
-  .then((valasz) => valasz.json())
-  .then((adat) => {
+  .then((response) => response.json())
+  .then((data) => {
     var carouselInner = document.getElementById("gameCarousel");
 
-    for (let i = 0; i < adat.length; i++) {
+    for (let i = 0; i < data.length; i++) {
       var akciosAr = Math.round(
-        adat[i].ar - (adat[i].ar / 100) * adat[i].akcio
+        data[i].ar - (data[i].ar / 100) * data[i].akcio
       );
       carouselInner.innerHTML += `
         <div class="carousel-item">
           <div class="card flex-column flex-lg-row">
-            <a href="./jatek/jatek.html?id=${adat[i].id}"><img src="./kepek/jatekok/${
-              adat[i].kep
-            }" class="d-block w-100" alt="${adat[i].nev}">
+            <a href="./jatek/jatek.html?id=${data[i].id}"><img src="./kepek/jatekok/${
+              data[i].kep
+            }" class="d-block w-100" alt="${data[i].nev}">
             </a>
             <div class="card-body">
               <!--<span class="badge bg-secondary">New</span>-->
-              <h5 class="card-title">${adat[i].nev}</h5>
+              <h5 class="card-title">${data[i].nev}</h5>
               ${
-                adat[i].akcio > 0
-                  ? `<p class="card-text ar" style="text-decoration: line-through;">${adat[i].ar} Ft</p>`
-                  : `<p class="card-text ar">${adat[i].ar} Ft</p>`
+                data[i].akcio > 0
+                  ? `<p class="card-text ar" style="text-decoration: line-through;">${data[i].ar} Ft</p>`
+                  : `<p class="card-text ar">${data[i].ar} Ft</p>`
               }
               ${
-                adat[i].akcio > 0
+                data[i].akcio > 0
                   ? `<p class="card-text akciosar">${akciosAr} Ft</p>`
                   : ""
               }
-              ${hozzaadasGomb(adat[i].id)}
+              ${hozzaadasGomb(data[i].id)}
             </div>  
           </div>
         </div>
@@ -63,7 +52,7 @@ fetch(
 
 //get kosár
 function getkosar(gombid) {
-  fetch(`http://localhost:8080/CodeCraftersWebshop-1.0-SNAPSHOT/webresources/kosar/${bejelentkezettFelhasznalo.id}`, {
+  fetch(`http://localhost:8080/CodeCraftersWebshop-1.0-SNAPSHOT/webresources/kosar/${logged_user.id}`, {
       method: 'GET'
     })
     .then(response => response.json())
@@ -73,7 +62,7 @@ function getkosar(gombid) {
       for (let i = 0; i < result.length; i++) {
         gombid[i] = result[i].jatekId;
         console.log(gombid[i], result[i].jatekId);
-        console.log(kosarid[0], kosarid[1], kosarid[2]);
+        console.log(cart_id[0], cart_id[1], cart_id[2]);
       }
     }).catch(error => console.error(error));
 }
@@ -107,9 +96,9 @@ function parseJwt (token) {
 
 function hozzaadasGomb(id) {
   var vanilyen_ID = false;
-  if (bejelentkezettFelhasznalo) {
-    for (let i = 0; i < kosarid.length; i++) {
-      if (kosarid[i] === id) {
+  if (logged_user) {
+    for (let i = 0; i < cart_id.length; i++) {
+      if (cart_id[i] === id) {
         vanilyen_ID = true;
       }
     }
@@ -126,24 +115,62 @@ function hozzaadasGomb(id) {
 };
 
 document.addEventListener("DOMContentLoaded", function () {
-  const keresoInput = document.querySelector('.navbar input[type="search"]');
+  const search_Input = document.querySelector('.navbar input[type="search"]');
   const form = document.querySelector(".navbar form");
-  const aktualisPath = window.location.pathname;
-  const kijelentkezés_gomb = document.getElementById("felhasznalo_kilep");
-  const beallitasok_gomb = document.getElementById("beallitasok");
-  const fnev = document.getElementById("felhasznalo");
+  const actual_path = window.location.pathname;
+  const logout = document.getElementById("logout");
+  const settings_btn = document.getElementById("settings");
+  const cart_btn = document.getElementById("cart");
+  const user_name = document.getElementById("username");
+  const email = document.getElementById("email");
+  const login = document.getElementById("login");
+  const reg = document.getElementById("registration");
+
+  if(logged_user){
+    log_reg.display="none";
+    userbox.display="flex";
+    getkosar(cart_id);  
+  }
+  else{
+    log_reg.display="flex";
+    userbox.display="none";
+  }
   //kijelentkezés essetén
-  kijelentkezés_gomb.addEventListener("click", function () {
+  logout.addEventListener("click", function () {
     localStorage.removeItem("bejelentkezes");
     log_reg.style.display = "flex";
-    felhasznaloful.style.display = "none";
+    userbox.style.display = "none";
   });
-  beallitasok_gomb.addEventListener("click", function () {
-    if (aktualisPath == "/frontend/index.html") {
+  settings_btn.addEventListener("click", function () {
+    if (actual_path == "/frontend/index.html") {
       // Most már tovább navigálhatsz az új oldalra
-      window.open("./felhasznalo/felhasznalo.html");
+      window.location.href="./felhasznalo/felhasznalo.html";
     } else {
-      window.open("../felhasznalo/felhasznalo.html");
+      window.location.href="../felhasznalo/felhasznalo.html";
+    }
+  });
+  cart_btn.addEventListener("click", function () {
+    if (actual_path == "/frontend/index.html") {
+      // Most már tovább navigálhatsz az új oldalra
+      window.location.href="./kosar/kosar.html";
+    } else {
+      window.location.href="../kosar/kosar.html";
+    }
+  });
+  reg.addEventListener("click", function () {
+    if (actual_path == "/frontend/index.html") {
+      // Most már tovább navigálhatsz az új oldalra
+      window.location.href="./regisztracio/regisztracio.html";
+    } else {
+      window.location.href="../regisztracio/regisztracio.html";
+    }
+  });
+  login.addEventListener("click", function () {
+    if (actual_path == "/frontend/index.html") {
+      // Most már tovább navigálhatsz az új oldalra
+      window.location.href="./bejelentkezés/bejelentkezes.html";
+    } else {
+      window.location.href="../bejelentkezés/bejelentkezes.html";
     }
   });
   // Eseményfigyelők hozzáadása a keresőhöz és az ármezőkhöz
@@ -151,12 +178,12 @@ document.addEventListener("DOMContentLoaded", function () {
     esemeny.preventDefault();
 
     // A keresőszöveg tárolása a localStorage-ban
-    localStorage.setItem('keresesSzoveg', keresoInput.value.toLowerCase());
+    localStorage.setItem('keresesSzoveg', search_Input.value.toLowerCase());
 
-    if (aktualisPath == "/frontend/index.html") {
+    if (actual_path == "/frontend/index.html") {
       // Tovább navigálunk az új oldalra
       window.location.href = "./termekek/termekek.html";
-    } else if (aktualisPath == "/frontend/jatek/jatek.html") {
+    } else if (actual_path == "/frontend/jatek/jatek.html") {
       window.location.href = "../termekek/termekek.html";
     } else {
       // Egyéb esetek kezelése (opcionális)
@@ -164,15 +191,15 @@ document.addEventListener("DOMContentLoaded", function () {
   });
 
 
-  if (bejelentkezettFelhasznalo) {
-    console.log(bejelentkezettFelhasznalo.id);
+  if (logged_user) {
+    console.log(logged_user.id);
     log_reg.style.display = "none";
-    felhasznaloful.style.display = "flex";
-    fnev.innerHTML = "";
-    fnev.innerHTML += bejelentkezettFelhasznalo.felhasznaloNev;
+    userbox.style.display = "flex";
+    user_name.innerHTML += logged_user.felhasznaloNev;
+    email.innerHTML +=logged_user.email;
   } else {
     log_reg.style.display = "flex";
-    felhasznaloful.style.display = "none";
+    userbox.style.display = "none";
   }
 
   document.addEventListener("click", function (event) {
@@ -187,7 +214,7 @@ document.addEventListener("DOMContentLoaded", function () {
       myHeaders.append("Content-Type", "application/json");
       var raw = JSON.stringify({
         jatekId: jatekId,
-        felhasznaloId: bejelentkezettFelhasznalo.id
+        felhasznaloId: logged_user.id
       });
 
       console.log(raw);

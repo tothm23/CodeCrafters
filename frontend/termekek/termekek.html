@@ -23,7 +23,7 @@
           aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button>
-        <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+        <div class="collapse navbar-collapse flex-column flex-lg-row" id="navbarNavAltMarkup">
           <div class="navbar-nav">
 
             <nav class="searchbar">
@@ -31,53 +31,55 @@
                 <form class="d-flex">
                   <!-- kereső mező -->
                   <input class="form-control me-2" type="search" placeholder="Keresés..." aria-label="Search" />
-                  <button class="btn bg-dark btn-outline-light" type="submit">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 40 40" fill="none">
-                      <g clip-path="url(#clip0_41_926)">
-                        <path
-                          d="M25.8333 23.3333H24.5167L24.05 22.8833C25.6833 20.9833 26.6667 18.5167 26.6667 15.8333C26.6667 9.85 21.8167 5 15.8333 5C9.85 5 5 9.85 5 15.8333C5 21.8167 9.85 26.6667 15.8333 26.6667C18.5167 26.6667 20.9833 25.6833 22.8833 24.05L23.3333 24.5167V25.8333L31.6667 34.15L34.15 31.6667L25.8333 23.3333ZM15.8333 23.3333C11.6833 23.3333 8.33333 19.9833 8.33333 15.8333C8.33333 11.6833 11.6833 8.33333 15.8333 8.33333C19.9833 8.33333 23.3333 11.6833 23.3333 15.8333C23.3333 19.9833 19.9833 23.3333 15.8333 23.3333Z"
-                          fill="white" />
-                      </g>
-                      <defs>
-                        <clipPath id="clip0_41_926">
-                          <rect width="40" height="40" fill="white" />
-                        </clipPath>
-                      </defs>
-                    </svg>
+                  <button class="btn bg-dark search-btn" type="submit">
+                    <i class="fa-solid fa-magnifying-glass"></i>
                   </button>
                 </form>
               </div>
             </nav>
-
-            <div id="log_reg" class="flex-lg-column flex-row">
-              <button type="button"><a class="gomblink"
-                  href="../bejeletkezés/bejelentkezes.html">Bejelentkezés</a></button>
-              <button type="button"><a class="gomblink"
-                  href="../regisztracio/regisztracio.html">Regisztráció</a></button>
+            
+            <div id="log_reg" class="dropdown">
+              <button id="dropdownMenuButton2" class="btn" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                <i class="fa-solid fa-user"></i>
+              </button>
+              
+              <p class="p-1">Bejelentkezés / Regisztráció</p>
+                
+              <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton2">
+                <li id="login" class="dropdown-item link-light"><i class="fa-solid fa-right-from-bracket"></i> Bejelentkezés</li>
+                <li id="registration" class="dropdown-item link-light"><i class="fa-solid fa-user-plus"></i> Regisztráció</li>
+              </ul>
             </div>
+            
           </div>
+
+          <!-- felhasználó-->
+        <div id="felhasznalo-box" class="dropdown justify-content-end">
+          <button id="dropdownMenuButton1" class="btn btn-dark felhasznalo-gomb" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+            <div class="d-flex flex-row justify-content-center align-items-center">
+              <img src="../kepek/felhasznalo.png" id="felhasznalo-kep" alt="Mákosguba55" />
+              <p id="username"></p>
+            </div>
+          </button>
+          
+          <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+            <span id="profile" class="dropdown-item"><img src="../kepek/felhasznalo.png" alt=""><span id="email"></span></span>
+
+            <li><hr class="dropdown-divider"></li>
+
+            <li id="cart" class="dropdown-item"><i class="fa-solid fa-basket-shopping"></i> Kosár</li>
+            <li id="settings" class="dropdown-item"><i class="fa-regular fa-pen-to-square"></i>  Profil szerkesztése</li>
+            
+            <li><hr class="dropdown-divider"></li>
+
+            <li id="logout" class="dropdown-item"><i class="fa-solid fa-right-from-bracket"></i> Kijeletkezés</li>
+          </ul>
+        </div>
+
         </div>
       </div>
-      <div id="felhasznalo-box" class="justify-content-end">
-        <button id="felhasznalo-gomb" class="btn btn-dark" type="button" data-bs-toggle="collapse"
-            data-bs-target="#collapseExample" aria-expanded="true" aria-controls="collapseExample">
-            <img src="../kepek/felhasznalo.png" id="felhasznalo-kep" alt="Mákosguba55" />
-            <p id="felhasznalo">Mákosguba55</p>
-        </button>
-        <div class="collapse" id="collapseExample">
-            <div class="card card-body">
-                <ul>
-                  <li id="beallitasok">
-                    Beállítások
-                </li>
-                    <li id="felhasznalo_kilep">
-                        Kijeletkezés
-                    </li>
-                </ul>
-            </div>
-        </div>
-    </div>
 
+    
     </nav>
   </div>
   <!-- az oldal -->

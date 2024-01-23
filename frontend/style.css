@@ -29,7 +29,6 @@ body {
   display: flex;
   flex-direction: row;
   align-items: end;
-  border: #000 solid 1px;
   margin-top: 30px;
 }
 
@@ -49,7 +48,6 @@ body {
   display: flex;
   flex-grow: 1;
   align-items: center;
-  flex-direction: column;
 }
 
 /*kereső*/
@@ -62,31 +60,31 @@ body {
 }
 
 .searchbar form {
-  flex-grow: 1;
-  display: flex;
+  border: 1px solid black;
+  justify-content: center;
 }
 
 .searchbar input {
   border-radius: 10px 0px 0px 10px;
-  border: 1px solid #000;
   background: #d9d9d9;
-  height: 40px;
+  height: 50px;
   margin: 0;
 }
 
-.searchbar button {
+.search-btn,.search-btn:hover{
   border-radius: 0px 10px 10px 0px;
-  border: 1px solid #000;
   background: #241f1f;
-  height: 40px;
+  height: 50px;
   margin: 0;
+  padding: 20;
+  color: white;
+
 }
 
 /*logo*/
 .nav img {
   border-radius: 10px;
   max-width: 100px;
-  border: solid #fff 1px;
   margin: 5px;
 }
 
@@ -101,42 +99,70 @@ body {
 }
 
 
-#felhasznalo-box{
-  min-width: 200px;
-  display: flex;
-  flex-direction: column;
-  background-color: #241f1f;
-  border-top-left-radius: 30px;
+#felhasznalo-box {
+  min-width: 250px;
+  margin-right: 10px;
 }
 
-#felhasznalo-gomb {
-  background-color: inherit;
-  min-width: 150px;
+#felhasznalo-box span {
+  color: white;
+}
+
+.dropdown-menu {
+  background: #241f1f;
+  width: 100%;
+}
+
+.dropdown-menu li{
+  max-height: 50px;
+  font-size: 20px;
+}
+
+
+#dropdownMenuButton1,#dropdownMenuButton2 {
+  width: 100%;
+  min-width:50px;
+  background: inherit;
   border: none;
-  border-top-left-radius: 30px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-direction: column;
-  font-weight: bold;
+  box-shadow: none;
+  height: 70px;
+  font-size: 25px;
+  padding: 0px;
 }
 
-#felhasznalo-box ul{
-list-style: none;
+#dropdownMenuButton1 p {
+  margin: 5px;
 }
-#felhasznalo-box .card{
-background-color: inherit;
-color: white;
-font-weight: bold;
+
+#dropdownMenuButton1 img {
+  height: 50px;
+  width: 50px;
+  margin-right: 5px;
 }
+
+#felhasznalo-box ul {
+  list-style: none;
+}
+
+#profile,
+#profile:hover {
+  background: #241f1f;
+}
+
+#profile img {
+  width: 30px;
+}
+
 
 #felhasznalo-box li {
   color: white;
+  background-color: #241f1f;
 
 }
 
 #felhasznalo-box li:hover {
-  color: #ff4444;
+  color: #fff;
+  background-color: #404040;
 }
 
 
@@ -148,31 +174,6 @@ font-weight: bold;
 #felhasznalo {
   color: #fff;
   padding-top: 0.3vh;
-}
-
-#kosar-box {
-  background-color: #241f1f;
-  border: 0.2vh solid #000;
-  color: #fff;
-  font-size: 3vh;
-  width: 7vh;
-  height: 7vh;
-  margin-top: 2.5vh;
-  border-radius: 50%;
-  cursor: pointer;
-
-  position: fixed;
-  top: 250px;
-  right: 5vh;
-
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-direction: column;
-}
-
-#kosar-box a {
-  color: white;
 }
 
 /* vissza az oldal tetejére */
@@ -197,54 +198,19 @@ font-weight: bold;
   flex-direction: column;
 }
 
-
-
-/*gombok*/
-
 #log_reg {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
+  width: 200px;
 }
+
 
 #log_reg button {
-  color: #000000;
-  background-color: #ffffff;
-  border-radius: 10px;
-  height: 30px;
-  margin: 5px;
-  padding: 20px;
-  flex-direction: row;
-  justify-content: space-between;
-}
-
-#log_reg button:hover {
-  background-color: #cdcdcd;
-
-}
-
-#log_reg a {
-  text-align: center;
-}
-
-
-
-/*menu gombok formázása*/
-.gomblink {
-  text-decoration: none;
-  color: inherit;
-  font-size: 12pt;
-  font-weight: bold;
-  flex-shrink: 0;
-  height: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.gomblink:hover {
-  color: #ff4444;
-  border-radius: 5px;
+  width: 50px;
+  height: 50px;
+  color: white;
+  border-radius: 100%;
+  border: none;
+  cursor: pointer;
+  background: #241f1f;
 }
 
 h2 {
@@ -256,8 +222,6 @@ form .mb-3,
 p {
   color: white;
 }
-
-
 
 /* 
 slide
@@ -282,7 +246,17 @@ slide
   align-items: center;
 }
 
-.slideshow .card,.main .card {
+.slideshow .card {
+  background-color: #241f1f;
+  color: white;
+  display: block;
+  align-items: center;
+  justify-content: center;
+  font-size: large;
+  text-align: center;
+}
+
+.main .card {
   background-color: #241f1f;
   color: white;
   display: flex;
@@ -290,18 +264,17 @@ slide
   width: 100%;
   align-items: center;
   justify-content: center;
-  width: 100%;
   font-size: larger;
   text-align: center;
 }
 
-
 .carousel-inner img {
   border: #000 solid 1px;
   min-width: 300px;
-  max-width: 600px;
   min-height: 300px;
   max-height: 600px;
+  overflow: hidden;
+
 }
 
 #hozzadas,
