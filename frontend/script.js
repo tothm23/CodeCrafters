@@ -35,6 +35,7 @@ fetch(
             }" class="d-block w-100" alt="${adat[i].nev}">
             </a>
             <div class="card-body">
+              <!--<span class="badge bg-secondary">New</span>-->
               <h5 class="card-title">${adat[i].nev}</h5>
               ${
                 adat[i].akcio > 0
