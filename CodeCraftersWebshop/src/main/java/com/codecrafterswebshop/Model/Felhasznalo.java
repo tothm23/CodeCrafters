@@ -40,7 +40,6 @@ import javax.validation.constraints.Size;
     @NamedQuery(name = "Felhasznalo.findByVezetekNev", query = "SELECT f FROM Felhasznalo f WHERE f.vezetekNev = :vezetekNev"),
     @NamedQuery(name = "Felhasznalo.findByKeresztNev", query = "SELECT f FROM Felhasznalo f WHERE f.keresztNev = :keresztNev"),
     @NamedQuery(name = "Felhasznalo.findByEmail", query = "SELECT f FROM Felhasznalo f WHERE f.email = :email"),
-    @NamedQuery(name = "Felhasznalo.findByJogosultsagId", query = "SELECT f FROM Felhasznalo f WHERE f.jogosultsagId = :jogosultsagId"),
     @NamedQuery(name = "Felhasznalo.findByLetrehozva", query = "SELECT f FROM Felhasznalo f WHERE f.letrehozva = :letrehozva"),
     @NamedQuery(name = "Felhasznalo.findByFrissitve", query = "SELECT f FROM Felhasznalo f WHERE f.frissitve = :frissitve")})
 public class Felhasznalo implements Serializable {
