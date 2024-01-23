@@ -80,10 +80,6 @@ public class Felhasznalo implements Serializable {
     private String jelszo;
     @Basic(optional = false)
     @NotNull
-    @Column(name = "jogosultsagId")
-    private int jogosultsagId;
-    @Basic(optional = false)
-    @NotNull
     @Column(name = "letrehozva")
     @Temporal(TemporalType.TIMESTAMP)
     private Date letrehozva;
@@ -98,23 +94,21 @@ public class Felhasznalo implements Serializable {
         this.id = id;
     }
 
-    public Felhasznalo(Integer id, String felhasznaloNev, String vezetekNev, String keresztNev, String email, String jelszo, int jogosultsagId) {
+    public Felhasznalo(Integer id, String felhasznaloNev, String vezetekNev, String keresztNev, String email, String jelszo) {
         this.id = id;
         this.felhasznaloNev = felhasznaloNev;
         this.vezetekNev = vezetekNev;
         this.keresztNev = keresztNev;
         this.email = email;
         this.jelszo = jelszo;
-        this.jogosultsagId = jogosultsagId;
     }
 
-    private Felhasznalo(Integer id, String felhasznaloNev, String vezetekNev, String keresztNev, String email, int jogosultsagId) {
+    public Felhasznalo(Integer id, String felhasznaloNev, String vezetekNev, String keresztNev, String email) {
         this.id = id;
         this.felhasznaloNev = felhasznaloNev;
         this.vezetekNev = vezetekNev;
         this.keresztNev = keresztNev;
         this.email = email;
-        this.jogosultsagId = jogosultsagId;
     }
 
     public Integer getId() {
@@ -163,14 +157,6 @@ public class Felhasznalo implements Serializable {
 
     public void setJelszo(String jelszo) {
         this.jelszo = jelszo;
-    }
-
-    public int getJogosultsagId() {
-        return jogosultsagId;
-    }
-
-    public void setJogosultsagId(int jogosultsagId) {
-        this.jogosultsagId = jogosultsagId;
     }
 
     public Date getLetrehozva() {
@@ -232,7 +218,6 @@ public class Felhasznalo implements Serializable {
                 felhasznalo.put("vezetekNev", sor[2]);
                 felhasznalo.put("keresztNev", sor[3]);
                 felhasznalo.put("email", sor[4]);
-                felhasznalo.put("jogosultsagId", sor[5]);
             }
 
         } catch (Exception e) {
@@ -261,7 +246,6 @@ public class Felhasznalo implements Serializable {
             spq.registerStoredProcedureParameter("vezetekNevKI", String.class, ParameterMode.OUT);
             spq.registerStoredProcedureParameter("keresztNevKI", String.class, ParameterMode.OUT);
             spq.registerStoredProcedureParameter("emailKI", String.class, ParameterMode.OUT);
-            spq.registerStoredProcedureParameter("jogosultsagIdKI", Integer.class, ParameterMode.OUT);
 
             spq.setParameter("felhasznaloNevBE", felhasznaloNevBE);
             spq.setParameter("jelszoBE", jelszoBE);
@@ -271,9 +255,8 @@ public class Felhasznalo implements Serializable {
             String vezetekNev = (String) spq.getOutputParameterValue("vezetekNevKI");
             String keresztNev = (String) spq.getOutputParameterValue("keresztNevKI");
             String email = (String) spq.getOutputParameterValue("emailKI");
-            Integer jogosultsagId = (Integer) spq.getOutputParameterValue("jogosultsagIdKI");
 
-            Felhasznalo f = new Felhasznalo(id, felhasznaloNev, vezetekNev, keresztNev, email, jogosultsagId);
+            Felhasznalo f = new Felhasznalo(id, felhasznaloNev, vezetekNev, keresztNev, email);
             return f;
 
         } catch (Exception e) {
