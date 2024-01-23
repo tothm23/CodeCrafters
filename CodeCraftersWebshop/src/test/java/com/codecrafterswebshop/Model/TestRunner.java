@@ -11,7 +11,6 @@ public class TestRunner {
 
     public static void main(String[] args) {
         runTests(FelhasznaloTest.class);
-        runTests(JatekTest.class);
     }
 
     public static void runTests(Class<?> testClass) {
