@@ -102,6 +102,10 @@ public class Jatek implements Serializable {
     @Column(name = "frissitve")
     @Temporal(TemporalType.TIMESTAMP)
     private Date frissitve;
+    @Basic(optional = false)
+    @NotNull
+    @Column(name = "eladva")
+    private int eladva;
 
     public Jatek() {
     }
@@ -110,7 +114,8 @@ public class Jatek implements Serializable {
         this.id = id;
     }
 
-    public Jatek(Integer id, String nev, int ar, String leiras, String kep, int korhatar, int akcio, int mennyisegraktaron, int eszkozId, int platformId, Date letrehozva) {
+    public Jatek(Integer id, String nev, int ar, String leiras, String kep, int korhatar, int akcio, int mennyisegraktaron, int eszkozId,
+            int platformId, Date letrehozva, Integer eladva) {
         this.id = id;
         this.nev = nev;
         this.ar = ar;
@@ -122,6 +127,7 @@ public class Jatek implements Serializable {
         this.eszkozId = eszkozId;
         this.platformId = platformId;
         this.letrehozva = letrehozva;
+        this.eladva = eladva;
     }
 
     public Integer getId() {
@@ -218,6 +224,14 @@ public class Jatek implements Serializable {
 
     public void setFrissitve(Date frissitve) {
         this.frissitve = frissitve;
+    }
+
+    public int getEladva() {
+        return eladva;
+    }
+
+    public void setEladva(int eladva) {
+        this.eladva = eladva;
     }
 
     @Override
