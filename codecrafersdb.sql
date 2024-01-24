@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Jan 23, 2024 at 09:42 AM
+-- Generation Time: Jan 24, 2024 at 09:54 AM
 -- Server version: 5.7.24
 -- PHP Version: 8.0.1
 
@@ -71,6 +71,7 @@ CREATE DEFINER=`root`@`localhost` PROCEDURE `felhasznalo` (IN `idBE` INT(9))   S
     felhasznalo.keresztNev,
     felhasznalo.email
 FROM felhasznalo
+
 WHERE felhasznalo.id = idBE$$
 
 CREATE DEFINER=`root`@`localhost` PROCEDURE `felhasznaloBelepes` (IN `felhasznaloNevBE` VARCHAR(100), IN `jelszoBE` TEXT, OUT `felhasznaloIdKI` INT(9), OUT `felhasznaloNevKI` VARCHAR(100), OUT `vezetekNevKI` VARCHAR(100), OUT `keresztNevKI` VARCHAR(100), OUT `emailKI` VARCHAR(100))   SELECT 
@@ -86,17 +87,21 @@ INTO
     keresztNevKI,
     emailKI
 FROM felhasznalo
+
 WHERE felhasznalo.felhasznaloNev = felhasznaloNevBE AND felhasznalo.jelszo = SHA1(jelszoBE)$$
 
-CREATE DEFINER=`root`@`localhost` PROCEDURE `felhasznaloEmailEllenorzes` (IN `emailBE` VARCHAR(100), OUT `dbKI` INT(1))   SELECT COUNT(felhasznalo.id) INTO dbKI
+CREATE DEFINER=`root`@`localhost` PROCEDURE `felhasznaloEmailEllenorzes` (IN `emailBE` VARCHAR(100), OUT `dbKI` INT(1))   SELECT COUNT(felhasznalo.id) 
+INTO dbKI
 FROM felhasznalo
 WHERE felhasznalo.email = emailBE$$
 
-CREATE DEFINER=`root`@`localhost` PROCEDURE `felhasznaloIdEllenorzes` (IN `felhasznaloIdBE` INT(9), OUT `dbKI` INT(1))   SELECT COUNT(felhasznalo.id) INTO dbKI
+CREATE DEFINER=`root`@`localhost` PROCEDURE `felhasznaloIdEllenorzes` (IN `felhasznaloIdBE` INT(9), OUT `dbKI` INT(1))   SELECT COUNT(felhasznalo.id) 
+INTO dbKI
 FROM felhasznalo
 WHERE felhasznalo.id = felhasznaloIdBE$$
 
-CREATE DEFINER=`root`@`localhost` PROCEDURE `felhasznaloIdKosarEllenorzes` (IN `felhasznaloIdBE` INT(9), OUT `dbKI` INT(1))   SELECT COUNT(kosar.felhasznaloId) INTO dbKI
+CREATE DEFINER=`root`@`localhost` PROCEDURE `felhasznaloIdKosarEllenorzes` (IN `felhasznaloIdBE` INT(9), OUT `dbKI` INT(1))   SELECT COUNT(kosar.felhasznaloId) 
+INTO dbKI
 FROM kosar
 WHERE kosar.felhasznaloId = felhasznaloIdBE$$
 
@@ -117,7 +122,8 @@ WHERE kosar.felhasznaloId = felhasznaloIdBE;
 
 END$$
 
-CREATE DEFINER=`root`@`localhost` PROCEDURE `felhasznaloNevEllenorzes` (IN `nevBE` VARCHAR(100), OUT `dbKI` INT(1))   SELECT COUNT(felhasznalo.id) INTO dbKI
+CREATE DEFINER=`root`@`localhost` PROCEDURE `felhasznaloNevEllenorzes` (IN `nevBE` VARCHAR(100), OUT `dbKI` INT(1))   SELECT COUNT(felhasznalo.id) 
+INTO dbKI
 FROM felhasznalo
 WHERE felhasznalo.felhasznaloNev = nevBE$$
 
@@ -129,7 +135,9 @@ SET felhasznalo.felhasznaloNev = felhasznaloNevBE,
     felhasznalo.frissitve = CURRENT_TIMESTAMP
 WHERE felhasznalo.id = idBE$$
 
-CREATE DEFINER=`root`@`localhost` PROCEDURE `jatek` (IN `idBe` INT(9))   SELECT 
+CREATE DEFINER=`root`@`localhost` PROCEDURE `jatek` (IN `idBe` INT(9))   BEGIN
+
+SELECT 
 	jatek.id,
     jatek.nev AS "jatekNev",
     jatek.ar,
@@ -148,17 +156,23 @@ ON jatek.eszkozId = eszkoz.id
 INNER JOIN platform
 ON jatek.platformId = platform.id
 
-WHERE jatek.id = idBe$$
+WHERE jatek.id = idBe;
 
-CREATE DEFINER=`root`@`localhost` PROCEDURE `jatekIdEllenorzes` (IN `jatekIdBE` INT(9), OUT `dbKI` INT(1))   SELECT COUNT(jatek.id) INTO dbKI
+END$$
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `jatekIdEllenorzes` (IN `jatekIdBE` INT(9), OUT `dbKI` INT(1))   SELECT COUNT(jatek.id) 
+INTO dbKI
 FROM jatek
 WHERE jatek.id = jatekIdBE$$
 
-CREATE DEFINER=`root`@`localhost` PROCEDURE `jatekIdKosarEllenorzes` (IN `jatekIdBE` INT(9), OUT `dbKI` INT(1))   SELECT COUNT(kosar.jatekId) INTO dbKI
+CREATE DEFINER=`root`@`localhost` PROCEDURE `jatekIdKosarEllenorzes` (IN `jatekIdBE` INT(9), OUT `dbKI` INT(1))   SELECT COUNT(kosar.jatekId) 
+INTO dbKI
 FROM kosar
 WHERE kosar.jatekId = jatekIdBE$$
 
-CREATE DEFINER=`root`@`localhost` PROCEDURE `jatekok` ()   SELECT 
+CREATE DEFINER=`root`@`localhost` PROCEDURE `jatekok` ()   BEGIN
+
+SELECT 
 	jatek.id,
     jatek.nev AS "jatekNev",
     jatek.ar,
@@ -175,7 +189,9 @@ INNER JOIN eszkoz
 ON jatek.eszkozId = eszkoz.id
 
 INNER JOIN platform
-ON jatek.platformId = platform.id$$
+ON jatek.platformId = platform.id;
+
+END$$
 
 CREATE DEFINER=`root`@`localhost` PROCEDURE `kosar` (IN `jatekIdBE` INT(9), IN `felhasznaloIdBE` INT(9))   BEGIN
 
@@ -222,7 +238,9 @@ VALUES(
 
 END$$
 
-CREATE DEFINER=`root`@`localhost` PROCEDURE `termekKulcs` (IN `felhasznaloIdBE` INT(9))   SELECT 
+CREATE DEFINER=`root`@`localhost` PROCEDURE `termekKulcs` (IN `felhasznaloIdBE` INT(9))   BEGIN
+
+SELECT 
     kosar.jatekId,
     felhasznalo.email,
     felhasznalo.felhasznaloNev,
@@ -240,7 +258,9 @@ ON kosar.jatekId = jatek.id
 INNER JOIN termekkulcs
 ON kosar.jatekId = termekkulcs.jatekId
 
-WHERE kosar.felhasznaloId = felhasznaloIdBE$$
+WHERE kosar.felhasznaloId = felhasznaloIdBE;
+
+END$$
 
 CREATE DEFINER=`root`@`localhost` PROCEDURE `torlesFelhasznalo` (IN `felhasznaloIdBE` INT(9))   DELETE FROM felhasznalo
 WHERE felhasznalo.id = felhasznaloIdBE$$
@@ -334,7 +354,6 @@ CREATE TABLE `jatek` (
   `eszkozId` int(9) NOT NULL,
   `platformId` int(9) NOT NULL,
   `letrehozva` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `frissitve` datetime DEFAULT NULL,
   `eladva` int(9) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -342,33 +361,33 @@ CREATE TABLE `jatek` (
 -- Dumping data for table `jatek`
 --
 
-INSERT INTO `jatek` (`id`, `nev`, `ar`, `leiras`, `kep`, `korhatar`, `akcio`, `mennyisegraktaron`, `eszkozId`, `platformId`, `letrehozva`, `frissitve`, `eladva`) VALUES
-(1, 'The Witcher 3: Wild Hunt', 5990, 'A The Witcher 3: Wild Hunt egy fantasy szerepjáték, melyben Geralt of Rivia karakterét irányítva különböző küldetéseket teljesíthetsz egy nyitott világban.', 'witcher3.jpg', 18, 15, 100, 1, 1, '2023-11-11 11:57:24', NULL, 0),
-(2, 'Counter-Strike: Global Offensive', 1490, 'A Counter-Strike: Global Offensive egy taktikai lövöldözős játék, ahol két csapat, a terroristák és az antiterroristák egymás ellen küzdenek.', 'csgo.jpg', 16, 0, 300, 1, 1, '2023-11-11 12:02:56', NULL, 1),
-(3, 'Minecraft', 2990, 'A Minecraft egy sandbox játék, ahol a játékosok kockákból építhetnek és felfedezhetnek egy végtelen világot.', 'minecraft.jpg', 7, 0, 200, 7, 3, '2023-11-11 12:04:14', NULL, 0),
-(4, 'FC 24', 9990, 'A FC 24 egy futballszimulátor játék, ahol a játékosok vezethetik kedvenc csapatukat és részt vehetnek különböző versenyeken.', 'fc24.jpg', 7, 20, 150, 2, 2, '2023-11-11 12:04:14', NULL, 0),
-(5, 'Grand Theft Auto V', 6990, 'A Grand Theft Auto V egy akció-kaland játék, melyben a játékosok Los Santos városában szabadon közlekedhetnek és különböző küldetéseket teljesíthetnek.', 'gta5.jpg', 18, 0, 100, 1, 3, '2023-11-11 12:14:09', NULL, 0),
-(6, 'Red Dead Redemption 2: Ultimate Edition', 28990, 'Amerika, 1899. A vadnyugat hőskora lassan véget ér, ahogy a törvény emberei az utolsó bűnbandákat is levadásszák. Aki nem hajlandó megadni magát, halál fia. Arthur Morgan és a Van der Linde banda egy félresikerült rablási kísérlet miatt menekülni kényszerül Blackwater városából. Miközben szövetségi ügynökök és az ország legjobb fejvadászai lihegnek a nyomukban, a bandának nincs más választása, mint hogy a túlélés érdekében rabolva és fosztogatva átverekedjék magukat Amerika könyörtelen belvidékein. Amikor az egyre élesedő belső ellentétek a banda szétszakításával fenyegetnek, Arthur kénytelen eldönteni, hogy saját elveihez marad hű, vagy a bandához, amely felnevelte.', 'RDR2.jpg', 18, 0, 235, 1, 3, '2023-11-13 21:57:50', NULL, 0),
-(7, 'Alan Wake 2', 17900, 'Az Alan Wake 2 egy túlélőhorror játék, amit a Remedy Entertainment stúdió fejlesztett ki. Ez a 2010-ben megjelent Alan Wake folytatása.', 'AlanWake2.jpg', 18, 0, 50, 6, 1, '2023-11-13 22:06:04', NULL, 2),
-(8, 'Star Wars Battlefront 2', 13990, 'A Star Wars Battlefront II-ban lehetőséged nyílik átvenni az irányítást Iden Versio-n, a Birodalom jól ismert Inferno Squad-jának parancsnoka felett, hogy a mintegy 30 évtizedet felölelő kampány során megismerhess egy izgalmas sztorit a bosszúról, az árulásról és a megváltásról, méghozzá a mozifilmekhez kapcsolódó áthallásokkal és szereplőkkel a középpontban.', 'BF2.jpg', 16, 15, 188, 5, 1, '2023-11-13 22:09:22', NULL, 0),
-(9, 'Battlefield 2042', 19990, 'Az Amerikai Egyesült Államok és Oroszország a háború szélére sodródott. Miután a két nagyhatalom peremháborúi már évtizedek óta tartanak, számos tapasztalt veterán harcol a világban, akiknek elege van a fennálló rendszerből. Ezek a specialisták a saját, különleges harci képzettségüket arra használják, hogy alakítsák az emberiség jövőjét. Ebben a futurisztikus háborúban vehetsz részt te is a Battlefield 2042 harcosaként.', 'BF2042.png', 16, 0, 150, 2, 2, '2023-11-13 22:18:27', NULL, 0),
-(10, 'Tom Clancy\'s Rainbow Six Siege', 6660, 'A taktikai FPS-ek egyik legjobbjaként számon tartott Rainbow Six-sorozat legújabb epizódjában ismét megtapasztalhatod, hogy milyen egy speciális katonai egység tagjaként csapatban, parancsra engedelmeskedni, és egy előre meghatározott stratégia mentén együtt végrehajtani a feladatokat.', 'R6.jpg', 18, 0, 125, 1, 4, '2023-11-13 22:23:30', NULL, 1),
-(11, 'Assassin\'s Creed Odyssey', 6990, 'Írd meg saját odüsszeiádat, és válj legendás spártai hőssé az Assassin’s Creed sorozat legnagyobb és legszebb epizódjában! Több száz évvel az Assassin’s Creed Origins eseményei előtt, az ókori Görögországban háború dúl Spárta és a görögök között. Ez a te lehetőséged, hogy kitaszítottból igazi legendává válj! Ez az első eset, hogy a nyílt világú Assassin’s Creed sorozat valódi RPG-vé válik. Irányíthatod a beszélgetéseket, hatással lehetsz a küldetések alakulására és a történet végkimenetelére. Fejleszd saját férfi vagy női karakteredet, szerezz új fegyvereket, lopakodj, támadj, barangolj és hajózz a lenyűgöző világban. A legősibb kaland lesz a legnagyobb!', 'ACOdyssey.jpg', 18, 0, 150, 2, 4, '2023-12-01 18:12:39', NULL, 0),
-(12, 'Assassin\'s Creed Mirage', 14900, 'Éld át Basim, az Assassin’s Creed Valhallában megismert bérgyilkos izgalmas történetét az Assassin’s Creed Mirage játékban! Basim egy furfangos utcai tolvaj volt rémálomszerű víziókkal, aki válaszokat és igazságot keresett a 9. századi Bagdad utcáin. Miután találkozott a rejtélyes szervezettel, a Hidden Ones-szal, halálos bérgyilkos vált belőle, és oly módon változott meg a sorsa, ahogyan sosem gondolta volna. Térj vissza a legendás sorozat gyökereihez, és ismerd meg az egyik leghalálosabb bérgyilkos izgalmas történetét!', 'ACMirage.jpg', 18, 0, 220, 6, 4, '2023-12-01 18:19:26', NULL, 0),
-(13, 'The Sims 4', 2990, 'Átesett a generációváltáson a még mindig rendkívüli népszerűségnek örvendő The Sims-sorozat is, így a műfajában egyedinek tekinthető élet-szimulátor keretein belül ezúttal minden eddiginél nagyobb szabadság, felejthetetlen élmények, valamint a virtuális világ szépségei várnak rád. A The Sims 4-ben tehát lehetőséged lesz valóra váltani minden olyan álmodat, amire a való életben korántsem biztos, hogy képes lennél, mindezt pedig megerősíthetjük azzal, hogy a minden eddiginél komolyabb lehetőséget kínáló Create-A-Sim opcióban nem csak külsőleg, hanem belsőleg is megalkothatod virtuális másodat.', 'Sims4.jpg', 12, 0, 70, 5, 2, '2023-12-01 18:30:38', NULL, 0),
-(14, 'Battlefield V', 6990, 'Vegyél részt az emberiség történelmének legnagyobb háborújában, ahogy a híres lövöldözős játéksorozat visszatér a gyökereihez, és úgy ábrázolja a II. világháborút, mint még soha! Állítsd össze a csapatodat teljes egészében testreszabható katonákból, fegyverekből és járművekből – aztán vidd el őket egy epikus kalandra a Tides of War játékmódban! Éld át az eddigi legélethűbb Battlefield élményt, az egyjátékos történetekből felépülő War Stories kampánytól kezdve a klasszikus és új multiplayer játékmódokon át egészen a hatalmas Grand Operations módig. Élvezd, hogy nincs Premium Pass, mindenki megkapja az összes kiegészítőt. Fogd barátaidat, és vessétek bele magatokat az eddigi legnagyobb szabású Battlefield játékba!', 'BFV.jpg', 16, 0, 140, 5, 2, '2023-12-01 18:41:13', NULL, 0),
-(15, 'Call of Duty: Modern Warfare III', 27900, 'Egy évvel a minden rekordot megdöntő Call of Duty: Modern Warfare II után itt a közvetlen folytatás, a Call of Duty: Modern Warfare III. Captain Price és a Task Force 141 a legvégső fenyegetéssel néz szembe a Sledgehammer Games és az Infinity Ward nagyszabású produkciójában. Az ultranacionalista háborús bűnök, Vladimir Makarov visszatért, és folyamatosan növeli befolyását és hatalmát a világban, így a Task Force 141-nek keményebben kell harcolnia, mint valaha. Ez a végső konfliktus egy mindent elpusztító harmadik világháború peremére sodródott helyzetben!', 'CoDMW3.jpg', 18, 0, 390, 6, 1, '2023-12-01 18:51:27', NULL, 0),
-(16, 'Animal Crossing: New Horizons', 20900, 'A Nintendo legendás Animal Crossing sorozatának legújabb része a Switch konzol legmodernebb funkcióit és képességeit kihasználva egy minden korábbinál látványosabb és izgalmasabb kalandra hív. Ha a modern élet mókuskerekét és viszontagságait magad mögött szeretnéd hagyni, akkor irány a Nook Inc. lakatlan szigete, ahol új kihívások várnak! Irány a sziget, ahol egy új élet és új kalandok várnak a horizonton túl.', 'AnimalCrossing.jpg', 3, 0, 166, 7, 3, '2023-12-01 19:05:45', NULL, 0),
-(17, 'Super Smash Bros. Ultimate', 23900, 'Ez a harc lesz a végső! A Nintendo egyik legnagyobb sikersorozata, a Smash Bros. végre Switch-re is ellátogat, a valaha készült legszebb és legtartalmasabb epizóddal. A Super Smash Bros. Ultimate az összes szereplőt tartalmazza, aki valaha felbukkant a sorozat epizódjaiban, ez összesen 66 karaktert jelent! Mindenki itt van a Nintendo univerzumából, de a Capcom és más kiadók hősei is megjelennek, hogy borsot törjenek egymás orra alá. A számtalan figurához rengeteg pálya is dukál, melyek között új, és jelentősen felújított korábbi helyszínek is akadnak. A verekedős játék egyjátékos módokat is kínál, de a 4 fős multiplayert nem übereli semmi, ez a Smash Bros legvonzóbb játékmódja. Vesd bele magad te is a Nintendo univerzum legnagyobb össznépi bunyójába!', 'SSBU.jpg', 12, 20, 110, 7, 3, '2023-12-01 19:14:06', NULL, 0),
-(18, 'The Legend of Zelda: Tears of the Kingdom', 23000, 'A 2017-es, világsikert aratott Legend of Zelda: Breath of the Wild folytatása egy még szebb, még nagyobb kaland, amelyben a főhős, Link immár nemcsak Hyrule világát, hanem a felette elhelyezkedő égi világot is felfedezheti. Készülj fel életed egyik legnagyobb kalandjára, kizárólag Nintendo Switch-en!', 'TLoZToK.jpg', 12, 0, 99, 7, 3, '2023-12-01 19:19:27', NULL, 0),
-(19, 'Mortal Kombat 1', 17900, 'Fedezd fel az újjászületett Mortal Kombat Univerzumot, amelyet a Tűzisten, Liu Kang hozott létre, a Mortal Kombat 1 játékkal! Ez az ikonikus verekedős játéksorozat új korszakának kezdete, vadonatúj harcrendszerrel, új játékmódokkal és kivégzésekkel! Készülj fel egy új univerzumra, új hősökre és az új háborúra. A Földet továbbra is meg kell védeni! Új korszak kezdődik a Mortal Kombat 1 világában.', 'MK1.jpg', 18, 0, 150, 4, 1, '2023-12-02 17:18:02', NULL, 0),
-(20, 'Assassin\'s Creed Valhalla', 9000, 'Teremtsd meg a saját viking legendádat az Assassin’s Creed Valhalla gigászi kalandjában! Ez minden idők legnagyobb Assassin’s Creed játéka, amelyen nem kevesebb, mint 14 Ubisoft stúdió dolgozott! Bújj Eivor, a legendás viking hódító bőrébe, és vezesd klánodat a fagyos Norvégia partjaitól egészen Anglia buja tájaiig a 9. században. Fedezz fel egy gyönyörű és rejtélyes világot, ahol brutális ellenségek várnak, és lenyűgöző kastélyokat igázhatsz le. Építs saját települést, bővítsd új épületekkel és létesítményekkel. Szerezz szövetségeseket a világban, és írd be nevedet Valhalla történelmébe!', 'ACV.jpg', 18, 0, 56, 4, 4, '2023-12-02 17:25:28', NULL, 0),
-(21, 'Dying Light 2', 11900, 'Életben tudsz maradni egy zombik által ostromolt városban? Az apokalipszis kitörése után túlélők csoportjai próbálnak boldogulni a mindennapokban, és ehhez neked is segítened kell: járd be a hatalmas várost, teljesíts küldetéseket a különböző frakcióknak, és védd meg a közösséget a külső támadásokról. A Dying Light 2 szebb, és sokkal nagyobb, mint az első rész, új mozdulatokkal még könnyebben közlekedhetsz a városban. A játéktér dinamikus, a döntéseidtől függően átalakul a környezet, és a történet is új fordulatokat vehet!', 'DL2.jpg', 18, 0, 156, 4, 2, '2023-12-02 17:27:53', NULL, 0),
-(22, 'Star Wars: Jedi Survivor Deluxe Edition', 29990, 'Cal Kestis története folytatódik a Star Wars Jedi: Survivor játékban, amely egy külső nézetes, galaxison átívelő akció-kalandjáték a Respawn Entertainment és a Lucasfilm Games fejlesztésében. Ez a történetvezérelt, egyjátékos cím öt évvel a Star Wars Jedi: Fallen Order eseményei után kezdődik, és Cal egyre elkeseredettebb harcát követi, amint a galaxis egyre mélyebb sötétségbe süllyed. A Birodalom által a galaxis pereméig üldözött Cal ismerős és új fenyegetésekkel találja szembe magát. Az egyik utolsó Jedi túlélőként Cal kénytelen kiállni a szabadságért a galaxis legsötétebb óráiban – de milyen messzire képes elmenni azért, hogy megvédje magát, csapatát, és a Jedi rendet?', 'SWJS.jpg', 12, 10, 68, 3, 2, '2023-12-02 17:33:20', NULL, 0),
-(23, 'Forza Motorsport', 24990, 'Az Xbox legnagyobb autós sorozata, a Forza Motorsport visszatér egy vadonatúj, következő generációs epizóddal! Az új Forza Motorsport az Xbox Series X|S konzolok képességeihez készül, 4K felbontást, 60 fps képfrissítést és sugárkövetéses (raytracing) technológiát kínál, ezzel minden idők legélethűbb Xboxos autós játéka lesz. Előtérbe kerül az autóversenyzés: ülj be a legmodernebb versenygépek volánja mögé, vegyél részt nagyszabású bajnokságokban, hosszútávú versenyeken, ahol a minden korábbinál realisztikusabb fizika, a box stratégia és az időjárás is komoly szerepet játszik.', 'ForzaM.png', 3, 0, 231, 3, 1, '2023-12-02 17:39:18', NULL, 0),
-(24, 'The Elder Scrolls V Skyrim Special Edition', 7999, 'Újgenerációs köntösbe bújik az utóbbi évtized egyik legjobb szerepjátékaként számon tartott The Elder Scrolls V: Skyrim, amelynek PS4-es változata 1080p-s felbontással futtatja a csodaszép textúrákat, aminek köszönhetően páratlanul elragadó látványvilág társaságában élheted át a Skyrim földjére kalauzoló, sárkányvadászattal tarkított kalandokat.', 'ESVSkyrim.jpg', 18, 0, 143, 3, 4, '2023-12-02 17:44:44', NULL, 0),
-(25, 'Resident Evil 4', 22900, 'Éld át újra minden idők egyik legjobb túlélő-horror játékát, a Resident Evil 4-et, hihetetlen módon felújított grafikával és új játékmeneti elemekkel! A Capcom a korábbi Resident Evil játékokhoz hasonlóan a legendás negyedik epizódot is teljeskörűen felújította, hogy a meghatározó kaland egy új generáció számára is elérhető legyen.\r\n\r\nA Resident Evil 4-ben a túlélés csak a kezdet. A Raccoon City-ben történt biológiai katasztrófa óta hat év telt el. Leon S. Kennedy ügynök, az incidens egyik túlélője új küldetésre indul, hogy megmentse az elnök elrabolt lányát. A nyomok egy elhagyatott európai kisvárosba vezetnek, ahol valami komoly baj van a helyi lakókkal. Élet és halál, a terror és a katarzis rémületes érzése találkozik, ahogy felgördül a függöny, és kezdetét veszi egy emlékezetes történet.', 'RE4.jpg', 18, 10, 274, 6, 1, '2023-12-02 17:49:28', NULL, 0),
-(26, 'Resident Evil 3', 9999, 'A Capcom a Resident Evil 2 remake óriási sikere után a sorozat rajongóinak egyik kedvencét, a Resident Evil 3-at is felújított formában teszi újra elérhetővé! A klasszikus játék a Capcom saját RE Engine grafikus motorjával születik újjá, lenyűgözően élethű grafikával, új kameranézettel, és minden korábbinál félelmetesebb hangulattal.\r\n\r\nA Resident Evil 3-ban Jill Valentine az egyik utolsó túlélő Raccoon City-ben, aki egyúttal annak is tanúja, hogy mit tesz az Umbrella Corporation a zombi apokalipszis eltusolásának érdekében. A cég, hogy megfékezze Jill-t, elszabadítja a legszörnyűbb kísérletét: megérkezik Nemesis!', 'RE3.jpg', 18, 0, 197, 5, 4, '2023-12-02 17:57:07', NULL, 0);
+INSERT INTO `jatek` (`id`, `nev`, `ar`, `leiras`, `kep`, `korhatar`, `akcio`, `mennyisegraktaron`, `eszkozId`, `platformId`, `letrehozva`, `eladva`) VALUES
+(1, 'The Witcher 3: Wild Hunt', 5990, 'A The Witcher 3: Wild Hunt egy fantasy szerepjáték, melyben Geralt of Rivia karakterét irányítva különböző küldetéseket teljesíthetsz egy nyitott világban.', 'witcher3.jpg', 18, 15, 100, 1, 1, '2023-11-11 11:57:24', 0),
+(2, 'Counter-Strike: Global Offensive', 1490, 'A Counter-Strike: Global Offensive egy taktikai lövöldözős játék, ahol két csapat, a terroristák és az antiterroristák egymás ellen küzdenek.', 'csgo.jpg', 16, 0, 300, 1, 1, '2023-11-11 12:02:56', 1),
+(3, 'Minecraft', 2990, 'A Minecraft egy sandbox játék, ahol a játékosok kockákból építhetnek és felfedezhetnek egy végtelen világot.', 'minecraft.jpg', 7, 0, 200, 7, 3, '2023-11-11 12:04:14', 0),
+(4, 'FC 24', 9990, 'A FC 24 egy futballszimulátor játék, ahol a játékosok vezethetik kedvenc csapatukat és részt vehetnek különböző versenyeken.', 'fc24.jpg', 7, 20, 150, 2, 2, '2023-11-11 12:04:14', 0),
+(5, 'Grand Theft Auto V', 6990, 'A Grand Theft Auto V egy akció-kaland játék, melyben a játékosok Los Santos városában szabadon közlekedhetnek és különböző küldetéseket teljesíthetnek.', 'gta5.jpg', 18, 0, 100, 1, 3, '2023-11-11 12:14:09', 0),
+(6, 'Red Dead Redemption 2: Ultimate Edition', 28990, 'Amerika, 1899. A vadnyugat hőskora lassan véget ér, ahogy a törvény emberei az utolsó bűnbandákat is levadásszák. Aki nem hajlandó megadni magát, halál fia. Arthur Morgan és a Van der Linde banda egy félresikerült rablási kísérlet miatt menekülni kényszerül Blackwater városából. Miközben szövetségi ügynökök és az ország legjobb fejvadászai lihegnek a nyomukban, a bandának nincs más választása, mint hogy a túlélés érdekében rabolva és fosztogatva átverekedjék magukat Amerika könyörtelen belvidékein. Amikor az egyre élesedő belső ellentétek a banda szétszakításával fenyegetnek, Arthur kénytelen eldönteni, hogy saját elveihez marad hű, vagy a bandához, amely felnevelte.', 'RDR2.jpg', 18, 0, 235, 1, 3, '2023-11-13 21:57:50', 0),
+(7, 'Alan Wake 2', 17900, 'Az Alan Wake 2 egy túlélőhorror játék, amit a Remedy Entertainment stúdió fejlesztett ki. Ez a 2010-ben megjelent Alan Wake folytatása.', 'AlanWake2.jpg', 18, 0, 50, 6, 1, '2023-11-13 22:06:04', 2),
+(8, 'Star Wars Battlefront 2', 13990, 'A Star Wars Battlefront II-ban lehetőséged nyílik átvenni az irányítást Iden Versio-n, a Birodalom jól ismert Inferno Squad-jának parancsnoka felett, hogy a mintegy 30 évtizedet felölelő kampány során megismerhess egy izgalmas sztorit a bosszúról, az árulásról és a megváltásról, méghozzá a mozifilmekhez kapcsolódó áthallásokkal és szereplőkkel a középpontban.', 'BF2.jpg', 16, 15, 188, 5, 1, '2023-11-13 22:09:22', 0),
+(9, 'Battlefield 2042', 19990, 'Az Amerikai Egyesült Államok és Oroszország a háború szélére sodródott. Miután a két nagyhatalom peremháborúi már évtizedek óta tartanak, számos tapasztalt veterán harcol a világban, akiknek elege van a fennálló rendszerből. Ezek a specialisták a saját, különleges harci képzettségüket arra használják, hogy alakítsák az emberiség jövőjét. Ebben a futurisztikus háborúban vehetsz részt te is a Battlefield 2042 harcosaként.', 'BF2042.png', 16, 0, 150, 2, 2, '2023-11-13 22:18:27', 0),
+(10, 'Tom Clancy\'s Rainbow Six Siege', 6660, 'A taktikai FPS-ek egyik legjobbjaként számon tartott Rainbow Six-sorozat legújabb epizódjában ismét megtapasztalhatod, hogy milyen egy speciális katonai egység tagjaként csapatban, parancsra engedelmeskedni, és egy előre meghatározott stratégia mentén együtt végrehajtani a feladatokat.', 'R6.jpg', 18, 0, 125, 1, 4, '2023-11-13 22:23:30', 1),
+(11, 'Assassin\'s Creed Odyssey', 6990, 'Írd meg saját odüsszeiádat, és válj legendás spártai hőssé az Assassin’s Creed sorozat legnagyobb és legszebb epizódjában! Több száz évvel az Assassin’s Creed Origins eseményei előtt, az ókori Görögországban háború dúl Spárta és a görögök között. Ez a te lehetőséged, hogy kitaszítottból igazi legendává válj! Ez az első eset, hogy a nyílt világú Assassin’s Creed sorozat valódi RPG-vé válik. Irányíthatod a beszélgetéseket, hatással lehetsz a küldetések alakulására és a történet végkimenetelére. Fejleszd saját férfi vagy női karakteredet, szerezz új fegyvereket, lopakodj, támadj, barangolj és hajózz a lenyűgöző világban. A legősibb kaland lesz a legnagyobb!', 'ACOdyssey.jpg', 18, 0, 150, 2, 4, '2023-12-01 18:12:39', 0),
+(12, 'Assassin\'s Creed Mirage', 14900, 'Éld át Basim, az Assassin’s Creed Valhallában megismert bérgyilkos izgalmas történetét az Assassin’s Creed Mirage játékban! Basim egy furfangos utcai tolvaj volt rémálomszerű víziókkal, aki válaszokat és igazságot keresett a 9. századi Bagdad utcáin. Miután találkozott a rejtélyes szervezettel, a Hidden Ones-szal, halálos bérgyilkos vált belőle, és oly módon változott meg a sorsa, ahogyan sosem gondolta volna. Térj vissza a legendás sorozat gyökereihez, és ismerd meg az egyik leghalálosabb bérgyilkos izgalmas történetét!', 'ACMirage.jpg', 18, 0, 220, 6, 4, '2023-12-01 18:19:26', 0),
+(13, 'The Sims 4', 2990, 'Átesett a generációváltáson a még mindig rendkívüli népszerűségnek örvendő The Sims-sorozat is, így a műfajában egyedinek tekinthető élet-szimulátor keretein belül ezúttal minden eddiginél nagyobb szabadság, felejthetetlen élmények, valamint a virtuális világ szépségei várnak rád. A The Sims 4-ben tehát lehetőséged lesz valóra váltani minden olyan álmodat, amire a való életben korántsem biztos, hogy képes lennél, mindezt pedig megerősíthetjük azzal, hogy a minden eddiginél komolyabb lehetőséget kínáló Create-A-Sim opcióban nem csak külsőleg, hanem belsőleg is megalkothatod virtuális másodat.', 'Sims4.jpg', 12, 0, 70, 5, 2, '2023-12-01 18:30:38', 0),
+(14, 'Battlefield V', 6990, 'Vegyél részt az emberiség történelmének legnagyobb háborújában, ahogy a híres lövöldözős játéksorozat visszatér a gyökereihez, és úgy ábrázolja a II. világháborút, mint még soha! Állítsd össze a csapatodat teljes egészében testreszabható katonákból, fegyverekből és járművekből – aztán vidd el őket egy epikus kalandra a Tides of War játékmódban! Éld át az eddigi legélethűbb Battlefield élményt, az egyjátékos történetekből felépülő War Stories kampánytól kezdve a klasszikus és új multiplayer játékmódokon át egészen a hatalmas Grand Operations módig. Élvezd, hogy nincs Premium Pass, mindenki megkapja az összes kiegészítőt. Fogd barátaidat, és vessétek bele magatokat az eddigi legnagyobb szabású Battlefield játékba!', 'BFV.jpg', 16, 0, 140, 5, 2, '2023-12-01 18:41:13', 0),
+(15, 'Call of Duty: Modern Warfare III', 27900, 'Egy évvel a minden rekordot megdöntő Call of Duty: Modern Warfare II után itt a közvetlen folytatás, a Call of Duty: Modern Warfare III. Captain Price és a Task Force 141 a legvégső fenyegetéssel néz szembe a Sledgehammer Games és az Infinity Ward nagyszabású produkciójában. Az ultranacionalista háborús bűnök, Vladimir Makarov visszatért, és folyamatosan növeli befolyását és hatalmát a világban, így a Task Force 141-nek keményebben kell harcolnia, mint valaha. Ez a végső konfliktus egy mindent elpusztító harmadik világháború peremére sodródott helyzetben!', 'CoDMW3.jpg', 18, 0, 390, 6, 1, '2023-12-01 18:51:27', 0),
+(16, 'Animal Crossing: New Horizons', 20900, 'A Nintendo legendás Animal Crossing sorozatának legújabb része a Switch konzol legmodernebb funkcióit és képességeit kihasználva egy minden korábbinál látványosabb és izgalmasabb kalandra hív. Ha a modern élet mókuskerekét és viszontagságait magad mögött szeretnéd hagyni, akkor irány a Nook Inc. lakatlan szigete, ahol új kihívások várnak! Irány a sziget, ahol egy új élet és új kalandok várnak a horizonton túl.', 'AnimalCrossing.jpg', 3, 0, 166, 7, 3, '2023-12-01 19:05:45', 0),
+(17, 'Super Smash Bros. Ultimate', 23900, 'Ez a harc lesz a végső! A Nintendo egyik legnagyobb sikersorozata, a Smash Bros. végre Switch-re is ellátogat, a valaha készült legszebb és legtartalmasabb epizóddal. A Super Smash Bros. Ultimate az összes szereplőt tartalmazza, aki valaha felbukkant a sorozat epizódjaiban, ez összesen 66 karaktert jelent! Mindenki itt van a Nintendo univerzumából, de a Capcom és más kiadók hősei is megjelennek, hogy borsot törjenek egymás orra alá. A számtalan figurához rengeteg pálya is dukál, melyek között új, és jelentősen felújított korábbi helyszínek is akadnak. A verekedős játék egyjátékos módokat is kínál, de a 4 fős multiplayert nem übereli semmi, ez a Smash Bros legvonzóbb játékmódja. Vesd bele magad te is a Nintendo univerzum legnagyobb össznépi bunyójába!', 'SSBU.jpg', 12, 20, 110, 7, 3, '2023-12-01 19:14:06', 0),
+(18, 'The Legend of Zelda: Tears of the Kingdom', 23000, 'A 2017-es, világsikert aratott Legend of Zelda: Breath of the Wild folytatása egy még szebb, még nagyobb kaland, amelyben a főhős, Link immár nemcsak Hyrule világát, hanem a felette elhelyezkedő égi világot is felfedezheti. Készülj fel életed egyik legnagyobb kalandjára, kizárólag Nintendo Switch-en!', 'TLoZToK.jpg', 12, 0, 99, 7, 3, '2023-12-01 19:19:27', 0),
+(19, 'Mortal Kombat 1', 17900, 'Fedezd fel az újjászületett Mortal Kombat Univerzumot, amelyet a Tűzisten, Liu Kang hozott létre, a Mortal Kombat 1 játékkal! Ez az ikonikus verekedős játéksorozat új korszakának kezdete, vadonatúj harcrendszerrel, új játékmódokkal és kivégzésekkel! Készülj fel egy új univerzumra, új hősökre és az új háborúra. A Földet továbbra is meg kell védeni! Új korszak kezdődik a Mortal Kombat 1 világában.', 'MK1.jpg', 18, 0, 150, 4, 1, '2023-12-02 17:18:02', 0),
+(20, 'Assassin\'s Creed Valhalla', 9000, 'Teremtsd meg a saját viking legendádat az Assassin’s Creed Valhalla gigászi kalandjában! Ez minden idők legnagyobb Assassin’s Creed játéka, amelyen nem kevesebb, mint 14 Ubisoft stúdió dolgozott! Bújj Eivor, a legendás viking hódító bőrébe, és vezesd klánodat a fagyos Norvégia partjaitól egészen Anglia buja tájaiig a 9. században. Fedezz fel egy gyönyörű és rejtélyes világot, ahol brutális ellenségek várnak, és lenyűgöző kastélyokat igázhatsz le. Építs saját települést, bővítsd új épületekkel és létesítményekkel. Szerezz szövetségeseket a világban, és írd be nevedet Valhalla történelmébe!', 'ACV.jpg', 18, 0, 56, 4, 4, '2023-12-02 17:25:28', 0),
+(21, 'Dying Light 2', 11900, 'Életben tudsz maradni egy zombik által ostromolt városban? Az apokalipszis kitörése után túlélők csoportjai próbálnak boldogulni a mindennapokban, és ehhez neked is segítened kell: járd be a hatalmas várost, teljesíts küldetéseket a különböző frakcióknak, és védd meg a közösséget a külső támadásokról. A Dying Light 2 szebb, és sokkal nagyobb, mint az első rész, új mozdulatokkal még könnyebben közlekedhetsz a városban. A játéktér dinamikus, a döntéseidtől függően átalakul a környezet, és a történet is új fordulatokat vehet!', 'DL2.jpg', 18, 0, 156, 4, 2, '2023-12-02 17:27:53', 0),
+(22, 'Star Wars: Jedi Survivor Deluxe Edition', 29990, 'Cal Kestis története folytatódik a Star Wars Jedi: Survivor játékban, amely egy külső nézetes, galaxison átívelő akció-kalandjáték a Respawn Entertainment és a Lucasfilm Games fejlesztésében. Ez a történetvezérelt, egyjátékos cím öt évvel a Star Wars Jedi: Fallen Order eseményei után kezdődik, és Cal egyre elkeseredettebb harcát követi, amint a galaxis egyre mélyebb sötétségbe süllyed. A Birodalom által a galaxis pereméig üldözött Cal ismerős és új fenyegetésekkel találja szembe magát. Az egyik utolsó Jedi túlélőként Cal kénytelen kiállni a szabadságért a galaxis legsötétebb óráiban – de milyen messzire képes elmenni azért, hogy megvédje magát, csapatát, és a Jedi rendet?', 'SWJS.jpg', 12, 10, 68, 3, 2, '2023-12-02 17:33:20', 0),
+(23, 'Forza Motorsport', 24990, 'Az Xbox legnagyobb autós sorozata, a Forza Motorsport visszatér egy vadonatúj, következő generációs epizóddal! Az új Forza Motorsport az Xbox Series X|S konzolok képességeihez készül, 4K felbontást, 60 fps képfrissítést és sugárkövetéses (raytracing) technológiát kínál, ezzel minden idők legélethűbb Xboxos autós játéka lesz. Előtérbe kerül az autóversenyzés: ülj be a legmodernebb versenygépek volánja mögé, vegyél részt nagyszabású bajnokságokban, hosszútávú versenyeken, ahol a minden korábbinál realisztikusabb fizika, a box stratégia és az időjárás is komoly szerepet játszik.', 'ForzaM.png', 3, 0, 231, 3, 1, '2023-12-02 17:39:18', 0),
+(24, 'The Elder Scrolls V Skyrim Special Edition', 7999, 'Újgenerációs köntösbe bújik az utóbbi évtized egyik legjobb szerepjátékaként számon tartott The Elder Scrolls V: Skyrim, amelynek PS4-es változata 1080p-s felbontással futtatja a csodaszép textúrákat, aminek köszönhetően páratlanul elragadó látványvilág társaságában élheted át a Skyrim földjére kalauzoló, sárkányvadászattal tarkított kalandokat.', 'ESVSkyrim.jpg', 18, 0, 143, 3, 4, '2023-12-02 17:44:44', 0),
+(25, 'Resident Evil 4', 22900, 'Éld át újra minden idők egyik legjobb túlélő-horror játékát, a Resident Evil 4-et, hihetetlen módon felújított grafikával és új játékmeneti elemekkel! A Capcom a korábbi Resident Evil játékokhoz hasonlóan a legendás negyedik epizódot is teljeskörűen felújította, hogy a meghatározó kaland egy új generáció számára is elérhető legyen.\r\n\r\nA Resident Evil 4-ben a túlélés csak a kezdet. A Raccoon City-ben történt biológiai katasztrófa óta hat év telt el. Leon S. Kennedy ügynök, az incidens egyik túlélője új küldetésre indul, hogy megmentse az elnök elrabolt lányát. A nyomok egy elhagyatott európai kisvárosba vezetnek, ahol valami komoly baj van a helyi lakókkal. Élet és halál, a terror és a katarzis rémületes érzése találkozik, ahogy felgördül a függöny, és kezdetét veszi egy emlékezetes történet.', 'RE4.jpg', 18, 10, 274, 6, 1, '2023-12-02 17:49:28', 0),
+(26, 'Resident Evil 3', 9999, 'A Capcom a Resident Evil 2 remake óriási sikere után a sorozat rajongóinak egyik kedvencét, a Resident Evil 3-at is felújított formában teszi újra elérhetővé! A klasszikus játék a Capcom saját RE Engine grafikus motorjával születik újjá, lenyűgözően élethű grafikával, új kameranézettel, és minden korábbinál félelmetesebb hangulattal.\r\n\r\nA Resident Evil 3-ban Jill Valentine az egyik utolsó túlélő Raccoon City-ben, aki egyúttal annak is tanúja, hogy mit tesz az Umbrella Corporation a zombi apokalipszis eltusolásának érdekében. A cég, hogy megfékezze Jill-t, elszabadítja a legszörnyűbb kísérletét: megérkezik Nemesis!', 'RE3.jpg', 18, 0, 197, 5, 4, '2023-12-02 17:57:07', 0);
 
 -- --------------------------------------------------------
 
