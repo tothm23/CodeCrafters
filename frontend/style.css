@@ -102,7 +102,7 @@ body {
 }
 
 
-#felhasznalo-box {
+#felhasznalo-box, #log_reg{
   min-width: 250px;
   margin-right: 10px;
 }
@@ -202,7 +202,6 @@ body {
 }
 
 #log_reg {
-  width: 200px;
   cursor: pointer;
 }
 

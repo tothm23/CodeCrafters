@@ -36,52 +36,60 @@
                 </form>
               </div>
             </nav>
-            
-            <div id="log_reg" class="dropdown">
-              <button id="dropdownMenuButton2" class="btn" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                <i class="fa-solid fa-user"></i>
-              </button>
-              
-              <p class="p-1" data-bs-toggle="dropdown">Bejelentkezés / Regisztráció</p>
-                
+
+            <div id="log_reg" class="dropdown d-flex flex-column">
+                <button id="dropdownMenuButton2" class="btn" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                  <i class="fa-solid fa-user"></i>
+                </button>
+                <p class="p-1" data-bs-toggle="dropdown">Bejelentkezés / Regisztráció</p>
+
               <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton2">
-                <li id="login" class="dropdown-item link-light"><i class="fa-solid fa-right-from-bracket"></i> Bejelentkezés</li>
-                <li id="registration" class="dropdown-item link-light"><i class="fa-solid fa-user-plus"></i> Regisztráció</li>
+                <li id="login" class="dropdown-item link-light"><i class="fa-solid fa-right-from-bracket"></i>
+                  Bejelentkezés</li>
+                <li id="registration" class="dropdown-item link-light"><i class="fa-solid fa-user-plus"></i>
+                  Regisztráció</li>
               </ul>
             </div>
-            
+
           </div>
 
           <!-- felhasználó-->
-        <div id="felhasznalo-box" class="dropdown justify-content-end">
-          <button id="dropdownMenuButton1" class="btn btn-dark felhasznalo-gomb" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-            <div class="d-flex flex-row justify-content-center align-items-center">
-              <img src="./kepek/felhasznalo.png" id="felhasznalo-kep" alt="Mákosguba55" />
-              <p id="username"></p>
-            </div>
-          </button>
-          
-          <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-            <span id="profile" class="dropdown-item"><img src="./kepek/felhasznalo.png" alt=""><span id="email"></span></span>
+          <div id="felhasznalo-box" class="dropdown justify-content-end">
+            <button id="dropdownMenuButton1" class="btn btn-dark" type="button" data-bs-toggle="dropdown"
+              aria-expanded="false">
+              <div class="d-flex flex-row justify-content-center align-items-center">
+                <img src="./kepek/felhasznalo.png" id="felhasznalo-kep" />
+                <p id="username"></p>
+              </div>
+            </button>
 
-            <li><hr class="dropdown-divider"></li>
+            <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+              <span id="profile" class="dropdown-item"><img src="./kepek/felhasznalo.png" alt=""><span
+                  id="email"></span></span>
 
-            <li id="cart" class="dropdown-item"><i class="fa-solid fa-basket-shopping"></i> Kosár</li>
-            <li id="settings" class="dropdown-item"><i class="fa-regular fa-pen-to-square"></i>  Profil szerkesztése</li>
-            
-            <li><hr class="dropdown-divider"></li>
+              <li>
+                <hr class="dropdown-divider">
+              </li>
 
-            <li id="logout" class="dropdown-item"><i class="fa-solid fa-right-from-bracket"></i> Kijeletkezés</li>
-          </ul>
-        </div>
+              <li id="cart" class="dropdown-item"><i class="fa-solid fa-basket-shopping"></i> Kosár</li>
+              <li id="settings" class="dropdown-item"><i class="fa-regular fa-pen-to-square"></i> Profil szerkesztése
+              </li>
+
+              <li>
+                <hr class="dropdown-divider">
+              </li>
+
+              <li id="logout" class="dropdown-item"><i class="fa-solid fa-right-from-bracket"></i> Kijeletkezés</li>
+            </ul>
+          </div>
 
         </div>
       </div>
 
-    
+
     </nav>
   </div>
-  
+
 
   <!-- carousel -->
   <div class="slideshow">
