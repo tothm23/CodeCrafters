@@ -25,8 +25,7 @@ document.addEventListener("DOMContentLoaded", function () {
         vezetekNev: vezeteknev,
         keresztNev: keresztnev,
         email: email,
-        jelszo: jelszo,
-        jogosultsagId: "2"
+        jelszo: jelszo
 
       };
       // regisztráció fetch

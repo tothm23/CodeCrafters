@@ -203,6 +203,11 @@ body {
 
 #log_reg {
   width: 200px;
+  cursor: pointer;
+}
+
+#log_reg li:hover {
+background-color: #241f1f;
 }
 
 
@@ -212,7 +217,6 @@ body {
   color: white;
   border-radius: 100%;
   border: none;
-  cursor: pointer;
   background: #241f1f;
 }
 
