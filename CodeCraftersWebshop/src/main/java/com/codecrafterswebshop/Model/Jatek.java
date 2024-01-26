@@ -326,6 +326,7 @@ public class Jatek implements Serializable {
                     jatek.put("mennyisegraktaron", (Integer) sor[7]);
                     jatek.put("eszkoz", (String) sor[8]);
                     jatek.put("platform", (String) sor[9]);
+                    jatek.put("tipus", "veletlen");
 
                     jatekok.add(jatek);
                 }
@@ -341,6 +342,46 @@ public class Jatek implements Serializable {
         }
 
         return jatekok;
+
+    }
+
+    public static List<Map<String, Object>> bestseller() {
+        List<Map<String, Object>> bestsellerek = new ArrayList<>();
+
+        EntityManagerFactory emf = Persistence.createEntityManagerFactory(Database.getPersistenceUnitNev());
+        EntityManager em = emf.createEntityManager();
+
+        try {
+            StoredProcedureQuery spq = em.createStoredProcedureQuery("bestseller");
+
+            List<Object[]> eredmeny = spq.getResultList();
+
+            if (!eredmeny.isEmpty()) {
+
+                for (Object[] sor : eredmeny) {
+                    LinkedHashMap<String, Object> bestseller = new LinkedHashMap<>();
+
+                    bestseller.put("id", (Integer) sor[0]);
+                    bestseller.put("nev", (String) sor[1]);
+                    bestseller.put("ar", (Integer) sor[2]);
+                    bestseller.put("kep", (String) sor[3]);
+                    bestseller.put("akcio", (Integer) sor[4]);
+                    bestseller.put("tipus", "bestseller");
+
+                    bestsellerek.add(bestseller);
+                }
+
+            }
+
+        } catch (Exception e) {
+            System.err.println(e.getMessage());
+        } finally {
+            em.clear();
+            em.close();
+            emf.close();
+        }
+
+        return bestsellerek;
 
     }
 
