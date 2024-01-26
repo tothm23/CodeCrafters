@@ -18,8 +18,8 @@ import org.json.JSONArray;
 public class FooldalResource {
 
     @GET
-    public Response _3veletlenjatek() {
-        JSONArray eredmeny = FooldalService._3veletlenjatek();
+    public Response fooldal() {
+        JSONArray eredmeny = FooldalService.fooldal();
         return Response.status(Response.Status.OK).entity(eredmeny.toString())
                 .type(MediaType.APPLICATION_JSON).build();
     }

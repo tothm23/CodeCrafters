@@ -12,13 +12,15 @@ import org.json.JSONObject;
  */
 public class FooldalService {
 
-    public static JSONArray _3veletlenjatek() {
+    public static JSONArray fooldal() {
+
+        JSONArray jsonArray = new JSONArray();
+        JSONObject obj = new JSONObject();
 
         List<Map<String, Object>> jatekok = Jatek._3veletlenjatek();
-        JSONArray jsonArray = new JSONArray();
+        List<Map<String, Object>> bestsellerek = Jatek.bestseller();
 
         for (Map<String, Object> jatek : jatekok) {
-            JSONObject obj = new JSONObject();
             obj.put("id", jatek.get("id"));
             obj.put("nev", jatek.get("nev"));
             obj.put("ar", jatek.get("ar"));
@@ -29,10 +31,23 @@ public class FooldalService {
             obj.put("mennyisegraktaron", jatek.get("mennyisegraktaron"));
             obj.put("eszkoz", jatek.get("eszkoz"));
             obj.put("platform", jatek.get("platform"));
+            obj.put("tipus", "veletlen");
+
+            jsonArray.put(obj);
+        }
+
+        for (Map<String, Object> bestseller : bestsellerek) {
+            obj.put("id", bestseller.get("id"));
+            obj.put("nev", bestseller.get("nev"));
+            obj.put("ar", bestseller.get("ar"));
+            obj.put("kep", bestseller.get("kep"));
+            obj.put("akcio", bestseller.get("akcio"));
+            obj.put("tipus", "bestseller");
 
             jsonArray.put(obj);
         }
 
         return jsonArray;
     }
+
 }
