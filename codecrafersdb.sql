@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Jan 24, 2024 at 09:54 AM
+-- Generation Time: Jan 27, 2024 at 02:27 PM
 -- Server version: 5.7.24
 -- PHP Version: 8.0.1
 
@@ -27,6 +27,21 @@ DELIMITER $$
 --
 -- Procedures
 --
+CREATE DEFINER=`root`@`localhost` PROCEDURE `3legujabbJatek` ()   BEGIN
+
+SELECT 
+	jatek.id,
+    jatek.nev,
+    jatek.ar,
+    jatek.kep,
+    jatek.akcio
+FROM jatek
+
+ORDER BY jatek.letrehozva DESC
+LIMIT 3;
+
+END$$
+
 CREATE DEFINER=`root`@`localhost` PROCEDURE `3veletlenjatek` ()   SELECT 
 	jatek.id,
     jatek.nev AS "jatekNev",
