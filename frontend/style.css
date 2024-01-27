@@ -121,6 +121,9 @@ body {
   font-size: 20px;
 }
 
+.dropdown{
+  cursor: pointer;
+}
 
 #dropdownMenuButton1,#dropdownMenuButton2 {
   width: 100%;
