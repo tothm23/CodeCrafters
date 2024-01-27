@@ -94,6 +94,7 @@ body {
 .keplink {
   text-decoration: none;
   color: inherit;
+  margin: 10px;
 }
 
 .keplink:hover {
@@ -159,6 +160,10 @@ body {
   width: 30px;
 }
 
+#username{
+  font-weight: bold;
+}
+
 
 #felhasznalo-box li {
   color: white;
@@ -205,11 +210,12 @@ body {
 }
 
 #log_reg {
+  margin-top: 10px;
   cursor: pointer;
 }
 
 #log_reg li:hover {
-background-color: #241f1f;
+background-color: #404040;
 }
 
 
