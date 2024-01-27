@@ -47,7 +47,7 @@ body {
     color: white;
     box-shadow: none;
     border-radius: 15px;
-    border: 1px solid #000;
+    border: none;
     background: rgba(217, 217, 217, 0.10);
 }
 
