@@ -385,6 +385,46 @@ public class Jatek implements Serializable {
 
     }
 
+    public static List<Map<String, Object>> _3legujabbJatek() {
+        List<Map<String, Object>> jatekok = new ArrayList<>();
+
+        EntityManagerFactory emf = Persistence.createEntityManagerFactory(Database.getPersistenceUnitNev());
+        EntityManager em = emf.createEntityManager();
+
+        try {
+            StoredProcedureQuery spq = em.createStoredProcedureQuery("3legujabbJatek");
+
+            List<Object[]> eredmeny = spq.getResultList();
+
+            if (!eredmeny.isEmpty()) {
+
+                for (Object[] sor : eredmeny) {
+                    LinkedHashMap<String, Object> jatek = new LinkedHashMap<>();
+
+                    jatek.put("id", (Integer) sor[0]);
+                    jatek.put("nev", (String) sor[1]);
+                    jatek.put("ar", (Integer) sor[2]);
+                    jatek.put("kep", (String) sor[3]);
+                    jatek.put("akcio", (Integer) sor[4]);
+                    jatek.put("tipus", "legujabb");
+
+                    jatekok.add(jatek);
+                }
+
+            }
+
+        } catch (Exception e) {
+            System.err.println(e.getMessage());
+        } finally {
+            em.clear();
+            em.close();
+            emf.close();
+        }
+
+        return jatekok;
+
+    }
+
     public static Map<String, Object> jatek(Integer idBe) {
 
         Map<String, Object> jatek = new LinkedHashMap<>();
