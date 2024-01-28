@@ -15,12 +15,14 @@ public class FooldalService {
     public static JSONArray fooldal() {
 
         JSONArray jsonArray = new JSONArray();
-        JSONObject obj = new JSONObject();
 
         List<Map<String, Object>> jatekok = Jatek._3veletlenjatek();
         List<Map<String, Object>> bestsellerek = Jatek.bestseller();
+        List<Map<String, Object>> legujabbjatekok = Jatek._3legujabbJatek();
 
         for (Map<String, Object> jatek : jatekok) {
+            JSONObject obj = new JSONObject();
+
             obj.put("id", jatek.get("id"));
             obj.put("nev", jatek.get("nev"));
             obj.put("ar", jatek.get("ar"));
@@ -37,12 +39,27 @@ public class FooldalService {
         }
 
         for (Map<String, Object> bestseller : bestsellerek) {
+            JSONObject obj = new JSONObject();
+
             obj.put("id", bestseller.get("id"));
             obj.put("nev", bestseller.get("nev"));
             obj.put("ar", bestseller.get("ar"));
             obj.put("kep", bestseller.get("kep"));
             obj.put("akcio", bestseller.get("akcio"));
             obj.put("tipus", "bestseller");
+
+            jsonArray.put(obj);
+        }
+
+        for (Map<String, Object> jatek : legujabbjatekok) {
+            JSONObject obj = new JSONObject();
+
+            obj.put("id", jatek.get("id"));
+            obj.put("nev", jatek.get("nev"));
+            obj.put("ar", jatek.get("ar"));
+            obj.put("kep", jatek.get("kep"));
+            obj.put("akcio", jatek.get("akcio"));
+            obj.put("tipus", "legujabb");
 
             jsonArray.put(obj);
         }
