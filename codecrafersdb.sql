@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Jan 27, 2024 at 02:27 PM
+-- Generation Time: Jan 29, 2024 at 10:49 AM
 -- Server version: 5.7.24
 -- PHP Version: 8.0.1
 
@@ -27,56 +27,34 @@ DELIMITER $$
 --
 -- Procedures
 --
-CREATE DEFINER=`root`@`localhost` PROCEDURE `3legujabbJatek` ()   BEGIN
+CREATE DEFINER=`root`@`localhost` PROCEDURE `bestseller` ()   BEGIN
 
-SELECT 
-	jatek.id,
-    jatek.nev,
-    jatek.ar,
-    jatek.kep,
-    jatek.akcio
-FROM jatek
+    SELECT 
+        jatek.id,
+        jatek.nev,
+        jatek.ar,
+        jatek.kep,
+        jatek.akcio
+    FROM jatek
 
-ORDER BY jatek.letrehozva DESC
-LIMIT 3;
+    ORDER BY jatek.eladva DESC
+    LIMIT 3;
 
 END$$
 
-CREATE DEFINER=`root`@`localhost` PROCEDURE `3veletlenjatek` ()   SELECT 
-	jatek.id,
-    jatek.nev AS "jatekNev",
-    jatek.ar,
-    jatek.leiras,
-    jatek.kep,
-    jatek.korhatar,
-    jatek.akcio,
-    jatek.mennyisegraktaron,
-    eszkoz.nev AS "eszkozNev",
-    platform.nev AS "platformNev"
-FROM jatek
+CREATE DEFINER=`root`@`localhost` PROCEDURE `carouselJatekok` ()   BEGIN
 
-INNER JOIN eszkoz
-ON jatek.eszkozId = eszkoz.id
+    SELECT 
+        jatek.id,
+        jatek.nev,
+        jatek.ar,
+        jatek.kep,
+        jatek.akcio
+    FROM jatek
 
-INNER JOIN platform
-ON jatek.platformId = platform.id
-
-ORDER BY RAND()
-LIMIT 3$$
-
-CREATE DEFINER=`root`@`localhost` PROCEDURE `bestseller` ()   BEGIN
-
-SELECT 
-	jatek.id,
-    jatek.nev,
-    jatek.ar,
-    jatek.kep,
-    jatek.akcio
-FROM jatek
-
-ORDER BY jatek.eladva DESC
-LIMIT 3;
-
+    ORDER BY RAND()
+    LIMIT 3;
+    
 END$$
 
 CREATE DEFINER=`root`@`localhost` PROCEDURE `felhasznalo` (IN `idBE` INT(9))   SELECT 
@@ -122,18 +100,18 @@ WHERE kosar.felhasznaloId = felhasznaloIdBE$$
 
 CREATE DEFINER=`root`@`localhost` PROCEDURE `felhasznaloKosar` (IN `felhasznaloIdBE` INT(9))   BEGIN
 
-SELECT 
-	kosar.felhasznaloId,
-    jatek.id as "jatekId",
-	jatek.nev AS "jatekNev",
-    kosar.vegosszeg AS "jatekAr",
-    jatek.kep AS "jatekKep"
-FROM kosar
+    SELECT 
+        kosar.felhasznaloId,
+        jatek.id,
+        jatek.nev,
+        kosar.vegosszeg,
+        jatek.kep
+    FROM kosar
 
-INNER JOIN jatek
-ON kosar.jatekId = jatek.id
+    INNER JOIN jatek
+    ON kosar.jatekId = jatek.id
 
-WHERE kosar.felhasznaloId = felhasznaloIdBE;
+    WHERE kosar.felhasznaloId = felhasznaloIdBE;
 
 END$$
 
@@ -152,26 +130,26 @@ WHERE felhasznalo.id = idBE$$
 
 CREATE DEFINER=`root`@`localhost` PROCEDURE `jatek` (IN `idBe` INT(9))   BEGIN
 
-SELECT 
-	jatek.id,
-    jatek.nev AS "jatekNev",
-    jatek.ar,
-    jatek.leiras,
-    jatek.kep,
-    jatek.korhatar,
-    jatek.akcio,
-    jatek.mennyisegraktaron,
-    eszkoz.nev AS "eszkozNev",
-    platform.nev AS "platformNev"
-FROM jatek
+    SELECT 
+        jatek.id,
+        jatek.nev AS "jatekNev",
+        jatek.ar,
+        jatek.leiras,
+        jatek.kep,
+        jatek.korhatar,
+        jatek.akcio,
+        jatek.mennyisegraktaron,
+        eszkoz.nev AS "eszkozNev",
+        platform.nev AS "platformNev"
+    FROM jatek
 
-INNER JOIN eszkoz
-ON jatek.eszkozId = eszkoz.id
+    INNER JOIN eszkoz
+    ON jatek.eszkozId = eszkoz.id
 
-INNER JOIN platform
-ON jatek.platformId = platform.id
+    INNER JOIN platform
+    ON jatek.platformId = platform.id
 
-WHERE jatek.id = idBe;
+    WHERE jatek.id = idBe;
 
 END$$
 
@@ -187,93 +165,106 @@ WHERE kosar.jatekId = jatekIdBE$$
 
 CREATE DEFINER=`root`@`localhost` PROCEDURE `jatekok` ()   BEGIN
 
-SELECT 
-	jatek.id,
-    jatek.nev AS "jatekNev",
-    jatek.ar,
-    jatek.leiras,
-    jatek.kep,
-    jatek.korhatar,
-    jatek.akcio,
-    jatek.mennyisegraktaron,
-    eszkoz.nev AS "eszkozNev",
-    platform.nev AS "platformNev"
-FROM jatek
+    SELECT 
+        jatek.id,
+        jatek.nev AS "jatekNev",
+        jatek.ar,
+        jatek.kep,
+        jatek.korhatar,
+        jatek.akcio,
+        eszkoz.nev AS "eszkozNev",
+        platform.nev AS "platformNev"
+    FROM jatek
 
-INNER JOIN eszkoz
-ON jatek.eszkozId = eszkoz.id
+    INNER JOIN eszkoz
+    ON jatek.eszkozId = eszkoz.id
 
-INNER JOIN platform
-ON jatek.platformId = platform.id;
+    INNER JOIN platform
+    ON jatek.platformId = platform.id;
 
 END$$
 
 CREATE DEFINER=`root`@`localhost` PROCEDURE `kosar` (IN `jatekIdBE` INT(9), IN `felhasznaloIdBE` INT(9))   BEGIN
 
-DECLARE jatekAr INT(9);
-DECLARE jatekAkcio INT(9);
+    DECLARE jatekAr INT(9);
+    DECLARE jatekAkcio INT(9);
 
-SELECT jatek.ar INTO jatekAr
-FROM jatek
-WHERE jatek.id = jatekIdBE;
+    SELECT jatek.ar INTO jatekAr
+    FROM jatek
+    WHERE jatek.id = jatekIdBE;
 
-SELECT jatek.akcio INTO jatekAkcio
-FROM jatek
-WHERE jatek.id = jatekIdBE;
+    SELECT jatek.akcio INTO jatekAkcio
+    FROM jatek
+    WHERE jatek.id = jatekIdBE;
 
-INSERT INTO kosar(
-    kosar.felhasznaloId,
-    kosar.jatekId,
-    kosar.vegosszeg
-)
-VALUES(
-    felhasznaloIdBE,
-	jatekIdBE,
-    ROUND( jatekAr - (jatekAr * jatekAkcio / 100), 0)
-);
+    INSERT INTO kosar(
+        kosar.felhasznaloId,
+        kosar.jatekId,
+        kosar.vegosszeg
+    )
+    VALUES(
+        felhasznaloIdBE,
+        jatekIdBE,
+        ROUND( jatekAr - (jatekAr * jatekAkcio / 100), 0)
+    );
+
+END$$
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `legujabbJatekok` ()   BEGIN
+
+    SELECT 
+        jatek.id,
+        jatek.nev,
+        jatek.ar,
+        jatek.kep,
+        jatek.akcio
+    FROM jatek
+
+    ORDER BY jatek.letrehozva DESC
+    LIMIT 3;
 
 END$$
 
 CREATE DEFINER=`root`@`localhost` PROCEDURE `rendeles` (IN `felhasznaloIdBE` INT(9))   BEGIN
 
-DECLARE vegosszeg INT(9);
+    DECLARE vegosszeg INT(9);
 
-SELECT SUM(kosar.vegosszeg) INTO vegosszeg
-FROM kosar
-WHERE kosar.felhasznaloId = felhasznaloIdBE;
+    SELECT SUM(kosar.vegosszeg) INTO vegosszeg
+    FROM kosar
+    WHERE kosar.felhasznaloId = felhasznaloIdBE;
 
-INSERT INTO rendeles(
-    rendeles.felhasznaloId,
-    rendeles.vegosszeg
-)
-VALUES(
-    felhasznaloIdBE,
-    vegosszeg
-);
+    INSERT INTO rendeles(
+        rendeles.felhasznaloId,
+        rendeles.vegosszeg
+    )
+    VALUES(
+        felhasznaloIdBE,
+        vegosszeg
+    );
 
 END$$
 
 CREATE DEFINER=`root`@`localhost` PROCEDURE `termekKulcs` (IN `felhasznaloIdBE` INT(9))   BEGIN
 
-SELECT 
-    kosar.jatekId,
-    felhasznalo.email,
-    felhasznalo.felhasznaloNev,
-    jatek.nev AS "jatekNev",
-    kosar.vegosszeg AS "jatekAr",
-    termekkulcs.kulcs
-FROM kosar
+    SELECT 
+        kosar.jatekId,
+        felhasznalo.email,
+        felhasznalo.felhasznaloNev,
+        jatek.nev,
+        kosar.vegosszeg,
+        termekkulcs.kulcs
+    FROM kosar
 
-INNER JOIN felhasznalo
-ON kosar.felhasznaloId = felhasznalo.id
+    INNER JOIN felhasznalo
+    ON kosar.felhasznaloId = felhasznalo.id
 
-INNER JOIN jatek
-ON kosar.jatekId = jatek.id
+    INNER JOIN jatek
+    ON kosar.jatekId = jatek.id
 
-INNER JOIN termekkulcs
-ON kosar.jatekId = termekkulcs.jatekId
+    INNER JOIN termekkulcs
+    ON kosar.jatekId = termekkulcs.jatekId
 
-WHERE kosar.felhasznaloId = felhasznaloIdBE;
+    WHERE kosar.felhasznaloId = felhasznaloIdBE;
 
 END$$
 
