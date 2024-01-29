@@ -168,9 +168,9 @@ document.addEventListener("DOMContentLoaded", function () {
   login.addEventListener("click", function () {
     if (actual_path == "/frontend/index.html") {
       // Most már tovább navigálhatsz az új oldalra
-      window.location.href="./bejelentkezés/bejelentkezes.html";
+      window.location.href="./bejelentkezes/bejelentkezes.html";
     } else {
-      window.location.href="../bejelentkezés/bejelentkezes.html";
+      window.location.href="../bejelentkezes/bejelentkezes.html";
     }
   });
   // Eseményfigyelők hozzáadása a keresőhöz és az ármezőkhöz

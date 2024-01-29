@@ -14,46 +14,48 @@
 </head>
 
 <body class="bg-dark text-white d-flex align-items-center justify-content-center">
-    <div class="form-popup">
-        <div class="form-content">
-            <form>
-                    <div class="mb-3">
-                        <label for="felhasz" class="form-label">Felhasználónév</label>
-                        <input type="text" class="form-control" id="felhasz" required>
+    <div class="container">
+        <div class="form-popup">
+            <div class="form-content">
+                <form>
+                        <div class="mb-3">
+                            <label for="felhasz" class="form-label">Felhasználónév</label>
+                            <input type="text" class="form-control" id="felhasz" required>
+                        </div>
+                    <div class="row mb-3">
+                        <div class="col-md-6">
+                            <label for="vezeteknev" class="form-label">Vezetéknév</label>
+                            <input type="text" class="form-control" id="vezeteknev" required>
+                        </div>
+                        <div class="col-md-6">
+                            <label for="keresztnev" class="form-label">Keresztnév</label>
+                            <input type="text" class="form-control" id="keresztnev" required>
+                        </div>
                     </div>
-                <div class="row mb-3">
-                    <div class="col-md-6">
-                        <label for="vezeteknev" class="form-label">Vezetéknév</label>
-                        <input type="text" class="form-control" id="vezeteknev" required>
+                        <div class="mb-3">
+                            <label for="email" class="form-label">Email</label>
+                            <input type="text" class="form-control" id="email" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="jelszo" class="form-label">Jelszó</label>
+                            <input type="password" class="form-control" id="jelszo" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="jelszoegyezes" class="form-label">Jelszó Újra</label>
+                            <input type="password" class="form-control" id="jelszoegyezes" required>
+                        </div>
+        
+                    <div class="mb-3 form-check">
+                        <input class="form-check-input" type="checkbox" id="policy" required>
+                        <label class="form-check-label">
+                            <a href="../felhasznalasi-feltetelek/felhasznalasi-feltetelek.html">Egyetértek a Felhasználási feltételekkel</a>
+                        </label>
                     </div>
-                    <div class="col-md-6">
-                        <label for="keresztnev" class="form-label">Keresztnév</label>
-                        <input type="text" class="form-control" id="keresztnev" required>
-                    </div>
+                    <button class="btn btn-primary w-100 mt-3 mx-auto" id="regisztracio" type="submit">Regisztrálj</button>
+                </form>
+                <div class="bottom-link text-center mt-3">
+                    Már van fiókja? <a href="../bejelentkezes/bejelentkezes.html" id="login-link">Belépés</a>
                 </div>
-                    <div class="mb-3">
-                        <label for="email" class="form-label">Email</label>
-                        <input type="text" class="form-control" id="email" required>
-                    </div>
-                    <div class="mb-3">
-                        <label for="jelszo" class="form-label">Jelszó</label>
-                        <input type="password" class="form-control" id="jelszo" required>
-                    </div>
-                    <div class="mb-3">
-                        <label for="jelszoegyezes" class="form-label">Jelszó Újra</label>
-                        <input type="password" class="form-control" id="jelszoegyezes" required>
-                    </div>
-                
-                <div class="mb-3 form-check">
-                    <input class="form-check-input" type="checkbox" id="policy" required>
-                    <label class="form-check-label">
-                        <a href="../felhasznalasi-feltetelek/felhasznalasi-feltetelek.html">Egyetértek a Felhasználási feltételekkel</a>
-                    </label>
-                </div>
-                <button class="btn btn-primary w-100 mt-3 mx-auto" id="regisztracio" type="submit">Regisztrálj</button>
-            </form>
-            <div class="bottom-link text-center mt-3">
-                Már van fiókja? <a href="../bejelentkezés/bejelentkezes.html" id="login-link">Belépés</a>
             </div>
         </div>
     </div>
