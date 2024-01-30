@@ -1,6 +1,6 @@
 package com.codecrafterswebshop.Controller;
 
-import com.codecrafterswebshop.Service.TermekekService;
+import com.codecrafterswebshop.Service.ProductsService;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.core.MediaType;
@@ -13,12 +13,12 @@ import org.json.JSONArray;
  * @author tothm23
  */
 @Path("termekek")
-public class TermekekResource {
+public class ProductsResource {
 
     @GET
-    public Response termekek() {
-        JSONArray eredmeny = TermekekService.termekek();
-        return Response.status(Response.Status.OK).entity(eredmeny.toString())
+    public Response products() {
+        JSONArray result = ProductsService.products();
+        return Response.status(Response.Status.OK).entity(result.toString())
                 .type(MediaType.APPLICATION_JSON).build();
     }
 }
