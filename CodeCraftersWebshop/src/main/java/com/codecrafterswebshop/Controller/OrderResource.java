@@ -1,7 +1,7 @@
 package com.codecrafterswebshop.Controller;
 
-import com.codecrafterswebshop.Model.Kosar;
-import com.codecrafterswebshop.Service.RendelesService;
+import com.codecrafterswebshop.Model.Basket;
+import com.codecrafterswebshop.Service.OrderService;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
@@ -15,12 +15,12 @@ import javax.ws.rs.core.Response;
  */
 @Path("rendeles")
 @Consumes(MediaType.APPLICATION_JSON)
-public class RendelesResource {
+public class OrderResource {
 
     @POST
-    public Response rendeles(Kosar k) {
-        String eredmeny = RendelesService.rendeles(k.getFelhasznaloId());
-        return Response.status(Response.Status.CREATED).entity(eredmeny)
+    public Response order(Basket k) {
+        String result = OrderService.order(k.getFelhasznaloId());
+        return Response.status(Response.Status.CREATED).entity(result)
                 .type(MediaType.APPLICATION_JSON).build();
     }
 

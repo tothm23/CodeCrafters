@@ -1,6 +1,6 @@
 package com.codecrafterswebshop.Controller;
 
-import com.codecrafterswebshop.Service.FooldalService;
+import com.codecrafterswebshop.Service.MainPageService;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
@@ -15,12 +15,12 @@ import org.json.JSONArray;
  */
 @Path("fooldal")
 @Produces(MediaType.APPLICATION_JSON)
-public class FooldalResource {
+public class MainPageResource {
 
     @GET
-    public Response fooldal() {
-        JSONArray eredmeny = FooldalService.fooldal();
-        return Response.status(Response.Status.OK).entity(eredmeny.toString())
+    public Response mainPage() {
+        JSONArray result = MainPageService.mainPage();
+        return Response.status(Response.Status.OK).entity(result.toString())
                 .type(MediaType.APPLICATION_JSON).build();
     }
 

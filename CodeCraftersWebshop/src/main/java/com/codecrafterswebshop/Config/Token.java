@@ -1,6 +1,6 @@
 package com.codecrafterswebshop.Config;
 
-import com.codecrafterswebshop.Model.Felhasznalo;
+import com.codecrafterswebshop.Model.User;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.ExpiredJwtException;
 import io.jsonwebtoken.Jws;
@@ -18,7 +18,7 @@ import java.util.Date;
  */
 public class Token {
 
-    public static String letrehozas(Felhasznalo f, long expirationMillis) {
+    public static String create(User f, long expirationMillis) {
 
         long nowMillis = System.currentTimeMillis();
 
@@ -40,7 +40,7 @@ public class Token {
         return token;
     }
 
-    public static int dekodolas(String token) {
+    public static int decode(String token) {
         try {
             String secret = "RXogbGVzeiBhIHRpdGtvcyBrdWxjcw==";
             Jws<Claims> result = Jwts.parser().setSigningKey(TextCodec.BASE64.decode(secret)).parseClaimsJws(token);

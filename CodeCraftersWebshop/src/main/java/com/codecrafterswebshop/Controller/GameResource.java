@@ -1,6 +1,6 @@
 package com.codecrafterswebshop.Controller;
 
-import com.codecrafterswebshop.Service.JatekService;
+import com.codecrafterswebshop.Service.GameService;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
@@ -18,13 +18,13 @@ import org.json.JSONObject;
 @Path("jatek")
 @Produces(MediaType.APPLICATION_JSON)
 @Consumes(MediaType.APPLICATION_JSON)
-public class JatekResource {
+public class GameResource {
 
     @GET
     @Path("{jatekId}")
-    public Response jatek(@PathParam("jatekId") Integer id) {
-        JSONObject eredmeny = JatekService.jatek(id);
-        return Response.status(Response.Status.OK).entity(eredmeny.toString())
+    public Response game(@PathParam("jatekId") Integer id) {
+        JSONObject result = GameService.game(id);
+        return Response.status(Response.Status.OK).entity(result.toString())
                 .type(MediaType.APPLICATION_JSON).build();
     }
 }

@@ -46,7 +46,7 @@ import javax.validation.constraints.Size;
     @NamedQuery(name = "Jatek.findByPlatformId", query = "SELECT j FROM Jatek j WHERE j.platformId = :platformId"),
     @NamedQuery(name = "Jatek.findByLetrehozva", query = "SELECT j FROM Jatek j WHERE j.letrehozva = :letrehozva"),
     @NamedQuery(name = "Jatek.findByFrissitve", query = "SELECT j FROM Jatek j WHERE j.frissitve = :frissitve")})
-public class Jatek implements Serializable {
+public class Game implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
@@ -107,14 +107,14 @@ public class Jatek implements Serializable {
     @Column(name = "eladva")
     private int eladva;
 
-    public Jatek() {
+    public Game() {
     }
 
-    public Jatek(Integer id) {
+    public Game(Integer id) {
         this.id = id;
     }
 
-    public Jatek(Integer id, String nev, int ar, String leiras, String kep, int korhatar, int akcio, int mennyisegraktaron, int eszkozId,
+    public Game(Integer id, String nev, int ar, String leiras, String kep, int korhatar, int akcio, int mennyisegraktaron, int eszkozId,
             int platformId, Date letrehozva, Integer eladva) {
         this.id = id;
         this.nev = nev;
@@ -243,11 +243,10 @@ public class Jatek implements Serializable {
 
     @Override
     public boolean equals(Object object) {
-        // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Jatek)) {
+        if (!(object instanceof Game)) {
             return false;
         }
-        Jatek other = (Jatek) object;
+        Game other = (Game) object;
         return !((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id)));
     }
 
@@ -259,7 +258,7 @@ public class Jatek implements Serializable {
     public static List<Map<String, Object>> jatekok() {
         List<Map<String, Object>> jatekok = new ArrayList<>();
 
-        EntityManagerFactory emf = Persistence.createEntityManagerFactory(Database.getPersistenceUnitNev());
+        EntityManagerFactory emf = Persistence.createEntityManagerFactory(Database.getPersistenceUnitName());
         EntityManager em = emf.createEntityManager();
 
         try {
@@ -303,7 +302,7 @@ public class Jatek implements Serializable {
     public static List<Map<String, Object>> _3veletlenjatek() {
         List<Map<String, Object>> jatekok = new ArrayList<>();
 
-        EntityManagerFactory emf = Persistence.createEntityManagerFactory(Database.getPersistenceUnitNev());
+        EntityManagerFactory emf = Persistence.createEntityManagerFactory(Database.getPersistenceUnitName());
         EntityManager em = emf.createEntityManager();
 
         try {
@@ -348,7 +347,7 @@ public class Jatek implements Serializable {
     public static List<Map<String, Object>> bestseller() {
         List<Map<String, Object>> bestsellerek = new ArrayList<>();
 
-        EntityManagerFactory emf = Persistence.createEntityManagerFactory(Database.getPersistenceUnitNev());
+        EntityManagerFactory emf = Persistence.createEntityManagerFactory(Database.getPersistenceUnitName());
         EntityManager em = emf.createEntityManager();
 
         try {
@@ -388,7 +387,7 @@ public class Jatek implements Serializable {
     public static List<Map<String, Object>> _3legujabbJatek() {
         List<Map<String, Object>> jatekok = new ArrayList<>();
 
-        EntityManagerFactory emf = Persistence.createEntityManagerFactory(Database.getPersistenceUnitNev());
+        EntityManagerFactory emf = Persistence.createEntityManagerFactory(Database.getPersistenceUnitName());
         EntityManager em = emf.createEntityManager();
 
         try {
@@ -425,11 +424,11 @@ public class Jatek implements Serializable {
 
     }
 
-    public static Map<String, Object> jatek(Integer idBe) {
+    public static Map<String, Object> game(Integer idBe) {
 
-        Map<String, Object> jatek = new LinkedHashMap<>();
+        Map<String, Object> game = new LinkedHashMap<>();
 
-        EntityManagerFactory emf = Persistence.createEntityManagerFactory(Database.getPersistenceUnitNev());
+        EntityManagerFactory emf = Persistence.createEntityManagerFactory(Database.getPersistenceUnitName());
         EntityManager em = emf.createEntityManager();
 
         try {
@@ -442,16 +441,16 @@ public class Jatek implements Serializable {
 
             if (!eredmeny.isEmpty()) {
                 Object[] sor = eredmeny.get(0);
-                jatek.put("id", sor[0]);
-                jatek.put("nev", sor[1]);
-                jatek.put("ar", sor[2]);
-                jatek.put("leiras", sor[3]);
-                jatek.put("kep", sor[4]);
-                jatek.put("korhatar", sor[5]);
-                jatek.put("akcio", sor[6]);
-                jatek.put("mennyisegraktaron", sor[7]);
-                jatek.put("eszkoz", sor[8]);
-                jatek.put("platform", sor[9]);
+                game.put("id", sor[0]);
+                game.put("nev", sor[1]);
+                game.put("ar", sor[2]);
+                game.put("leiras", sor[3]);
+                game.put("kep", sor[4]);
+                game.put("korhatar", sor[5]);
+                game.put("akcio", sor[6]);
+                game.put("mennyisegraktaron", sor[7]);
+                game.put("eszkoz", sor[8]);
+                game.put("platform", sor[9]);
             }
 
         } catch (Exception e) {
@@ -462,7 +461,7 @@ public class Jatek implements Serializable {
             emf.close();
         }
 
-        return jatek;
+        return game;
     }
 
 }

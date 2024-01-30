@@ -1,6 +1,6 @@
 package com.codecrafterswebshop.Service;
 
-import com.codecrafterswebshop.Model.Jatek;
+import com.codecrafterswebshop.Model.Game;
 import java.util.List;
 import java.util.Map;
 import org.json.JSONArray;
@@ -10,15 +10,15 @@ import org.json.JSONObject;
  *
  * @author tothm23
  */
-public class FooldalService {
+public class MainPageService {
 
-    public static JSONArray fooldal() {
+    public static JSONArray mainPage() {
 
         JSONArray jsonArray = new JSONArray();
 
-        List<Map<String, Object>> jatekok = Jatek._3veletlenjatek();
-        List<Map<String, Object>> bestsellerek = Jatek.bestseller();
-        List<Map<String, Object>> legujabbjatekok = Jatek._3legujabbJatek();
+        List<Map<String, Object>> jatekok = Game._3veletlenjatek();
+        List<Map<String, Object>> bestsellerek = Game.bestseller();
+        List<Map<String, Object>> legujabbjatekok = Game._3legujabbJatek();
 
         for (Map<String, Object> jatek : jatekok) {
             JSONObject obj = new JSONObject();
