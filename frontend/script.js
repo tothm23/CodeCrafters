@@ -1,6 +1,6 @@
 const logged_user = JSON.parse(localStorage.getItem("bejelentkezes"));
 const log_reg = document.getElementById("log_reg");
-const userbox = document.getElementById("felhasznalo-box");
+const userbox = document.getElementById("user-box");
 
 let cart_id = [];
 
@@ -18,27 +18,26 @@ fetch(
       );
       carouselInner.innerHTML += `
         <div class="carousel-item">
-          <div class="card flex-column flex-lg-row">
-            <a href="./jatek/jatek.html?id=${data[i].id}"><img src="./kepek/jatekok/${
-              data[i].kep
-            }" class="d-block w-100" alt="${data[i].nev}">
-            </a>
-            <div class="card-body">
-              <!--<span class="badge bg-secondary">New</span>-->
-              <h5 class="card-title">${data[i].nev}</h5>
-              ${
-                data[i].akcio > 0
-                  ? `<p class="card-text ar" style="text-decoration: line-through;">${data[i].ar} Ft</p>`
-                  : `<p class="card-text ar">${data[i].ar} Ft</p>`
-              }
-              ${
-                data[i].akcio > 0
-                  ? `<p class="card-text akciosar">${akciosAr} Ft</p>`
-                  : ""
-              }
-              ${hozzaadasGomb(data[i].id)}
-            </div>  
-          </div>
+        <div class="card flex-column flex-lg-row">
+        <a href="./jatek/jatek.html?id=${data[i].id}"><img src="./kepek/jatekok/${
+          data[i].kep
+        }" class="d-block w-100" alt="${data[i].nev}">
+        </a>
+        <div class="card-body">
+          <!--<span class="badge bg-secondary">New</span>-->
+          <h5 class="card-title">${data[i].nev}</h5>
+          ${
+            data[i].akcio > 0
+              ? `<p class="card-text ar" style="text-decoration: line-through;">${data[i].ar} Ft</p>`
+              : `<p class="card-text ar">${data[i].ar} Ft</p>`
+          }
+          ${
+            data[i].akcio > 0
+              ? `<p class="card-text akciosar">${akciosAr} Ft</p>`
+              : ""
+          }
+          ${hozzaadasGomb(data[i].id)}
+        </div>
         </div>
       `;
       // Kiválasztjuk az első carousel-item-et
@@ -84,11 +83,11 @@ function felgorget() {
   });
 }
 //token
-function parseJwt (token) {
+function parseJwt(token) {
   var base64Url = token.split('.')[1];
   var base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
-  var jsonPayload = decodeURIComponent(window.atob(base64).split('').map(function(c) {
-      return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
+  var jsonPayload = decodeURIComponent(window.atob(base64).split('').map(function (c) {
+    return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
   }).join(''));
 
   return JSON.parse(jsonPayload);
@@ -126,14 +125,13 @@ document.addEventListener("DOMContentLoaded", function () {
   const login = document.getElementById("login");
   const reg = document.getElementById("registration");
 
-  if(logged_user){
-    log_reg.display="none";
-    userbox.display="flex";
-    getkosar(cart_id);  
-  }
-  else{
-    log_reg.display="flex";
-    userbox.display="none";
+  if (logged_user) {
+    log_reg.display = "none";
+    userbox.display = "flex";
+    getkosar(cart_id);
+  } else {
+    log_reg.display = "flex";
+    userbox.display = "none";
   }
   //kijelentkezés essetén
   logout.addEventListener("click", function () {
@@ -144,33 +142,33 @@ document.addEventListener("DOMContentLoaded", function () {
   settings_btn.addEventListener("click", function () {
     if (actual_path == "/frontend/index.html") {
       // Most már tovább navigálhatsz az új oldalra
-      window.location.href="./felhasznalo/felhasznalo.html";
+      window.location.href = "./felhasznalo/felhasznalo.html";
     } else {
-      window.location.href="../felhasznalo/felhasznalo.html";
+      window.location.href = "../felhasznalo/felhasznalo.html";
     }
   });
   cart_btn.addEventListener("click", function () {
     if (actual_path == "/frontend/index.html") {
       // Most már tovább navigálhatsz az új oldalra
-      window.location.href="./kosar/kosar.html";
+      window.location.href = "./kosar/kosar.html";
     } else {
-      window.location.href="../kosar/kosar.html";
+      window.location.href = "../kosar/kosar.html";
     }
   });
   reg.addEventListener("click", function () {
     if (actual_path == "/frontend/index.html") {
       // Most már tovább navigálhatsz az új oldalra
-      window.location.href="./regisztracio/regisztracio.html";
+      window.location.href = "./regisztracio/regisztracio.html";
     } else {
-      window.location.href="../regisztracio/regisztracio.html";
+      window.location.href = "../regisztracio/regisztracio.html";
     }
   });
   login.addEventListener("click", function () {
     if (actual_path == "/frontend/index.html") {
       // Most már tovább navigálhatsz az új oldalra
-      window.location.href="./bejelentkezes/bejelentkezes.html";
+      window.location.href = "./bejelentkezes/bejelentkezes.html";
     } else {
-      window.location.href="../bejelentkezes/bejelentkezes.html";
+      window.location.href = "../bejelentkezes/bejelentkezes.html";
     }
   });
   // Eseményfigyelők hozzáadása a keresőhöz és az ármezőkhöz
@@ -196,7 +194,7 @@ document.addEventListener("DOMContentLoaded", function () {
     log_reg.style.display = "none";
     userbox.style.display = "flex";
     user_name.innerHTML += logged_user.felhasznaloNev;
-    email.innerHTML +=logged_user.email;
+    email.innerHTML += logged_user.email;
   } else {
     log_reg.style.display = "flex";
     userbox.style.display = "none";

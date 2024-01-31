@@ -103,12 +103,12 @@ body {
 }
 
 
-#felhasznalo-box, #log_reg{
+#user-box, #log_reg{
   min-width: 250px;
   margin-right: 10px;
 }
 
-#felhasznalo-box span {
+#user-box span {
   color: white;
 }
 
@@ -147,7 +147,7 @@ body {
   margin-right: 5px;
 }
 
-#felhasznalo-box ul {
+#user-box ul {
   list-style: none;
 }
 
@@ -165,13 +165,13 @@ body {
 }
 
 
-#felhasznalo-box li {
+#user-box li {
   color: white;
   background-color: #241f1f;
 
 }
 
-#felhasznalo-box li:hover {
+#user-box li:hover {
   color: #fff;
   background-color: #404040;
 }
@@ -265,6 +265,7 @@ slide
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  
 }
 
 .slideshow .card {
