@@ -228,6 +228,12 @@ background-color: #404040;
   background: #241f1f;
 }
 
+#log_reg p {
+  height: 50px;
+  display: flex;
+  align-items: center;
+}
+
 h2 {
   text-align: center;
 }
