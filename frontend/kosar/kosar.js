@@ -1,35 +1,35 @@
 document.addEventListener('DOMContentLoaded', function () {
     const Kosartartalma = document.getElementById('kosartartalma');
     let kosarmerete = [];
-    const vegosszeg = document.getElementById('vegosszeg');
-    const rendelesgomb = document.getElementById('rendeles_btn');
+    const final_price = document.getElementById('vegosszeg');
+    const order_btn = document.getElementById('rendeles_btn');
     // Kinyerjük a bejelentkezési adatokat a localStorage-ból
-    const bejelentkezettFelhasznalo = JSON.parse(localStorage.getItem("bejelentkezes"));
+    const logeduser_data = JSON.parse(localStorage.getItem("logeduserdata"));
     // Ellenőrizzük, hogy van-e bejelentkezett felhasználó
-    console.log(bejelentkezettFelhasznalo && bejelentkezettFelhasznalo.id);
+    console.log(logeduser_data && logeduser_data.id);
 
     addEventListener('load', function () {
-        if (bejelentkezettFelhasznalo.id) {
+        if (logeduser_data.id) {
             kosarGet();
         } else {
             // Ha nincs bejelentkezett felhasználó, valamilyen hiba kezelése vagy irányítás
             console.error("Nincs bejelentkezett felhasználó");
-            rendelesgomb.style.display="none";
+            order_btn.style.display="none";
         }
     });
 
 
-    function kosartartalma(adatok) {
+    function kosartartalma(data) {
         Kosartartalma.innerHTML = "";
 
-        for (let i = 0; i < adatok.length; i++) {
-            kosarmerete[i] = adatok[i].jatekId;
+        for (let i = 0; i < data.length; i++) {
+            kosarmerete[i] = data[i].jatekId;
             Kosartartalma.innerHTML += `
-        <div class="card d-flex flex-row justify-content-center h-auto h-lg-120" data-id="${adatok[i].jatekId}">
-            <img class="card-img-top img-fluid justify-content-center" src="../kepek/jatekok/${adatok[i].kep}" alt="${adatok[i].nev}">
+        <div class="card d-flex flex-row justify-content-center h-auto h-lg-120" data-id="${data[i].jatekId}">
+            <img class="card-img-top img-fluid justify-content-center" src="../img/games/${data[i].kep}" alt="${data[i].nev}">
             <div class="card-body d-flex flex-row justify-align-content-between border-10">
-                <p class="card-text text-lg-center">${adatok[i].nev}</p>
-                <p class="card-text d-none d-lg-block">${adatok[i].vegosszeg} Ft</p>
+                <p class="card-text text-lg-center">${data[i].nev}</p>
+                <p class="card-text d-none d-lg-block">${data[i].vegosszeg} Ft</p>
                 <button id="torol" class="btn btn-danger h-50 h-lg-auto w-50 w-lg-auto" type="button">X</button>
             </div>
         </div>
@@ -39,11 +39,11 @@ document.addEventListener('DOMContentLoaded', function () {
 
     document.addEventListener("click", function torlese(event) {
         console.log("Click");
-        var kosarElem = event.target.closest('.card');
+        var closest_card = event.target.closest('.card');
         // Olvassa ki az ID-t a data-id attribútumból
-        var jatekid = kosarElem.getAttribute('data-id');
-        console.log("termek id:", jatekid);
-        kosartorlese(jatekid);
+        var gameid = closest_card.getAttribute('data-id');
+        console.log("termek id:", gameid);
+        kosartorlese(gameid);
 
     });
 
@@ -52,7 +52,7 @@ document.addEventListener('DOMContentLoaded', function () {
             method: 'DELETE',
             redirect: 'follow'
         };
-        const url = `http://localhost:8080/CodeCraftersWebshop-1.0-SNAPSHOT/webresources/kosar?felhasznaloId=${bejelentkezettFelhasznalo.id}&jatekId=${jatekid}`;
+        const url = `http://localhost:8080/CodeCraftersWebshop-1.0-SNAPSHOT/webresources/kosar?felhasznaloId=${logeduser_data.id}&jatekId=${jatekid}`;
         fetch(url, requestOptions)
             .then(response => response.text())
             .then(result => {
@@ -63,12 +63,12 @@ document.addEventListener('DOMContentLoaded', function () {
             .catch(error => console.log('error', error));
     }
 
-    rendelesgomb.addEventListener('click', function () {
+    order_btn.addEventListener('click', function () {
         var myHeaders = new Headers();
         myHeaders.append("Content-Type", "application/json");
 
         var raw = JSON.stringify({
-            "felhasznaloId": bejelentkezettFelhasznalo.id
+            "felhasznaloId": logeduser_data.id
         });
 
         var requestOptions = {
@@ -91,21 +91,21 @@ document.addEventListener('DOMContentLoaded', function () {
 
     });
 
-    function vegosszegkiszamitasa(adatok) {
-        vegosszeg.innerHTML = "";
-        let osszesitettar = 0;
-        for (let i = 0; i < adatok.length; i++) {
-            osszesitettar += adatok[i].vegosszeg;
+    function vegosszegkiszamitasa(data) {
+        final_price.innerHTML = "";
+        let sum_price = 0;
+        for (let i = 0; i < data.length; i++) {
+            sum_price += data[i].vegosszeg;
         }
-        if (osszesitettar == 0) rendelesgomb.disabled = true;
-        else rendelesgomb.disabled = false;
-        vegosszeg.innerHTML += `${osszesitettar} Ft`;
+        if (sum_price == 0) order_btn.disabled = true;
+        else order_btn.disabled = false;
+        final_price.innerHTML += `${sum_price} Ft`;
 
-        console.log(osszesitettar);
+        console.log(sum_price);
     }
 
     function kosarGet() {
-        fetch(`http://localhost:8080/CodeCraftersWebshop-1.0-SNAPSHOT/webresources/kosar/${bejelentkezettFelhasznalo.id}`, )
+        fetch(`http://localhost:8080/CodeCraftersWebshop-1.0-SNAPSHOT/webresources/kosar/${logeduser_data.id}`, )
             .then(response => response.json())
             .then(result => {
                 // Itt további kezelése a kapott adatoknak

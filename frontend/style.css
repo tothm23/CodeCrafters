@@ -303,9 +303,9 @@ slide
 
 }
 
-#hozzadas,
-#hozzadas:focus,
-#hozzadas:hover {
+#add_btn,
+#add_btn:focus,
+#add_btn:hover {
   background-color: #95e72d;
   color: #000;
   border: 0;

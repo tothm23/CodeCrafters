@@ -1,6 +1,6 @@
 const formPopup = document.querySelector(".form-popup");
 const signupLoginLink = formPopup.querySelectorAll(".bottom-link a");
-const regisztracio = document.getElementById("regisztracio");
+const registration_id = document.getElementById("registration");
 
 document.addEventListener("DOMContentLoaded", function () {
   document.body.classList.toggle("show-popup");
@@ -9,23 +9,23 @@ document.addEventListener("DOMContentLoaded", function () {
 
   regisztraciosForm.addEventListener("submit", function (event) {
     event.preventDefault();
-    const felhasz = document.getElementById("felhasz").value;
-    const vezeteknev = document.getElementById("vezeteknev").value;
-    const keresztnev = document.getElementById("keresztnev").value;
+    const username = document.getElementById("username").value;
+    const lastname = document.getElementById("lastname").value;
+    const firstname = document.getElementById("firstname").value;
     const email = document.getElementById("email").value;
-    const jelszo = document.getElementById("jelszo").value;
-    const jelszoujra = document.getElementById("jelszoegyezes").value;
+    const pas = document.getElementById("jelszo").value;
+    const pas_again = document.getElementById("jelszoegyezes").value;
 
-    if (jelszo != jelszoujra) {
+    if (pas != pas_again) {
       alert("A jelszavak nem egyeznek!");
     } else {
 
       const inputdata = {
-        felhasznaloNev: felhasz,
-        vezetekNev: vezeteknev,
-        keresztNev: keresztnev,
+        felhasznaloNev: username,
+        vezetekNev: lastname,
+        keresztNev: firstname,
         email: email,
-        jelszo: jelszo
+        jelszo: pas
 
       };
       // regisztráció fetch

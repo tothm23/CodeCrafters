@@ -1,70 +1,70 @@
 document.addEventListener("DOMContentLoaded", function () {
   // HTML elemek kiválasztása
-  const keresoInput = document.querySelector('.navbar input[type="search"]');
-  const minArInput = document.querySelector('.ar input[name="min"]');
-  const maxArInput = document.querySelector('.ar input[name="max"]');
-  const minArInput2 = document.querySelector('.ar2 input[name="min"]');
-  const maxArInput2 = document.querySelector('.ar2 input[name="max"]');
+  const searchIn = document.querySelector('.navbar input[type="search"]');
+  const minpriceIn = document.querySelector('.ar input[name="min"]');
+  const maxpriceIn = document.querySelector('.ar input[name="max"]');
+  const minpriceIn2 = document.querySelector('.ar2 input[name="min"]');
+  const maxpriceIn2 = document.querySelector('.ar2 input[name="max"]');
 
   const form = document.querySelector(".navbar form");
 
   const checkboxok = document.querySelectorAll(".form-check-input");
   
-  const jatekokElem = document.querySelector(".termek-lista#jatekok");
-  const keresoSzoveg = localStorage.getItem('keresesSzoveg');
+  const product_games = document.querySelector(".termek-lista#jatekok");
+  const searched_text = localStorage.getItem('keresesSzoveg');
 
-  const kivalasztottAkcios = document.getElementById("AkciosCheckbox");
-  const kivalasztottAkcios2 = document.getElementById("AkciosCheckbox2");
+  const sale_checkbox = document.getElementById("AkciosCheckbox");
+  const sale_checkbox2 = document.getElementById("AkciosCheckbox2");
   //akcio input mindig egy forma  
-  kivalasztottAkcios.addEventListener("change", function (e) {
-    if (kivalasztottAkcios.checked == true) kivalasztottAkcios2.checked = true;
-    else kivalasztottAkcios2.checked = false;
+  sale_checkbox.addEventListener("change", function (e) {
+    if (sale_checkbox.checked == true) sale_checkbox2.checked = true;
+    else sale_checkbox2.checked = false;
 
   });
 
-  kivalasztottAkcios2.addEventListener("change", function (e) {
-    if (kivalasztottAkcios2.checked == true) kivalasztottAkcios.checked = true;
-    else if (kivalasztottAkcios2.checked == false) kivalasztottAkcios.checked = false;
+  sale_checkbox2.addEventListener("change", function (e) {
+    if (sale_checkbox2.checked == true) sale_checkbox.checked = true;
+    else if (sale_checkbox2.checked == false) sale_checkbox.checked = false;
 
   });
 
 
   // Eredeti adatok tárolása
-  let eredetiAdatok;
+  let original_data;
   //keresoben az érték új ablak menyitása esetén elvan tárolva és local storageből betöltjük
-  if (keresoSzoveg) {
-    keresoInput.value = keresoSzoveg;
+  if (searched_text) {
+    searchIn.value = searched_text;
   }
 
   // Eseményfigyelők hozzáadása a keresőhöz és az ármezőkhöz
   form.addEventListener("submit", function (esemeny) {
     esemeny.preventDefault();
-    szurokAlkalmazasa();
+    apply_fillters();
   });
 
 
-  minArInput.addEventListener("input", function () {
-    minArInput2.value = minArInput.value;
-    szurokAlkalmazasa();
+  minpriceIn.addEventListener("input", function () {
+    minpriceIn2.value = minpriceIn.value;
+    apply_fillters();
   });
 
-  minArInput2.addEventListener("input", function () {
-    minArInput.value = minArInput2.value;
-    szurokAlkalmazasa();
+  minpriceIn2.addEventListener("input", function () {
+    minpriceIn.value = minpriceIn2.value;
+    apply_fillters();
   });
 
-  maxArInput.addEventListener("input", function () {
-    maxArInput2.value = maxArInput.value;
-    szurokAlkalmazasa();
+  maxpriceIn.addEventListener("input", function () {
+    maxpriceIn2.value = maxpriceIn.value;
+    apply_fillters();
   });
 
-  maxArInput2.addEventListener("input", function () {
-    maxArInput.value = maxArInput2.value;
-    szurokAlkalmazasa();
+  maxpriceIn2.addEventListener("input", function () {
+    maxpriceIn.value = maxpriceIn2.value;
+    apply_fillters();
   });
 
   checkboxok.forEach(function (checkbox) {
-    checkbox.addEventListener("change", szurokAlkalmazasa);
+    checkbox.addEventListener("change", apply_fillters);
   });
 
   // Termékek lekérése a szerverről
@@ -73,12 +73,12 @@ document.addEventListener("DOMContentLoaded", function () {
     )
     .then((valasz) => valasz.json())
     .then((adat) => {
-      eredetiAdatok = adat;
+      original_data = adat;
 
       // Kezdeti terméklista megjelenítése
-      termekekMegjelenitese(adat);
+      show_products(adat);
       // Az oldal betöltésekor alkalmazza a szűrőket de csak mikor a betöltöt addatal egyenlő hogy ne fusson le mindig
-      if (keresoSzoveg == keresoInput.value) szurokAlkalmazasa();
+      if (searched_text == searchIn.value) apply_fillters();
     })
     .catch((hiba) => alert(hiba));
 
@@ -99,33 +99,33 @@ document.addEventListener("DOMContentLoaded", function () {
               ? `<p class="card-text saleprice">${saleprice} Ft</p>`
               : ""
           }
-          ${hozzaadasGomb(id)}
+          ${add_btn(id)}
         </div>
       </div>
     `;
   }
 
-  function termekekMegjelenitese(adatok) {
-    jatekokElem.innerHTML = "";
+  function show_products(data) {
+    product_games.innerHTML = "";
 
-    for (let i = 0; i < adatok.length; i++) {
-      jatekokElem.innerHTML +=
+    for (let i = 0; i < data.length; i++) {
+      product_games.innerHTML +=
         (createCard(
-          `../kepek/jatekok/${adatok[i].kep}`,
-          adatok[i].nev,
-          adatok[i].ar,
-          adatok[i].akcio,
-          adatok[i].id,
+          `../img/games/${data[i].kep}`,
+          data[i].nev,
+          data[i].ar,
+          data[i].akcio,
+          data[i].id,
           "../jatek/jatek.html"
         ));
     }
   }
 
   // Szűrők alkalmazása és terméklista frissítése
-  function szurokAlkalmazasa() {
-    const keresendoSzoveg = keresoInput.value.toLowerCase();
-    const minAr = parseFloat(minArInput.value) || 0;
-    const maxAr = parseFloat(maxArInput.value) || Infinity;
+  function apply_fillters() {
+    const searched_text = searchIn.value.toLowerCase();
+    const minAr = parseFloat(minpriceIn.value) || 0;
+    const maxAr = parseFloat(maxpriceIn.value) || Infinity;
     console.log("min:" + minAr + " max:" + maxAr);
     const kivalasztottPlatformok = Array.from(document.querySelectorAll('.platform input:checked'))
       .map(checkbox => checkbox.value.toLowerCase());
@@ -133,10 +133,10 @@ document.addEventListener("DOMContentLoaded", function () {
     const kivalasztottEszkozok = Array.from(document.querySelectorAll('.eszkoz input:checked'))
       .map(checkbox => checkbox.value.toLowerCase());
     // Csak akkor alkalmazza a szűrést, ha a checkbox be van jelölve
-    const szurtAdatok = eredetiAdatok.filter(
+    const szurtAdatok = original_data.filter(
       (elem) =>
-      (elem.nev.toLowerCase().includes(keresendoSzoveg) ||
-        keresendoSzoveg.includes(elem.nev.toLowerCase())) &&
+      (elem.nev.toLowerCase().includes(searched_text) ||
+        searched_text.includes(elem.nev.toLowerCase())) &&
       elem.ar >= minAr &&
       elem.ar <= maxAr &&
       //platformra szűrés
@@ -144,9 +144,9 @@ document.addEventListener("DOMContentLoaded", function () {
       //eszközre szűrés
       (kivalasztottEszkozok.length === 0 || kivalasztottEszkozok.includes(elem.eszkoz.toLowerCase())) &&
       //akciósra szűrés
-      (kivalasztottAkcios.checked == false || elem.akcio > 0)
+      (sale_checkbox.checked == false || elem.akcio > 0)
     );
     // Szűrt termékek megjelenítése
-    termekekMegjelenitese(szurtAdatok);
+    show_products(szurtAdatok);
   }
 });

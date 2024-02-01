@@ -10,7 +10,9 @@ body {
     min-height: 100vh;
 }
 
-.feltetelek {
+.userterms{
+    margin-top: 20px;
+    margin-bottom: 20px;
     width: 100%;
     border: 2px solid #fff;
     border-radius: 15px;

@@ -1,19 +1,19 @@
 document.addEventListener("DOMContentLoaded", (event) => {
   const formPopup = document.querySelector(".form-popup");
-  const belepesGomb = document.getElementById("bejelentkezes");
+  const login_btn = document.getElementById("login");
 
-  belepesGomb.addEventListener("click", (event) => {
+  login_btn.addEventListener("click", (event) => {
     event.preventDefault();
 
-    const felhaszNev = document.querySelector("#felhasz").value;
-    const jelszo = document.querySelector("#jelszo").value;
+    const username = document.querySelector("#username").value;
+    const pas = document.querySelector("#pas").value;
 
     var myHeaders = new Headers();
     myHeaders.append("Content-Type", "application/json");
 
     var raw = JSON.stringify({
-      felhasznaloNev: felhaszNev,
-      jelszo: jelszo
+      felhasznaloNev: username,
+      jelszo: pas
     });
 
     var requestOptions = {
@@ -39,9 +39,9 @@ document.addEventListener("DOMContentLoaded", (event) => {
             return JSON.parse(jsonPayload);
         }
 
-        let valszObjektum=(JSON.stringify(parseJwt
+        let response_object=(JSON.stringify(parseJwt
           (result.token)));
-          localStorage.setItem("bejelentkezes",valszObjektum);
+          localStorage.setItem("logeduserdata",response_object);
           alert("Sikeres bejelentkezés");
           window.location.href = "../index.html";
         }
@@ -53,7 +53,7 @@ document.addEventListener("DOMContentLoaded", (event) => {
     .catch(error => {
       console.log('Hiba történt:', error);
       // Hiba kezelése, pl. felhasználó értesítése
-      alert("Hiba történt")
+      alert("Hiba történt");
     });
   });
 });

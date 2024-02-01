@@ -1,4 +1,4 @@
-const logged_user = JSON.parse(localStorage.getItem("bejelentkezes"));
+const logged_user = JSON.parse(localStorage.getItem("logeduserdata"));
 const log_reg = document.getElementById("log_reg");
 const userbox = document.getElementById("user-box");
 
@@ -19,7 +19,7 @@ fetch(
       carouselInner.innerHTML += `
         <div class="carousel-item">
         <div class="card d-flex flex-column flex-md-row">
-        <a class="d-block w-100" href="./jatek/jatek.html?id=${data[i].id}"><img src="./kepek/jatekok/${
+        <a class="d-block w-100" href="./jatek/jatek.html?id=${data[i].id}"><img src="./img/games/${
           data[i].kep
         }" class="d-block w-100" alt="${data[i].nev}">
         </a>
@@ -36,7 +36,7 @@ fetch(
               ? `<p class="card-text saleprice">${akciosAr} Ft</p>`
               : ""
           }
-          ${hozzaadasGomb(data[i].id)}
+          ${add_btn(data[i].id)}
         </div>
         </div>
       `;
@@ -93,7 +93,7 @@ function parseJwt(token) {
   return JSON.parse(jsonPayload);
 }
 
-function hozzaadasGomb(id) {
+function add_btn(id) {
   var vanilyen_ID = false;
   if (logged_user) {
     for (let i = 0; i < cart_id.length; i++) {
@@ -102,13 +102,13 @@ function hozzaadasGomb(id) {
       }
     }
     if (vanilyen_ID) {
-      return `<input id="hozzadas" data-jatek-id="${id}" class="my-2 p-2 btn btn-success fs-5" type="button" disabled value="Kosárban" />`;
+      return `<input id="add_btn" data-jatek-id="${id}" class="my-2 p-2 btn btn-success fs-5" type="button" disabled value="Kosárban" />`;
     } else {
-      return `<input id="hozzadas" data-jatek-id="${id}" class="my-2 p-2 btn btn-success fs-5" type="button" value="Hozzáadás a kosárhoz" />`;
+      return `<input id="add_btn" data-jatek-id="${id}" class="my-2 p-2 btn btn-success fs-5" type="button" value="Hozzáadás a kosárhoz" />`;
 
     }
   } else {
-    return `<input id="hozzadas" data-jatek-id="${id}" class="my-2 p-2 btn btn-success fs-5" type="button" disabled value="Hozzáadás a kosárhoz" />`;
+    return `<input id="add_btn" data-jatek-id="${id}" class="my-2 p-2 btn btn-success fs-5" type="button" disabled value="Hozzáadás a kosárhoz" />`;
   }
 
 };
@@ -201,7 +201,7 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 
   document.addEventListener("click", function (event) {
-    if (event.target && event.target.id === "hozzadas") {
+    if (event.target && event.target.id === "add_btn") {
       //ha hozzáadjuk a kosárhoz akkor disbaled és a value megváltozik kosárbanra
       event.target.value = "Kosárban";
       event.target.disabled = true;
