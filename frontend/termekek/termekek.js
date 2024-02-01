@@ -83,20 +83,20 @@ document.addEventListener("DOMContentLoaded", function () {
     .catch((hiba) => alert(hiba));
 
   // Termékek megjelenítése a HTML-ben
-  function createCard(kepPath, nev, ar, akcio, id, url) {
-    const akciosAr = akcio > 0 ? Math.round(ar - (ar / 100) * akcio) : null;
+  function createCard(imgPath, name, price, sale, id, url) {
+    const saleprice = sale > 0 ? Math.round(price - (price / 100) * sale) : null;
 
     return `
       <div class="card my-4 flex-column flex-lg-row">
-        <a href="${url}?id=${id}"><img src="${kepPath}" class="card-img-top" alt="${nev}"></a>
+        <a href="${url}?id=${id}"><img src="${imgPath}" class="card-img-top" alt="${name}"></a>
         <div class="card-body">
-          <h5 class="card-title">${nev}</h5>
+          <h5 class="card-title">${name}</h5>
           <p class="card-text ar">${
-            akciosAr > 0 ? `<del>${ar} Ft</del>` : `${ar} Ft`
+            saleprice > 0 ? `<del>${price} Ft</del>` : `${price} Ft`
           }</p>
           ${
-            akciosAr > 0
-              ? `<p class="card-text akciosar">${akciosAr} Ft</p>`
+            saleprice > 0
+              ? `<p class="card-text saleprice">${saleprice} Ft</p>`
               : ""
           }
           ${hozzaadasGomb(id)}

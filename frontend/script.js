@@ -33,7 +33,7 @@ fetch(
           }
           ${
             data[i].akcio > 0
-              ? `<p class="card-text akciosar">${akciosAr} Ft</p>`
+              ? `<p class="card-text saleprice">${akciosAr} Ft</p>`
               : ""
           }
           ${hozzaadasGomb(data[i].id)}
@@ -57,7 +57,7 @@ function getkosar(gombid) {
     .then(response => response.json())
     .then(result => {
       // Ellenőrizze, hogy a válasz tartalmazza-e a várt tulajdonságokat
-      console.log('Eredmény:', result);
+      //console.log('Eredmény:', result);
       for (let i = 0; i < result.length; i++) {
         gombid[i] = result[i].jatekId;
         console.log(gombid[i], result[i].jatekId);
