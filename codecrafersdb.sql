@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Jan 29, 2024 at 10:49 AM
+-- Generation Time: Feb 01, 2024 at 10:31 AM
 -- Server version: 5.7.24
 -- PHP Version: 8.0.1
 
@@ -27,287 +27,300 @@ DELIMITER $$
 --
 -- Procedures
 --
-CREATE DEFINER=`root`@`localhost` PROCEDURE `bestseller` ()   BEGIN
+CREATE DEFINER=`root`@`localhost` PROCEDURE `basket` (IN `gameIdIN` INT(9), IN `userIdIN` INT(9))   BEGIN
+
+    DECLARE gamePrice INT(9);
+    DECLARE gameDiscount INT(9);
+
+    SELECT game.price INTO gamePrice
+    FROM game
+    WHERE game.id = gameIdIN;
+
+    SELECT game.discount INTO gameDiscount
+    FROM game
+    WHERE game.id = gameIdIN;
+
+    INSERT INTO basket(
+        basket.userId,
+        basket.gameId,
+        basket.amount
+    )
+    VALUES(
+        userIdIN,
+        gameIdIN,
+        ROUND( gamePrice - (gamePrice * gameDiscount / 100), 0)
+    );
+
+END$$
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `bestsellers` ()   BEGIN
 
     SELECT 
-        jatek.id,
-        jatek.nev,
-        jatek.ar,
-        jatek.kep,
-        jatek.akcio
-    FROM jatek
+        game.id,
+        game.name,
+        game.price,
+        game.image,
+        game.discount
+    FROM game
 
-    ORDER BY jatek.eladva DESC
+    ORDER BY game.amountSold DESC
     LIMIT 3;
 
 END$$
 
-CREATE DEFINER=`root`@`localhost` PROCEDURE `carouselJatekok` ()   BEGIN
+CREATE DEFINER=`root`@`localhost` PROCEDURE `carouselGames` ()   BEGIN
 
     SELECT 
-        jatek.id,
-        jatek.nev,
-        jatek.ar,
-        jatek.kep,
-        jatek.akcio
-    FROM jatek
+        game.id,
+        game.name,
+        game.price,
+        game.image,
+        game.discount
+    FROM game
 
     ORDER BY RAND()
     LIMIT 3;
     
 END$$
 
-CREATE DEFINER=`root`@`localhost` PROCEDURE `felhasznalo` (IN `idBE` INT(9))   SELECT 
-	felhasznalo.id,
-    felhasznalo.felhasznaloNev,
-    felhasznalo.vezetekNev,
-    felhasznalo.keresztNev,
-    felhasznalo.email
-FROM felhasznalo
+CREATE DEFINER=`root`@`localhost` PROCEDURE `checkGameId` (IN `gameIdIN` INT(9), OUT `dbOUT` INT(1))   SELECT COUNT(game.id) 
+INTO dbOUT
+FROM game
+WHERE game.id = gameIdIN$$
 
-WHERE felhasznalo.id = idBE$$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `checkGameIdBasket` (IN `gameIdIN` INT(9), OUT `dbOUT` INT(1))   SELECT COUNT(basket.gameId) 
+INTO dbOUT
+FROM basket
+WHERE basket.gameId = gameIdIN$$
 
-CREATE DEFINER=`root`@`localhost` PROCEDURE `felhasznaloBelepes` (IN `felhasznaloNevBE` VARCHAR(100), IN `jelszoBE` TEXT, OUT `felhasznaloIdKI` INT(9), OUT `felhasznaloNevKI` VARCHAR(100), OUT `vezetekNevKI` VARCHAR(100), OUT `keresztNevKI` VARCHAR(100), OUT `emailKI` VARCHAR(100))   SELECT 
-	felhasznalo.id,
-    felhasznalo.felhasznaloNev,
-    felhasznalo.vezetekNev,
-    felhasznalo.keresztNev,
-    felhasznalo.email
+CREATE DEFINER=`root`@`localhost` PROCEDURE `checkUserEmail` (IN `emailIN` VARCHAR(100), OUT `dbOUT` INT(1))   SELECT COUNT(user.id) 
+INTO dbOUT
+FROM user
+WHERE user.email = emailIN$$
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `checkUserId` (IN `userIdIN` INT(9), OUT `dbOUT` INT(1))   SELECT COUNT(user.id) 
+INTO dbOUT
+FROM user
+WHERE user.id = userIdIN$$
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `checkUserIdBasket` (IN `userIdIN` INT(9), OUT `dbOUT` INT(1))   SELECT COUNT(basket.userId) 
+INTO dbOUT
+FROM basket
+WHERE basket.userId = userIdIN$$
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `checkUserName` (IN `nameIN` VARCHAR(100), OUT `dbOUT` INT(1))   SELECT COUNT(user.id) 
+INTO dbOUT
+FROM user
+WHERE user.userName = nameIN$$
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `deleteGameFromBasket` (IN `userIdIN` INT(9), IN `gameIdIN` INT(9))   DELETE 
+FROM basket
+WHERE basket.userId = userIdIN AND basket.gameId = gameIdIN$$
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `deleteUser` (IN `userIdIN` INT(9))   DELETE FROM user
+WHERE user.id = userIdIN$$
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `game` (IN `idIN` INT(9))   BEGIN
+
+    SELECT 
+        game.id,
+        game.name AS "gameName",
+        game.price,
+        game.description,
+        game.image,
+        game.ageLimit,
+        game.discount,
+        game.inStock,
+        device.name AS "deviceName",
+        platform.name AS "platformName"
+    FROM game
+
+    INNER JOIN device
+    ON game.deviceId = device.id
+
+    INNER JOIN platform
+    ON game.platformId = platform.id
+
+    WHERE game.id = idIN;
+
+END$$
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `games` ()   BEGIN
+
+    SELECT 
+        game.id,
+        game.name AS "gameName",
+        game.price,
+        game.image,
+        game.ageLimit,
+        game.discount,
+        device.name AS "deviceName",
+        platform.name AS "platformName"
+    FROM game
+
+    INNER JOIN device
+    ON game.deviceId = device.id
+
+    INNER JOIN platform
+    ON game.platformId = platform.id;
+
+END$$
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `login` (IN `userNameIN` VARCHAR(100), IN `passwordIN` TEXT, OUT `userIdOUT` INT(9), OUT `userNameOUT` VARCHAR(100), OUT `lastNameOUT` VARCHAR(100), OUT `firstNameOUT` VARCHAR(100), OUT `emailOUT` VARCHAR(100))   SELECT 
+	user.id,
+    user.userName,
+    user.lastName,
+    user.firstName,
+    user.email
 INTO
-	felhasznaloIdKI,
-    felhasznaloNevKI,
-    vezetekNevKI,
-    keresztNevKI,
-    emailKI
-FROM felhasznalo
+	userIdOUT,
+    userNameOUT,
+    lastNameOUT,
+    firstNameOUT,
+    emailOUT
+FROM user
 
-WHERE felhasznalo.felhasznaloNev = felhasznaloNevBE AND felhasznalo.jelszo = SHA1(jelszoBE)$$
+WHERE user.userName = userNameIN AND user.password = SHA1(passwordIN)$$
 
-CREATE DEFINER=`root`@`localhost` PROCEDURE `felhasznaloEmailEllenorzes` (IN `emailBE` VARCHAR(100), OUT `dbKI` INT(1))   SELECT COUNT(felhasznalo.id) 
-INTO dbKI
-FROM felhasznalo
-WHERE felhasznalo.email = emailBE$$
-
-CREATE DEFINER=`root`@`localhost` PROCEDURE `felhasznaloIdEllenorzes` (IN `felhasznaloIdBE` INT(9), OUT `dbKI` INT(1))   SELECT COUNT(felhasznalo.id) 
-INTO dbKI
-FROM felhasznalo
-WHERE felhasznalo.id = felhasznaloIdBE$$
-
-CREATE DEFINER=`root`@`localhost` PROCEDURE `felhasznaloIdKosarEllenorzes` (IN `felhasznaloIdBE` INT(9), OUT `dbKI` INT(1))   SELECT COUNT(kosar.felhasznaloId) 
-INTO dbKI
-FROM kosar
-WHERE kosar.felhasznaloId = felhasznaloIdBE$$
-
-CREATE DEFINER=`root`@`localhost` PROCEDURE `felhasznaloKosar` (IN `felhasznaloIdBE` INT(9))   BEGIN
+CREATE DEFINER=`root`@`localhost` PROCEDURE `newGames` ()   BEGIN
 
     SELECT 
-        kosar.felhasznaloId,
-        jatek.id,
-        jatek.nev,
-        kosar.vegosszeg,
-        jatek.kep
-    FROM kosar
+        game.id,
+        game.name,
+        game.price,
+        game.image,
+        game.discount
+    FROM game
 
-    INNER JOIN jatek
-    ON kosar.jatekId = jatek.id
-
-    WHERE kosar.felhasznaloId = felhasznaloIdBE;
-
-END$$
-
-CREATE DEFINER=`root`@`localhost` PROCEDURE `felhasznaloNevEllenorzes` (IN `nevBE` VARCHAR(100), OUT `dbKI` INT(1))   SELECT COUNT(felhasznalo.id) 
-INTO dbKI
-FROM felhasznalo
-WHERE felhasznalo.felhasznaloNev = nevBE$$
-
-CREATE DEFINER=`root`@`localhost` PROCEDURE `frissitesFelhasznalo` (IN `idBE` INT(9), IN `felhasznaloNevBE` VARCHAR(100), IN `vezetekNevBE` VARCHAR(100), IN `keresztNevBE` VARCHAR(100), IN `jelszoBE` TEXT)   UPDATE felhasznalo
-SET felhasznalo.felhasznaloNev = felhasznaloNevBE,
-	felhasznalo.vezetekNev = vezetekNevBE,
-    felhasznalo.keresztNev = keresztNevBE,
-  	felhasznalo.jelszo = SHA1(jelszoBE),
-    felhasznalo.frissitve = CURRENT_TIMESTAMP
-WHERE felhasznalo.id = idBE$$
-
-CREATE DEFINER=`root`@`localhost` PROCEDURE `jatek` (IN `idBe` INT(9))   BEGIN
-
-    SELECT 
-        jatek.id,
-        jatek.nev AS "jatekNev",
-        jatek.ar,
-        jatek.leiras,
-        jatek.kep,
-        jatek.korhatar,
-        jatek.akcio,
-        jatek.mennyisegraktaron,
-        eszkoz.nev AS "eszkozNev",
-        platform.nev AS "platformNev"
-    FROM jatek
-
-    INNER JOIN eszkoz
-    ON jatek.eszkozId = eszkoz.id
-
-    INNER JOIN platform
-    ON jatek.platformId = platform.id
-
-    WHERE jatek.id = idBe;
-
-END$$
-
-CREATE DEFINER=`root`@`localhost` PROCEDURE `jatekIdEllenorzes` (IN `jatekIdBE` INT(9), OUT `dbKI` INT(1))   SELECT COUNT(jatek.id) 
-INTO dbKI
-FROM jatek
-WHERE jatek.id = jatekIdBE$$
-
-CREATE DEFINER=`root`@`localhost` PROCEDURE `jatekIdKosarEllenorzes` (IN `jatekIdBE` INT(9), OUT `dbKI` INT(1))   SELECT COUNT(kosar.jatekId) 
-INTO dbKI
-FROM kosar
-WHERE kosar.jatekId = jatekIdBE$$
-
-CREATE DEFINER=`root`@`localhost` PROCEDURE `jatekok` ()   BEGIN
-
-    SELECT 
-        jatek.id,
-        jatek.nev AS "jatekNev",
-        jatek.ar,
-        jatek.kep,
-        jatek.korhatar,
-        jatek.akcio,
-        eszkoz.nev AS "eszkozNev",
-        platform.nev AS "platformNev"
-    FROM jatek
-
-    INNER JOIN eszkoz
-    ON jatek.eszkozId = eszkoz.id
-
-    INNER JOIN platform
-    ON jatek.platformId = platform.id;
-
-END$$
-
-CREATE DEFINER=`root`@`localhost` PROCEDURE `kosar` (IN `jatekIdBE` INT(9), IN `felhasznaloIdBE` INT(9))   BEGIN
-
-    DECLARE jatekAr INT(9);
-    DECLARE jatekAkcio INT(9);
-
-    SELECT jatek.ar INTO jatekAr
-    FROM jatek
-    WHERE jatek.id = jatekIdBE;
-
-    SELECT jatek.akcio INTO jatekAkcio
-    FROM jatek
-    WHERE jatek.id = jatekIdBE;
-
-    INSERT INTO kosar(
-        kosar.felhasznaloId,
-        kosar.jatekId,
-        kosar.vegosszeg
-    )
-    VALUES(
-        felhasznaloIdBE,
-        jatekIdBE,
-        ROUND( jatekAr - (jatekAr * jatekAkcio / 100), 0)
-    );
-
-END$$
-
-CREATE DEFINER=`root`@`localhost` PROCEDURE `legujabbJatekok` ()   BEGIN
-
-    SELECT 
-        jatek.id,
-        jatek.nev,
-        jatek.ar,
-        jatek.kep,
-        jatek.akcio
-    FROM jatek
-
-    ORDER BY jatek.letrehozva DESC
+    ORDER BY game.createdAt DESC
     LIMIT 3;
 
 END$$
 
-CREATE DEFINER=`root`@`localhost` PROCEDURE `rendeles` (IN `felhasznaloIdBE` INT(9))   BEGIN
+CREATE DEFINER=`root`@`localhost` PROCEDURE `order` (IN `userIdIN` INT(9))   BEGIN
 
-    DECLARE vegosszeg INT(9);
+    DECLARE total INT(9);
 
-    SELECT SUM(kosar.vegosszeg) INTO vegosszeg
-    FROM kosar
-    WHERE kosar.felhasznaloId = felhasznaloIdBE;
+    SELECT SUM(basket.amount) INTO total
+    FROM basket
+    WHERE basket.userId = userIdIN;
 
-    INSERT INTO rendeles(
-        rendeles.felhasznaloId,
-        rendeles.vegosszeg
+    INSERT INTO order_(
+        order_.userId,
+        order_.totalAmount
     )
     VALUES(
-        felhasznaloIdBE,
-        vegosszeg
+        userIdIN,
+        total
     );
 
 END$$
 
-CREATE DEFINER=`root`@`localhost` PROCEDURE `termekKulcs` (IN `felhasznaloIdBE` INT(9))   BEGIN
+CREATE DEFINER=`root`@`localhost` PROCEDURE `productKeys` (IN `userIdIN` INT(9))   BEGIN
 
     SELECT 
-        kosar.jatekId,
-        felhasznalo.email,
-        felhasznalo.felhasznaloNev,
-        jatek.nev,
-        kosar.vegosszeg,
-        termekkulcs.kulcs
-    FROM kosar
+        basket.gameId,
+        user.email,
+        user.userName,
+        game.name,
+        basket.amount,
+        productkey.key
+    FROM basket
 
-    INNER JOIN felhasznalo
-    ON kosar.felhasznaloId = felhasznalo.id
+    INNER JOIN user
+    ON basket.userId = user.id
 
-    INNER JOIN jatek
-    ON kosar.jatekId = jatek.id
+    INNER JOIN game
+    ON basket.gameId = game.id
 
-    INNER JOIN termekkulcs
-    ON kosar.jatekId = termekkulcs.jatekId
+    INNER JOIN productkey
+    ON basket.gameId = productkey.gameId
 
-    WHERE kosar.felhasznaloId = felhasznaloIdBE;
+    WHERE basket.userId = userIdIN;
 
 END$$
 
-CREATE DEFINER=`root`@`localhost` PROCEDURE `torlesFelhasznalo` (IN `felhasznaloIdBE` INT(9))   DELETE FROM felhasznalo
-WHERE felhasznalo.id = felhasznaloIdBE$$
-
-CREATE DEFINER=`root`@`localhost` PROCEDURE `torlesJatekKosarbol` (IN `felhasznaloIdBE` INT(9), IN `jatekIdBE` INT(9))   DELETE 
-FROM kosar
-WHERE kosar.felhasznaloId = felhasznaloIdBE AND kosar.jatekId = jatekIdBE$$
-
-CREATE DEFINER=`root`@`localhost` PROCEDURE `ujFelhasznalo` (IN `felhasznaloNevBE` VARCHAR(100), IN `vezetekNevBE` VARCHAR(100), IN `keresztNev` VARCHAR(100), IN `emailBE` VARCHAR(100), IN `jelszoBE` TEXT)   INSERT INTO felhasznalo(
-	felhasznalo.felhasznaloNev,
-    felhasznalo.vezetekNev,
-    felhasznalo.keresztNev,
-    felhasznalo.email,
-    felhasznalo.jelszo
+CREATE DEFINER=`root`@`localhost` PROCEDURE `registration` (IN `userNameIN` VARCHAR(100), IN `lastNameIN` VARCHAR(100), IN `firstNameIN` VARCHAR(100), IN `emailIN` VARCHAR(100), IN `passwordIN` TEXT)   INSERT INTO user(
+	user.userName,
+    user.lastName,
+    user.firstName,
+    user.email,
+    user.password
 )
 VALUES(
-	felhasznaloNevBE,
-    vezetekNevBE,
-    keresztNev,
-    emailBE,
-    SHA1(jelszoBE)
+	userNameIN,
+    lastNameIN,
+    firstNameIN,
+    emailIN,
+    SHA1(passwordIN)
 )$$
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `updateUser` (IN `idIN` INT(9), IN `userNameIN` VARCHAR(100), IN `lastNameIN` VARCHAR(100), IN `firstNameIN` VARCHAR(100), IN `passwordIN` TEXT)   UPDATE user
+SET user.userName = userNameIN,
+	user.lastName = lastNameIN,
+    user.firstName = firstNameIN,
+  	user.password = SHA1(passwordIN),
+    user.updatedAt = CURRENT_TIMESTAMP
+WHERE user.id = idIN$$
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `user` (IN `idIN` INT(9))   SELECT 
+	user.id,
+    user.userName,
+    user.lastName,
+    user.firstName,
+    user.email
+FROM user
+
+WHERE user.id = idIN$$
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `userBasket` (IN `userIdIN` INT(9))   BEGIN
+
+    SELECT 
+        basket.userId,
+        game.id,
+        game.name,
+        basket.amount,
+        game.image
+    FROM basket
+
+    INNER JOIN game
+    ON basket.gameId = game.id
+
+    WHERE basket.userId = userIdIN;
+
+END$$
 
 DELIMITER ;
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `eszkoz`
+-- Table structure for table `basket`
 --
 
-CREATE TABLE `eszkoz` (
+CREATE TABLE `basket` (
   `id` int(9) NOT NULL,
-  `nev` varchar(100) NOT NULL
+  `userId` int(9) NOT NULL,
+  `gameId` int(9) NOT NULL,
+  `amount` int(9) NOT NULL DEFAULT '0'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `device`
+--
+
+CREATE TABLE `device` (
+  `id` int(9) NOT NULL,
+  `name` varchar(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `eszkoz`
+-- Dumping data for table `device`
 --
 
-INSERT INTO `eszkoz` (`id`, `nev`) VALUES
+INSERT INTO `device` (`id`, `name`) VALUES
 (7, 'Nintendo Switch'),
 (1, 'PC'),
 (5, 'PS4'),
@@ -319,55 +332,29 @@ INSERT INTO `eszkoz` (`id`, `nev`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `felhasznalo`
+-- Table structure for table `game`
 --
 
-CREATE TABLE `felhasznalo` (
+CREATE TABLE `game` (
   `id` int(9) NOT NULL,
-  `felhasznaloNev` varchar(100) NOT NULL,
-  `vezetekNev` varchar(100) NOT NULL,
-  `keresztNev` varchar(100) NOT NULL,
-  `email` varchar(100) NOT NULL,
-  `jelszo` text NOT NULL,
-  `letrehozva` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `frissitve` datetime DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
---
--- Dumping data for table `felhasznalo`
---
-
-INSERT INTO `felhasznalo` (`id`, `felhasznaloNev`, `vezetekNev`, `keresztNev`, `email`, `jelszo`, `letrehozva`, `frissitve`) VALUES
-(1, 'SunnyDay21', 'Kéri', 'Bence', 'keribence0@gmail.com', '49e6586c9fbf5cdbfb820bde5c0f6800a21b549a', '2023-11-20 17:13:02', NULL),
-(2, 'AdventureSeeker', 'Nagy', 'Péter', 'peter.nagy@example.com', '9c073111b80b0af312f9c9f8bb4baa1c41e86d51', '2023-11-20 17:13:35', NULL),
-(3, 'MusicLover88', 'Tóth', 'Eszter', 'eszter.toth@example.com', '1e0acaff2cd87e52f18dbc6c9b6cad2b62483e49', '2023-12-15 15:06:49', NULL);
-
--- --------------------------------------------------------
-
---
--- Table structure for table `jatek`
---
-
-CREATE TABLE `jatek` (
-  `id` int(9) NOT NULL,
-  `nev` varchar(100) NOT NULL,
-  `ar` int(9) NOT NULL,
-  `leiras` text NOT NULL,
-  `kep` varchar(100) NOT NULL,
-  `korhatar` int(2) NOT NULL,
-  `akcio` int(3) NOT NULL DEFAULT '0',
-  `mennyisegraktaron` int(5) NOT NULL,
-  `eszkozId` int(9) NOT NULL,
+  `name` varchar(100) NOT NULL,
+  `price` int(9) NOT NULL,
+  `description` text NOT NULL,
+  `image` varchar(100) NOT NULL,
+  `ageLimit` int(2) NOT NULL,
+  `discount` int(3) NOT NULL DEFAULT '0',
+  `inStock` int(5) NOT NULL,
+  `deviceId` int(9) NOT NULL,
   `platformId` int(9) NOT NULL,
-  `letrehozva` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `eladva` int(9) NOT NULL
+  `createdAt` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `amountSold` int(9) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `jatek`
+-- Dumping data for table `game`
 --
 
-INSERT INTO `jatek` (`id`, `nev`, `ar`, `leiras`, `kep`, `korhatar`, `akcio`, `mennyisegraktaron`, `eszkozId`, `platformId`, `letrehozva`, `eladva`) VALUES
+INSERT INTO `game` (`id`, `name`, `price`, `description`, `image`, `ageLimit`, `discount`, `inStock`, `deviceId`, `platformId`, `createdAt`, `amountSold`) VALUES
 (1, 'The Witcher 3: Wild Hunt', 5990, 'A The Witcher 3: Wild Hunt egy fantasy szerepjáték, melyben Geralt of Rivia karakterét irányítva különböző küldetéseket teljesíthetsz egy nyitott világban.', 'witcher3.jpg', 18, 15, 100, 1, 1, '2023-11-11 11:57:24', 0),
 (2, 'Counter-Strike: Global Offensive', 1490, 'A Counter-Strike: Global Offensive egy taktikai lövöldözős játék, ahol két csapat, a terroristák és az antiterroristák egymás ellen küzdenek.', 'csgo.jpg', 16, 0, 300, 1, 1, '2023-11-11 12:02:56', 1),
 (3, 'Minecraft', 2990, 'A Minecraft egy sandbox játék, ahol a játékosok kockákból építhetnek és felfedezhetnek egy végtelen világot.', 'minecraft.jpg', 7, 0, 200, 7, 3, '2023-11-11 12:04:14', 0),
@@ -398,14 +385,14 @@ INSERT INTO `jatek` (`id`, `nev`, `ar`, `leiras`, `kep`, `korhatar`, `akcio`, `m
 -- --------------------------------------------------------
 
 --
--- Table structure for table `kosar`
+-- Table structure for table `order_`
 --
 
-CREATE TABLE `kosar` (
+CREATE TABLE `order_` (
   `id` int(9) NOT NULL,
-  `felhasznaloId` int(9) NOT NULL,
-  `jatekId` int(9) NOT NULL,
-  `vegosszeg` int(9) NOT NULL DEFAULT '0'
+  `userId` int(9) NOT NULL,
+  `totalAmount` int(9) NOT NULL,
+  `orderedAt` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
@@ -416,14 +403,14 @@ CREATE TABLE `kosar` (
 
 CREATE TABLE `platform` (
   `id` int(9) NOT NULL,
-  `nev` varchar(100) NOT NULL
+  `name` varchar(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `platform`
 --
 
-INSERT INTO `platform` (`id`, `nev`) VALUES
+INSERT INTO `platform` (`id`, `name`) VALUES
 (3, 'Epic Games'),
 (2, 'Origin'),
 (1, 'Steam'),
@@ -432,33 +419,20 @@ INSERT INTO `platform` (`id`, `nev`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `rendeles`
+-- Table structure for table `productkey`
 --
 
-CREATE TABLE `rendeles` (
+CREATE TABLE `productkey` (
   `id` int(9) NOT NULL,
-  `felhasznaloId` int(9) NOT NULL,
-  `vegosszeg` int(9) NOT NULL,
-  `feladva` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
--- --------------------------------------------------------
-
---
--- Table structure for table `termekkulcs`
---
-
-CREATE TABLE `termekkulcs` (
-  `id` int(9) NOT NULL,
-  `kulcs` char(50) NOT NULL,
-  `jatekId` int(9) NOT NULL
+  `key` char(50) NOT NULL,
+  `gameId` int(9) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `termekkulcs`
+-- Dumping data for table `productkey`
 --
 
-INSERT INTO `termekkulcs` (`id`, `kulcs`, `jatekId`) VALUES
+INSERT INTO `productkey` (`id`, `key`, `gameId`) VALUES
 (1, 'a1de-2jg2-jas7', 1),
 (2, 'b2fg-1hd3-k9s8', 2),
 (3, 'k1op-2qr3-3st4', 3),
@@ -486,88 +460,114 @@ INSERT INTO `termekkulcs` (`id`, `kulcs`, `jatekId`) VALUES
 (25, 'g3qr-4st5-5uv6', 25),
 (26, 'h4ij-5kl6-6mn7', 26);
 
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `user`
+--
+
+CREATE TABLE `user` (
+  `id` int(9) NOT NULL,
+  `userName` varchar(100) NOT NULL,
+  `lastName` varchar(100) NOT NULL,
+  `firstName` varchar(100) NOT NULL,
+  `email` varchar(100) NOT NULL,
+  `password` text NOT NULL,
+  `createdAt` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `updatedAt` datetime DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `user`
+--
+
+INSERT INTO `user` (`id`, `userName`, `lastName`, `firstName`, `email`, `password`, `createdAt`, `updatedAt`) VALUES
+(1, 'SunnyDay21', 'Kéri', 'Bence', 'keribence0@gmail.com', '49e6586c9fbf5cdbfb820bde5c0f6800a21b549a', '2023-11-20 17:13:02', NULL),
+(2, 'AdventureSeeker', 'Nagy', 'Péter', 'peter.nagy@example.com', '9c073111b80b0af312f9c9f8bb4baa1c41e86d51', '2023-11-20 17:13:35', NULL),
+(3, 'MusicLover88', 'Tóth', 'Eszter', 'eszter.toth@example.com', '1e0acaff2cd87e52f18dbc6c9b6cad2b62483e49', '2023-12-15 15:06:49', NULL);
+
 --
 -- Indexes for dumped tables
 --
 
 --
--- Indexes for table `eszkoz`
+-- Indexes for table `basket`
 --
-ALTER TABLE `eszkoz`
+ALTER TABLE `basket`
   ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `Egyedi` (`nev`);
+  ADD KEY `felhasznaloId` (`userId`,`gameId`);
 
 --
--- Indexes for table `felhasznalo`
+-- Indexes for table `device`
 --
-ALTER TABLE `felhasznalo`
+ALTER TABLE `device`
   ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `Egyedi` (`felhasznaloNev`,`email`);
+  ADD UNIQUE KEY `Egyedi` (`name`);
 
 --
--- Indexes for table `jatek`
+-- Indexes for table `game`
 --
-ALTER TABLE `jatek`
+ALTER TABLE `game`
   ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `Egyedi` (`nev`,`kep`),
-  ADD KEY `kategoriaId` (`eszkozId`,`platformId`);
+  ADD UNIQUE KEY `Egyedi` (`name`,`image`),
+  ADD KEY `kategoriaId` (`deviceId`,`platformId`);
 
 --
--- Indexes for table `kosar`
+-- Indexes for table `order_`
 --
-ALTER TABLE `kosar`
+ALTER TABLE `order_`
   ADD PRIMARY KEY (`id`),
-  ADD KEY `felhasznaloId` (`felhasznaloId`,`jatekId`);
+  ADD KEY `felhasznaloId` (`userId`);
 
 --
 -- Indexes for table `platform`
 --
 ALTER TABLE `platform`
   ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `Egyedi` (`nev`);
+  ADD UNIQUE KEY `Egyedi` (`name`);
 
 --
--- Indexes for table `rendeles`
+-- Indexes for table `productkey`
 --
-ALTER TABLE `rendeles`
+ALTER TABLE `productkey`
   ADD PRIMARY KEY (`id`),
-  ADD KEY `felhasznaloId` (`felhasznaloId`);
+  ADD UNIQUE KEY `kulcs` (`key`),
+  ADD UNIQUE KEY `jatekId` (`gameId`),
+  ADD KEY `ajandekKartyaId` (`gameId`);
 
 --
--- Indexes for table `termekkulcs`
+-- Indexes for table `user`
 --
-ALTER TABLE `termekkulcs`
+ALTER TABLE `user`
   ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `kulcs` (`kulcs`),
-  ADD UNIQUE KEY `jatekId` (`jatekId`),
-  ADD KEY `ajandekKartyaId` (`jatekId`);
+  ADD UNIQUE KEY `Egyedi` (`userName`,`email`);
 
 --
 -- AUTO_INCREMENT for dumped tables
 --
 
 --
--- AUTO_INCREMENT for table `eszkoz`
+-- AUTO_INCREMENT for table `basket`
 --
-ALTER TABLE `eszkoz`
+ALTER TABLE `basket`
+  MODIFY `id` int(9) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `device`
+--
+ALTER TABLE `device`
   MODIFY `id` int(9) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
--- AUTO_INCREMENT for table `felhasznalo`
+-- AUTO_INCREMENT for table `game`
 --
-ALTER TABLE `felhasznalo`
-  MODIFY `id` int(9) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
-
---
--- AUTO_INCREMENT for table `jatek`
---
-ALTER TABLE `jatek`
+ALTER TABLE `game`
   MODIFY `id` int(9) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
 
 --
--- AUTO_INCREMENT for table `kosar`
+-- AUTO_INCREMENT for table `order_`
 --
-ALTER TABLE `kosar`
+ALTER TABLE `order_`
   MODIFY `id` int(9) NOT NULL AUTO_INCREMENT;
 
 --
@@ -577,16 +577,16 @@ ALTER TABLE `platform`
   MODIFY `id` int(9) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
--- AUTO_INCREMENT for table `rendeles`
+-- AUTO_INCREMENT for table `productkey`
 --
-ALTER TABLE `rendeles`
-  MODIFY `id` int(9) NOT NULL AUTO_INCREMENT;
+ALTER TABLE `productkey`
+  MODIFY `id` int(9) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
 
 --
--- AUTO_INCREMENT for table `termekkulcs`
+-- AUTO_INCREMENT for table `user`
 --
-ALTER TABLE `termekkulcs`
-  MODIFY `id` int(9) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
+ALTER TABLE `user`
+  MODIFY `id` int(9) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
