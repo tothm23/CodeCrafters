@@ -18,8 +18,8 @@ fetch(
       );
       carouselInner.innerHTML += `
         <div class="carousel-item">
-        <div class="card flex-column flex-lg-row">
-        <a href="./jatek/jatek.html?id=${data[i].id}"><img src="./kepek/jatekok/${
+        <div class="card d-flex flex-column flex-md-row">
+        <a class="d-block w-100" href="./jatek/jatek.html?id=${data[i].id}"><img src="./kepek/jatekok/${
           data[i].kep
         }" class="d-block w-100" alt="${data[i].nev}">
         </a>

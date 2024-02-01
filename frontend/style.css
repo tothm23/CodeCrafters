@@ -278,6 +278,10 @@ slide
   text-align: center;
 }
 
+.slideshow .card-body{
+  width:300px;
+}
+
 .main .card {
   background-color: #241f1f;
   color: white;
