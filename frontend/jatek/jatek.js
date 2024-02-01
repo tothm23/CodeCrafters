@@ -1,15 +1,14 @@
 const link = "http://localhost:8080/CodeCraftersWebshop-1.0-SNAPSHOT/webresources/jatek";
 
-const kep = document.getElementById("kep");
-const nev = document.getElementById("nev");
+const img = document.getElementById("img");
+const game_name = document.getElementById("game_name");
 const eszkoz = document.getElementById("eszkoz");
 const platform = document.getElementById("platform");
-const korhatar = document.getElementById("korhatar");
-const elerheto = document.getElementById("elerheto");
-const eredeti_ar = document.getElementById("eredeti-ar");
-const akcios_ar = document.getElementById("akcios-ar");
-const leiras = document.getElementById("leiras");
-const hozzadasgomb = document.getElementById("hozzadasgomb");
+const age = document.getElementById("korhatar");
+const acces = document.getElementById("elerheto");
+const price = document.getElementById("eredeti-ar");
+const sale_price = document.getElementById("akcios-ar");
+const desc = document.getElementById("leiras");
 
 // Kiolvassa a paraméterek az URL-ből
 let parameterek = new URL(document.location).searchParams;
@@ -22,66 +21,67 @@ fetch(`${link}/${id}`)
   .then((response) => response.json())
   .then((data) => {
     if (data.id) {
-      kep.innerHTML = data.nev;
-      var src='../kepek/jatekok/'+data.kep;
-      kep.setAttribute("src", src);
+      console.log(data)
+      img.innerHTML = data.nev;
+      var src='../img/games/'+data.kep;
+      img.setAttribute("src", src);
       
-      nev.innerHTML = data.nev;
+      game_name.innerHTML = data.nev;
       eszkoz.innerHTML = data.eszkoz;
       platform.innerHTML = data.platform;
 
       // Korhatár színe
       switch (data.korhatar) {
         case 3:
-          korhatar.style.border = "3px solid #a5c301";
+          age.style.border = "3px solid #a5c301";
           break;
         case 7:
-          korhatar.style.border = "3px solid #a5c301";
+          age.style.border = "3px solid #a5c301";
           break;
         case 12:
-          korhatar.style.border = "3px solid #f7a100";
+          age.style.border = "3px solid #f7a100";
           break;
         case 16:
-          korhatar.style.border = "3px solid #f7a100";
+          age.style.border = "3px solid #f7a100";
           break;
         case 18:
-          korhatar.style.border = "3px solid #e4001b";
+          age.style.border = "3px solid #e4001b";
         default:
           break;
       }
 
-      korhatar.style.borderRadius = "50%";
-      korhatar.innerHTML = data.korhatar;
+      age.style.borderRadius = "50%";
+      age.innerHTML = data.korhatar;
 
       // Raktáron
       if (data.mennyisegraktaron == 0) {
-        elerheto.innerHTML = "elérhető";
-        elerheto.style.color = "#95e72d";
+        acces.innerHTML = "elérhető";
+        acces.style.color = "#95e72d";
       } else {
-        elerheto.innerHTML = "nem elérhető";
-        elerheto.style.color = "#ff0000";
+        acces.innerHTML = "nem elérhető";
+        acces.style.color = "#ff0000";
       }
 
-      eredeti_ar.innerHTML = data.ar + " Ft";
+      price.innerHTML = data.ar + " Ft";
       //Ár megjelenítése
 
       if(data.akcio > 0){
-        eredeti_ar.innerHTML=`<p class="card-text ar" style="text-decoration: line-through;">${data.ar} Ft</p>`; 
+        price.innerHTML=`<p class="card-text ar" style="text-decoration: line-through;">${data.ar} Ft</p>`; 
       }
       else{
-        eredeti_ar.innerHTML=`<p class="card-text ar">${data.ar} Ft</p>`;
+        price.innerHTML=`<p class="card-text ar">${data.ar} Ft</p>`;
       }
       
       if(data.akcio > 0){
         // Akciós ár egész számra kerekítve
-        akcios_ar.innerHTML = `<p class="card-text akciosar">${Math.round(data.ar - (data.ar / 100) * data.akcio)} Ft</p>`;
+        sale_price.innerHTML = `<p class="card-text saleprice">${Math.round(data.ar - (data.ar / 100) * data.akcio)} Ft</p>`;
       }
       else{ 
-        akcios_ar.innerHTML = "";
+        sale_price.innerHTML = "";
       }
-      hozzadasgomb.innerHTML=hozzaadasGomb(id);
+      add_btn.innerHTML=add_btn(id);
       
-      leiras.innerHTML = data.leiras;
+      desc.innerHTML = data.leiras;
     } else {
       alert("A játék nem található!");
     }
