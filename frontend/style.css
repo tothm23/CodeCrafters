@@ -188,7 +188,7 @@ body {
 }
 
 /* vissza az oldal tetejére */
-#vissza-gomb {
+#scroll_Up {
   background-color: #bb4930;
   border: 2px solid #000;
   color: #000;

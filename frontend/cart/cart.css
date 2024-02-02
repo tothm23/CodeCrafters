@@ -19,7 +19,7 @@ body {
     margin: auto;
 }
 
-.kosar{
+.cart{
     margin-top: 50px;
     margin-bottom: 50px;
     border: black solid 1px;
@@ -88,29 +88,29 @@ body {
     background-color: #e21717;
 }
 
-.kosar-vegosszeg {
+.final-price-div {
     margin-top: 10px;
     margin-right: 10px;
 }
 
-#vegosszeg{
+#final_price{
     font-size: xx-large;
 }
 
-.kosar-vegosszeg-title {
+.final_price_text {
     font-weight: lighter;
     font-size: 1.5em;
     color: white;
     margin-right: 20px;
 }
 
-.kosar-btns {
+.cart-btns {
     display: flex;
     margin-top: 1em;
     justify-content: space-around;
 }
 
-.btn-vissza {
+.btn-back {
     color: white;
     background-color: inherit;
     border: 1px solid white;
@@ -121,16 +121,16 @@ body {
     width: 150px;
 }
 
-.btn-vissza:hover {
+.btn-back:hover {
     border: 1px solid white;
     background-color: #404040;
 }
 
-.btn-vissza a {
+.btn-back a {
     color: #fff;
 }
 
-.btn-rendeles {
+.btn-order {
     color: black;
     background-color: greenyellow;
     border: 1px solid black;
@@ -141,8 +141,8 @@ body {
     width: 150px;
 }
 
-.btn-rendeles:hover,
-.btn-rendeles:focus ,.btn-rendeles:disabled{
+.btn-order:hover,
+.btn-order:focus ,.btn-order:disabled{
     color: black;
     border: 1px solid black;
     background-color: rgb(139, 185, 45);

@@ -1,4 +1,4 @@
-const logged_user = JSON.parse(localStorage.getItem("logeduserdata"));
+const logged_user = JSON.parse(localStorage.getItem("loged_userdata"));
 const log_reg = document.getElementById("log_reg");
 const userbox = document.getElementById("user-box");
 
@@ -19,7 +19,7 @@ fetch(
       carouselInner.innerHTML += `
         <div class="carousel-item">
         <div class="card d-flex flex-column flex-md-row">
-        <a class="d-block w-100" href="./jatek/jatek.html?id=${data[i].id}"><img src="./img/games/${
+        <a class="d-block w-100" href="./game/game.html?id=${data[i].id}"><img src="./img/games/${
           data[i].kep
         }" class="d-block w-100" alt="${data[i].nev}">
         </a>
@@ -50,7 +50,7 @@ fetch(
   .catch((hiba) => alert(hiba));
 
 //get kosár
-function getkosar(gombid) {
+function getCart(gombid) {
   fetch(`http://localhost:8080/CodeCraftersWebshop-1.0-SNAPSHOT/webresources/kosar/${logged_user.id}`, {
       method: 'GET'
     })
@@ -66,7 +66,7 @@ function getkosar(gombid) {
     }).catch(error => console.error(error));
 }
 // vissza gomb
-let mybutton = document.getElementById("vissza-gomb");
+let mybutton = document.getElementById("scroll_Up");
 
 window.onscroll = () => {
   if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
@@ -76,7 +76,7 @@ window.onscroll = () => {
   }
 };
 
-function felgorget() {
+function scroll_Up() {
   window.scrollTo({
     top: 0,
     behavior: "smooth",
@@ -128,47 +128,47 @@ document.addEventListener("DOMContentLoaded", function () {
   if (logged_user) {
     log_reg.display = "none";
     userbox.display = "flex";
-    getkosar(cart_id);
+    getCart(cart_id);
   } else {
     log_reg.display = "flex";
     userbox.display = "none";
   }
   //kijelentkezés essetén
   logout.addEventListener("click", function () {
-    localStorage.removeItem("bejelentkezes");
+    localStorage.removeItem("loged_userdata");
     log_reg.style.display = "flex";
     userbox.style.display = "none";
   });
   settings_btn.addEventListener("click", function () {
     if (actual_path == "/frontend/index.html") {
       // Most már tovább navigálhatsz az új oldalra
-      window.location.href = "./felhasznalo/felhasznalo.html";
+      window.location.href = "./user/user.html";
     } else {
-      window.location.href = "../felhasznalo/felhasznalo.html";
+      window.location.href = "../user/user.html";
     }
   });
   cart_btn.addEventListener("click", function () {
     if (actual_path == "/frontend/index.html") {
       // Most már tovább navigálhatsz az új oldalra
-      window.location.href = "./kosar/kosar.html";
+      window.location.href = "./cart/cart.html";
     } else {
-      window.location.href = "../kosar/kosar.html";
+      window.location.href = "../cart/cart.html";
     }
   });
   reg.addEventListener("click", function () {
     if (actual_path == "/frontend/index.html") {
       // Most már tovább navigálhatsz az új oldalra
-      window.location.href = "./regisztracio/regisztracio.html";
+      window.location.href = "./registration/registration.html";
     } else {
-      window.location.href = "../regisztracio/regisztracio.html";
+      window.location.href = "../registration/registration.html";
     }
   });
   login.addEventListener("click", function () {
     if (actual_path == "/frontend/index.html") {
       // Most már tovább navigálhatsz az új oldalra
-      window.location.href = "./bejelentkezes/bejelentkezes.html";
+      window.location.href = "./login/login.html";
     } else {
-      window.location.href = "../bejelentkezes/bejelentkezes.html";
+      window.location.href = "../login/login.html";
     }
   });
   // Eseményfigyelők hozzáadása a keresőhöz és az ármezőkhöz
@@ -176,13 +176,13 @@ document.addEventListener("DOMContentLoaded", function () {
     esemeny.preventDefault();
 
     // A keresőszöveg tárolása a localStorage-ban
-    localStorage.setItem('keresesSzoveg', search_Input.value.toLowerCase());
+    localStorage.setItem('searched_text', search_Input.value.toLowerCase());
 
     if (actual_path == "/frontend/index.html") {
       // Tovább navigálunk az új oldalra
-      window.location.href = "./termekek/termekek.html";
-    } else if (actual_path == "/frontend/jatek/jatek.html") {
-      window.location.href = "../termekek/termekek.html";
+      window.location.href = "./products/products.html";
+    } else if (actual_path == "/frontend/game/game.html") {
+      window.location.href = "../products/products.html";
     } else {
       // Egyéb esetek kezelése (opcionális)
     }

@@ -1,11 +1,11 @@
 /* főoldal */
-.szoveg-doboz {
+.text-content {
   background-color: #241f1f;
   color: #fff;
   border-radius: 20px;
 }
 
-#elerheto {
+#available {
   color: #95e72d;
 }
 

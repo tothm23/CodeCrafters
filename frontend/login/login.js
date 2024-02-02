@@ -41,7 +41,7 @@ document.addEventListener("DOMContentLoaded", (event) => {
 
         let response_object=(JSON.stringify(parseJwt
           (result.token)));
-          localStorage.setItem("logeduserdata",response_object);
+          localStorage.setItem("loged_userdata",response_object);
           alert("Sikeres bejelentkezés");
           window.location.href = "../index.html";
         }

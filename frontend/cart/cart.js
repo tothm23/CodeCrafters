@@ -1,16 +1,16 @@
 document.addEventListener('DOMContentLoaded', function () {
-    const Kosartartalma = document.getElementById('kosartartalma');
-    let kosarmerete = [];
-    const final_price = document.getElementById('vegosszeg');
-    const order_btn = document.getElementById('rendeles_btn');
+    const cart_content = document.getElementById('cart_content');
+    let cart_size = [];
+    const final_price = document.getElementById('final_price');
+    const order_btn = document.getElementById('order_btn');
     // Kinyerjük a bejelentkezési adatokat a localStorage-ból
-    const logeduser_data = JSON.parse(localStorage.getItem("logeduserdata"));
+    const logeduser_data = JSON.parse(localStorage.getItem("loged_userdata"));
     // Ellenőrizzük, hogy van-e bejelentkezett felhasználó
     console.log(logeduser_data && logeduser_data.id);
 
     addEventListener('load', function () {
         if (logeduser_data.id) {
-            kosarGet();
+            cartGet();
         } else {
             // Ha nincs bejelentkezett felhasználó, valamilyen hiba kezelése vagy irányítás
             console.error("Nincs bejelentkezett felhasználó");
@@ -19,12 +19,12 @@ document.addEventListener('DOMContentLoaded', function () {
     });
 
 
-    function kosartartalma(data) {
-        Kosartartalma.innerHTML = "";
+    function _content(data) {
+        cart_content.innerHTML = "";
 
         for (let i = 0; i < data.length; i++) {
-            kosarmerete[i] = data[i].jatekId;
-            Kosartartalma.innerHTML += `
+            cart_size[i] = data[i].jatekId;
+            cart_content.innerHTML += `
         <div class="card d-flex flex-row justify-content-center h-auto h-lg-120" data-id="${data[i].jatekId}">
             <img class="card-img-top img-fluid justify-content-center" src="../img/games/${data[i].kep}" alt="${data[i].nev}">
             <div class="card-body d-flex flex-row justify-align-content-between border-10">
@@ -43,11 +43,11 @@ document.addEventListener('DOMContentLoaded', function () {
         // Olvassa ki az ID-t a data-id attribútumból
         var gameid = closest_card.getAttribute('data-id');
         console.log("termek id:", gameid);
-        kosartorlese(gameid);
+        cart_delete(gameid);
 
     });
 
-    function kosartorlese(jatekid) {
+    function cart_delete(jatekid) {
         var requestOptions = {
             method: 'DELETE',
             redirect: 'follow'
@@ -57,7 +57,7 @@ document.addEventListener('DOMContentLoaded', function () {
             .then(response => response.text())
             .then(result => {
                 console.log(result);
-                kosarGet();
+                cartGet();
 
             })
             .catch(error => console.log('error', error));
@@ -82,16 +82,16 @@ document.addEventListener('DOMContentLoaded', function () {
             .then(response => response.text())
             .then(result => {
                 console.log(result);
-                for (let i = 0; i < kosarmerete.length; i++) {
-                    kosartorlese(kosarmerete[i]);
+                for (let i = 0; i < cart_size.length; i++) {
+                    cart_delete(cart_size[i]);
                 }
-                kosarGet();
+                cartGet();
             })
             .catch(error => console.log('error', error));
 
     });
 
-    function vegosszegkiszamitasa(data) {
+    function final_price_cal(data) {
         final_price.innerHTML = "";
         let sum_price = 0;
         for (let i = 0; i < data.length; i++) {
@@ -104,13 +104,13 @@ document.addEventListener('DOMContentLoaded', function () {
         console.log(sum_price);
     }
 
-    function kosarGet() {
+    function cartGet() {
         fetch(`http://localhost:8080/CodeCraftersWebshop-1.0-SNAPSHOT/webresources/kosar/${logeduser_data.id}`, )
             .then(response => response.json())
             .then(result => {
                 // Itt további kezelése a kapott adatoknak
-                kosartartalma(result);
-                vegosszegkiszamitasa(result);
+                _content(result);
+                final_price_cal(result);
                 console.log(result);
             })
             .catch(error => console.error(error));

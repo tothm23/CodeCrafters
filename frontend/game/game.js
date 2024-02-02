@@ -2,13 +2,13 @@ const link = "http://localhost:8080/CodeCraftersWebshop-1.0-SNAPSHOT/webresource
 
 const img = document.getElementById("img");
 const game_name = document.getElementById("game_name");
-const eszkoz = document.getElementById("eszkoz");
+const device = document.getElementById("device");
 const platform = document.getElementById("platform");
-const age = document.getElementById("korhatar");
-const acces = document.getElementById("elerheto");
-const price = document.getElementById("eredeti-ar");
-const sale_price = document.getElementById("akcios-ar");
-const desc = document.getElementById("leiras");
+const age = document.getElementById("age");
+const available = document.getElementById("available");
+const price = document.getElementById("price");
+const sale_price = document.getElementById("sale_price");
+const desc = document.getElementById("desc");
 
 // Kiolvassa a paraméterek az URL-ből
 let parameterek = new URL(document.location).searchParams;
@@ -27,7 +27,7 @@ fetch(`${link}/${id}`)
       img.setAttribute("src", src);
       
       game_name.innerHTML = data.nev;
-      eszkoz.innerHTML = data.eszkoz;
+      device.innerHTML = data.eszkoz;
       platform.innerHTML = data.platform;
 
       // Korhatár színe
@@ -55,21 +55,21 @@ fetch(`${link}/${id}`)
 
       // Raktáron
       if (data.mennyisegraktaron == 0) {
-        acces.innerHTML = "elérhető";
-        acces.style.color = "#95e72d";
+        available.innerHTML = "elérhető";
+        available.style.color = "#95e72d";
       } else {
-        acces.innerHTML = "nem elérhető";
-        acces.style.color = "#ff0000";
+        available.innerHTML = "nem elérhető";
+        available.style.color = "#ff0000";
       }
 
       price.innerHTML = data.ar + " Ft";
       //Ár megjelenítése
 
       if(data.akcio > 0){
-        price.innerHTML=`<p class="card-text ar" style="text-decoration: line-through;">${data.ar} Ft</p>`; 
+        price.innerHTML=`<p class="card-text price" style="text-decoration: line-through;">${data.ar} Ft</p>`; 
       }
       else{
-        price.innerHTML=`<p class="card-text ar">${data.ar} Ft</p>`;
+        price.innerHTML=`<p class="card-text price">${data.ar} Ft</p>`;
       }
       
       if(data.akcio > 0){

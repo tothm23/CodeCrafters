@@ -11,7 +11,7 @@ document.addEventListener("DOMContentLoaded", function () {
   const checkboxok = document.querySelectorAll(".form-check-input");
   
   const product_games = document.querySelector(".termek-lista#jatekok");
-  const searched_text = localStorage.getItem('keresesSzoveg');
+  const searched_text = localStorage.getItem('searched_text');
 
   const sale_checkbox = document.getElementById("AkciosCheckbox");
   const sale_checkbox2 = document.getElementById("AkciosCheckbox2");
@@ -80,7 +80,7 @@ document.addEventListener("DOMContentLoaded", function () {
       // Az oldal betöltésekor alkalmazza a szűrőket de csak mikor a betöltöt addatal egyenlő hogy ne fusson le mindig
       if (searched_text == searchIn.value) apply_fillters();
     })
-    .catch((hiba) => alert(hiba));
+    .catch((error) => alert(error));
 
   // Termékek megjelenítése a HTML-ben
   function createCard(imgPath, name, price, sale, id, url) {
@@ -116,7 +116,7 @@ document.addEventListener("DOMContentLoaded", function () {
           data[i].ar,
           data[i].akcio,
           data[i].id,
-          "../jatek/jatek.html"
+          "../game/game.html"
         ));
     }
   }
@@ -124,29 +124,29 @@ document.addEventListener("DOMContentLoaded", function () {
   // Szűrők alkalmazása és terméklista frissítése
   function apply_fillters() {
     const searched_text = searchIn.value.toLowerCase();
-    const minAr = parseFloat(minpriceIn.value) || 0;
-    const maxAr = parseFloat(maxpriceIn.value) || Infinity;
-    console.log("min:" + minAr + " max:" + maxAr);
-    const kivalasztottPlatformok = Array.from(document.querySelectorAll('.platform input:checked'))
+    const min_price = parseFloat(minpriceIn.value) || 0;
+    const max_price = parseFloat(maxpriceIn.value) || Infinity;
+    console.log("min:" + min_price + " max:" + max_price);
+    const checked_platform = Array.from(document.querySelectorAll('.platform input:checked'))
       .map(checkbox => checkbox.value.toLowerCase());
 
-    const kivalasztottEszkozok = Array.from(document.querySelectorAll('.eszkoz input:checked'))
+    const checked_device = Array.from(document.querySelectorAll('.device input:checked'))
       .map(checkbox => checkbox.value.toLowerCase());
     // Csak akkor alkalmazza a szűrést, ha a checkbox be van jelölve
-    const szurtAdatok = original_data.filter(
+    const filltered_data = original_data.filter(
       (elem) =>
       (elem.nev.toLowerCase().includes(searched_text) ||
         searched_text.includes(elem.nev.toLowerCase())) &&
-      elem.ar >= minAr &&
-      elem.ar <= maxAr &&
+      elem.ar >= min_price &&
+      elem.ar <= max_price &&
       //platformra szűrés
-      (kivalasztottPlatformok.length === 0 || kivalasztottPlatformok.includes(elem.platform.toLowerCase())) &&
+      (checked_platform.length === 0 || checked_platform.includes(elem.platform.toLowerCase())) &&
       //eszközre szűrés
-      (kivalasztottEszkozok.length === 0 || kivalasztottEszkozok.includes(elem.eszkoz.toLowerCase())) &&
+      (checked_device.length === 0 || checked_device.includes(elem.eszkoz.toLowerCase())) &&
       //akciósra szűrés
       (sale_checkbox.checked == false || elem.akcio > 0)
     );
     // Szűrt termékek megjelenítése
-    show_products(szurtAdatok);
+    show_products(filltered_data);
   }
 });
