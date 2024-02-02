@@ -19,7 +19,7 @@ img{
     max-width: 100px;
 }
 
-#felhasznalo-vezeteknev,#felhasznalo-keresztnev{
+#lastName,#firstName{
     margin: 1px;
 }
 
@@ -70,13 +70,13 @@ form {
     color: white;
 }
 
-.felhasznalo-btns {
+.user-btns {
     margin-top: 1em;
     display: flex;
     justify-content: center;
 }
 
-#mentes {
+#save {
     border-radius: 10px;
     border: 1px solid black;
     color: black;
@@ -87,11 +87,11 @@ form {
     padding-bottom: 10px;
 }
 
-#mentes:hover {
+#save:hover {
     background-color: rgb(139, 185, 45)
 }
 
-#torles {
+#delete {
     border-radius: 10px;
     border: 1px solid black;
     color: black;
@@ -102,6 +102,6 @@ form {
     padding-bottom: 10px;
 }
 
-#torles:hover {
+#delete:hover {
     background-color: #CC4C4C;
 }

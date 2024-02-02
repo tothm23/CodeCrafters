@@ -1,36 +1,36 @@
-const felhaszadatai = document.getElementById('felhasznalo-adatai');
+const felhaszadatai = document.getElementById('user-data');
 const form_inner = document.getElementById('forminner');
-let bejelentkezettFelhasznalo = JSON.parse(localStorage.getItem("bejelentkezes"));
+let loged_userdata = JSON.parse(localStorage.getItem("loged_userdata"));
 
 document.addEventListener('DOMContentLoaded', function () {
-    adatok_innerHtml();
+    data_innerHtml();
 
     const felhasznalo_form = document.querySelector("form");
 
     felhasznalo_form.addEventListener("submit", function (event) {
         event.preventDefault();
-        const felhaszInput = document.getElementById("felhasz").value;
-        const vezeteknevInput = document.getElementById("vezeteknev").value;
-        const keresztnevInput = document.getElementById("keresztnev").value;
-        const emailInput = document.getElementById("email").value;
-        const jelszo = document.getElementById("jelszo").value;
-        const jelszoujra = document.getElementById("jelszoegyezes").value;
+        const userNameIn = document.getElementById("userName").value;
+        const lastNameIn = document.getElementById("lastName").value;
+        const firstNameIn = document.getElementById("firstName").value;
+        const emailIn = document.getElementById("email").value;
+        const pas = document.getElementById("pas").value;
+        const pasAgain = document.getElementById("pasAgain").value;
 
         //felhasznalo jelszavának egyezésének figyelése
-        if (jelszo !== jelszoujra) {
+        if (pas !== pasAgain) {
             alert("A jelszavak nem egyeznek!");
         } else {
             // A gomb, amire kattintottál
             const clickedButton = event.submitter;
-            if (clickedButton.id === "mentes") {
+            if (clickedButton.id === "save") {
                 // Mentési logika
                 var myHeaders = new Headers();
                 myHeaders.append("Content-Type", "application/json");
                 var raw = JSON.stringify({
-                    "felhasznaloNev": felhaszInput,
-                    "vezetekNev": vezeteknevInput,
-                    "keresztNev": keresztnevInput,
-                    "jelszo": jelszo
+                    "felhasznaloNev": userNameIn,
+                    "vezetekNev": lastNameIn,
+                    "keresztNev": firstNameIn,
+                    "jelszo": pas
                 });
 
                 var requestOptions = {
@@ -40,36 +40,36 @@ document.addEventListener('DOMContentLoaded', function () {
                     redirect: 'follow'
                 };
 
-                fetch(`http://localhost:8080/CodeCraftersWebshop-1.0-SNAPSHOT/webresources/felhasznalo/${bejelentkezettFelhasznalo.id}`, requestOptions)
+                fetch(`http://localhost:8080/CodeCraftersWebshop-1.0-SNAPSHOT/webresources/felhasznalo/${loged_userdata.id}`, requestOptions)
                     .then(response => response.text())
                     .then(result => console.log(result))
                     .catch(error => console.log('error', error));
                 console.log("Felhasználó frissítve");
                 alert("Felhasználó frissítve");
 
-                let valszObjektum = {
-                    "felhasznaloNev": felhaszInput,
-                    "email": bejelentkezettFelhasznalo.email,
-                    "id": bejelentkezettFelhasznalo.id,
-                    "vezetekNev": vezeteknevInput,
-                    "keresztNev": keresztnevInput,
-                    "jelszo": jelszo
+                let responseObject = {
+                    "felhasznaloNev": userNameIn,
+                    "email": loged_userdata.email,
+                    "id": loged_userdata.id,
+                    "vezetekNev": lastNameIn,
+                    "keresztNev": firstNameIn,
+                    "jelszo": pas
                 }
-                bejelentkezettFelhasznalo = localStorage.setItem("bejelentkezes", JSON.stringify(valszObjektum));
-                console.log(bejelentkezettFelhasznalo);
+                loged_userdata = localStorage.setItem("loged_userdata", JSON.stringify(responseObject));
+                console.log(loged_userdata);
                 //még a local storageba nincsen el mentve a változtatás
 
 
-            } else if (clickedButton.id === "torles") {
+            } else if (clickedButton.id === "delete") {
                 // Törlés logika
                 var myHeaders = new Headers();
                 myHeaders.append("Content-Type", "application/json");
 
                 var raw = JSON.stringify({
-                    "felhasznaloNev": felhaszInput,
-                    "vezetekNev": vezeteknevInput,
-                    "keresztNev": keresztnevInput,
-                    "jelszo": jelszo
+                    "felhasznaloNev": userNameIn,
+                    "vezetekNev": lastNameIn,
+                    "keresztNev": firstNameIn,
+                    "jelszo": pas
                 });
 
                 var requestOptions = {
@@ -79,12 +79,12 @@ document.addEventListener('DOMContentLoaded', function () {
                     redirect: 'follow'
                 };
 
-                fetch(`http://localhost:8080/CodeCraftersWebshop-1.0-SNAPSHOT/webresources/felhasznalo/${bejelentkezettFelhasznalo.id}`, requestOptions)
+                fetch(`http://localhost:8080/CodeCraftersWebshop-1.0-SNAPSHOT/webresources/felhasznalo/${loged_userdata.id}`, requestOptions)
                     .then(response => response.text())
                     .then(result => console.log(result))
                     .catch(error => console.log('error', error));
                 console.log("A felhasználó törölve!");
-                localStorage.removeItem('bejelentkezes');
+                localStorage.removeItem('loged_userdata');
                 alert("A felhasználó törölve!");
             }
         }
@@ -93,50 +93,50 @@ document.addEventListener('DOMContentLoaded', function () {
 
 
 
-function adatok_innerHtml() {
+function data_innerHtml() {
     felhaszadatai.innerHTML +=
         `
-    <div class="felhasznalo-kep">
-                <img src="../kepek/felhasznalo.png" alt="Profil-kep">
+    <div class="user-img">
+                <img src="../img/user.png" alt="Profil-kep">
             </div>
-            <div id="felhasznalo-nev">${bejelentkezettFelhasznalo.felhasznaloNev}</div>
-            <div class="felhasznalo-valos-nevek d-flex flex-row">
-                <div id="felhasznalo-vezeteknev">${bejelentkezettFelhasznalo.vezetekNev}</div>
-                <div id="felhasznalo-keresztnev">${bejelentkezettFelhasznalo.keresztNev}</div>
+            <div id="user-name">${loged_userdata.felhasznaloNev}</div>
+            <div class="d-flex flex-row">
+                <div id="lastName">${loged_userdata.vezetekNev}</div>
+                <div id="fistName">${loged_userdata.keresztNev}</div>
             </div>
     `;
 
     form_inner.innerHTML += `
                 <form>
                     <div class="mb-3">
-                        <label for="felhasz" class="form-label">Felhasználónév</label>
-                        <input type="text" class="form-control" id="felhasz" placeholder="${bejelentkezettFelhasznalo.felhasznaloNev}" required>
+                        <label for="userName" class="form-label">Felhasználónév</label>
+                        <input type="text" class="form-control" id="userName" placeholder="${loged_userdata.felhasznaloNev}" required>
                     </div>
                     <div class="row mb-3">
                         <div class="col-md-6 mb-3">
-                            <label for="vezeteknev" class="form-label">Vezetéknév</label>
-                            <input type="text" class="form-control" id="vezeteknev" placeholder="${bejelentkezettFelhasznalo.vezetekNev}" required>
+                            <label for="lastName" class="form-label">Vezetéknév</label>
+                            <input type="text" class="form-control" id="lastName" placeholder="${loged_userdata.vezetekNev}" required>
                         </div>
                         <div class="col-md-6 mb-3">
-                            <label for="keresztnev" class="form-label">Keresztnév</label>
-                            <input type="text" class="form-control" id="keresztnev" placeholder="${bejelentkezettFelhasznalo.keresztNev}" required>
+                            <label for="firstName" class="form-label">Keresztnév</label>
+                            <input type="text" class="form-control" id="firstName" placeholder="${loged_userdata.keresztNev}" required>
                         </div>
                     </div>
                     <div class="mb-3">
                         <label for="email" class="form-label">Email</label>
-                        <input type="text" class="form-control" id="email" placeholder="${bejelentkezettFelhasznalo.email}" disabled>
+                        <input type="text" class="form-control" id="email" placeholder="${loged_userdata.email}" disabled>
                     </div>
                     <div class="mb-3">
-                        <label for="jelszo" class="form-label">Jelszó</label>
-                        <input type="password" class="form-control" id="jelszo" required>
+                        <label for="pas" class="form-label">Jelszó</label>
+                        <input type="password" class="form-control" id="pas" required>
                     </div>
                     <div class="mb-3">
-                        <label for="jelszoegyezes" class="form-label">Jelszó Újra</label>
-                        <input type="password" class="form-control" id="jelszoegyezes" required>
+                        <label for="pasAgain" class="form-label">Jelszó Újra</label>
+                        <input type="password" class="form-control" id="pasAgain" required>
                     </div>
-                    <div id="mentes-torles" class="felhasznalo-btns">
-                        <button class="btn btn-primary w-100 mt-3 mx-auto" id="mentes" type="submit">Mentés</button>
-                        <button class="btn btn-danger w-100 mt-3 mx-auto" id="torles" type="submit">Törlés</button>
+                    <div class="user-btns">
+                        <button class="btn btn-primary w-100 mt-3 mx-auto" id="save" type="submit">Mentés</button>
+                        <button class="btn btn-danger w-100 mt-3 mx-auto" id="delete" type="submit">Törlés</button>
                     </div>
                 </form>
                 `;
