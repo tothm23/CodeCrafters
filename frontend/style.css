@@ -91,13 +91,13 @@ body {
   margin: 5px;
 }
 
-.keplink {
+.logo-link {
   text-decoration: none;
   color: inherit;
   margin: 10px;
 }
 
-.keplink:hover {
+.logo-link:hover {
   text-decoration: none;
   color: inherit;
 }
@@ -177,14 +177,9 @@ body {
 }
 
 
-#felhasznalo-kep {
+#user-img {
   width: 50px;
   height: 50px;
-}
-
-#felhasznalo {
-  color: #fff;
-  padding-top: 0.3vh;
 }
 
 /* vissza az oldal tetejére */
@@ -282,7 +277,7 @@ slide
   width:300px;
 }
 
-.main .card {
+#jatekok .card{
   background-color: #241f1f;
   color: white;
   display: flex;
@@ -294,6 +289,26 @@ slide
   text-align: center;
 }
 
+#cards .card{
+  background-color: #241f1f;
+  color: white;
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  align-items: center;
+  justify-content: center;
+  font-size: medium;
+  text-align: center;
+  margin: 5px;
+}
+
+#cards{
+  margin: 50px;
+}
+
+#bestseller_card{
+  margin: 5px;
+}
 .carousel-inner img {
   border: #000 solid 1px;
   min-width: 300px;

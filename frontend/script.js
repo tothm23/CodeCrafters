@@ -6,45 +6,96 @@ let cart_id = [];
 
 // GET kérés
 fetch(
-    "http://localhost:8080/CodeCraftersWebshop-1.0-SNAPSHOT/webresources/fooldal"
+    "http://localhost:8080/CodeCraftersWebshop-1.0-SNAPSHOT/webresources/mainPage"
   )
   .then((response) => response.json())
   .then((data) => {
     var carouselInner = document.getElementById("gameCarousel");
+    var bestseller_card = document.getElementById("bestseller_card");
+    var new_card = document.getElementById("new_card");
 
     for (let i = 0; i < data.length; i++) {
-      var akciosAr = Math.round(
-        data[i].ar - (data[i].ar / 100) * data[i].akcio
+      var salePrice = Math.round(
+        data[i].price - (data[i].price / 100) * data[i].discount
       );
-      carouselInner.innerHTML += `
+      if (data[i].type == "carousel") {
+        carouselInner.innerHTML += `
         <div class="carousel-item">
         <div class="card d-flex flex-column flex-md-row">
         <a class="d-block w-100" href="./game/game.html?id=${data[i].id}"><img src="./img/games/${
-          data[i].kep
-        }" class="d-block w-100" alt="${data[i].nev}">
+          data[i].image
+        }" class="d-block w-100" alt="${data[i].name}">
         </a>
         <div class="card-body">
-          <!--<span class="badge bg-secondary">New</span>-->
-          <h5 class="card-title">${data[i].nev}</h5>
+          <h5 class="card-title">${data[i].name}</h5>
           ${
-            data[i].akcio > 0
-              ? `<p class="card-text ar" style="text-decoration: line-through;">${data[i].ar} Ft</p>`
-              : `<p class="card-text ar">${data[i].ar} Ft</p>`
+            data[i].discount > 0
+              ? `<p class="card-text ar" style="text-decoration: line-through;">${data[i].price} Ft</p>`
+              : `<p class="card-text ar">${data[i].price} Ft</p>`
           }
           ${
-            data[i].akcio > 0
-              ? `<p class="card-text saleprice">${akciosAr} Ft</p>`
+            data[i].discount > 0
+              ? `<p class="card-text saleprice">${salePrice} Ft</p>`
               : ""
           }
           ${add_btn(data[i].id)}
         </div>
         </div>
       `;
-      // Kiválasztjuk az első carousel-item-et
-      var elsoCarouselElem = document.querySelector(".carousel-item");
+        // Kiválasztjuk az első carousel-item-et
+        var elsoCarouselElem = document.querySelector(".carousel-item");
 
-      // Hozzáadjuk az "active" osztályt
-      elsoCarouselElem.classList.add("active");
+        // Hozzáadjuk az "active" osztályt
+        elsoCarouselElem.classList.add("active");
+      }
+      if(data[i].type === "bestseller")
+      {
+        bestseller_card.innerHTML += `
+        <div class="card d-flex flex-column">
+        <a class="d-block w-100" href="./game/game.html?id=${data[i].id}"><img src="./img/games/${
+          data[i].image
+        }" class="d-block w-100" alt="${data[i].name}">
+        </a>
+        <div class="card-body">
+          <h5 class="card-title">${data[i].name}</h5>
+          ${
+            data[i].discount > 0
+              ? `<p class="card-text" style="text-decoration: line-through;">${data[i].price} Ft</p>`
+              : `<p class="card-text">${data[i].price} Ft</p>`
+          }
+          ${
+            data[i].discount > 0
+              ? `<p class="card-text saleprice">${salePrice} Ft</p>`
+              : ""
+          }
+          ${add_btn(data[i].id)}
+        </div>
+      `;
+      }
+      if(data[i].type === "new"){
+        new_card.innerHTML += `
+        <div class="card d-flex flex-column">
+        <a class="d-block w-100" href="./game/game.html?id=${data[i].id}"><img src="./img/games/${
+          data[i].image
+        }" class="d-block w-100" alt="${data[i].name}">
+        </a>
+        <div class="card-body">
+          <span class="badge bg-secondary">Új</span>
+          <h5 class="card-title">${data[i].name}</h5>
+          ${
+            data[i].discount > 0
+              ? `<p class="card-text" style="text-decoration: line-through;">${data[i].price} Ft</p>`
+              : `<p class="card-text">${data[i].price} Ft</p>`
+          }
+          ${
+            data[i].discount > 0
+              ? `<p class="card-text saleprice">${salePrice} Ft</p>`
+              : ""
+          }
+          ${add_btn(data[i].id)}
+        </div>
+      `;
+      }
     }
   })
   .catch((hiba) => alert(hiba));

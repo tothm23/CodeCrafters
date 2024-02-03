@@ -17,7 +17,7 @@
     <!-- navigáció -->
     <nav class="nav navbar navbar-expand-lg navbar-light">
       <div class="container-fluid">
-        <a class="keplink" href="./index.html"><img src="./img/logo.png" /></a>
+        <a class="logo-link" href="./index.html"><img src="./img/logo.png" /></a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup"
           aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
@@ -29,7 +29,8 @@
               <div class="container-fluid">
                 <form class="d-flex">
                   <!-- kereső mező -->
-                  <input class="form-control shadow-none border-0" type="search" placeholder="Keresés..." aria-label="Search" />
+                  <input class="form-control shadow-none border-0" type="search" placeholder="Keresés..."
+                    aria-label="Search" />
                   <button class="btn bg-dark shadow-none border-0 search-btn" type="submit">
                     <i class="fa-solid fa-magnifying-glass"></i>
                   </button>
@@ -38,10 +39,11 @@
             </nav>
 
             <div id="log_reg" class="dropdown justify-content-center">
-                <button id="dropdownMenuButton2" class="btn" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                  <i class="fa-solid fa-user"></i>
-                </button>
-                <p class="p-1" data-bs-toggle="dropdown">Bejelentkezés / Regisztráció</p>
+              <button id="dropdownMenuButton2" class="btn" type="button" data-bs-toggle="dropdown"
+                aria-expanded="false">
+                <i class="fa-solid fa-user"></i>
+              </button>
+              <p class="p-1" data-bs-toggle="dropdown">Bejelentkezés / Regisztráció</p>
 
               <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton2">
                 <li id="login" class="dropdown-item link-light"><i class="fa-solid fa-right-from-bracket"></i>
@@ -58,14 +60,13 @@
             <button id="dropdownMenuButton1" class="btn btn-dark" type="button" data-bs-toggle="dropdown"
               aria-expanded="false">
               <div class="d-flex flex-row justify-content-center align-items-center">
-                <img src="./img/user.png" id="felhasznalo-kep" />
+                <img src="./img/user.png" id="user-img" />
                 <p id="username"></p>
               </div>
             </button>
 
             <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-              <span id="profile" class="dropdown-item"><img src="./img/user.png" alt=""><span
-                  id="email"></span></span>
+              <span id="profile" class="dropdown-item"><img src="./img/user.png" alt=""><span id="email"></span></span>
 
               <li>
                 <hr class="dropdown-divider">
@@ -116,10 +117,17 @@
       </button>
     </div>
   </div>
+  <div id="cards" class="d-flex flex-column">
+    <h2>Legkelendőbb</h2>
+    <div id="bestseller_card" class="d-flex flex-md-row flex-column"></div>
+    <h2>Új</h2>
+    <div id="new_card" class="d-flex flex-md-row flex-column"></div>
   </div>
+
+
   <!-- lábléc -->
-  <div class="lab">
-    <div id="lablec">
+  <div class="footer">
+    <div id="footer">
       <div class="footer-content">
         <p>Készítette: Váradi Barnabás, Tóth Milán, Kéri Bence</p>
       </div>
