@@ -13,13 +13,13 @@ import javax.ws.rs.core.Response;
  *
  * @author tothm23
  */
-@Path("rendeles")
+@Path("order")
 @Consumes(MediaType.APPLICATION_JSON)
 public class OrderResource {
 
     @POST
     public Response order(Basket k) {
-        String result = OrderService.order(k.getFelhasznaloId());
+        String result = OrderService.order(k.getUserId());
         return Response.status(Response.Status.CREATED).entity(result)
                 .type(MediaType.APPLICATION_JSON).build();
     }

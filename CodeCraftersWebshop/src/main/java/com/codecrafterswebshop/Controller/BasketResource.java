@@ -19,14 +19,14 @@ import org.json.JSONArray;
  *
  * @author tothm23
  */
-@Path("kosar")
+@Path("basket")
 @Produces(MediaType.APPLICATION_JSON)
 @Consumes(MediaType.APPLICATION_JSON)
 public class BasketResource {
 
     @GET
-    @Path("{felhasznaloId}")
-    public Response userBasket(@PathParam("felhasznaloId") Integer id) {
+    @Path("{userId}")
+    public Response userBasket(@PathParam("userId") Integer id) {
         JSONArray result = BasketService.userBasket(id);
         return Response.status(Response.Status.OK).entity(result.toString())
                 .type(MediaType.APPLICATION_JSON).build();
@@ -34,14 +34,14 @@ public class BasketResource {
 
     @POST
     public Response basket(Basket k) {
-        String result = BasketService.basket(k.getJatekId(), k.getFelhasznaloId());
+        String result = BasketService.basket(k.getGameId(), k.getUserId());
         return Response.status(Response.Status.OK).entity(result)
                 .type(MediaType.APPLICATION_JSON).build();
     }
 
     @DELETE
-    public Response deleteGameBasket(@QueryParam("felhasznaloId") Integer felhasznaloId, @QueryParam("jatekId") Integer jatekId) {
-        String result = BasketService.deleteGameBasket(felhasznaloId, jatekId);
+    public Response deleteGameBasket(@QueryParam("userId") Integer userId, @QueryParam("gameId") Integer gameId) {
+        String result = BasketService.deleteGameBasket(userId, gameId);
         return Response.status(Response.Status.OK).entity(result)
                 .type(MediaType.APPLICATION_JSON).build();
     }

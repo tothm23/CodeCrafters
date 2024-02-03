@@ -11,8 +11,8 @@ public class OrderService {
 
     public static String order(Integer userIdIN) {
         try {
-            String addressee = EmailService.addressee(Basket.productKey(userIdIN));
-            String content = EmailService.htmlOrder(Basket.productKey(userIdIN));
+            String addressee = EmailService.addressee(Basket.productKeys(userIdIN));
+            String content = EmailService.htmlOrder(Basket.productKeys(userIdIN));
 
             if (!Basket.checkUserIdBasket(userIdIN)) {
                 return "Hibás felhasznaloId!";

@@ -13,7 +13,7 @@ import org.json.JSONArray;
  *
  * @author tothm23
  */
-@Path("fooldal")
+@Path("mainPage")
 @Produces(MediaType.APPLICATION_JSON)
 public class MainPageResource {
 

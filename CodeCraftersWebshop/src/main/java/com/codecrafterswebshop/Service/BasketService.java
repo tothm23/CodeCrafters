@@ -20,7 +20,8 @@ public class BasketService {
 
         for (Map<String, Object> basket : baskets) {
             JSONObject obj = new JSONObject();
-            obj.put("gameId", basket.get("gameId"));
+
+            obj.put("id", basket.get("id"));
             obj.put("name", basket.get("name"));
             obj.put("amount", basket.get("amount"));
             obj.put("image", basket.get("image"));
@@ -53,7 +54,7 @@ public class BasketService {
                 return "Hibás felhasznaloId!";
             } else if (!Basket.checkGameIdBasket(gameIdIN)) {
                 return "Hibás gameId!";
-            } else if (Basket.deleteGameBasket(userIdIN, gameIdIN)) {
+            } else if (Basket.deleteGameFromBasket(userIdIN, gameIdIN)) {
                 return "Játék törölve a kosárból!";
             } else {
                 return "Hiba a Játék törlésénél!";

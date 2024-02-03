@@ -32,16 +32,16 @@ import javax.validation.constraints.Size;
  * @author tothm23
  */
 @Entity
-@Table(name = "felhasznalo")
+@Table(name = "user")
 @NamedQueries({
-    @NamedQuery(name = "Felhasznalo.findAll", query = "SELECT f FROM Felhasznalo f"),
-    @NamedQuery(name = "Felhasznalo.findById", query = "SELECT f FROM Felhasznalo f WHERE f.id = :id"),
-    @NamedQuery(name = "Felhasznalo.findByFelhasznaloNev", query = "SELECT f FROM Felhasznalo f WHERE f.userName = :userName"),
-    @NamedQuery(name = "Felhasznalo.findByVezetekNev", query = "SELECT f FROM Felhasznalo f WHERE f.lastName = :lastName"),
-    @NamedQuery(name = "Felhasznalo.findByKeresztNev", query = "SELECT f FROM Felhasznalo f WHERE f.firstName = :firstName"),
-    @NamedQuery(name = "Felhasznalo.findByEmail", query = "SELECT f FROM Felhasznalo f WHERE f.email = :email"),
-    @NamedQuery(name = "Felhasznalo.findByLetrehozva", query = "SELECT f FROM Felhasznalo f WHERE f.letrehozva = :letrehozva"),
-    @NamedQuery(name = "Felhasznalo.findByFrissitve", query = "SELECT f FROM Felhasznalo f WHERE f.frissitve = :frissitve")})
+    @NamedQuery(name = "User.findAll", query = "SELECT u FROM User u"),
+    @NamedQuery(name = "User.findById", query = "SELECT u FROM User u WHERE u.id = :id"),
+    @NamedQuery(name = "User.findByUserName", query = "SELECT u FROM User u WHERE u.userName = :userName"),
+    @NamedQuery(name = "User.findByLastName", query = "SELECT u FROM User u WHERE u.lastName = :lastName"),
+    @NamedQuery(name = "User.findByFirstName", query = "SELECT u FROM User u WHERE u.firstName = :firstName"),
+    @NamedQuery(name = "User.findByEmail", query = "SELECT u FROM User u WHERE u.email = :email"),
+    @NamedQuery(name = "User.findByCreatedAt", query = "SELECT u FROM User u WHERE u.createdAt = :createdAt"),
+    @NamedQuery(name = "User.findByUpdatedAt", query = "SELECT u FROM User u WHERE u.updatedAt = :updatedAt")})
 public class User implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -75,16 +75,16 @@ public class User implements Serializable {
     @NotNull
     @Lob
     @Size(min = 1, max = 65535)
-    @Column(name = "jelszo")
-    private String jelszo;
+    @Column(name = "password")
+    private String password;
     @Basic(optional = false)
     @NotNull
-    @Column(name = "letrehozva")
+    @Column(name = "createdAt")
     @Temporal(TemporalType.TIMESTAMP)
-    private Date letrehozva;
-    @Column(name = "frissitve")
+    private Date createdAt;
+    @Column(name = "updatedAt")
     @Temporal(TemporalType.TIMESTAMP)
-    private Date frissitve;
+    private Date updatedAt;
 
     public User() {
     }
@@ -93,16 +93,17 @@ public class User implements Serializable {
         this.id = id;
     }
 
-    public User(Integer id, String userName, String lastName, String firstName, String email, String jelszo) {
+    public User(Integer id, String userName, String lastName, String firstName, String email, String password, Date createdAt) {
         this.id = id;
         this.userName = userName;
         this.lastName = lastName;
         this.firstName = firstName;
         this.email = email;
-        this.jelszo = jelszo;
+        this.password = password;
+        this.createdAt = createdAt;
     }
 
-    public User(Integer id, String userName, String lastName, String firstName, String email) {
+    private User(Integer id, String userName, String lastName, String firstName, String email) {
         this.id = id;
         this.userName = userName;
         this.lastName = lastName;
@@ -118,27 +119,27 @@ public class User implements Serializable {
         this.id = id;
     }
 
-    public String getFelhasznaloNev() {
+    public String getUserName() {
         return userName;
     }
 
-    public void setFelhasznaloNev(String userName) {
+    public void setUserName(String userName) {
         this.userName = userName;
     }
 
-    public String getVezetekNev() {
+    public String getLastName() {
         return lastName;
     }
 
-    public void setVezetekNev(String lastName) {
+    public void setLastName(String lastName) {
         this.lastName = lastName;
     }
 
-    public String getKeresztNev() {
+    public String getFirstName() {
         return firstName;
     }
 
-    public void setKeresztNev(String firstName) {
+    public void setFirstName(String firstName) {
         this.firstName = firstName;
     }
 
@@ -150,28 +151,28 @@ public class User implements Serializable {
         this.email = email;
     }
 
-    public String getJelszo() {
-        return jelszo;
+    public String getPassword() {
+        return password;
     }
 
-    public void setJelszo(String jelszo) {
-        this.jelszo = jelszo;
+    public void setPassword(String password) {
+        this.password = password;
     }
 
-    public Date getLetrehozva() {
-        return letrehozva;
+    public Date getCreatedAt() {
+        return createdAt;
     }
 
-    public void setLetrehozva(Date letrehozva) {
-        this.letrehozva = letrehozva;
+    public void setCreatedAt(Date createdAt) {
+        this.createdAt = createdAt;
     }
 
-    public Date getFrissitve() {
-        return frissitve;
+    public Date getUpdatedAt() {
+        return updatedAt;
     }
 
-    public void setFrissitve(Date frissitve) {
-        this.frissitve = frissitve;
+    public void setUpdatedAt(Date updatedAt) {
+        this.updatedAt = updatedAt;
     }
 
     @Override
@@ -192,7 +193,7 @@ public class User implements Serializable {
 
     @Override
     public String toString() {
-        return "com.codecrafterswebshop.Model.Felhasznalo[ id=" + id + " ]";
+        return "com.codecrafterswebshop.Model.User[ id=" + id + " ]";
     }
 
     public static Map<String, Object> user(Integer idIN) {
@@ -255,8 +256,8 @@ public class User implements Serializable {
             String firstName = (String) spq.getOutputParameterValue("firstNameOUT");
             String email = (String) spq.getOutputParameterValue("emailOUT");
 
-            User f = new User(id, userName, lastName, firstName, email);
-            return f;
+            User u = new User(id, userName, lastName, firstName, email);
+            return u;
 
         } catch (Exception e) {
             System.err.println(e.getMessage());
@@ -370,15 +371,15 @@ public class User implements Serializable {
         EntityManagerFactory emf = Persistence.createEntityManagerFactory(Database.getPersistenceUnitName());
         EntityManager em = emf.createEntityManager();
 
-        int piece = 0;
+        int count = 0;
         try {
             StoredProcedureQuery spq = em.createStoredProcedureQuery("checkUsername");
 
             spq.registerStoredProcedureParameter("nameIN", String.class, ParameterMode.IN);
-            spq.registerStoredProcedureParameter("pieceOUT", Integer.class, ParameterMode.OUT);
+            spq.registerStoredProcedureParameter("countOUT", Integer.class, ParameterMode.OUT);
 
             spq.setParameter("nameIN", userName);
-            piece = (Integer) spq.getOutputParameterValue("pieceOUT");
+            count = (Integer) spq.getOutputParameterValue("countOUT");
 
         } catch (Exception e) {
             System.err.println(e.getMessage());
@@ -389,7 +390,7 @@ public class User implements Serializable {
             emf.close();
         }
 
-        if (piece > 0) {
+        if (count > 0) {
             throw new UserException("A felhasználó neve már létezik!");
         } else {
             return true;
@@ -452,15 +453,15 @@ public class User implements Serializable {
         EntityManagerFactory emf = Persistence.createEntityManagerFactory(Database.getPersistenceUnitName());
         EntityManager em = emf.createEntityManager();
 
-        int piece = 0;
+        int count = 0;
         try {
             StoredProcedureQuery spq = em.createStoredProcedureQuery("checkEmail");
 
             spq.registerStoredProcedureParameter("emailIN", String.class, ParameterMode.IN);
-            spq.registerStoredProcedureParameter("pieceOUT", Integer.class, ParameterMode.OUT);
+            spq.registerStoredProcedureParameter("countOUT", Integer.class, ParameterMode.OUT);
 
             spq.setParameter("emailIN", email);
-            piece = (Integer) spq.getOutputParameterValue("pieceOUT");
+            count = (Integer) spq.getOutputParameterValue("countOUT");
 
         } catch (Exception e) {
             System.err.println(e.getMessage());
@@ -471,7 +472,7 @@ public class User implements Serializable {
             emf.close();
         }
 
-        if (piece > 0) {
+        if (count > 0) {
             throw new UserException("A felhasználó emailje már létezik!");
         } else {
             return true;
@@ -522,4 +523,5 @@ public class User implements Serializable {
             return true;
         }
     }
+
 }

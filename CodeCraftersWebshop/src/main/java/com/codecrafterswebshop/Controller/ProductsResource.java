@@ -12,7 +12,7 @@ import org.json.JSONArray;
  *
  * @author tothm23
  */
-@Path("termekek")
+@Path("products")
 public class ProductsResource {
 
     @GET
