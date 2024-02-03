@@ -18,33 +18,33 @@ import org.json.JSONObject;
  *
  * @author tothm23
  */
-@Path("felhasznalo")
+@Path("user")
 @Produces(MediaType.APPLICATION_JSON)
 @Consumes(MediaType.APPLICATION_JSON)
 public class UserResource {
 
     @POST
     public Response registration(User u) {
-        String result = UserService.registration(u.getFelhasznaloNev(), u.getVezetekNev(),
-                u.getKeresztNev(), u.getEmail(), u.getJelszo());
+        String result = UserService.registration(u.getUserName(), u.getLastName(),
+                u.getFirstName(), u.getEmail(), u.getPassword());
         return Response.status(Response.Status.CREATED).entity(result)
                 .type(MediaType.APPLICATION_JSON).build();
     }
 
     @POST
-    @Path("bejelentkezes")
+    @Path("login")
     public Response login(User u) {
-        JSONObject result = UserService.login(u.getFelhasznaloNev(), u.getJelszo());
+        JSONObject result = UserService.login(u.getUserName(), u.getPassword());
         return Response.status(Response.Status.OK).entity(result.toString())
                 .type(MediaType.APPLICATION_JSON).build();
     }
 
     @PUT
-    @Path("{felhasznaloId}")
-    public Response updateUser(User u, @PathParam("felhasznaloId") Integer id) {
+    @Path("{userId}")
+    public Response updateUser(User u, @PathParam("userId") Integer id) {
         JSONObject result = UserService.user(id);
-        String update = UserService.updateUser(id, u.getFelhasznaloNev(), u.getVezetekNev(),
-                u.getKeresztNev(), u.getJelszo());
+        String update = UserService.updateUser(id, u.getUserName(), u.getLastName(),
+                u.getFirstName(), u.getPassword());
 
         return result.length() == 0 ? Response.status(Response.Status.NOT_FOUND).entity(update)
                 .type(MediaType.APPLICATION_JSON).build() : Response.status(Response.Status.OK).entity(update)
@@ -52,8 +52,8 @@ public class UserResource {
     }
 
     @DELETE
-    @Path("{felhasznaloId}")
-    public Response deleteUser(@PathParam("felhasznaloId") Integer id) {
+    @Path("{userId}")
+    public Response deleteUser(@PathParam("userId") Integer id) {
         JSONObject result = UserService.user(id);
         String delete = UserService.deleteUser(id);
 

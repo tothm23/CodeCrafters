@@ -16,50 +16,45 @@ public class MainPageService {
 
         JSONArray jsonArray = new JSONArray();
 
-        List<Map<String, Object>> jatekok = Game._3veletlenjatek();
-        List<Map<String, Object>> bestsellerek = Game.bestseller();
-        List<Map<String, Object>> legujabbjatekok = Game._3legujabbJatek();
+        List<Map<String, Object>> carouselGames = Game.carouselGames();
+        List<Map<String, Object>> bestsellers = Game.bestsellers();
+        List<Map<String, Object>> newGames = Game.newGames();
 
-        for (Map<String, Object> jatek : jatekok) {
+        for (Map<String, Object> game : carouselGames) {
             JSONObject obj = new JSONObject();
 
-            obj.put("id", jatek.get("id"));
-            obj.put("nev", jatek.get("nev"));
-            obj.put("ar", jatek.get("ar"));
-            obj.put("leiras", jatek.get("leiras"));
-            obj.put("kep", jatek.get("kep"));
-            obj.put("korhatar", jatek.get("korhatar"));
-            obj.put("akcio", jatek.get("akcio"));
-            obj.put("mennyisegraktaron", jatek.get("mennyisegraktaron"));
-            obj.put("eszkoz", jatek.get("eszkoz"));
-            obj.put("platform", jatek.get("platform"));
-            obj.put("tipus", "veletlen");
+            obj.put("id", game.get("id"));
+            obj.put("name", game.get("name"));
+            obj.put("price", game.get("price"));
+            obj.put("image", game.get("image"));
+            obj.put("discount", game.get("discount"));
+            obj.put("type", "carousel");
 
             jsonArray.put(obj);
         }
 
-        for (Map<String, Object> bestseller : bestsellerek) {
+        for (Map<String, Object> bestseller : bestsellers) {
             JSONObject obj = new JSONObject();
 
             obj.put("id", bestseller.get("id"));
-            obj.put("nev", bestseller.get("nev"));
-            obj.put("ar", bestseller.get("ar"));
-            obj.put("kep", bestseller.get("kep"));
-            obj.put("akcio", bestseller.get("akcio"));
-            obj.put("tipus", "bestseller");
+            obj.put("name", bestseller.get("name"));
+            obj.put("price", bestseller.get("price"));
+            obj.put("image", bestseller.get("image"));
+            obj.put("discount", bestseller.get("discount"));
+            obj.put("type", "bestseller");
 
             jsonArray.put(obj);
         }
 
-        for (Map<String, Object> jatek : legujabbjatekok) {
+        for (Map<String, Object> game : newGames) {
             JSONObject obj = new JSONObject();
 
-            obj.put("id", jatek.get("id"));
-            obj.put("nev", jatek.get("nev"));
-            obj.put("ar", jatek.get("ar"));
-            obj.put("kep", jatek.get("kep"));
-            obj.put("akcio", jatek.get("akcio"));
-            obj.put("tipus", "legujabb");
+            obj.put("id", game.get("id"));
+            obj.put("name", game.get("name"));
+            obj.put("price", game.get("price"));
+            obj.put("image", game.get("image"));
+            obj.put("discount", game.get("discount"));
+            obj.put("type", "new");
 
             jsonArray.put(obj);
         }

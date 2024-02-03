@@ -32,20 +32,20 @@ import javax.validation.constraints.Size;
  * @author tothm23
  */
 @Entity
-@Table(name = "jatek")
+@Table(name = "game")
 @NamedQueries({
-    @NamedQuery(name = "Jatek.findAll", query = "SELECT j FROM Jatek j"),
-    @NamedQuery(name = "Jatek.findById", query = "SELECT j FROM Jatek j WHERE j.id = :id"),
-    @NamedQuery(name = "Jatek.findByNev", query = "SELECT j FROM Jatek j WHERE j.nev = :nev"),
-    @NamedQuery(name = "Jatek.findByAr", query = "SELECT j FROM Jatek j WHERE j.ar = :ar"),
-    @NamedQuery(name = "Jatek.findByKep", query = "SELECT j FROM Jatek j WHERE j.kep = :kep"),
-    @NamedQuery(name = "Jatek.findByKorhatar", query = "SELECT j FROM Jatek j WHERE j.korhatar = :korhatar"),
-    @NamedQuery(name = "Jatek.findByAkcio", query = "SELECT j FROM Jatek j WHERE j.akcio = :akcio"),
-    @NamedQuery(name = "Jatek.findByMennyisegraktaron", query = "SELECT j FROM Jatek j WHERE j.mennyisegraktaron = :mennyisegraktaron"),
-    @NamedQuery(name = "Jatek.findByEszkozId", query = "SELECT j FROM Jatek j WHERE j.eszkozId = :eszkozId"),
-    @NamedQuery(name = "Jatek.findByPlatformId", query = "SELECT j FROM Jatek j WHERE j.platformId = :platformId"),
-    @NamedQuery(name = "Jatek.findByLetrehozva", query = "SELECT j FROM Jatek j WHERE j.letrehozva = :letrehozva"),
-    @NamedQuery(name = "Jatek.findByFrissitve", query = "SELECT j FROM Jatek j WHERE j.frissitve = :frissitve")})
+    @NamedQuery(name = "Game.findAll", query = "SELECT g FROM Game g"),
+    @NamedQuery(name = "Game.findById", query = "SELECT g FROM Game g WHERE g.id = :id"),
+    @NamedQuery(name = "Game.findByName", query = "SELECT g FROM Game g WHERE g.name = :name"),
+    @NamedQuery(name = "Game.findByPrice", query = "SELECT g FROM Game g WHERE g.price = :price"),
+    @NamedQuery(name = "Game.findByImage", query = "SELECT g FROM Game g WHERE g.image = :image"),
+    @NamedQuery(name = "Game.findByAgeLimit", query = "SELECT g FROM Game g WHERE g.ageLimit = :ageLimit"),
+    @NamedQuery(name = "Game.findByDiscount", query = "SELECT g FROM Game g WHERE g.discount = :discount"),
+    @NamedQuery(name = "Game.findByInStock", query = "SELECT g FROM Game g WHERE g.inStock = :inStock"),
+    @NamedQuery(name = "Game.findByDeviceId", query = "SELECT g FROM Game g WHERE g.deviceId = :deviceId"),
+    @NamedQuery(name = "Game.findByPlatformId", query = "SELECT g FROM Game g WHERE g.platformId = :platformId"),
+    @NamedQuery(name = "Game.findByCreatedAt", query = "SELECT g FROM Game g WHERE g.createdAt = :createdAt"),
+    @NamedQuery(name = "Game.findByAmountSold", query = "SELECT g FROM Game g WHERE g.amountSold = :amountSold")})
 public class Game implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -57,55 +57,52 @@ public class Game implements Serializable {
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 100)
-    @Column(name = "nev")
-    private String nev;
+    @Column(name = "name")
+    private String name;
     @Basic(optional = false)
     @NotNull
-    @Column(name = "ar")
-    private int ar;
+    @Column(name = "price")
+    private int price;
     @Basic(optional = false)
     @NotNull
     @Lob
     @Size(min = 1, max = 65535)
-    @Column(name = "leiras")
-    private String leiras;
+    @Column(name = "description")
+    private String description;
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 100)
-    @Column(name = "kep")
-    private String kep;
+    @Column(name = "image")
+    private String image;
     @Basic(optional = false)
     @NotNull
-    @Column(name = "korhatar")
-    private int korhatar;
+    @Column(name = "ageLimit")
+    private int ageLimit;
     @Basic(optional = false)
     @NotNull
-    @Column(name = "akcio")
-    private int akcio;
+    @Column(name = "discount")
+    private int discount;
     @Basic(optional = false)
     @NotNull
-    @Column(name = "mennyisegraktaron")
-    private int mennyisegraktaron;
+    @Column(name = "inStock")
+    private int inStock;
     @Basic(optional = false)
     @NotNull
-    @Column(name = "eszkozId")
-    private int eszkozId;
+    @Column(name = "deviceId")
+    private int deviceId;
     @Basic(optional = false)
     @NotNull
     @Column(name = "platformId")
     private int platformId;
     @Basic(optional = false)
     @NotNull
-    @Column(name = "letrehozva")
+    @Column(name = "createdAt")
     @Temporal(TemporalType.TIMESTAMP)
-    private Date letrehozva;
-    @Column(name = "frissitve")
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date frissitve;
+    private Date createdAt;
     @Basic(optional = false)
     @NotNull
-    @Column(name = "eladva")
-    private int eladva;
+    @Column(name = "amountSold")
+    private int amountSold;
 
     public Game() {
     }
@@ -114,20 +111,19 @@ public class Game implements Serializable {
         this.id = id;
     }
 
-    public Game(Integer id, String nev, int ar, String leiras, String kep, int korhatar, int akcio, int mennyisegraktaron, int eszkozId,
-            int platformId, Date letrehozva, Integer eladva) {
+    public Game(Integer id, String name, int price, String description, String image, int ageLimit, int discount, int inStock, int deviceId, int platformId, Date createdAt, int amountSold) {
         this.id = id;
-        this.nev = nev;
-        this.ar = ar;
-        this.leiras = leiras;
-        this.kep = kep;
-        this.korhatar = korhatar;
-        this.akcio = akcio;
-        this.mennyisegraktaron = mennyisegraktaron;
-        this.eszkozId = eszkozId;
+        this.name = name;
+        this.price = price;
+        this.description = description;
+        this.image = image;
+        this.ageLimit = ageLimit;
+        this.discount = discount;
+        this.inStock = inStock;
+        this.deviceId = deviceId;
         this.platformId = platformId;
-        this.letrehozva = letrehozva;
-        this.eladva = eladva;
+        this.createdAt = createdAt;
+        this.amountSold = amountSold;
     }
 
     public Integer getId() {
@@ -138,68 +134,68 @@ public class Game implements Serializable {
         this.id = id;
     }
 
-    public String getNev() {
-        return nev;
+    public String getName() {
+        return name;
     }
 
-    public void setNev(String nev) {
-        this.nev = nev;
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public int getAr() {
-        return ar;
+    public int getPrice() {
+        return price;
     }
 
-    public void setAr(int ar) {
-        this.ar = ar;
+    public void setPrice(int price) {
+        this.price = price;
     }
 
-    public String getLeiras() {
-        return leiras;
+    public String getDescription() {
+        return description;
     }
 
-    public void setLeiras(String leiras) {
-        this.leiras = leiras;
+    public void setDescription(String description) {
+        this.description = description;
     }
 
-    public String getKep() {
-        return kep;
+    public String getImage() {
+        return image;
     }
 
-    public void setKep(String kep) {
-        this.kep = kep;
+    public void setImage(String image) {
+        this.image = image;
     }
 
-    public int getKorhatar() {
-        return korhatar;
+    public int getAgeLimit() {
+        return ageLimit;
     }
 
-    public void setKorhatar(int korhatar) {
-        this.korhatar = korhatar;
+    public void setAgeLimit(int ageLimit) {
+        this.ageLimit = ageLimit;
     }
 
-    public int getAkcio() {
-        return akcio;
+    public int getDiscount() {
+        return discount;
     }
 
-    public void setAkcio(int akcio) {
-        this.akcio = akcio;
+    public void setDiscount(int discount) {
+        this.discount = discount;
     }
 
-    public int getMennyisegraktaron() {
-        return mennyisegraktaron;
+    public int getInStock() {
+        return inStock;
     }
 
-    public void setMennyisegraktaron(int mennyisegraktaron) {
-        this.mennyisegraktaron = mennyisegraktaron;
+    public void setInStock(int inStock) {
+        this.inStock = inStock;
     }
 
-    public int getEszkozId() {
-        return eszkozId;
+    public int getDeviceId() {
+        return deviceId;
     }
 
-    public void setEszkozId(int eszkozId) {
-        this.eszkozId = eszkozId;
+    public void setDeviceId(int deviceId) {
+        this.deviceId = deviceId;
     }
 
     public int getPlatformId() {
@@ -210,28 +206,20 @@ public class Game implements Serializable {
         this.platformId = platformId;
     }
 
-    public Date getLetrehozva() {
-        return letrehozva;
+    public Date getCreatedAt() {
+        return createdAt;
     }
 
-    public void setLetrehozva(Date letrehozva) {
-        this.letrehozva = letrehozva;
+    public void setCreatedAt(Date createdAt) {
+        this.createdAt = createdAt;
     }
 
-    public Date getFrissitve() {
-        return frissitve;
+    public int getAmountSold() {
+        return amountSold;
     }
 
-    public void setFrissitve(Date frissitve) {
-        this.frissitve = frissitve;
-    }
-
-    public int getEladva() {
-        return eladva;
-    }
-
-    public void setEladva(int eladva) {
-        this.eladva = eladva;
+    public void setAmountSold(int amountSold) {
+        this.amountSold = amountSold;
     }
 
     @Override
@@ -252,37 +240,35 @@ public class Game implements Serializable {
 
     @Override
     public String toString() {
-        return "com.codecrafterswebshop.Model.Jatek[ id=" + id + " ]";
+        return "com.codecrafterswebshop.Model.Game[ id=" + id + " ]";
     }
 
-    public static List<Map<String, Object>> jatekok() {
-        List<Map<String, Object>> jatekok = new ArrayList<>();
+    public static List<Map<String, Object>> games() {
+        List<Map<String, Object>> games = new ArrayList<>();
 
         EntityManagerFactory emf = Persistence.createEntityManagerFactory(Database.getPersistenceUnitName());
         EntityManager em = emf.createEntityManager();
 
         try {
-            StoredProcedureQuery spq = em.createStoredProcedureQuery("jatekok");
+            StoredProcedureQuery spq = em.createStoredProcedureQuery("games");
 
-            List<Object[]> eredmeny = spq.getResultList();
+            List<Object[]> result = spq.getResultList();
 
-            if (!eredmeny.isEmpty()) {
+            if (!result.isEmpty()) {
 
-                for (Object[] sor : eredmeny) {
-                    LinkedHashMap<String, Object> jatek = new LinkedHashMap<>();
+                for (Object[] line : result) {
+                    LinkedHashMap<String, Object> game = new LinkedHashMap<>();
 
-                    jatek.put("id", (Integer) sor[0]);
-                    jatek.put("nev", (String) sor[1]);
-                    jatek.put("ar", (Integer) sor[2]);
-                    jatek.put("leiras", (String) sor[3]);
-                    jatek.put("kep", (String) sor[4]);
-                    jatek.put("korhatar", (Integer) sor[5]);
-                    jatek.put("akcio", (Integer) sor[6]);
-                    jatek.put("mennyisegraktaron", (Integer) sor[7]);
-                    jatek.put("eszkoz", (String) sor[8]);
-                    jatek.put("platform", (String) sor[9]);
+                    game.put("id", (Integer) line[0]);
+                    game.put("gameName", (String) line[1]);
+                    game.put("price", (Integer) line[2]);
+                    game.put("image", (String) line[3]);
+                    game.put("ageLimit", (Integer) line[4]);
+                    game.put("discount", (Integer) line[5]);
+                    game.put("deviceName", (String) line[6]);
+                    game.put("platformName", (String) line[7]);
 
-                    jatekok.add(jatek);
+                    games.add(game);
                 }
 
             }
@@ -295,39 +281,33 @@ public class Game implements Serializable {
             emf.close();
         }
 
-        return jatekok;
+        return games;
 
     }
 
-    public static List<Map<String, Object>> _3veletlenjatek() {
-        List<Map<String, Object>> jatekok = new ArrayList<>();
+    public static List<Map<String, Object>> carouselGames() {
+        List<Map<String, Object>> games = new ArrayList<>();
 
         EntityManagerFactory emf = Persistence.createEntityManagerFactory(Database.getPersistenceUnitName());
         EntityManager em = emf.createEntityManager();
 
         try {
-            StoredProcedureQuery spq = em.createStoredProcedureQuery("3veletlenjatek");
+            StoredProcedureQuery spq = em.createStoredProcedureQuery("carouselGames");
 
-            List<Object[]> eredmeny = spq.getResultList();
+            List<Object[]> result = spq.getResultList();
 
-            if (!eredmeny.isEmpty()) {
+            if (!result.isEmpty()) {
 
-                for (Object[] sor : eredmeny) {
-                    LinkedHashMap<String, Object> jatek = new LinkedHashMap<>();
+                for (Object[] line : result) {
+                    LinkedHashMap<String, Object> game = new LinkedHashMap<>();
 
-                    jatek.put("id", (Integer) sor[0]);
-                    jatek.put("nev", (String) sor[1]);
-                    jatek.put("ar", (Integer) sor[2]);
-                    jatek.put("leiras", (String) sor[3]);
-                    jatek.put("kep", (String) sor[4]);
-                    jatek.put("korhatar", (Integer) sor[5]);
-                    jatek.put("akcio", (Integer) sor[6]);
-                    jatek.put("mennyisegraktaron", (Integer) sor[7]);
-                    jatek.put("eszkoz", (String) sor[8]);
-                    jatek.put("platform", (String) sor[9]);
-                    jatek.put("tipus", "veletlen");
+                    game.put("id", (Integer) line[0]);
+                    game.put("name", (String) line[1]);
+                    game.put("price", (Integer) line[2]);
+                    game.put("image", (String) line[3]);
+                    game.put("discount", (Integer) line[4]);
 
-                    jatekok.add(jatek);
+                    games.add(game);
                 }
 
             }
@@ -340,34 +320,33 @@ public class Game implements Serializable {
             emf.close();
         }
 
-        return jatekok;
+        return games;
 
     }
 
-    public static List<Map<String, Object>> bestseller() {
-        List<Map<String, Object>> bestsellerek = new ArrayList<>();
+    public static List<Map<String, Object>> bestsellers() {
+        List<Map<String, Object>> bestsellers = new ArrayList<>();
 
         EntityManagerFactory emf = Persistence.createEntityManagerFactory(Database.getPersistenceUnitName());
         EntityManager em = emf.createEntityManager();
 
         try {
-            StoredProcedureQuery spq = em.createStoredProcedureQuery("bestseller");
+            StoredProcedureQuery spq = em.createStoredProcedureQuery("bestsellers");
 
-            List<Object[]> eredmeny = spq.getResultList();
+            List<Object[]> result = spq.getResultList();
 
-            if (!eredmeny.isEmpty()) {
+            if (!result.isEmpty()) {
 
-                for (Object[] sor : eredmeny) {
+                for (Object[] line : result) {
                     LinkedHashMap<String, Object> bestseller = new LinkedHashMap<>();
 
-                    bestseller.put("id", (Integer) sor[0]);
-                    bestseller.put("nev", (String) sor[1]);
-                    bestseller.put("ar", (Integer) sor[2]);
-                    bestseller.put("kep", (String) sor[3]);
-                    bestseller.put("akcio", (Integer) sor[4]);
-                    bestseller.put("tipus", "bestseller");
+                    bestseller.put("id", (Integer) line[0]);
+                    bestseller.put("name", (String) line[1]);
+                    bestseller.put("price", (Integer) line[2]);
+                    bestseller.put("image", (String) line[3]);
+                    bestseller.put("discount", (Integer) line[4]);
 
-                    bestsellerek.add(bestseller);
+                    bestsellers.add(bestseller);
                 }
 
             }
@@ -380,34 +359,33 @@ public class Game implements Serializable {
             emf.close();
         }
 
-        return bestsellerek;
+        return bestsellers;
 
     }
 
-    public static List<Map<String, Object>> _3legujabbJatek() {
-        List<Map<String, Object>> jatekok = new ArrayList<>();
+    public static List<Map<String, Object>> newGames() {
+        List<Map<String, Object>> games = new ArrayList<>();
 
         EntityManagerFactory emf = Persistence.createEntityManagerFactory(Database.getPersistenceUnitName());
         EntityManager em = emf.createEntityManager();
 
         try {
-            StoredProcedureQuery spq = em.createStoredProcedureQuery("3legujabbJatek");
+            StoredProcedureQuery spq = em.createStoredProcedureQuery("newGames");
 
-            List<Object[]> eredmeny = spq.getResultList();
+            List<Object[]> result = spq.getResultList();
 
-            if (!eredmeny.isEmpty()) {
+            if (!result.isEmpty()) {
 
-                for (Object[] sor : eredmeny) {
-                    LinkedHashMap<String, Object> jatek = new LinkedHashMap<>();
+                for (Object[] line : result) {
+                    LinkedHashMap<String, Object> game = new LinkedHashMap<>();
 
-                    jatek.put("id", (Integer) sor[0]);
-                    jatek.put("nev", (String) sor[1]);
-                    jatek.put("ar", (Integer) sor[2]);
-                    jatek.put("kep", (String) sor[3]);
-                    jatek.put("akcio", (Integer) sor[4]);
-                    jatek.put("tipus", "legujabb");
+                    game.put("id", (Integer) line[0]);
+                    game.put("name", (String) line[1]);
+                    game.put("price", (Integer) line[2]);
+                    game.put("image", (String) line[3]);
+                    game.put("discount", (Integer) line[4]);
 
-                    jatekok.add(jatek);
+                    games.add(game);
                 }
 
             }
@@ -420,7 +398,7 @@ public class Game implements Serializable {
             emf.close();
         }
 
-        return jatekok;
+        return games;
 
     }
 
@@ -432,25 +410,26 @@ public class Game implements Serializable {
         EntityManager em = emf.createEntityManager();
 
         try {
-            StoredProcedureQuery spq = em.createStoredProcedureQuery("jatek");
+            StoredProcedureQuery spq = em.createStoredProcedureQuery("game");
 
             spq.registerStoredProcedureParameter("idBe", Integer.class, ParameterMode.IN);
             spq.setParameter("idBe", idBe);
 
-            List<Object[]> eredmeny = spq.getResultList();
+            List<Object[]> result = spq.getResultList();
 
-            if (!eredmeny.isEmpty()) {
-                Object[] sor = eredmeny.get(0);
-                game.put("id", sor[0]);
-                game.put("nev", sor[1]);
-                game.put("ar", sor[2]);
-                game.put("leiras", sor[3]);
-                game.put("kep", sor[4]);
-                game.put("korhatar", sor[5]);
-                game.put("akcio", sor[6]);
-                game.put("mennyisegraktaron", sor[7]);
-                game.put("eszkoz", sor[8]);
-                game.put("platform", sor[9]);
+            if (!result.isEmpty()) {
+                Object[] line = result.get(0);
+
+                game.put("id", (Integer) line[0]);
+                game.put("gameName", (String) line[1]);
+                game.put("price", (Integer) line[2]);
+                game.put("description", (String) line[3]);
+                game.put("image", (String) line[3]);
+                game.put("ageLimit", (Integer) line[4]);
+                game.put("discount", (Integer) line[5]);
+                game.put("inStock", (Integer) line[5]);
+                game.put("deviceName", (String) line[6]);
+                game.put("platformName", (String) line[7]);
             }
 
         } catch (Exception e) {

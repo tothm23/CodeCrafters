@@ -15,14 +15,14 @@ import org.json.JSONObject;
  *
  * @author tothm23
  */
-@Path("jatek")
+@Path("game")
 @Produces(MediaType.APPLICATION_JSON)
 @Consumes(MediaType.APPLICATION_JSON)
 public class GameResource {
 
     @GET
-    @Path("{jatekId}")
-    public Response game(@PathParam("jatekId") Integer id) {
+    @Path("{gameId}")
+    public Response game(@PathParam("gameId") Integer id) {
         JSONObject result = GameService.game(id);
         return Response.status(Response.Status.OK).entity(result.toString())
                 .type(MediaType.APPLICATION_JSON).build();

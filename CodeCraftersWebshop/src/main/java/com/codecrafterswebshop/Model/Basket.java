@@ -28,13 +28,13 @@ import javax.validation.constraints.NotNull;
  * @author tothm23
  */
 @Entity
-@Table(name = "kosar")
+@Table(name = "basket")
 @NamedQueries({
-    @NamedQuery(name = "Kosar.findAll", query = "SELECT k FROM Kosar k"),
-    @NamedQuery(name = "Kosar.findById", query = "SELECT k FROM Kosar k WHERE k.id = :id"),
-    @NamedQuery(name = "Kosar.findByFelhasznaloId", query = "SELECT k FROM Kosar k WHERE k.felhasznaloId = :felhasznaloId"),
-    @NamedQuery(name = "Kosar.findByJatekId", query = "SELECT k FROM Kosar k WHERE k.gameId = :gameId"),
-    @NamedQuery(name = "Kosar.findByVegosszeg", query = "SELECT k FROM Kosar k WHERE k.count = :count")})
+    @NamedQuery(name = "Basket.findAll", query = "SELECT b FROM Basket b"),
+    @NamedQuery(name = "Basket.findById", query = "SELECT b FROM Basket b WHERE b.id = :id"),
+    @NamedQuery(name = "Basket.findByUserId", query = "SELECT b FROM Basket b WHERE b.userId = :userId"),
+    @NamedQuery(name = "Basket.findByGameId", query = "SELECT b FROM Basket b WHERE b.gameId = :gameId"),
+    @NamedQuery(name = "Basket.findByAmount", query = "SELECT b FROM Basket b WHERE b.amount = :amount")})
 public class Basket implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -45,16 +45,16 @@ public class Basket implements Serializable {
     private Integer id;
     @Basic(optional = false)
     @NotNull
-    @Column(name = "felhasznaloId")
-    private int felhasznaloId;
+    @Column(name = "userId")
+    private int userId;
     @Basic(optional = false)
     @NotNull
     @Column(name = "gameId")
     private int gameId;
     @Basic(optional = false)
     @NotNull
-    @Column(name = "count")
-    private int count;
+    @Column(name = "amount")
+    private int amount;
 
     public Basket() {
     }
@@ -63,11 +63,11 @@ public class Basket implements Serializable {
         this.id = id;
     }
 
-    public Basket(Integer id, int felhasznaloId, int gameId, int count) {
+    public Basket(Integer id, int userId, int gameId, int amount) {
         this.id = id;
-        this.felhasznaloId = felhasznaloId;
+        this.userId = userId;
         this.gameId = gameId;
-        this.count = count;
+        this.amount = amount;
     }
 
     public Integer getId() {
@@ -78,28 +78,28 @@ public class Basket implements Serializable {
         this.id = id;
     }
 
-    public int getFelhasznaloId() {
-        return felhasznaloId;
+    public int getUserId() {
+        return userId;
     }
 
-    public void setFelhasznaloId(int felhasznaloId) {
-        this.felhasznaloId = felhasznaloId;
+    public void setUserId(int userId) {
+        this.userId = userId;
     }
 
-    public int getJatekId() {
+    public int getGameId() {
         return gameId;
     }
 
-    public void setJatekId(int gameId) {
+    public void setGameId(int gameId) {
         this.gameId = gameId;
     }
 
-    public int getVegosszeg() {
-        return count;
+    public int getAmount() {
+        return amount;
     }
 
-    public void setVegosszeg(int count) {
-        this.count = count;
+    public void setAmount(int amount) {
+        this.amount = amount;
     }
 
     @Override
@@ -120,7 +120,7 @@ public class Basket implements Serializable {
 
     @Override
     public String toString() {
-        return "com.codecrafterswebshop.Model.Kosar[ id=" + id + " ]";
+        return "com.codecrafterswebshop.Model.Basket[ id=" + id + " ]";
     }
 
     public static List<Map<String, Object>> userBasket(Integer userIdIN) {
@@ -142,7 +142,7 @@ public class Basket implements Serializable {
                 for (Object[] line : result) {
                     LinkedHashMap<String, Object> basket = new LinkedHashMap<>();
 
-                    basket.put("gameId", (Integer) line[1]);
+                    basket.put("id", (Integer) line[1]);
                     basket.put("name", (String) line[2]);
                     basket.put("amount", (Integer) line[3]);
                     basket.put("image", (String) line[4]);
@@ -193,13 +193,13 @@ public class Basket implements Serializable {
         }
     }
 
-    public static boolean deleteGameBasket(Integer userIdIN, Integer gameIdIN) {
+    public static boolean deleteGameFromBasket(Integer userIdIN, Integer gameIdIN) {
 
         EntityManagerFactory emf = Persistence.createEntityManagerFactory(Database.getPersistenceUnitName());
         EntityManager em = emf.createEntityManager();
 
         try {
-            StoredProcedureQuery spq = em.createStoredProcedureQuery("deleteGameBasket");
+            StoredProcedureQuery spq = em.createStoredProcedureQuery("deleteGameFromBasket");
 
             spq.registerStoredProcedureParameter("userIdIN", Integer.class, ParameterMode.IN);
             spq.registerStoredProcedureParameter("gameIdIN", Integer.class, ParameterMode.IN);
@@ -248,7 +248,7 @@ public class Basket implements Serializable {
         }
     }
 
-    public static List<Map<String, Object>> productKey(Integer userIdIN) {
+    public static List<Map<String, Object>> productKeys(Integer userIdIN) {
 
         List<Map<String, Object>> productKeys = new ArrayList<>();
 
@@ -256,7 +256,7 @@ public class Basket implements Serializable {
         EntityManager em = emf.createEntityManager();
 
         try {
-            StoredProcedureQuery spq = em.createStoredProcedureQuery("productKey");
+            StoredProcedureQuery spq = em.createStoredProcedureQuery("productKeys");
 
             spq.registerStoredProcedureParameter("userIdIN", Integer.class, ParameterMode.IN);
             spq.setParameter("userIdIN", userIdIN);

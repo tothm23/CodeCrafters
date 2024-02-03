@@ -14,19 +14,19 @@ public class ProductsService {
 
     public static JSONArray products() {
         JSONArray jsonArray = new JSONArray();
-        List<Map<String, Object>> games = Game.jatekok();
+        List<Map<String, Object>> games = Game.games();
 
         for (Map<String, Object> game : games) {
             JSONObject obj = new JSONObject();
             obj.put("id", game.get("id"));
-            obj.put("nev", game.get("nev"));
-            obj.put("ar", game.get("ar"));
-            obj.put("leiras", game.get("leiras"));
-            obj.put("kep", game.get("kep"));
-            obj.put("korhatar", game.get("korhatar"));
-            obj.put("akcio", game.get("akcio"));
-            obj.put("mennyisegraktaron", game.get("mennyisegraktaron"));
-            obj.put("eszkoz", game.get("eszkoz"));
+            obj.put("name", game.get("name"));
+            obj.put("price", game.get("price"));
+            obj.put("description", game.get("description"));
+            obj.put("image", game.get("image"));
+            obj.put("ageLimit", game.get("ageLimit"));
+            obj.put("discount", game.get("discount"));
+            obj.put("inStock", game.get("inStock"));
+            obj.put("device", game.get("device"));
             obj.put("platform", game.get("platform"));
 
             jsonArray.put(obj);
