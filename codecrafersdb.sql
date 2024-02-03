@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Feb 01, 2024 at 10:31 AM
+-- Generation Time: Feb 03, 2024 at 09:14 PM
 -- Server version: 5.7.24
 -- PHP Version: 8.0.1
 
@@ -83,33 +83,33 @@ CREATE DEFINER=`root`@`localhost` PROCEDURE `carouselGames` ()   BEGIN
     
 END$$
 
-CREATE DEFINER=`root`@`localhost` PROCEDURE `checkGameId` (IN `gameIdIN` INT(9), OUT `dbOUT` INT(1))   SELECT COUNT(game.id) 
-INTO dbOUT
+CREATE DEFINER=`root`@`localhost` PROCEDURE `checkGameId` (IN `gameIdIN` INT(9), OUT `countOUT` INT(1))   SELECT COUNT(game.id) 
+INTO countOUT
 FROM game
 WHERE game.id = gameIdIN$$
 
-CREATE DEFINER=`root`@`localhost` PROCEDURE `checkGameIdBasket` (IN `gameIdIN` INT(9), OUT `dbOUT` INT(1))   SELECT COUNT(basket.gameId) 
-INTO dbOUT
+CREATE DEFINER=`root`@`localhost` PROCEDURE `checkGameIdBasket` (IN `gameIdIN` INT(9), OUT `countOUT` INT(1))   SELECT COUNT(basket.gameId) 
+INTO countOUT
 FROM basket
 WHERE basket.gameId = gameIdIN$$
 
-CREATE DEFINER=`root`@`localhost` PROCEDURE `checkUserEmail` (IN `emailIN` VARCHAR(100), OUT `dbOUT` INT(1))   SELECT COUNT(user.id) 
-INTO dbOUT
+CREATE DEFINER=`root`@`localhost` PROCEDURE `checkUserEmail` (IN `emailIN` VARCHAR(100), OUT `countOUT` INT(1))   SELECT COUNT(user.id) 
+INTO countOUT
 FROM user
 WHERE user.email = emailIN$$
 
-CREATE DEFINER=`root`@`localhost` PROCEDURE `checkUserId` (IN `userIdIN` INT(9), OUT `dbOUT` INT(1))   SELECT COUNT(user.id) 
-INTO dbOUT
+CREATE DEFINER=`root`@`localhost` PROCEDURE `checkUserId` (IN `userIdIN` INT(9), OUT `countOUT` INT(1))   SELECT COUNT(user.id) 
+INTO countOUT
 FROM user
 WHERE user.id = userIdIN$$
 
-CREATE DEFINER=`root`@`localhost` PROCEDURE `checkUserIdBasket` (IN `userIdIN` INT(9), OUT `dbOUT` INT(1))   SELECT COUNT(basket.userId) 
-INTO dbOUT
+CREATE DEFINER=`root`@`localhost` PROCEDURE `checkUserIdBasket` (IN `userIdIN` INT(9), OUT `countOUT` INT(1))   SELECT COUNT(basket.userId) 
+INTO countOUT
 FROM basket
 WHERE basket.userId = userIdIN$$
 
-CREATE DEFINER=`root`@`localhost` PROCEDURE `checkUserName` (IN `nameIN` VARCHAR(100), OUT `dbOUT` INT(1))   SELECT COUNT(user.id) 
-INTO dbOUT
+CREATE DEFINER=`root`@`localhost` PROCEDURE `checkUserName` (IN `nameIN` VARCHAR(100), OUT `countOUT` INT(1))   SELECT COUNT(user.id) 
+INTO countOUT
 FROM user
 WHERE user.userName = nameIN$$
 
