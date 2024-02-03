@@ -313,13 +313,13 @@ slide
 }
 
 /* lábléc */
-.lab {
+.footer {
   position: relative;
   bottom: 0;
   width: 100%;
 }
 
-#lablec {
+#footer{
   height: 100px;
   background: #241f1f;
   color: white;
