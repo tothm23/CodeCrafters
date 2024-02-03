@@ -13,24 +13,24 @@ document.addEventListener("DOMContentLoaded", function () {
     const lastname = document.getElementById("lastname").value;
     const firstname = document.getElementById("firstname").value;
     const email = document.getElementById("email").value;
-    const pas = document.getElementById("jelszo").value;
-    const pas_again = document.getElementById("jelszoegyezes").value;
+    const pas = document.getElementById("pas").value;
+    const pas_again = document.getElementById("pas_again").value;
 
     if (pas != pas_again) {
       alert("A jelszavak nem egyeznek!");
     } else {
 
       const inputdata = {
-        felhasznaloNev: username,
-        vezetekNev: lastname,
-        keresztNev: firstname,
+        userName: username,
+        lastName: lastname,
+        firstName: firstname,
         email: email,
-        jelszo: pas
+        password: pas
 
       };
       // regisztráció fetch
       fetch(
-          "http://localhost:8080/CodeCraftersWebshop-1.0-SNAPSHOT/webresources/felhasznalo", {
+          "http://localhost:8080/CodeCraftersWebshop-1.0-SNAPSHOT/webresources/user", {
             method: "POST",
             body: JSON.stringify(inputdata),
             headers: {
@@ -38,16 +38,16 @@ document.addEventListener("DOMContentLoaded", function () {
             },
           }
         )
-        .then((valasz) => {
-          return valasz.text();
+        .then((response) => {
+          return response.text();
         })
-        .then((adat) => {
-          if(adat=="Felhasználó hozzáadva!"){
+        .then((data) => {
+          if(data=="Felhasználó hozzáadva!"){
             window.location.href = "../index.html";
           }
         })
-        .catch((hiba) => {
-          console.error('Hiba:', hiba);
+        .catch((error) => {
+          console.error('Hiba:', error);
         });
     }
 
