@@ -30,8 +30,8 @@ fetch(
           <h5 class="card-title">${data[i].name}</h5>
           ${
             data[i].discount > 0
-              ? `<p class="card-text ar" style="text-decoration: line-through;">${data[i].price} Ft</p>`
-              : `<p class="card-text ar">${data[i].price} Ft</p>`
+              ? `<p class="card-text" style="text-decoration: line-through;">${data[i].price} Ft</p>`
+              : `<p class="card-text">${data[i].price} Ft</p>`
           }
           ${
             data[i].discount > 0
@@ -98,10 +98,10 @@ fetch(
       }
     }
   })
-  .catch((hiba) => alert(hiba));
+  .catch((error) => alert(error));
 
 //get kosár
-function getCart(gombid) {
+function getCart(btn_id) {
   fetch(`http://localhost:8080/CodeCraftersWebshop-1.0-SNAPSHOT/webresources/kosar/${logged_user.id}`, {
       method: 'GET'
     })
@@ -110,8 +110,8 @@ function getCart(gombid) {
       // Ellenőrizze, hogy a válasz tartalmazza-e a várt tulajdonságokat
       //console.log('Eredmény:', result);
       for (let i = 0; i < result.length; i++) {
-        gombid[i] = result[i].jatekId;
-        console.log(gombid[i], result[i].jatekId);
+        btn_id[i] = result[i].jatekId;
+        console.log(btn_id[i], result[i].jatekId);
         console.log(cart_id[0], cart_id[1], cart_id[2]);
       }
     }).catch(error => console.error(error));
@@ -244,7 +244,7 @@ document.addEventListener("DOMContentLoaded", function () {
     console.log(logged_user.id);
     log_reg.style.display = "none";
     userbox.style.display = "flex";
-    user_name.innerHTML += logged_user.felhasznaloNev;
+    user_name.innerHTML += logged_user.userName;
     email.innerHTML += logged_user.email;
   } else {
     log_reg.style.display = "flex";
@@ -256,14 +256,14 @@ document.addEventListener("DOMContentLoaded", function () {
       //ha hozzáadjuk a kosárhoz akkor disbaled és a value megváltozik kosárbanra
       event.target.value = "Kosárban";
       event.target.disabled = true;
-      const jatekId = event.target.getAttribute("data-jatek-id");
+      const gameId = event.target.getAttribute("data-jatek-id");
 
-      if (jatekId)
+      if (gameId)
         var myHeaders = new Headers();
       myHeaders.append("Content-Type", "application/json");
       var raw = JSON.stringify({
-        jatekId: jatekId,
-        felhasznaloId: logged_user.id
+        gameId: gameId,
+        userId: logged_user.id
       });
 
       console.log(raw);

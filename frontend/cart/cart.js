@@ -47,12 +47,12 @@ document.addEventListener('DOMContentLoaded', function () {
 
     });
 
-    function cart_delete(jatekid) {
+    function cart_delete(gameId) {
         var requestOptions = {
             method: 'DELETE',
             redirect: 'follow'
         };
-        const url = `http://localhost:8080/CodeCraftersWebshop-1.0-SNAPSHOT/webresources/kosar?felhasznaloId=${logeduser_data.id}&jatekId=${jatekid}`;
+        const url = `http://localhost:8080/CodeCraftersWebshop-1.0-SNAPSHOT/webresources/basket?userId=${logeduser_data.id}&gameId=${gameId}`;
         fetch(url, requestOptions)
             .then(response => response.text())
             .then(result => {

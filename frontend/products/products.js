@@ -10,7 +10,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
   const checkboxok = document.querySelectorAll(".form-check-input");
   
-  const product_games = document.querySelector(".termek-lista#jatekok");
+  const product_games = document.querySelector(".products-list#games");
   const searched_text = localStorage.getItem('searched_text');
 
   const sale_checkbox = document.getElementById("AkciosCheckbox");
@@ -69,7 +69,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
   // Termékek lekérése a szerverről
   fetch(
-      "http://localhost:8080/CodeCraftersWebshop-1.0-SNAPSHOT/webresources/termekek"
+      "http://localhost:8080/CodeCraftersWebshop-1.0-SNAPSHOT/webresources/products"
     )
     .then((valasz) => valasz.json())
     .then((adat) => {
@@ -83,7 +83,7 @@ document.addEventListener("DOMContentLoaded", function () {
     .catch((error) => alert(error));
 
   // Termékek megjelenítése a HTML-ben
-  function createCard(imgPath, name, price, sale, id, url) {
+  function createCard(imgPath,ageLimit, name, price, sale, id, url) {
     const saleprice = sale > 0 ? Math.round(price - (price / 100) * sale) : null;
 
     return `
@@ -111,10 +111,11 @@ document.addEventListener("DOMContentLoaded", function () {
     for (let i = 0; i < data.length; i++) {
       product_games.innerHTML +=
         (createCard(
-          `../img/games/${data[i].kep}`,
-          data[i].nev,
-          data[i].ar,
-          data[i].akcio,
+          `../img/games/${data[i].image}`,
+          data[i].ageLimit,
+          data[i].name,
+          data[i].price,
+          data[i].discount,
           data[i].id,
           "../game/game.html"
         ));

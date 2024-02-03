@@ -277,7 +277,7 @@ slide
   width:300px;
 }
 
-#jatekok .card{
+#games .card{
   background-color: #241f1f;
   color: white;
   display: flex;
@@ -306,8 +306,8 @@ slide
   margin: 50px;
 }
 
-#bestseller_card{
-  margin: 5px;
+#bestseller_card,#new_card{
+  margin: 10px;
 }
 .carousel-inner img {
   border: #000 solid 1px;
