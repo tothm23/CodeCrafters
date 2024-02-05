@@ -19,7 +19,7 @@ public class ProductsService {
         for (Map<String, Object> game : games) {
             JSONObject obj = new JSONObject();
             obj.put("id", game.get("id"));
-            obj.put("name", game.get("name"));
+            obj.put("gameName", game.get("gameName"));
             obj.put("price", game.get("price"));
             obj.put("description", game.get("description"));
             obj.put("image", game.get("image"));

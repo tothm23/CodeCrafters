@@ -424,12 +424,12 @@ public class Game implements Serializable {
                 game.put("gameName", (String) line[1]);
                 game.put("price", (Integer) line[2]);
                 game.put("description", (String) line[3]);
-                game.put("image", (String) line[3]);
-                game.put("ageLimit", (Integer) line[4]);
-                game.put("discount", (Integer) line[5]);
-                game.put("inStock", (Integer) line[5]);
-                game.put("deviceName", (String) line[6]);
-                game.put("platformName", (String) line[7]);
+                game.put("image", (String) line[4]);
+                game.put("ageLimit", (Integer) line[5]);
+                game.put("discount", (Integer) line[6]);
+                game.put("inStock", (Integer) line[7]);
+                game.put("deviceName", (String) line[8]);
+                game.put("platformName", (String) line[9]);
             }
 
         } catch (Exception e) {
