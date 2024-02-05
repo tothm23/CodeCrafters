@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Feb 03, 2024 at 09:14 PM
+-- Generation Time: Feb 05, 2024 at 10:32 AM
 -- Server version: 5.7.24
 -- PHP Version: 8.0.1
 
@@ -180,7 +180,7 @@ INTO
     emailOUT
 FROM user
 
-WHERE user.userName = userNameIN AND user.password = SHA1(passwordIN)$$
+WHERE user.userName = userNameIN AND user.password = SHA2(passwordIN, 256)$$
 
 CREATE DEFINER=`root`@`localhost` PROCEDURE `newGames` ()   BEGIN
 
@@ -252,7 +252,7 @@ VALUES(
     lastNameIN,
     firstNameIN,
     emailIN,
-    SHA1(passwordIN)
+    SHA2(passwordIN, 256)
 )$$
 
 CREATE DEFINER=`root`@`localhost` PROCEDURE `updateUser` (IN `idIN` INT(9), IN `userNameIN` VARCHAR(100), IN `lastNameIN` VARCHAR(100), IN `firstNameIN` VARCHAR(100), IN `passwordIN` TEXT)   UPDATE user
@@ -482,9 +482,9 @@ CREATE TABLE `user` (
 --
 
 INSERT INTO `user` (`id`, `userName`, `lastName`, `firstName`, `email`, `password`, `createdAt`, `updatedAt`) VALUES
-(1, 'SunnyDay21', 'Kéri', 'Bence', 'keribence0@gmail.com', '49e6586c9fbf5cdbfb820bde5c0f6800a21b549a', '2023-11-20 17:13:02', NULL),
-(2, 'AdventureSeeker', 'Nagy', 'Péter', 'peter.nagy@example.com', '9c073111b80b0af312f9c9f8bb4baa1c41e86d51', '2023-11-20 17:13:35', NULL),
-(3, 'MusicLover88', 'Tóth', 'Eszter', 'eszter.toth@example.com', '1e0acaff2cd87e52f18dbc6c9b6cad2b62483e49', '2023-12-15 15:06:49', NULL);
+(1, 'SunnyDay21', 'Kéri', 'Bence', 'keribence0@gmail.com', 'c50797c1a6a1f41b96234209b5f59300cfdcc1ee489d91cde8b97cbd20270018', '2024-02-05 11:31:27', NULL),
+(2, 'AdventureSeeker', 'Nagy', 'Péter', 'peter.nagy@example.com', '3e89a2becc5561f645e8898cb198ff7e9d97f90482d486addee0dce8a0c8d475', '2024-02-05 11:31:27', NULL),
+(3, 'MusicLover88', 'Tóth', 'Eszter', 'eszter.toth@example.com', 'c68a132c5365595dc889cedd4be5b2cdde2167c06d3557d521ac2d64c20aa2b1', '2024-02-05 11:31:27', NULL);
 
 --
 -- Indexes for dumped tables
