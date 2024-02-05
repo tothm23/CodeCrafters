@@ -40,11 +40,11 @@ h1 {
   background: #241f1f;
   width: 100%;
 }
-.offcanvas .szurok{
+.offcanvas .fillter{
 border: none;
 }
 
-.szurok {
+.fillter {
   display: flex;
   flex-direction: column;
   min-width: 250px;
@@ -81,20 +81,20 @@ h2 {
   color: rgba(255, 255, 255, 0.945);
 }
 
-.arszures{
+.price_fillter{
   padding: 10px;
   margin: 10px;
   border-bottom: 1px solid white;
   align-items: center;
 }
 
-.ar ,.ar2{
+.price ,.price2{
   display: flex;
   flex-direction: row;
   justify-content: center;
 }
 
-.ar input ,.ar2 input{
+.price input ,.price2 input{
   width: 88px;
   box-sizing: border-box;
   height: 30px;

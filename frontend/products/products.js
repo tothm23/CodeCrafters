@@ -1,10 +1,10 @@
 document.addEventListener("DOMContentLoaded", function () {
   // HTML elemek kiválasztása
   const searchIn = document.querySelector('.navbar input[type="search"]');
-  const minpriceIn = document.querySelector('.ar input[name="min"]');
-  const maxpriceIn = document.querySelector('.ar input[name="max"]');
-  const minpriceIn2 = document.querySelector('.ar2 input[name="min"]');
-  const maxpriceIn2 = document.querySelector('.ar2 input[name="max"]');
+  const minpriceIn = document.querySelector('.price input[name="min"]');
+  const maxpriceIn = document.querySelector('.price input[name="max"]');
+  const minpriceIn2 = document.querySelector('.price2 input[name="min"]');
+  const maxpriceIn2 = document.querySelector('.price2 input[name="max"]');
 
   const form = document.querySelector(".navbar form");
 
@@ -13,8 +13,8 @@ document.addEventListener("DOMContentLoaded", function () {
   const product_games = document.querySelector(".products-list#games");
   const searched_text = localStorage.getItem('searched_text');
 
-  const sale_checkbox = document.getElementById("AkciosCheckbox");
-  const sale_checkbox2 = document.getElementById("AkciosCheckbox2");
+  const sale_checkbox = document.getElementById("sale_checkbox");
+  const sale_checkbox2 = document.getElementById("sale_checkbox2");
   //akcio input mindig egy forma  
   sale_checkbox.addEventListener("change", function (e) {
     if (sale_checkbox.checked == true) sale_checkbox2.checked = true;
@@ -83,20 +83,20 @@ document.addEventListener("DOMContentLoaded", function () {
     .catch((error) => alert(error));
 
   // Termékek megjelenítése a HTML-ben
-  function createCard(imgPath,ageLimit, name, price, sale, id, url) {
-    const saleprice = sale > 0 ? Math.round(price - (price / 100) * sale) : null;
+  function createCard(imgPath,ageLimit, name, price, discount, id, url) {
+    const discount_price = discount > 0 ? Math.round(price - (price / 100) * discount) : null;
 
     return `
       <div class="card my-4 flex-column flex-lg-row">
         <a href="${url}?id=${id}"><img src="${imgPath}" class="card-img-top" alt="${name}"></a>
         <div class="card-body">
           <h5 class="card-title">${name}</h5>
-          <p class="card-text ar">${
-            saleprice > 0 ? `<del>${price} Ft</del>` : `${price} Ft`
+          <p class="card-text price">${
+            discount_price > 0 ? `<del>${price} Ft</del>` : `${price} Ft`
           }</p>
           ${
-            saleprice > 0
-              ? `<p class="card-text saleprice">${saleprice} Ft</p>`
+            discount_price > 0
+              ? `<p class="card-text discount_price">${discount_price} Ft</p>`
               : ""
           }
           ${add_btn(id)}
@@ -113,7 +113,7 @@ document.addEventListener("DOMContentLoaded", function () {
         (createCard(
           `../img/games/${data[i].image}`,
           data[i].ageLimit,
-          data[i].name,
+          data[i].gameName,
           data[i].price,
           data[i].discount,
           data[i].id,
@@ -136,16 +136,16 @@ document.addEventListener("DOMContentLoaded", function () {
     // Csak akkor alkalmazza a szűrést, ha a checkbox be van jelölve
     const filltered_data = original_data.filter(
       (elem) =>
-      (elem.nev.toLowerCase().includes(searched_text) ||
-        searched_text.includes(elem.nev.toLowerCase())) &&
-      elem.ar >= min_price &&
-      elem.ar <= max_price &&
+      (elem.gameName.toLowerCase().includes(searched_text) ||
+        searched_text.includes(elem.gameName.toLowerCase())) &&
+      elem.price >= min_price &&
+      elem.price <= max_price &&
       //platformra szűrés
       (checked_platform.length === 0 || checked_platform.includes(elem.platform.toLowerCase())) &&
       //eszközre szűrés
-      (checked_device.length === 0 || checked_device.includes(elem.eszkoz.toLowerCase())) &&
+      (checked_device.length === 0 || checked_device.includes(elem.device.toLowerCase())) &&
       //akciósra szűrés
-      (sale_checkbox.checked == false || elem.akcio > 0)
+      (sale_checkbox.checked == false || elem.discount > 0)
     );
     // Szűrt termékek megjelenítése
     show_products(filltered_data);

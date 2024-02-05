@@ -30,56 +30,66 @@
               <div class="container-fluid">
                 <form class="d-flex">
                   <!-- kereső mező -->
-                  <input class="form-control shadow-none border-0" type="search" placeholder="Keresés..." aria-label="Search" />
+                  <input class="form-control shadow-none border-0" type="search" placeholder="Keresés..."
+                    aria-label="Search" />
                   <button class="btn bg-dark shadow-none border-0 search-btn" type="submit">
                     <i class="fa-solid fa-magnifying-glass"></i>
                   </button>
                 </form>
               </div>
             </nav>
-            
+
             <div id="log_reg" class="dropdown">
-              <button id="dropdownMenuButton2" class="btn" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+              <button id="dropdownMenuButton2" class="btn" type="button" data-bs-toggle="dropdown"
+                aria-expanded="false">
                 <i class="fa-solid fa-user"></i>
               </button>
-              
+
               <p class="p-1">Bejelentkezés / Regisztráció</p>
-                
+
               <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton2">
-                <li id="login" class="dropdown-item link-light"><i class="fa-solid fa-right-from-bracket"></i> Bejelentkezés</li>
-                <li id="registration" class="dropdown-item link-light"><i class="fa-solid fa-user-plus"></i> Regisztráció</li>
+                <li id="login" class="dropdown-item link-light"><i class="fa-solid fa-right-from-bracket"></i>
+                  Bejelentkezés</li>
+                <li id="registration" class="dropdown-item link-light"><i class="fa-solid fa-user-plus"></i>
+                  Regisztráció</li>
               </ul>
             </div>
-            
+
           </div>
 
           <!-- felhasználó-->
-        <div id="user-box" class="dropdown justify-content-end">
-          <button id="dropdownMenuButton1" class="btn btn-dark" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-            <div class="d-flex flex-row justify-content-center align-items-center">
-              <img src="../img/user.png" id="user-img"/>
-              <p id="username"></p>
-            </div>
-          </button>
-          
-          <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-            <span id="profile" class="dropdown-item"><img src="../img/user.png" alt=""><span id="email"></span></span>
+          <div id="user-box" class="dropdown justify-content-end">
+            <button id="dropdownMenuButton1" class="btn btn-dark" type="button" data-bs-toggle="dropdown"
+              aria-expanded="false">
+              <div class="d-flex flex-row justify-content-center align-items-center">
+                <img src="../img/user.png" id="user-img" />
+                <p id="username"></p>
+              </div>
+            </button>
 
-            <li><hr class="dropdown-divider"></li>
+            <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+              <span id="profile" class="dropdown-item"><img src="../img/user.png" alt=""><span id="email"></span></span>
 
-            <li id="cart" class="dropdown-item"><i class="fa-solid fa-basket-shopping"></i> Kosár</li>
-            <li id="settings" class="dropdown-item"><i class="fa-regular fa-pen-to-square"></i>  Profil szerkesztése</li>
-            
-            <li><hr class="dropdown-divider"></li>
+              <li>
+                <hr class="dropdown-divider">
+              </li>
 
-            <li id="logout" class="dropdown-item"><i class="fa-solid fa-right-from-bracket"></i> Kijeletkezés</li>
-          </ul>
-        </div>
+              <li id="cart" class="dropdown-item"><i class="fa-solid fa-basket-shopping"></i> Kosár</li>
+              <li id="settings" class="dropdown-item"><i class="fa-regular fa-pen-to-square"></i> Profil szerkesztése
+              </li>
+
+              <li>
+                <hr class="dropdown-divider">
+              </li>
+
+              <li id="logout" class="dropdown-item"><i class="fa-solid fa-right-from-bracket"></i> Kijeletkezés</li>
+            </ul>
+          </div>
 
         </div>
       </div>
 
-    
+
     </nav>
   </div>
   <!-- az oldal -->
@@ -88,7 +98,7 @@
       <h1><b>Termékek</b></h1>
     </header>
 
-    <div class="adatok">
+    <div class="products">
       <!-- offcanvas -->
       <button class="btn btn-primary d-block d-md-none" type="button" data-bs-toggle="offcanvas"
         data-bs-target="#offcanvasWithBothOptions" aria-controls="offcanvasWithBothOptions">Szűrők</button>
@@ -100,15 +110,15 @@
             aria-label="Close"></button>
         </div>
         <div class="offcanvas-body">
-          <div class="szurok">
+          <div class="fillter">
             <h2>Kategóriák</h2>
             <div class="form-check">
-              <input class="form-check-input" type="checkbox" value="Akcios" id="AkciosCheckbox2"/>
-              <label class="form-check-label" for="AkciosCheckbox"> Akciós </label>
+              <input class="form-check-input" type="checkbox" value="Akcios" id="sale_checkbox2" />
+              <label class="form-check-label" for="sale_checkbox2"> Akciós </label>
             </div>
-            <div class="arszures">
+            <div class="price_fillter">
               <h2>Ár</h2>
-              <div class="ar2">
+              <div class="price2">
                 <input type="number" name="min" placeholder="Tól" min="0" value />
                 <span style="color: white">-</span>
                 <input type="number" name="max" placeholder="Ig" max="999999" value />
@@ -169,15 +179,15 @@
       </div>
       <div class="main-inner">
         <!-- Szűrők -->
-        <div class="szurok d-none d-md-block">
+        <div class="fillter d-none d-md-block">
           <h2>Kategóriák</h2>
           <div class="form-check">
-            <input class="form-check-input" type="checkbox" value="Akcios" id="AkciosCheckbox" />
-            <label class="form-check-label" for="AkciosCheckbox"> Akciós </label>
+            <input class="form-check-input" type="checkbox" value="Akcios" id="sale_checkbox" />
+            <label class="form-check-label" for="sale_checkbox"> Akciós </label>
           </div>
-          <div class="arszures">
+          <div class="price_fillter">
             <h2>Ár</h2>
-            <div class="ar">
+            <div class="price">
               <input type="number" name="min" placeholder="Tól" min="0" value />
               <span style="color: white">-</span>
               <input type="number" name="max" placeholder="Ig" max="999999" value />
@@ -240,12 +250,12 @@
         </div>
       </div>
     </div>
+    <!-- vissza -->
+    <div id="scroll_Up" onclick="scroll_Up()">
+      <button2><i class="fa-solid fa-arrow-up"></i></button2>
+    </div>
   </div>
-  <!-- vissza -->
-  <div id="scroll_Up" onclick="scroll_Up()">
-    <button2><i class="fa-solid fa-arrow-up"></i></button2>
-  </div>
-  </div>
+
   <!-- lábléc -->
   <div class="footer">
     <div id="footer">

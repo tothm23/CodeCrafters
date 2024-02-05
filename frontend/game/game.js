@@ -1,4 +1,4 @@
-const link = "http://localhost:8080/CodeCraftersWebshop-1.0-SNAPSHOT/webresources/jatek";
+const link = "http://localhost:8080/CodeCraftersWebshop-1.0-SNAPSHOT/webresources/game";
 
 const img = document.getElementById("img");
 const game_name = document.getElementById("game_name");
@@ -22,16 +22,16 @@ fetch(`${link}/${id}`)
   .then((data) => {
     if (data.id) {
       console.log(data)
-      img.innerHTML = data.nev;
-      var src='../img/games/'+data.kep;
+      img.innerHTML;
+      var src='../img/games/'+data.image;
       img.setAttribute("src", src);
       
-      game_name.innerHTML = data.nev;
-      device.innerHTML = data.eszkoz;
-      platform.innerHTML = data.platform;
+      game_name.innerHTML = data.gameName;
+      device.innerHTML = data.deviceName;
+      platform.innerHTML = data.platformName;
 
       // Korhatár színe
-      switch (data.korhatar) {
+      switch (data.ageLimit) {
         case 3:
           age.style.border = "3px solid #a5c301";
           break;
@@ -51,10 +51,10 @@ fetch(`${link}/${id}`)
       }
 
       age.style.borderRadius = "50%";
-      age.innerHTML = data.korhatar;
+      age.innerHTML = data.ageLimit;
 
       // Raktáron
-      if (data.mennyisegraktaron == 0) {
+      if (data.inStock > 0) {
         available.innerHTML = "elérhető";
         available.style.color = "#95e72d";
       } else {
@@ -62,26 +62,26 @@ fetch(`${link}/${id}`)
         available.style.color = "#ff0000";
       }
 
-      price.innerHTML = data.ar + " Ft";
+      price.innerHTML = data.price + " Ft";
       //Ár megjelenítése
-
-      if(data.akcio > 0){
-        price.innerHTML=`<p class="card-text price" style="text-decoration: line-through;">${data.ar} Ft</p>`; 
+      
+      if(data.discount > 0){
+        price.innerHTML=`<p class="card-text price" style="text-decoration: line-through;">${data.price} Ft</p>`; 
       }
       else{
-        price.innerHTML=`<p class="card-text price">${data.ar} Ft</p>`;
+        price.innerHTML=`<p class="card-text price">${data.price} Ft</p>`;
       }
       
-      if(data.akcio > 0){
+      if(data.discount > 0){
         // Akciós ár egész számra kerekítve
-        sale_price.innerHTML = `<p class="card-text saleprice">${Math.round(data.ar - (data.ar / 100) * data.akcio)} Ft</p>`;
+        sale_price.innerHTML = `<p class="card-text saleprice">${Math.round(data.price - (data.price / 100) * data.discount)} Ft</p>`;
       }
       else{ 
         sale_price.innerHTML = "";
       }
       add_btn.innerHTML=add_btn(id);
       
-      desc.innerHTML = data.leiras;
+      desc.innerHTML = data.description;
     } else {
       alert("A játék nem található!");
     }

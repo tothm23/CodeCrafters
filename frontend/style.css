@@ -302,6 +302,10 @@ slide
   margin: 5px;
 }
 
+.carousel .flex-column .card-body{
+height: 250px;
+}
+
 #cards{
   margin: 50px;
 }
@@ -325,7 +329,12 @@ slide
   color: #000;
   border: 0;
   border-radius: 10px;
+  width: 150px;
+  position: relative;
+  bottom: 0;
+  margin-bottom: 10px;
 }
+
 
 /* lábléc */
 .footer {

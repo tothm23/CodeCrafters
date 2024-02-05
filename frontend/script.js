@@ -155,11 +155,11 @@ function add_btn(id) {
     if (vanilyen_ID) {
       return `<input id="add_btn" data-jatek-id="${id}" class="my-2 p-2 btn btn-success fs-5" type="button" disabled value="Kosárban" />`;
     } else {
-      return `<input id="add_btn" data-jatek-id="${id}" class="my-2 p-2 btn btn-success fs-5" type="button" value="Hozzáadás a kosárhoz" />`;
+      return `<input id="add_btn" data-jatek-id="${id}" class="my-2 p-2 btn btn-success fs-5" type="button" value="Hozzáadás" />`;
 
     }
   } else {
-    return `<input id="add_btn" data-jatek-id="${id}" class="my-2 p-2 btn btn-success fs-5" type="button" disabled value="Hozzáadás a kosárhoz" />`;
+    return `<input id="add_btn" data-jatek-id="${id}" class="my-2 p-2 btn btn-success fs-5" type="button" disabled value="Hozzáadás" />`;
   }
 
 };
