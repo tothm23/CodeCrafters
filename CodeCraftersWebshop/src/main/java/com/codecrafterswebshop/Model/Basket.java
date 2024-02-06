@@ -228,7 +228,7 @@ public class Basket implements Serializable {
         EntityManager em = emf.createEntityManager();
 
         try {
-            StoredProcedureQuery spq = em.createStoredProcedureQuery("order");
+            StoredProcedureQuery spq = em.createStoredProcedureQuery("order_");
 
             spq.registerStoredProcedureParameter("userIdIN", Integer.class, ParameterMode.IN);
             spq.setParameter("userIdIN", userIdIN);
