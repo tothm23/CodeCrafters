@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Feb 05, 2024 at 10:32 AM
+-- Generation Time: Feb 06, 2024 at 10:14 AM
 -- Server version: 5.7.24
 -- PHP Version: 8.0.1
 
@@ -197,7 +197,7 @@ CREATE DEFINER=`root`@`localhost` PROCEDURE `newGames` ()   BEGIN
 
 END$$
 
-CREATE DEFINER=`root`@`localhost` PROCEDURE `order` (IN `userIdIN` INT(9))   BEGIN
+CREATE DEFINER=`root`@`localhost` PROCEDURE `order_` (IN `userIdIN` INT(9))   BEGIN
 
     DECLARE total INT(9);
 
