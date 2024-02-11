@@ -12,6 +12,7 @@ import io.jsonwebtoken.UnsupportedJwtException;
 import io.jsonwebtoken.impl.TextCodec;
 import java.util.Base64;
 import java.util.Date;
+import java.util.Random;
 
 /**
  *
@@ -19,7 +20,7 @@ import java.util.Date;
  */
 public class Token {
 
-    private static final String secret = generateSecret(24);
+    private static final String secret = generateSecret(new Random().nextInt(32 - 24) + 24);
 
     public static String getSecret() {
         return secret;
@@ -33,7 +34,7 @@ public class Token {
         StringBuilder key = new StringBuilder();
 
         for (int i = 0; i < keyLength; i++) {
-            key.append((char) Math.floor(Math.random() * (max - min + 1) + min));
+            key.append((char) new Random().nextInt(max - min) + min);
         }
 
         return Base64.getEncoder().encodeToString(new String(key).getBytes());
