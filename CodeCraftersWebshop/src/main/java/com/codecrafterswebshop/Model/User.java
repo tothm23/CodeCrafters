@@ -1,5 +1,6 @@
 package com.codecrafterswebshop.Model;
 
+import com.codecrafterswebshop.Config.Caesar;
 import com.codecrafterswebshop.Config.Database;
 import com.codecrafterswebshop.Exception.UserException;
 import java.io.Serializable;
@@ -7,6 +8,7 @@ import java.util.Date;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Random;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -109,6 +111,17 @@ public class User implements Serializable {
         this.lastName = lastName;
         this.firstName = firstName;
         this.email = email;
+    }
+
+    private static final int randomNumber = new Random().nextInt(32 - 24) + 24;
+    private static final String salt = generateSalt(User.getRandomNumber());
+
+    public static int getRandomNumber() {
+        return randomNumber;
+    }
+
+    public static String getSalt() {
+        return salt;
     }
 
     public Integer getId() {
@@ -248,7 +261,7 @@ public class User implements Serializable {
             spq.registerStoredProcedureParameter("emailOUT", String.class, ParameterMode.OUT);
 
             spq.setParameter("userNameIN", userNameIN);
-            spq.setParameter("passwordIN", passwordIN);
+            spq.setParameter("passwordIN", Caesar.encrypt(passwordIN + getSalt(), Caesar.getOffset()));
 
             Integer id = (Integer) spq.getOutputParameterValue("userIdOUT");
             String userName = (String) spq.getOutputParameterValue("userNameOUT");
@@ -289,7 +302,8 @@ public class User implements Serializable {
             spq.setParameter("lastNameIN", lastNameIN);
             spq.setParameter("firstNameIN", firstNameIN);
             spq.setParameter("emailIN", emailIN);
-            spq.setParameter("passwordIN", passwordIN);
+            spq.setParameter("passwordIN", Caesar.encrypt(passwordIN + getSalt(), Caesar.getOffset())
+            );
 
             spq.execute();
             return true;
@@ -365,6 +379,21 @@ public class User implements Serializable {
             em.close();
             emf.close();
         }
+    }
+
+    public static String generateSalt(int keyLength) {
+
+        int min = 33;
+        int max = 126;
+
+        StringBuilder sb = new StringBuilder();
+
+        for (int i = 0; i < keyLength; i++) {
+            sb.append((char) Math.floor(Math.random() * (max - min + 1) + min));
+        }
+
+        return new String(sb);
+
     }
 
     public static boolean checkUsernameUnique(String userName) throws UserException {
