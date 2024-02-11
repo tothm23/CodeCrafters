@@ -10,6 +10,7 @@ import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.SignatureException;
 import io.jsonwebtoken.UnsupportedJwtException;
 import io.jsonwebtoken.impl.TextCodec;
+import java.util.Base64;
 import java.util.Date;
 
 /**
@@ -17,6 +18,26 @@ import java.util.Date;
  * @author tothm23
  */
 public class Token {
+
+    private static final String secret = generateSecret(24);
+
+    public static String getSecret() {
+        return secret;
+    }
+
+    private static String generateSecret(int keyLength) {
+
+        int min = 33;
+        int max = 126;
+
+        StringBuilder key = new StringBuilder();
+
+        for (int i = 0; i < keyLength; i++) {
+            key.append((char) Math.floor(Math.random() * (max - min + 1) + min));
+        }
+
+        return Base64.getEncoder().encodeToString(new String(key).getBytes());
+    }
 
     public static String create(User f, long expirationMillis) {
 
@@ -33,7 +54,7 @@ public class Token {
                 .setExpiration(new Date(nowMillis + expirationMillis))
                 .signWith(
                         SignatureAlgorithm.HS256,
-                        TextCodec.BASE64.decode("RXogbGVzeiBhIHRpdGtvcyBrdWxjcw==")
+                        TextCodec.BASE64.decode(getSecret())
                 )
                 .compact();
 
@@ -42,8 +63,7 @@ public class Token {
 
     public static int decode(String token) {
         try {
-            String secret = "RXogbGVzeiBhIHRpdGtvcyBrdWxjcw==";
-            Jws<Claims> result = Jwts.parser().setSigningKey(TextCodec.BASE64.decode(secret)).parseClaimsJws(token);
+            Jws<Claims> result = Jwts.parser().setSigningKey(TextCodec.BASE64.decode(getSecret())).parseClaimsJws(token);
             return 1;
 
         } catch (ExpiredJwtException | MalformedJwtException | SignatureException | UnsupportedJwtException | IllegalArgumentException ex) {
