@@ -79,7 +79,7 @@ fetch(`${link}/${id}`)
       else{ 
         sale_price.innerHTML = "";
       }
-      add_btn.innerHTML=add_btn(id);
+      document.getElementById("add_btn").innerHTML=add_btn(id);
       
       desc.innerHTML = data.description;
     } else {
