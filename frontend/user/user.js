@@ -10,8 +10,11 @@ document.addEventListener('DOMContentLoaded', function () {
     felhasznalo_form.addEventListener("submit", function (event) {
         event.preventDefault();
         const userNameIn = document.getElementById("userName").value;
+        const userName2 = document.getElementById("userName2").value;
         const lastNameIn = document.getElementById("lastName").value;
+        const lastName2 = document.getElementById("lastName2").value;
         const firstNameIn = document.getElementById("firstName").value;
+        const firstName2 = document.getElementById("firstName2").value;
         const emailIn = document.getElementById("email").value;
         const pas = document.getElementById("pas").value;
         const pasAgain = document.getElementById("pasAgain").value;
@@ -26,6 +29,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 // Mentési logika
                 var myHeaders = new Headers();
                 myHeaders.append("Content-Type", "application/json");
+               
                 var raw = JSON.stringify({
                     "userName": userNameIn,
                     "lastName": lastNameIn,
@@ -40,24 +44,31 @@ document.addEventListener('DOMContentLoaded', function () {
                     redirect: 'follow'
                 };
 
-                fetch(`http://localhost:8080/CodeCraftersWebshop-1.0-SNAPSHOT/webresources/user/${loged_userdata.id}`, requestOptions)
+                let url = `http://localhost:8080/CodeCraftersWebshop-1.0-SNAPSHOT/webresources/user/${loged_userdata.id}`;
+
+                fetch(url, requestOptions)
                     .then(response => response.text())
                     .then(result => console.log(result))
                     .catch(error => console.log('error', error));
-                console.log("Felhasználó frissítve");
-                alert("Felhasználó frissítve");
 
-                let responseObject = {
-                    "userName": userNameIn,
-                    "email": loged_userdata.email,
-                    "id": loged_userdata.id,
-                    "lastName": lastNameIn,
-                    "firstName": firstNameIn,
-                    "password": pas
+
+                console.log(loged_userdata.id, loged_userdata.lastName);
+                if (result = "Felhasználó frissítve") {
+
+                    let responseObject = {
+                        "userName": userNameIn,
+                        "email": loged_userdata.email,
+                        "id": loged_userdata.id,
+                        "lastName": lastNameIn,
+                        "firstName": firstNameIn,
+                        "password": pas
+                    }
+                    //még a local storageba el mentjük a változtatást
+                    loged_userdata = localStorage.setItem("loged_userdata", JSON.stringify(responseObject));
+                    console.log(loged_userdata);
                 }
-                loged_userdata = localStorage.setItem("loged_userdata", JSON.stringify(responseObject));
-                console.log(loged_userdata);
-                //még a local storageba nincsen el mentve a változtatás
+
+
 
 
             } else if (clickedButton.id === "delete") {
@@ -99,10 +110,10 @@ function data_innerHtml() {
     <div class="user-img">
                 <img src="../img/user.png" alt="Profil-kep">
             </div>
-            <div id="user-name">${loged_userdata.userName}</div>
+            <div id="userName2">${loged_userdata.userName}</div>
             <div class="d-flex flex-row">
-                <div id="lastName">${loged_userdata.lastName}</div>
-                <div id="fistName">${loged_userdata.firstName}</div>
+                <div id="lastName2">${loged_userdata.lastName}</div>
+                <div id="firstName2">${loged_userdata.firstName}</div>
             </div>
     `;
 
@@ -110,16 +121,16 @@ function data_innerHtml() {
                 <form>
                     <div class="mb-3">
                         <label for="userName" class="form-label">Felhasználónév</label>
-                        <input type="text" class="form-control" id="userName" placeholder="${loged_userdata.userName}" required>
+                        <input type="text" class="form-control" id="userName" placeholder="${loged_userdata.userName}">
                     </div>
                     <div class="row mb-3">
                         <div class="col-md-6 mb-3">
                             <label for="lastName" class="form-label">Vezetéknév</label>
-                            <input type="text" class="form-control" id="lastName" placeholder="${loged_userdata.lastName}" required>
+                            <input type="text" class="form-control" id="lastName" placeholder="${loged_userdata.lastName}">
                         </div>
                         <div class="col-md-6 mb-3">
                             <label for="firstName" class="form-label">Keresztnév</label>
-                            <input type="text" class="form-control" id="firstName" placeholder="${loged_userdata.firstName}" required>
+                            <input type="text" class="form-control" id="firstName" placeholder="${loged_userdata.firstName}">
                         </div>
                     </div>
                     <div class="mb-3">
