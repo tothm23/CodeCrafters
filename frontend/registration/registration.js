@@ -20,35 +20,37 @@ document.addEventListener("DOMContentLoaded", function () {
       alert("A jelszavak nem egyeznek!");
     } else {
 
-      const inputdata = {
-        userName: username,
-        lastName: lastname,
-        firstName: firstname,
-        email: email,
-        password: pas
+      var myHeaders = new Headers();
+      myHeaders.append("Content-Type", "application/json");
 
+      var raw = JSON.stringify({
+        "userName": username,
+        "lastName": lastname,
+        "firstName": firstname,
+        "email": email,
+        "password": pas
+      });
+
+      var requestOptions = {
+        method: 'POST',
+        headers: myHeaders,
+        body: raw,
+        redirect: 'follow'
       };
       // regisztráció fetch
-      fetch(
-          "http://localhost:8080/CodeCraftersWebshop-1.0-SNAPSHOT/webresources/user", {
-            method: "POST",
-            body: JSON.stringify(inputdata),
-            headers: {
-              "Content-type": "application/json; charset=UTF-8",
-            },
-          }
-        )
-        .then((response) => {
-          return response.text();
-        })
-        .then((data) => {
-          if(data=="Felhasználó hozzáadva!"){
+      fetch("http://localhost:8080/CodeCraftersWebshop-1.0-SNAPSHOT/webresources/user", requestOptions)
+        .then(response => response.text())
+        .then(result => {
+          console.log(result);
+          alert(result);
+          if(result=="Felhasználó hozzáadva!")
+          {
             window.location.href = "../index.html";
           }
         })
-        .catch((error) => {
-          console.error('Hiba:', error);
-        });
+        .catch(error => console.log('error', error));
+
+
     }
 
 
