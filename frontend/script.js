@@ -102,7 +102,7 @@ fetch(
 
 //get kosár
 function getCart(btn_id) {
-  fetch(`http://localhost:8080/CodeCraftersWebshop-1.0-SNAPSHOT/webresources/kosar/${logged_user.id}`, {
+  fetch(`http://localhost:8080/CodeCraftersWebshop-1.0-SNAPSHOT/webresources/basket/${logged_user.id}`, {
       method: 'GET'
     })
     .then(response => response.json())
@@ -253,7 +253,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
   document.addEventListener("click", function (event) {
     if (event.target && event.target.id === "add_btn") {
-      //ha hozzáadjuk a kosárhoz akkor disbaled és a value megváltozik kosárbanra
+      //ha hozzáadjuk a kosárhoz akkor disabled és a value megváltozik kosárban-ra
       event.target.value = "Kosárban";
       event.target.disabled = true;
       const gameId = event.target.getAttribute("data-jatek-id");
@@ -275,7 +275,7 @@ document.addEventListener("DOMContentLoaded", function () {
         redirect: 'follow'
       };
 
-      fetch("http://localhost:8080/CodeCraftersWebshop-1.0-SNAPSHOT/webresources/kosar", requestOptions)
+      fetch("http://localhost:8080/CodeCraftersWebshop-1.0-SNAPSHOT/webresources/basket", requestOptions)
         .then(response => response.text())
         .then(result => console.log(result))
         .catch(error => console.log('error', error));

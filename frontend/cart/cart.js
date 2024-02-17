@@ -78,7 +78,7 @@ document.addEventListener('DOMContentLoaded', function () {
             redirect: 'follow'
         };
 
-        fetch("http://localhost:8080/CodeCraftersWebshop-1.0-SNAPSHOT/webresources/rendeles", requestOptions)
+        fetch("http://localhost:8080/CodeCraftersWebshop-1.0-SNAPSHOT/webresources/basket", requestOptions)
             .then(response => response.text())
             .then(result => {
                 console.log(result);
@@ -105,7 +105,7 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
     function cartGet() {
-        fetch(`http://localhost:8080/CodeCraftersWebshop-1.0-SNAPSHOT/webresources/kosar/${logeduser_data.id}`, )
+        fetch(`http://localhost:8080/CodeCraftersWebshop-1.0-SNAPSHOT/webresources/basket/${logeduser_data.id}`, )
             .then(response => response.json())
             .then(result => {
                 // Itt további kezelése a kapott adatoknak
