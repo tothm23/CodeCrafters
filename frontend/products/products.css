@@ -29,12 +29,6 @@ h1 {
   justify-content: space-between;
   padding: 5px;
 }
-
-.adatok .btn-primary{
-  background: #241f1f;
-  box-shadow: none;
-  border: none;
-}
 .offcanvas{
   padding: 0px;
   background: #241f1f;
@@ -51,7 +45,6 @@ border: none;
   background-color: #241f1f;
   padding: 20px;
   border-radius: 10px;
-  border: #000 solid 1px;
 }
 
 .form-check-input {
@@ -98,8 +91,7 @@ h2 {
   width: 88px;
   box-sizing: border-box;
   height: 30px;
-  border: 1px solid black;
-  border-radius: 2px;
+  border-radius: 10px;
   display: inline-block;
   padding: 10px;
   appearance: none;
@@ -154,7 +146,6 @@ h2 {
 }
 
 .main .card {
-  border: #000 solid 1px;
   min-width: 300px;
   max-width: 700px;
   flex-direction: row;
@@ -172,5 +163,4 @@ h2 {
 }
 .main .card img{
   max-width: 350px;
-  border: #000 solid 1px;
 }

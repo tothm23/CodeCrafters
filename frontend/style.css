@@ -185,7 +185,6 @@ body {
 /* vissza az oldal tetejére */
 #scroll_Up {
   background-color: #bb4930;
-  border: 2px solid #000;
   color: #000;
   font-size: 3vh;
   width: 7vh;
@@ -314,7 +313,6 @@ height: 250px;
   margin: 10px;
 }
 .carousel-inner img {
-  border: #000 solid 1px;
   min-width: 300px;
   min-height: 300px;
   max-height: 600px;
@@ -351,6 +349,5 @@ height: 250px;
   justify-content: center;
   align-items: center;
   color: #fff;
-  padding: 10px;
   width: 100%;
 }
