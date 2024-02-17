@@ -71,12 +71,12 @@ document.addEventListener("DOMContentLoaded", function () {
   fetch(
       "http://localhost:8080/CodeCraftersWebshop-1.0-SNAPSHOT/webresources/products"
     )
-    .then((valasz) => valasz.json())
-    .then((adat) => {
-      original_data = adat;
+    .then((response) => response.json())
+    .then((data) => {
+      original_data = data;
 
       // Kezdeti terméklista megjelenítése
-      show_products(adat);
+      show_products(data);
       // Az oldal betöltésekor alkalmazza a szűrőket de csak mikor a betöltöt addatal egyenlő hogy ne fusson le mindig
       if (searched_text == searchIn.value) apply_fillters();
     })

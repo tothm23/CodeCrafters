@@ -1,0 +1,82 @@
+body {
+    box-sizing: border-box;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    height: 100vh;
+    background: #241f1f;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.mb-3 input[type="text"],
+.mb-3 input[type="number"] {
+    background: none;
+    color: white;
+    box-shadow: none;
+    border: none;
+    background: rgba(217, 217, 217, 0.10);
+    margin-bottom: 5px;
+}
+
+.inputs{
+    margin: 5px;
+    width: 100%;
+}
+
+label{
+    margin-right: 5px;
+}
+
+.container{
+    border: red 1px solid;
+}
+
+.select,.select:focus,.select::after{
+    background: none;
+    color: white;
+    box-shadow: none;
+    border: none;
+    background: rgba(217, 217, 217, 0.10);
+}
+
+option{
+    color: black;
+}
+
+.discount{
+    display: flex;
+    flex-direction: column;
+}
+
+#discount_btn,#no_discount_btn {
+    border-radius: 10px;
+    width: 60px;
+    margin-left: 5px;
+    margin-right: 5px;
+}
+
+.discount i{
+    width: 30px;
+    height: 30px;
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.discount_row{
+    display: flex;
+    flex-direction: row;
+}
+
+.desc_class textarea{
+    min-height: 300px;
+    min-width: 100%;
+    background: none;
+    color: white;
+    box-shadow: none;
+    border: none;
+    background: rgba(217, 217, 217, 0.10);
+    margin-bottom: 5px;
+}
