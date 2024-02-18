@@ -45,9 +45,9 @@ public class UserService {
                 return "Hiba az email küldésénél!";
             } else if (User.registration(userNameIN, lastNameIN, firstNameIN,
                     emailIN, passwordIN)) {
-                return "Felhasználó hozzáadva!";
+                return "Sikeres regisztráció!";
             } else {
-                return "Hiba a Felhasználó hozzáadásánál!";
+                return "Hiba a regisztráció során!";
             }
         } catch (UserException ex) {
             return ex.getMessage();
