@@ -28,7 +28,8 @@ public class BasketResource {
     @Path("{userId}")
     public Response userBasket(@PathParam("userId") Integer id) {
         JSONArray result = BasketService.userBasket(id);
-        return Response.status(Response.Status.OK).entity(result.toString())
+        return result.isEmpty() ? Response.status(Response.Status.OK).entity("A kosár üres!")
+                .type(MediaType.APPLICATION_JSON).build() : Response.status(Response.Status.OK).entity(result.toString())
                 .type(MediaType.APPLICATION_JSON).build();
     }
 
