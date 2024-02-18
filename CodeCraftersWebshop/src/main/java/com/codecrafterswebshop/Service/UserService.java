@@ -74,13 +74,23 @@ public class UserService {
         try {
             if (user(idIN).length() == 0) {
                 return "A Felhasználó nem található!";
+            } else if (!User.checkUsernameUnique(userNameIN)) {
+                return "Hibás felhasználónév!";
+            } else if (!User.checkUsername(userNameIN)) {
+                return "Hibás felhasználónév!";
+            } else if (!User.checkLastName(lastNameIN)) {
+                return "Hibás vezetéknév!";
+            } else if (!User.checkFirstName(firstNameIN)) {
+                return "Hibás keresztnév!";
+            } else if (!User.checkPassword(passwordIN)) {
+                return "Hibás jelszó!";
             } else if (User.updateUser(idIN, userNameIN, lastNameIN, firstNameIN,
                     passwordIN)) {
                 return "Felhasználó frissítve!";
             } else {
                 return "Hiba a Felhasználó frissítésénél!";
             }
-        } catch (Exception ex) {
+        } catch (UserException ex) {
             return ex.getMessage();
         }
     }
