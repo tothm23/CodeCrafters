@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Feb 18, 2024 at 04:38 PM
+-- Generation Time: Feb 19, 2024 at 01:24 PM
 -- Server version: 5.7.24
 -- PHP Version: 8.0.1
 
@@ -27,6 +27,22 @@ DELIMITER $$
 --
 -- Procedures
 --
+CREATE DEFINER=`root`@`localhost` PROCEDURE `addAdmin` (IN `adminNameIN` VARCHAR(100), IN `newAdminNameIN` VARCHAR(100))   BEGIN
+
+DECLARE adminCount INT;
+
+SELECT COUNT(*) INTO adminCount
+FROM user
+WHERE user.userName = adminNameIN AND user.admin = 1;
+
+IF adminCount = 1 THEN
+UPDATE user
+SET user.admin = 1
+WHERE user.userName = newAdminNameIN;
+END IF;
+
+END$$
+
 CREATE DEFINER=`root`@`localhost` PROCEDURE `basket` (IN `gameIdIN` INT(9), IN `userIdIN` INT(9))   BEGIN
 
     DECLARE gamePrice INT(9);
@@ -298,6 +314,22 @@ VALUES(
     SHA2(passwordIN, 256)
 )$$
 
+CREATE DEFINER=`root`@`localhost` PROCEDURE `removeAdmin` (IN `adminNameIN` VARCHAR(100), IN `removeAdminNameIN` VARCHAR(100))   BEGIN
+
+DECLARE adminCount INT;
+
+SELECT COUNT(*) INTO adminCount
+FROM user
+WHERE user.userName = adminNameIN AND user.admin = 1;
+
+IF adminCount = 1 THEN
+UPDATE user
+SET user.admin = 0
+WHERE user.userName = newAdminNameIN;
+END IF;
+
+END$$
+
 CREATE DEFINER=`root`@`localhost` PROCEDURE `updateGame` (IN `idIN` INT(9), IN `nameIN` VARCHAR(100), IN `priceIN` INT(9), IN `descriptionIN` TEXT, IN `imageIN` VARCHAR(100), IN `ageLimitIN` INT(2), IN `discountIN` INT(3), IN `inStockIN` INT(5), IN `deviceIdIN` INT(9), IN `platformIdIN` INT(9))   BEGIN
 
     UPDATE game
@@ -535,7 +567,7 @@ CREATE TABLE `user` (
   `firstName` varchar(100) NOT NULL,
   `email` varchar(100) NOT NULL,
   `password` text NOT NULL,
-  `admin` tinyint(1) NOT NULL DEFAULT '0' COMMENT '0 = user, 1 = admin',
+  `admin` int(1) NOT NULL DEFAULT '0' COMMENT '0 = user, 1 = admin',
   `createdAt` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `updatedAt` datetime DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
