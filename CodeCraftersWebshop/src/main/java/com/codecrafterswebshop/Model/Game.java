@@ -1,6 +1,7 @@
 package com.codecrafterswebshop.Model;
 
 import com.codecrafterswebshop.Config.Database;
+import com.codecrafterswebshop.Exception.GameException;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
@@ -441,6 +442,242 @@ public class Game implements Serializable {
         }
 
         return game;
+    }
+
+    public static boolean newGame(String nameIN, Integer priceIN, String descriptionIN,
+            String imageIN, Integer ageLimitIN, Integer discountIN, Integer inStockIN, Integer deviceIdIN, Integer platformIdIN) {
+
+        EntityManagerFactory emf = Persistence.createEntityManagerFactory(Database.getPersistenceUnitName());
+        EntityManager em = emf.createEntityManager();
+
+        try {
+            StoredProcedureQuery spq = em.createStoredProcedureQuery("newGame");
+
+            spq.registerStoredProcedureParameter("nameIN", String.class, ParameterMode.IN);
+            spq.registerStoredProcedureParameter("priceIN", Integer.class, ParameterMode.IN);
+            spq.registerStoredProcedureParameter("descriptionIN", String.class, ParameterMode.IN);
+            spq.registerStoredProcedureParameter("imageIN", String.class, ParameterMode.IN);
+            spq.registerStoredProcedureParameter("ageLimitIN", Integer.class, ParameterMode.IN);
+            spq.registerStoredProcedureParameter("discountIN", Integer.class, ParameterMode.IN);
+            spq.registerStoredProcedureParameter("inStockIN", Integer.class, ParameterMode.IN);
+            spq.registerStoredProcedureParameter("deviceIdIN", Integer.class, ParameterMode.IN);
+            spq.registerStoredProcedureParameter("platformIdIN", Integer.class, ParameterMode.IN);
+
+            spq.setParameter("nameIN", nameIN);
+            spq.setParameter("priceIN", priceIN);
+            spq.setParameter("descriptionIN", descriptionIN);
+            spq.setParameter("imageIN", imageIN);
+            spq.setParameter("ageLimitIN", ageLimitIN);
+            spq.setParameter("discountIN", discountIN);
+            spq.setParameter("inStockIN", inStockIN);
+            spq.setParameter("deviceIdIN", deviceIdIN);
+            spq.setParameter("platformIdIN", platformIdIN);
+
+            spq.execute();
+            return true;
+
+        } catch (Exception e) {
+
+            System.err.println(e.getMessage());
+            return false;
+
+        } finally {
+            em.clear();
+            em.close();
+            emf.close();
+        }
+    }
+
+    public static boolean updateGame(Integer idIN, String nameIN, Integer priceIN, String descriptionIN,
+            String imageIN, Integer ageLimitIN, Integer discountIN, Integer inStockIN, Integer deviceIdIN, Integer platformIdIN) {
+
+        EntityManagerFactory emf = Persistence.createEntityManagerFactory(Database.getPersistenceUnitName());
+        EntityManager em = emf.createEntityManager();
+
+        try {
+            StoredProcedureQuery spq = em.createStoredProcedureQuery("updateGame");
+
+            spq.registerStoredProcedureParameter("idIN", Integer.class, ParameterMode.IN);
+            spq.registerStoredProcedureParameter("nameIN", String.class, ParameterMode.IN);
+            spq.registerStoredProcedureParameter("priceIN", Integer.class, ParameterMode.IN);
+            spq.registerStoredProcedureParameter("descriptionIN", String.class, ParameterMode.IN);
+            spq.registerStoredProcedureParameter("imageIN", String.class, ParameterMode.IN);
+            spq.registerStoredProcedureParameter("ageLimitIN", Integer.class, ParameterMode.IN);
+            spq.registerStoredProcedureParameter("discountIN", Integer.class, ParameterMode.IN);
+            spq.registerStoredProcedureParameter("inStockIN", Integer.class, ParameterMode.IN);
+            spq.registerStoredProcedureParameter("deviceIdIN", Integer.class, ParameterMode.IN);
+            spq.registerStoredProcedureParameter("platformIdIN", Integer.class, ParameterMode.IN);
+
+            spq.setParameter("idIN", idIN);
+            spq.setParameter("nameIN", nameIN);
+            spq.setParameter("priceIN", priceIN);
+            spq.setParameter("descriptionIN", descriptionIN);
+            spq.setParameter("imageIN", imageIN);
+            spq.setParameter("ageLimitIN", ageLimitIN);
+            spq.setParameter("discountIN", discountIN);
+            spq.setParameter("inStockIN", inStockIN);
+            spq.setParameter("deviceIdIN", deviceIdIN);
+            spq.setParameter("platformIdIN", platformIdIN);
+
+            spq.execute();
+            return true;
+
+        } catch (Exception e) {
+
+            System.err.println(e.getMessage());
+            return false;
+
+        } finally {
+            em.clear();
+            em.close();
+            emf.close();
+        }
+    }
+
+    public static boolean deleteGame(Integer idIN) {
+
+        EntityManagerFactory emf = Persistence.createEntityManagerFactory(Database.getPersistenceUnitName());
+        EntityManager em = emf.createEntityManager();
+
+        try {
+            StoredProcedureQuery spq = em.createStoredProcedureQuery("deleteGame");
+
+            spq.registerStoredProcedureParameter("idIN", Integer.class, ParameterMode.IN);
+            spq.setParameter("idIN", idIN);
+
+            spq.execute();
+            return true;
+
+        } catch (Exception e) {
+
+            System.err.println(e.getMessage());
+            return false;
+
+        } finally {
+            em.clear();
+            em.close();
+            emf.close();
+        }
+    }
+
+    public static boolean checkNameUnique(String name) throws GameException {
+        EntityManagerFactory emf = Persistence.createEntityManagerFactory(Database.getPersistenceUnitName());
+        EntityManager em = emf.createEntityManager();
+
+        int count = 0;
+        try {
+            StoredProcedureQuery spq = em.createStoredProcedureQuery("checkGameName");
+
+            spq.registerStoredProcedureParameter("nameIN", String.class, ParameterMode.IN);
+            spq.registerStoredProcedureParameter("countOUT", Integer.class, ParameterMode.OUT);
+
+            spq.setParameter("nameIN", name);
+            count = (Integer) spq.getOutputParameterValue("countOUT");
+
+        } catch (Exception e) {
+            System.err.println(e.getMessage());
+
+        } finally {
+            em.clear();
+            em.close();
+            emf.close();
+        }
+
+        if (count > 0) {
+            throw new GameException("A játék neve már létezik!");
+        } else {
+            return true;
+        }
+    }
+
+    public static boolean checkName(String name) throws GameException {
+        if (name.equals("")) {
+            throw new GameException("A játék neve nem lehet üres!");
+        } else if (name.length() > 100) {
+            throw new GameException("A játék neve nem lehet 100 karakternél hosszabb!");
+        } else {
+            return true;
+        }
+    }
+
+    public static boolean checkPrice(Integer price) throws GameException {
+        if (price < 0) {
+            throw new GameException("A játék ára nem lehet kisebb, mint 0!");
+        } else {
+            return true;
+        }
+    }
+
+    public static boolean checkDescription(String description) throws GameException {
+        if (description.equals("")) {
+            throw new GameException("A játék leírása nem lehet üres!");
+        } else {
+            return true;
+        }
+    }
+
+    public static boolean checkImageUnique(String image) throws GameException {
+        EntityManagerFactory emf = Persistence.createEntityManagerFactory(Database.getPersistenceUnitName());
+        EntityManager em = emf.createEntityManager();
+
+        int count = 0;
+        try {
+            StoredProcedureQuery spq = em.createStoredProcedureQuery("checkGameImage");
+
+            spq.registerStoredProcedureParameter("imageIN", String.class, ParameterMode.IN);
+            spq.registerStoredProcedureParameter("countOUT", Integer.class, ParameterMode.OUT);
+
+            spq.setParameter("imageIN", image);
+            count = (Integer) spq.getOutputParameterValue("countOUT");
+
+        } catch (Exception e) {
+            System.err.println(e.getMessage());
+
+        } finally {
+            em.clear();
+            em.close();
+            emf.close();
+        }
+
+        if (count > 0) {
+            throw new GameException("A játék képe már létezik!");
+        } else {
+            return true;
+        }
+    }
+
+    public static boolean checkImage(String image) throws GameException {
+        if (image.equals("")) {
+            throw new GameException("A játék képe nem lehet üres!");
+        } else {
+            return true;
+        }
+    }
+
+    public static boolean checkAgeLimit(Integer age) throws GameException {
+        if (age != 3 && age != 7 && age != 12 && age != 16 && age != 18) {
+            throw new GameException("A játék korhatára nem térhet el a PEGI számoktól!");
+        } else {
+            return true;
+        }
+    }
+
+    public static boolean checkDiscount(Integer discount) throws GameException {
+        if (discount < 0) {
+            throw new GameException("A játék akciója nem lehet kisebb, mint 0!");
+        } else if (discount > 100) {
+            throw new GameException("A játék akciója nem lehet nagyobb, mint 100!");
+        } else {
+            return true;
+        }
+    }
+
+    public static boolean checkInStock(Integer inStock) throws GameException {
+        if (inStock < 0) {
+            throw new GameException("A játék raktáron lévő mennyisége nem lehet kisebb, mint 0!");
+        } else {
+            return true;
+        }
     }
 
 }
