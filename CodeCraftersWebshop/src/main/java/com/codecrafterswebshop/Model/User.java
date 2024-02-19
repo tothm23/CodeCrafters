@@ -80,6 +80,9 @@ public class User implements Serializable {
     @Column(name = "password")
     private String password;
     @Basic(optional = false)
+    @Column(name = "admin")
+    private int admin;
+    @Basic(optional = false)
     @NotNull
     @Column(name = "createdAt")
     @Temporal(TemporalType.TIMESTAMP)
@@ -105,12 +108,13 @@ public class User implements Serializable {
         this.createdAt = createdAt;
     }
 
-    private User(Integer id, String userName, String lastName, String firstName, String email) {
+    private User(Integer id, String userName, String lastName, String firstName, String email, Integer admin) {
         this.id = id;
         this.userName = userName;
         this.lastName = lastName;
         this.firstName = firstName;
         this.email = email;
+        this.admin = admin;
     }
 
     private static final int randomNumber = new Random().nextInt(32 - 24) + 24;
@@ -172,6 +176,14 @@ public class User implements Serializable {
         this.password = password;
     }
 
+    public int getAdmin() {
+        return admin;
+    }
+
+    public void setAdmin(int admin) {
+        this.admin = admin;
+    }
+
     public Date getCreatedAt() {
         return createdAt;
     }
@@ -231,6 +243,7 @@ public class User implements Serializable {
                 user.put("lastName", line[2]);
                 user.put("firstName", line[3]);
                 user.put("email", line[4]);
+                user.put("admin", line[5]);
             }
 
         } catch (Exception e) {
@@ -259,6 +272,7 @@ public class User implements Serializable {
             spq.registerStoredProcedureParameter("lastNameOUT", String.class, ParameterMode.OUT);
             spq.registerStoredProcedureParameter("firstNameOUT", String.class, ParameterMode.OUT);
             spq.registerStoredProcedureParameter("emailOUT", String.class, ParameterMode.OUT);
+            spq.registerStoredProcedureParameter("adminOUT", Integer.class, ParameterMode.OUT);
 
             spq.setParameter("userNameIN", userNameIN);
             spq.setParameter("passwordIN", Caesar.encrypt(passwordIN + getSalt(), Caesar.getOffset()));
@@ -268,8 +282,9 @@ public class User implements Serializable {
             String lastName = (String) spq.getOutputParameterValue("lastNameOUT");
             String firstName = (String) spq.getOutputParameterValue("firstNameOUT");
             String email = (String) spq.getOutputParameterValue("emailOUT");
+            Integer admin = (Integer) spq.getOutputParameterValue("adminOUT");
 
-            User u = new User(id, userName, lastName, firstName, email);
+            User u = new User(id, userName, lastName, firstName, email, admin);
             return u;
 
         } catch (Exception e) {

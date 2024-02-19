@@ -57,10 +57,10 @@ public class UserService {
     public static JSONObject login(String userNameIN, String passwordIN) {
 
         JSONObject obj = new JSONObject();
-        User f = User.login(userNameIN, passwordIN);
-        String token = Token.create(f, 600000);
+        User u = User.login(userNameIN, passwordIN);
+        String token = Token.create(u, 600000);
 
-        if (f.getId() != null) {
+        if (u.getId() != null) {
             obj.put("token", token);
         } else {
             obj.put("token", "");

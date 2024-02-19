@@ -40,17 +40,17 @@ public class Token {
         return Base64.getEncoder().encodeToString(new String(key).getBytes());
     }
 
-    public static String create(User f, long expirationMillis) {
+    public static String create(User u, long expirationMillis) {
 
         long nowMillis = System.currentTimeMillis();
-
         String token = Jwts.builder()
                 .setIssuer("codecrafters")
-                .claim("id", f.getId())
-                .claim("userName", f.getUserName())
-                .claim("lastName", f.getLastName())
-                .claim("firstName", f.getFirstName())
-                .claim("email", f.getEmail())
+                .claim("id", u.getId())
+                .claim("userName", u.getUserName())
+                .claim("lastName", u.getLastName())
+                .claim("firstName", u.getFirstName())
+                .claim("email", u.getEmail())
+                .claim("admin", u.getAdmin())
                 .setIssuedAt(new Date(nowMillis))
                 .setExpiration(new Date(nowMillis + expirationMillis))
                 .signWith(
