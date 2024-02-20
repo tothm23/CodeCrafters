@@ -14,7 +14,7 @@ document.addEventListener('DOMContentLoaded', function () {
         } else {
             // Ha nincs bejelentkezett felhasználó, valamilyen hiba kezelése vagy irányítás
             console.error("Nincs bejelentkezett felhasználó");
-            order_btn.style.display="none";
+            order_btn.style.display = "none";
         }
     });
 
@@ -22,21 +22,21 @@ document.addEventListener('DOMContentLoaded', function () {
         cart_content.innerHTML = "";
 
         for (let i = 0; i < data.length; i++) {
-            cart_size[i] = data[i].jatekId;
+            cart_size[i] = data[i].gameId;
             cart_content.innerHTML += `
-        <div class="card d-flex flex-row justify-content-center h-auto h-lg-120" data-id="${data[i].jatekId}">
-            <img class="card-img-top img-fluid justify-content-center" src="../img/games/${data[i].kep}" alt="${data[i].nev}">
+        <div class="card d-flex flex-row justify-content-center h-auto h-lg-120" data-id="${data[i].id}">
+            <img class="card-img-top img-fluid justify-content-center" src="../img/games/${data[i].image}" alt="${data[i].name}">
             <div class="card-body d-flex flex-row justify-align-content-between border-10">
-                <p class="card-text text-lg-center">${data[i].nev}</p>
-                <p class="card-text d-none d-lg-block">${data[i].vegosszeg} Ft</p>
-                <button id="torol" class="btn btn-danger h-50 h-lg-auto w-50 w-lg-auto" type="button">X</button>
+                <p class="card-text text-lg-center">${data[i].name}</p>
+                <p class="card-text d-none d-lg-block">${data[i].amount} Ft</p>
+                <button id="del_btn" class="btn btn-danger h-50 h-lg-auto w-50 w-lg-auto" type="button">X</button>
             </div>
         </div>
     `;
         }
     }
 
-    document.addEventListener("click", function torlese(event) {
+    document.addEventListener("click", function del_btn(event) {
         console.log("Click");
         var closest_card = event.target.closest('.card');
         // Olvassa ki az ID-t a data-id attribútumból
@@ -67,7 +67,7 @@ document.addEventListener('DOMContentLoaded', function () {
         myHeaders.append("Content-Type", "application/json");
 
         var raw = JSON.stringify({
-            "felhasznaloId": logeduser_data.id
+            "userId": logeduser_data.id
         });
 
         var requestOptions = {
@@ -76,14 +76,14 @@ document.addEventListener('DOMContentLoaded', function () {
             body: raw,
             redirect: 'follow'
         };
-
-        fetch("http://localhost:8080/CodeCraftersWebshop-1.0-SNAPSHOT/webresources/basket", requestOptions)
+        fetch("http://localhost:8080/CodeCraftersWebshop-1.0-SNAPSHOT/webresources/order", requestOptions)
             .then(response => response.text())
             .then(result => {
                 console.log(result);
-                for (let i = 0; i < cart_size.length; i++) {
+                //a order nem töröl mert a cart méretétt használja a törlésnél 
+                /*for (let i = 0; i < cart_size.length; i++) {
                     cart_delete(cart_size[i]);
-                }
+                }*/
                 cartGet();
             })
             .catch(error => console.log('error', error));
@@ -93,7 +93,7 @@ document.addEventListener('DOMContentLoaded', function () {
         final_price.innerHTML = "";
         let sum_price = 0;
         for (let i = 0; i < data.length; i++) {
-            sum_price += data[i].vegosszeg;
+            sum_price += data[i].amount;
         }
         if (sum_price == 0) order_btn.disabled = true;
         else order_btn.disabled = false;
