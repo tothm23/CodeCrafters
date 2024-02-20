@@ -1,14 +1,12 @@
 package com.codecrafterswebshop.Config;
 
-import java.util.Random;
-
 /**
  *
  * @author tothm23
  */
 public class Caesar {
 
-    private static final int offset = new Random().nextInt(32 - 24) + 24;
+    private static final int offset = 12;
 
     public static int getOffset() {
         return offset;
