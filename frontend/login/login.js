@@ -48,7 +48,6 @@ document.addEventListener("DOMContentLoaded", (event) => {
         else{
           alert("Sikertelen bejelentkezés");
         }
-      
     }) 
     .catch(error => {
       console.log('Hiba történt:', error);

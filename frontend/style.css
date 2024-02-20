@@ -17,7 +17,6 @@ body {
   padding: 0px;
   justify-content: space-between;
 }
-
 /*nav*/
 .nav {
   width: 100%;
@@ -102,7 +101,6 @@ body {
   color: inherit;
 }
 
-
 #user-box, #log_reg{
   min-width: 250px;
   margin-right: 10px;
@@ -176,7 +174,6 @@ body {
   background-color: #404040;
 }
 
-
 #user-img {
   width: 50px;
   height: 50px;
@@ -212,7 +209,6 @@ body {
 background-color: #404040;
 }
 
-
 #log_reg button {
   width: 50px;
   height: 50px;
@@ -237,7 +233,6 @@ form .mb-3,
 p {
   color: white;
 }
-
 /* 
 slide
 */
@@ -332,8 +327,6 @@ height: 250px;
   bottom: 0;
   margin-bottom: 10px;
 }
-
-
 /* lábléc */
 .footer {
   position: relative;

@@ -12,10 +12,8 @@ const desc = document.getElementById("desc");
 
 // Kiolvassa a paraméterek az URL-ből
 let parameterek = new URL(document.location).searchParams;
-
 // Kiolvassa az id paramétert
 let id = parseInt(parameterek.get("id"));
-
 // GET kérés
 fetch(`${link}/${id}`)
   .then((response) => response.json())
@@ -29,7 +27,6 @@ fetch(`${link}/${id}`)
       game_name.innerHTML = data.gameName;
       device.innerHTML = data.deviceName;
       platform.innerHTML = data.platformName;
-
       // Korhatár színe
       switch (data.ageLimit) {
         case 3:
@@ -64,14 +61,12 @@ fetch(`${link}/${id}`)
 
       price.innerHTML = data.price + " Ft";
       //Ár megjelenítése
-      
       if(data.discount > 0){
         price.innerHTML=`<p class="card-text price" style="text-decoration: line-through;">${data.price} Ft</p>`; 
       }
       else{
         price.innerHTML=`<p class="card-text price">${data.price} Ft</p>`;
       }
-      
       if(data.discount > 0){
         // Akciós ár egész számra kerekítve
         sale_price.innerHTML = `<p class="card-text saleprice">${Math.round(data.price - (data.price / 100) * data.discount)} Ft</p>`;
@@ -80,7 +75,6 @@ fetch(`${link}/${id}`)
         sale_price.innerHTML = "";
       }
       document.getElementById("add_btn").innerHTML=add_btn(id);
-      
       desc.innerHTML = data.description;
     } else {
       alert("A játék nem található!");

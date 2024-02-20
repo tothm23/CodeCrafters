@@ -43,16 +43,11 @@ document.addEventListener("DOMContentLoaded", function () {
         .then(result => {
           console.log(result);
           alert(result);
-          if(result=="Felhasználó hozzáadva!")
-          {
+          if (result == "Felhasználó hozzáadva!") {
             window.location.href = "../index.html";
           }
         })
         .catch(error => console.log('error', error));
-
-
     }
-
-
   });
 });

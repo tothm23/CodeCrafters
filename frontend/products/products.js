@@ -21,13 +21,11 @@ document.addEventListener("DOMContentLoaded", function () {
     else sale_checkbox2.checked = false;
 
   });
-
   sale_checkbox2.addEventListener("change", function (e) {
     if (sale_checkbox2.checked == true) sale_checkbox.checked = true;
     else if (sale_checkbox2.checked == false) sale_checkbox.checked = false;
 
   });
-
 
   // Eredeti adatok tárolása
   let original_data;
@@ -41,7 +39,6 @@ document.addEventListener("DOMContentLoaded", function () {
     esemeny.preventDefault();
     apply_fillters();
   });
-
 
   minpriceIn.addEventListener("input", function () {
     minpriceIn2.value = minpriceIn.value;
@@ -74,14 +71,12 @@ document.addEventListener("DOMContentLoaded", function () {
     .then((response) => response.json())
     .then((data) => {
       original_data = data;
-
       // Kezdeti terméklista megjelenítése
       show_products(data);
       // Az oldal betöltésekor alkalmazza a szűrőket de csak mikor a betöltöt addatal egyenlő hogy ne fusson le mindig
       if (searched_text == searchIn.value) apply_fillters();
     })
     .catch((error) => alert(error));
-
   // Termékek megjelenítése a HTML-ben
   function createCard(imgPath,ageLimit, name, price, discount, id, url) {
     const discount_price = discount > 0 ? Math.round(price - (price / 100) * discount) : null;
@@ -121,7 +116,6 @@ document.addEventListener("DOMContentLoaded", function () {
         ));
     }
   }
-
   // Szűrők alkalmazása és terméklista frissítése
   function apply_fillters() {
     const searched_text = searchIn.value.toLowerCase();

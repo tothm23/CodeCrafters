@@ -29,7 +29,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 // Mentési logika
                 var myHeaders = new Headers();
                 myHeaders.append("Content-Type", "application/json");
-               
+
                 var raw = JSON.stringify({
                     "userName": userNameIn,
                     "lastName": lastNameIn,
@@ -43,15 +43,11 @@ document.addEventListener('DOMContentLoaded', function () {
                     body: raw,
                     redirect: 'follow'
                 };
-
                 let url = `http://localhost:8080/CodeCraftersWebshop-1.0-SNAPSHOT/webresources/user/${loged_userdata.id}`;
-
                 fetch(url, requestOptions)
                     .then(response => response.text())
                     .then(result => console.log(result))
                     .catch(error => console.log('error', error));
-
-
                 console.log(loged_userdata.id, loged_userdata.lastName);
                 if (result = "Felhasználó frissítve") {
 
@@ -67,10 +63,6 @@ document.addEventListener('DOMContentLoaded', function () {
                     loged_userdata = localStorage.setItem("loged_userdata", JSON.stringify(responseObject));
                     console.log(loged_userdata);
                 }
-
-
-
-
             } else if (clickedButton.id === "delete") {
                 // Törlés logika
                 var myHeaders = new Headers();
@@ -101,8 +93,6 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     });
 });
-
-
 
 function data_innerHtml() {
     felhaszadatai.innerHTML +=
