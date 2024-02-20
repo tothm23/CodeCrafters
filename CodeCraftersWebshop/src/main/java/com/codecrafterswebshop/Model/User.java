@@ -8,7 +8,6 @@ import java.util.Date;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Random;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -117,12 +116,7 @@ public class User implements Serializable {
         this.admin = admin;
     }
 
-    private static final int randomNumber = new Random().nextInt(32 - 24) + 24;
-    private static final String salt = generateSalt(User.getRandomNumber());
-
-    public static int getRandomNumber() {
-        return randomNumber;
-    }
+    private static final String salt = "ZJaP9OmgsQzsnS5mPPJvQrvS";
 
     public static String getSalt() {
         return salt;
@@ -394,21 +388,6 @@ public class User implements Serializable {
             em.close();
             emf.close();
         }
-    }
-
-    public static String generateSalt(int keyLength) {
-
-        int min = 33;
-        int max = 126;
-
-        StringBuilder sb = new StringBuilder();
-
-        for (int i = 0; i < keyLength; i++) {
-            sb.append((char) Math.floor(Math.random() * (max - min + 1) + min));
-        }
-
-        return new String(sb);
-
     }
 
     public static boolean checkUsernameUnique(String userName) throws UserException {
