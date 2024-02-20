@@ -18,7 +18,6 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     });
 
-
     function _content(data) {
         cart_content.innerHTML = "";
 
@@ -88,7 +87,6 @@ document.addEventListener('DOMContentLoaded', function () {
                 cartGet();
             })
             .catch(error => console.log('error', error));
-
     });
 
     function final_price_cal(data) {
@@ -100,7 +98,6 @@ document.addEventListener('DOMContentLoaded', function () {
         if (sum_price == 0) order_btn.disabled = true;
         else order_btn.disabled = false;
         final_price.innerHTML += `${sum_price} Ft`;
-
         console.log(sum_price);
     }
 

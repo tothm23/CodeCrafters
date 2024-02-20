@@ -161,7 +161,6 @@ function add_btn(id) {
   } else {
     return `<input id="add_btn" data-jatek-id="${id}" class="my-2 p-2 btn btn-success fs-5" type="button" disabled value="Hozzáadás" />`;
   }
-
 };
 
 document.addEventListener("DOMContentLoaded", function () {
@@ -238,7 +237,6 @@ document.addEventListener("DOMContentLoaded", function () {
       // Egyéb esetek kezelése (opcionális)
     }
   });
-
 
   if (logged_user) {
     console.log(logged_user.id);
