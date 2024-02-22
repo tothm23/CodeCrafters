@@ -49,10 +49,10 @@ public class Token {
     public static int decode(String token) {
         try {
             Jws<Claims> result = Jwts.parser().setSigningKey(TextCodec.BASE64.decode(getSecret())).parseClaimsJws(token);
-            return 1;
+            return 0;
 
         } catch (ExpiredJwtException | MalformedJwtException | SignatureException | UnsupportedJwtException | IllegalArgumentException ex) {
-            return 2;
+            return -1;
         }
     }
 
@@ -60,10 +60,10 @@ public class Token {
         try {
             Jws<Claims> result = Jwts.parser().setSigningKey(TextCodec.BASE64.decode(getSecret())).parseClaimsJws(token);
             int admin = result.getBody().get("admin", Integer.class);
-            return 1;
+            return admin == 0 ? 0 : -1;
 
         } catch (ExpiredJwtException | MalformedJwtException | SignatureException | UnsupportedJwtException | IllegalArgumentException ex) {
-            return 2;
+            return -1;
         }
     }
 }
