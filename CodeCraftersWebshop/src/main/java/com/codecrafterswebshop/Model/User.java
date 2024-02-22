@@ -219,7 +219,7 @@ public class User implements Serializable {
 
         Map<String, Object> user = new LinkedHashMap<>();
 
-        EntityManagerFactory emf = Persistence.createEntityManagerFactory(Database.getPersistenceUnitName());
+        EntityManagerFactory emf = Persistence.createEntityManagerFactory(Database.PERSISTENCEUNITNAME);
         EntityManager em = emf.createEntityManager();
 
         try {
@@ -253,7 +253,7 @@ public class User implements Serializable {
 
     public static User login(String userNameIN, String passwordIN) {
 
-        EntityManagerFactory emf = Persistence.createEntityManagerFactory(Database.getPersistenceUnitName());
+        EntityManagerFactory emf = Persistence.createEntityManagerFactory(Database.PERSISTENCEUNITNAME);
         EntityManager em = emf.createEntityManager();
 
         try {
@@ -269,7 +269,7 @@ public class User implements Serializable {
             spq.registerStoredProcedureParameter("adminOUT", Integer.class, ParameterMode.OUT);
 
             spq.setParameter("userNameIN", userNameIN);
-            spq.setParameter("passwordIN", Caesar.encrypt(passwordIN + getSalt(), Caesar.getOffset()));
+            spq.setParameter("passwordIN", Caesar.encrypt(passwordIN + getSalt(), Caesar.OFFSET));
 
             Integer id = (Integer) spq.getOutputParameterValue("userIdOUT");
             String userName = (String) spq.getOutputParameterValue("userNameOUT");
@@ -295,7 +295,7 @@ public class User implements Serializable {
     public static boolean registration(String userNameIN, String lastNameIN, String firstNameIN,
             String emailIN, String passwordIN) {
 
-        EntityManagerFactory emf = Persistence.createEntityManagerFactory(Database.getPersistenceUnitName());
+        EntityManagerFactory emf = Persistence.createEntityManagerFactory(Database.PERSISTENCEUNITNAME);
         EntityManager em = emf.createEntityManager();
 
         try {
@@ -311,7 +311,7 @@ public class User implements Serializable {
             spq.setParameter("lastNameIN", lastNameIN);
             spq.setParameter("firstNameIN", firstNameIN);
             spq.setParameter("emailIN", emailIN);
-            spq.setParameter("passwordIN", Caesar.encrypt(passwordIN + getSalt(), Caesar.getOffset())
+            spq.setParameter("passwordIN", Caesar.encrypt(passwordIN + getSalt(), Caesar.OFFSET)
             );
 
             spq.execute();
@@ -331,7 +331,7 @@ public class User implements Serializable {
 
     public static boolean updateUser(Integer idIN, String userNameIN, String lastNameIN, String firstNameIN, String passwordIN) {
 
-        EntityManagerFactory emf = Persistence.createEntityManagerFactory(Database.getPersistenceUnitName());
+        EntityManagerFactory emf = Persistence.createEntityManagerFactory(Database.PERSISTENCEUNITNAME);
         EntityManager em = emf.createEntityManager();
 
         try {
@@ -366,7 +366,7 @@ public class User implements Serializable {
 
     public static boolean deleteUser(Integer userIdIN) {
 
-        EntityManagerFactory emf = Persistence.createEntityManagerFactory(Database.getPersistenceUnitName());
+        EntityManagerFactory emf = Persistence.createEntityManagerFactory(Database.PERSISTENCEUNITNAME);
         EntityManager em = emf.createEntityManager();
 
         try {
@@ -391,7 +391,7 @@ public class User implements Serializable {
     }
 
     public static boolean checkUsernameUnique(String userName) throws UserException {
-        EntityManagerFactory emf = Persistence.createEntityManagerFactory(Database.getPersistenceUnitName());
+        EntityManagerFactory emf = Persistence.createEntityManagerFactory(Database.PERSISTENCEUNITNAME);
         EntityManager em = emf.createEntityManager();
 
         int count = 0;
@@ -473,7 +473,7 @@ public class User implements Serializable {
     }
 
     public static boolean checkEmailUnique(String email) throws UserException {
-        EntityManagerFactory emf = Persistence.createEntityManagerFactory(Database.getPersistenceUnitName());
+        EntityManagerFactory emf = Persistence.createEntityManagerFactory(Database.PERSISTENCEUNITNAME);
         EntityManager em = emf.createEntityManager();
 
         int count = 0;
