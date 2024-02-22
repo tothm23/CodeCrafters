@@ -126,7 +126,7 @@ public class Basket implements Serializable {
     public static List<Map<String, Object>> userBasket(Integer userIdIN) {
         List<Map<String, Object>> baskets = new ArrayList<>();
 
-        EntityManagerFactory emf = Persistence.createEntityManagerFactory(Database.getPersistenceUnitName());
+        EntityManagerFactory emf = Persistence.createEntityManagerFactory(Database.PERSISTENCEUNITNAME);
         EntityManager em = emf.createEntityManager();
 
         try {
@@ -166,7 +166,7 @@ public class Basket implements Serializable {
 
     public static boolean basket(Integer gameIdIN, Integer userIdIN) {
 
-        EntityManagerFactory emf = Persistence.createEntityManagerFactory(Database.getPersistenceUnitName());
+        EntityManagerFactory emf = Persistence.createEntityManagerFactory(Database.PERSISTENCEUNITNAME);
         EntityManager em = emf.createEntityManager();
 
         try {
@@ -195,7 +195,7 @@ public class Basket implements Serializable {
 
     public static boolean deleteGameFromBasket(Integer userIdIN, Integer gameIdIN) {
 
-        EntityManagerFactory emf = Persistence.createEntityManagerFactory(Database.getPersistenceUnitName());
+        EntityManagerFactory emf = Persistence.createEntityManagerFactory(Database.PERSISTENCEUNITNAME);
         EntityManager em = emf.createEntityManager();
 
         try {
@@ -224,7 +224,7 @@ public class Basket implements Serializable {
 
     public static boolean order(Integer userIdIN) {
 
-        EntityManagerFactory emf = Persistence.createEntityManagerFactory(Database.getPersistenceUnitName());
+        EntityManagerFactory emf = Persistence.createEntityManagerFactory(Database.PERSISTENCEUNITNAME);
         EntityManager em = emf.createEntityManager();
 
         try {
@@ -252,7 +252,7 @@ public class Basket implements Serializable {
 
         List<Map<String, Object>> productKeys = new ArrayList<>();
 
-        EntityManagerFactory emf = Persistence.createEntityManagerFactory(Database.getPersistenceUnitName());
+        EntityManagerFactory emf = Persistence.createEntityManagerFactory(Database.PERSISTENCEUNITNAME);
         EntityManager em = emf.createEntityManager();
 
         try {
@@ -291,7 +291,7 @@ public class Basket implements Serializable {
     }
 
     public static boolean checkGameId(Integer gameIdIN) throws BasketException {
-        EntityManagerFactory emf = Persistence.createEntityManagerFactory(Database.getPersistenceUnitName());
+        EntityManagerFactory emf = Persistence.createEntityManagerFactory(Database.PERSISTENCEUNITNAME);
         EntityManager em = emf.createEntityManager();
 
         int count = 0;
@@ -321,7 +321,7 @@ public class Basket implements Serializable {
     }
 
     public static boolean checkUserId(Integer userIdIN) throws BasketException {
-        EntityManagerFactory emf = Persistence.createEntityManagerFactory(Database.getPersistenceUnitName());
+        EntityManagerFactory emf = Persistence.createEntityManagerFactory(Database.PERSISTENCEUNITNAME);
         EntityManager em = emf.createEntityManager();
 
         int count = 0;
@@ -351,7 +351,7 @@ public class Basket implements Serializable {
     }
 
     public static boolean checkUserIdBasket(Integer userIdIN) throws BasketException {
-        EntityManagerFactory emf = Persistence.createEntityManagerFactory(Database.getPersistenceUnitName());
+        EntityManagerFactory emf = Persistence.createEntityManagerFactory(Database.PERSISTENCEUNITNAME);
         EntityManager em = emf.createEntityManager();
 
         int count = 0;
@@ -381,7 +381,7 @@ public class Basket implements Serializable {
     }
 
     public static boolean checkGameIdBasket(Integer gameIdIN) throws BasketException {
-        EntityManagerFactory emf = Persistence.createEntityManagerFactory(Database.getPersistenceUnitName());
+        EntityManagerFactory emf = Persistence.createEntityManagerFactory(Database.PERSISTENCEUNITNAME);
         EntityManager em = emf.createEntityManager();
 
         int count = 0;

@@ -18,11 +18,7 @@ import java.util.Date;
  */
 public class Token {
 
-    private static final String secret = "hDK2u4vlhFjXjxCFPpSWs9jj";
-
-    public static String getSecret() {
-        return secret;
-    }
+    public static final String SECRET = "hDK2u4vlhFjXjxCFPpSWs9jj";
 
     public static String create(User u, long expirationMillis) {
 
@@ -39,7 +35,7 @@ public class Token {
                 .setExpiration(new Date(nowMillis + expirationMillis))
                 .signWith(
                         SignatureAlgorithm.HS256,
-                        TextCodec.BASE64.decode(getSecret())
+                        TextCodec.BASE64.decode(Token.SECRET)
                 )
                 .compact();
 
@@ -48,7 +44,7 @@ public class Token {
 
     public static int decode(String token) {
         try {
-            Jws<Claims> result = Jwts.parser().setSigningKey(TextCodec.BASE64.decode(getSecret())).parseClaimsJws(token);
+            Jws<Claims> result = Jwts.parser().setSigningKey(TextCodec.BASE64.decode(Token.SECRET)).parseClaimsJws(token);
             return 0;
 
         } catch (ExpiredJwtException | MalformedJwtException | SignatureException | UnsupportedJwtException | IllegalArgumentException ex) {
@@ -58,7 +54,7 @@ public class Token {
 
     public static int decodeAdmin(String token) {
         try {
-            Jws<Claims> result = Jwts.parser().setSigningKey(TextCodec.BASE64.decode(getSecret())).parseClaimsJws(token);
+            Jws<Claims> result = Jwts.parser().setSigningKey(TextCodec.BASE64.decode(Token.SECRET)).parseClaimsJws(token);
             int admin = result.getBody().get("admin", Integer.class);
             return admin == 0 ? 0 : -1;
 

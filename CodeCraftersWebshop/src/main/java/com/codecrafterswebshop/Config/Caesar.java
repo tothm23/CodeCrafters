@@ -6,11 +6,7 @@ package com.codecrafterswebshop.Config;
  */
 public class Caesar {
 
-    private static final int offset = 12;
-
-    public static int getOffset() {
-        return offset;
-    }
+    public static final int OFFSET = 12;
 
     public static String encrypt(String input, int offset) {
         StringBuilder encrypted = new StringBuilder();

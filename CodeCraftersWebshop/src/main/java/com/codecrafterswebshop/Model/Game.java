@@ -247,7 +247,7 @@ public class Game implements Serializable {
     public static List<Map<String, Object>> games() {
         List<Map<String, Object>> games = new ArrayList<>();
 
-        EntityManagerFactory emf = Persistence.createEntityManagerFactory(Database.getPersistenceUnitName());
+        EntityManagerFactory emf = Persistence.createEntityManagerFactory(Database.PERSISTENCEUNITNAME);
         EntityManager em = emf.createEntityManager();
 
         try {
@@ -289,7 +289,7 @@ public class Game implements Serializable {
     public static List<Map<String, Object>> carouselGames() {
         List<Map<String, Object>> games = new ArrayList<>();
 
-        EntityManagerFactory emf = Persistence.createEntityManagerFactory(Database.getPersistenceUnitName());
+        EntityManagerFactory emf = Persistence.createEntityManagerFactory(Database.PERSISTENCEUNITNAME);
         EntityManager em = emf.createEntityManager();
 
         try {
@@ -328,7 +328,7 @@ public class Game implements Serializable {
     public static List<Map<String, Object>> bestsellers() {
         List<Map<String, Object>> bestsellers = new ArrayList<>();
 
-        EntityManagerFactory emf = Persistence.createEntityManagerFactory(Database.getPersistenceUnitName());
+        EntityManagerFactory emf = Persistence.createEntityManagerFactory(Database.PERSISTENCEUNITNAME);
         EntityManager em = emf.createEntityManager();
 
         try {
@@ -367,7 +367,7 @@ public class Game implements Serializable {
     public static List<Map<String, Object>> newGames() {
         List<Map<String, Object>> games = new ArrayList<>();
 
-        EntityManagerFactory emf = Persistence.createEntityManagerFactory(Database.getPersistenceUnitName());
+        EntityManagerFactory emf = Persistence.createEntityManagerFactory(Database.PERSISTENCEUNITNAME);
         EntityManager em = emf.createEntityManager();
 
         try {
@@ -407,7 +407,7 @@ public class Game implements Serializable {
 
         Map<String, Object> game = new LinkedHashMap<>();
 
-        EntityManagerFactory emf = Persistence.createEntityManagerFactory(Database.getPersistenceUnitName());
+        EntityManagerFactory emf = Persistence.createEntityManagerFactory(Database.PERSISTENCEUNITNAME);
         EntityManager em = emf.createEntityManager();
 
         try {
@@ -447,7 +447,7 @@ public class Game implements Serializable {
     public static boolean newGame(String nameIN, Integer priceIN, String descriptionIN,
             String imageIN, Integer ageLimitIN, Integer discountIN, Integer inStockIN, Integer deviceIdIN, Integer platformIdIN) {
 
-        EntityManagerFactory emf = Persistence.createEntityManagerFactory(Database.getPersistenceUnitName());
+        EntityManagerFactory emf = Persistence.createEntityManagerFactory(Database.PERSISTENCEUNITNAME);
         EntityManager em = emf.createEntityManager();
 
         try {
@@ -491,7 +491,7 @@ public class Game implements Serializable {
     public static boolean updateGame(Integer idIN, String nameIN, Integer priceIN, String descriptionIN,
             String imageIN, Integer ageLimitIN, Integer discountIN, Integer inStockIN, Integer deviceIdIN, Integer platformIdIN) {
 
-        EntityManagerFactory emf = Persistence.createEntityManagerFactory(Database.getPersistenceUnitName());
+        EntityManagerFactory emf = Persistence.createEntityManagerFactory(Database.PERSISTENCEUNITNAME);
         EntityManager em = emf.createEntityManager();
 
         try {
@@ -536,7 +536,7 @@ public class Game implements Serializable {
 
     public static boolean deleteGame(Integer idIN) {
 
-        EntityManagerFactory emf = Persistence.createEntityManagerFactory(Database.getPersistenceUnitName());
+        EntityManagerFactory emf = Persistence.createEntityManagerFactory(Database.PERSISTENCEUNITNAME);
         EntityManager em = emf.createEntityManager();
 
         try {
@@ -561,7 +561,7 @@ public class Game implements Serializable {
     }
 
     public static boolean checkNameUnique(String name) throws GameException {
-        EntityManagerFactory emf = Persistence.createEntityManagerFactory(Database.getPersistenceUnitName());
+        EntityManagerFactory emf = Persistence.createEntityManagerFactory(Database.PERSISTENCEUNITNAME);
         EntityManager em = emf.createEntityManager();
 
         int count = 0;
@@ -617,7 +617,7 @@ public class Game implements Serializable {
     }
 
     public static boolean checkImageUnique(String image) throws GameException {
-        EntityManagerFactory emf = Persistence.createEntityManagerFactory(Database.getPersistenceUnitName());
+        EntityManagerFactory emf = Persistence.createEntityManagerFactory(Database.PERSISTENCEUNITNAME);
         EntityManager em = emf.createEntityManager();
 
         int count = 0;
