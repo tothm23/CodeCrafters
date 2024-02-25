@@ -110,8 +110,8 @@ function getCart(btn_id) {
       // Ellenőrizze, hogy a válasz tartalmazza-e a várt tulajdonságokat
       //console.log('Eredmény:', result);
       for (let i = 0; i < result.length; i++) {
-        btn_id[i] = result[i].jatekId;
-        console.log(btn_id[i], result[i].jatekId);
+        btn_id[i] = result[i].id;
+        console.log(btn_id[i], result[i].id);
         console.log(cart_id[0], cart_id[1], cart_id[2]);
       }
     }).catch(error => console.error(error));

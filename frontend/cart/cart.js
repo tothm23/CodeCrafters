@@ -22,7 +22,7 @@ document.addEventListener('DOMContentLoaded', function () {
         cart_content.innerHTML = "";
 
         for (let i = 0; i < data.length; i++) {
-            cart_size[i] = data[i].gameId;
+            cart_size[i] = data[i].id;
             cart_content.innerHTML += `
         <div class="card d-flex flex-row justify-content-center h-auto h-lg-120" data-id="${data[i].id}">
             <img class="card-img-top img-fluid justify-content-center" src="../img/games/${data[i].image}" alt="${data[i].name}">
@@ -36,7 +36,7 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     }
 
-    document.addEventListener("click", function del_btn(event) {
+    document.addEventListener("click", event => {
         console.log("Click");
         var closest_card = event.target.closest('.card');
         // Olvassa ki az ID-t a data-id attribútumból
@@ -51,13 +51,11 @@ document.addEventListener('DOMContentLoaded', function () {
             method: 'DELETE',
             redirect: 'follow'
         };
-        const url = `http://localhost:8080/CodeCraftersWebshop-1.0-SNAPSHOT/webresources/basket?userId=${logeduser_data.id}&gameId=${gameId}`;
-        fetch(url, requestOptions)
+        fetch(`http://localhost:8080/CodeCraftersWebshop-1.0-SNAPSHOT/webresources/basket?userId=${logeduser_data.id}&gameId=${gameId}`, requestOptions)
             .then(response => response.text())
             .then(result => {
                 console.log(result);
                 cartGet();
-
             })
             .catch(error => console.log('error', error));
     }
@@ -81,10 +79,15 @@ document.addEventListener('DOMContentLoaded', function () {
             .then(result => {
                 console.log(result);
                 //a order nem töröl mert a cart méretétt használja a törlésnél 
-                /*for (let i = 0; i < cart_size.length; i++) {
+                for (let i = 0; i < cart_size.length; i++) {
+                    console.log(cart_size[i]);
                     cart_delete(cart_size[i]);
-                }*/
+                }
                 cartGet();
+                for (let i = 0; i < cart_size.length; i++) {
+                    console.log(cart_size);
+                    console.log(cart_size[i]);
+                }
             })
             .catch(error => console.log('error', error));
     });
@@ -110,7 +113,14 @@ document.addEventListener('DOMContentLoaded', function () {
                 final_price_cal(result);
                 console.log(result);
             })
-            .catch(error => console.error(error));
+            .catch(error => {
+                console.error(error);
+                if (error) {
+                value="";
+                _content(value);
+                final_price_cal(value);
+                }
+            });
     }
 
 });

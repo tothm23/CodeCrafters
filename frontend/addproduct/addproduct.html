@@ -18,10 +18,10 @@
 <body class="text-white d-flex align-items-center justify-content-center">
     <div class="container d-flex flex-column justify-content-center">
 
-        <div class="d-flex flex-column flex-md-row">
+        <div class="d-flex flex-column flex-md-row justify-content-between">
             <div class="img mb-3">
-                <!--<img src="" alt="" srcset="" style="width: 300px;height: 300px;">-->
-                <input type='file' id="imageInput" name="imageInput" accept="image/*" />
+                <img id="preview" src="#" alt="Preview" />
+                <input type='file' id="imageInput" name="imageInput" accept="image/*" onchange="previewImage(event)" />
             </div>
             <div class="inputs mb-3">
                 <div class="product">
@@ -55,10 +55,16 @@
             </div>
         </div>
 
-        <div class="input-group desc_class input-group-lg">
-            <span class="input-group-text" id="inputGroup-sizing-md">Leírás:</span>
-            <input type="text" class="form-control" aria-label="Sizing example input"
-                aria-describedby="inputGroup-sizing-md">
+        <div class="desc_class">
+            <label>Leírás:</label>
+            <div class="input-group input-group-lg">
+                <textarea class="form-control" aria-label="Sizing example input"
+                    aria-describedby="inputGroup-sizing-md"></textarea>
+            </div>
+        </div>
+        <div class="save&delete d-flex justify-content-center">
+            <button id="discount_btn" type="button" class="btn btn-success"><i class="fa-solid fa-save"></i></button>
+            <button id="no_discount_btn" type="button" class="btn  btn-danger"><i class="fa-solid fa-trash"></i></button>
         </div>
 
     </div>
