@@ -22,6 +22,9 @@ import javax.persistence.Persistence;
 import javax.persistence.StoredProcedureQuery;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
+import org.apache.logging.log4j.Level;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 /**
  *
@@ -55,6 +58,8 @@ public class Basket implements Serializable {
     @NotNull
     @Column(name = "amount")
     private int amount;
+
+    private static Logger logger = LogManager.getLogger(Basket.class.getName());
 
     public Basket() {
     }
@@ -153,7 +158,7 @@ public class Basket implements Serializable {
             }
 
         } catch (Exception e) {
-            System.err.println(e.getMessage());
+            logger.log(Level.ERROR, e);
         } finally {
             em.clear();
             em.close();
@@ -183,7 +188,7 @@ public class Basket implements Serializable {
 
         } catch (Exception e) {
 
-            System.err.println(e.getMessage());
+            logger.log(Level.ERROR, e);
             return false;
 
         } finally {
@@ -212,7 +217,7 @@ public class Basket implements Serializable {
 
         } catch (Exception e) {
 
-            System.err.println(e.getMessage());
+            logger.log(Level.ERROR, e);
             return false;
 
         } finally {
@@ -238,7 +243,7 @@ public class Basket implements Serializable {
 
         } catch (Exception e) {
 
-            System.err.println(e.getMessage());
+            logger.log(Level.ERROR, e);
             return false;
 
         } finally {
@@ -280,7 +285,7 @@ public class Basket implements Serializable {
             }
 
         } catch (Exception e) {
-            System.err.println(e.getMessage());
+            logger.log(Level.ERROR, e);
         } finally {
             em.clear();
             em.close();
@@ -305,7 +310,7 @@ public class Basket implements Serializable {
             count = (Integer) spq.getOutputParameterValue("countOUT");
 
         } catch (Exception e) {
-            System.err.println(e.getMessage());
+            logger.log(Level.ERROR, e);
 
         } finally {
             em.clear();
@@ -335,7 +340,7 @@ public class Basket implements Serializable {
             count = (Integer) spq.getOutputParameterValue("countOUT");
 
         } catch (Exception e) {
-            System.err.println(e.getMessage());
+            logger.log(Level.ERROR, e);
 
         } finally {
             em.clear();
@@ -365,7 +370,7 @@ public class Basket implements Serializable {
             count = (Integer) spq.getOutputParameterValue("countOUT");
 
         } catch (Exception e) {
-            System.err.println(e.getMessage());
+            logger.log(Level.ERROR, e);
 
         } finally {
             em.clear();
@@ -395,7 +400,7 @@ public class Basket implements Serializable {
             count = (Integer) spq.getOutputParameterValue("countOUT");
 
         } catch (Exception e) {
-            System.err.println(e.getMessage());
+            logger.log(Level.ERROR, e);
 
         } finally {
             em.clear();

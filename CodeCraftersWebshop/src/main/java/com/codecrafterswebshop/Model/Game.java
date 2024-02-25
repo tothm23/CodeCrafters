@@ -27,6 +27,9 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+import org.apache.logging.log4j.Level;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 /**
  *
@@ -104,6 +107,8 @@ public class Game implements Serializable {
     @NotNull
     @Column(name = "amountSold")
     private int amountSold;
+
+    private static Logger logger = LogManager.getLogger(Game.class.getName());
 
     public Game() {
     }
@@ -275,7 +280,7 @@ public class Game implements Serializable {
             }
 
         } catch (Exception e) {
-            System.err.println(e.getMessage());
+            logger.log(Level.ERROR, e);
         } finally {
             em.clear();
             em.close();
@@ -314,7 +319,7 @@ public class Game implements Serializable {
             }
 
         } catch (Exception e) {
-            System.err.println(e.getMessage());
+            logger.log(Level.ERROR, e);
         } finally {
             em.clear();
             em.close();
@@ -353,7 +358,7 @@ public class Game implements Serializable {
             }
 
         } catch (Exception e) {
-            System.err.println(e.getMessage());
+            logger.log(Level.ERROR, e);
         } finally {
             em.clear();
             em.close();
@@ -392,7 +397,7 @@ public class Game implements Serializable {
             }
 
         } catch (Exception e) {
-            System.err.println(e.getMessage());
+            logger.log(Level.ERROR, e);
         } finally {
             em.clear();
             em.close();
@@ -434,7 +439,7 @@ public class Game implements Serializable {
             }
 
         } catch (Exception e) {
-            System.err.println(e.getMessage());
+            logger.log(Level.ERROR, e);
         } finally {
             em.clear();
             em.close();
@@ -478,7 +483,7 @@ public class Game implements Serializable {
 
         } catch (Exception e) {
 
-            System.err.println(e.getMessage());
+            logger.log(Level.ERROR, e);
             return false;
 
         } finally {
@@ -524,7 +529,7 @@ public class Game implements Serializable {
 
         } catch (Exception e) {
 
-            System.err.println(e.getMessage());
+            logger.log(Level.ERROR, e);
             return false;
 
         } finally {
@@ -550,7 +555,7 @@ public class Game implements Serializable {
 
         } catch (Exception e) {
 
-            System.err.println(e.getMessage());
+            logger.log(Level.ERROR, e);
             return false;
 
         } finally {
@@ -575,7 +580,7 @@ public class Game implements Serializable {
             count = (Integer) spq.getOutputParameterValue("countOUT");
 
         } catch (Exception e) {
-            System.err.println(e.getMessage());
+            logger.log(Level.ERROR, e);
 
         } finally {
             em.clear();
@@ -631,7 +636,7 @@ public class Game implements Serializable {
             count = (Integer) spq.getOutputParameterValue("countOUT");
 
         } catch (Exception e) {
-            System.err.println(e.getMessage());
+            logger.log(Level.ERROR, e);
 
         } finally {
             em.clear();

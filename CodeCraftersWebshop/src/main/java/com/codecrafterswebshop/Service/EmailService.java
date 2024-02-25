@@ -11,6 +11,9 @@ import javax.mail.Session;
 import javax.mail.Transport;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
+import org.apache.logging.log4j.Level;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 /**
  *
@@ -255,6 +258,7 @@ public class EmailService {
             }
         });
 
+        Logger logger = LogManager.getLogger(EmailService.class.getName());
         try {
             MimeMessage message = new MimeMessage(session);
             message.addRecipient(Message.RecipientType.TO, new InternetAddress(addressee, true));
@@ -265,7 +269,7 @@ public class EmailService {
             return true;
 
         } catch (MessagingException me) {
-            System.err.println(me.getMessage());
+            logger.log(Level.ERROR, me);
         }
 
         return false;

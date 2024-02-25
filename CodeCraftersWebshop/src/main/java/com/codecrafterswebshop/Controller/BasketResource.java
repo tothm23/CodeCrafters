@@ -2,6 +2,8 @@ package com.codecrafterswebshop.Controller;
 
 import com.codecrafterswebshop.Model.Basket;
 import com.codecrafterswebshop.Service.BasketService;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
@@ -10,8 +12,13 @@ import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
+import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
+import javax.ws.rs.core.UriInfo;
+import org.apache.logging.log4j.Level;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.json.JSONArray;
 
 /**
@@ -24,26 +31,45 @@ import org.json.JSONArray;
 @Consumes(MediaType.APPLICATION_JSON)
 public class BasketResource {
 
+    @Context
+    private UriInfo uriInfo;
+    private Logger logger;
+    private String time;
+
+    public BasketResource() {
+        this.logger = LogManager.getLogger(GameResource.class.getName());
+        this.time = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date());
+    }
+
     @GET
     @Path("{userId}")
     public Response userBasket(@PathParam("userId") Integer id) {
         JSONArray result = BasketService.userBasket(id);
-        return result.isEmpty() ? Response.status(Response.Status.OK).entity("A kosár üres!")
+        Response response = result.isEmpty() ? Response.status(Response.Status.OK).entity("A kosár üres!")
                 .type(MediaType.APPLICATION_JSON).build() : Response.status(Response.Status.OK).entity(result.toString())
                 .type(MediaType.APPLICATION_JSON).build();
+
+        logger.log(Level.INFO, time + "  <--  [" + response.getStatus() + "] GET " + uriInfo.getPath());
+        return response;
     }
 
     @POST
     public Response basket(Basket k) {
         String result = BasketService.basket(k.getGameId(), k.getUserId());
-        return Response.status(Response.Status.OK).entity(result)
+        Response response = Response.status(Response.Status.OK).entity(result)
                 .type(MediaType.APPLICATION_JSON).build();
+
+        logger.log(Level.INFO, time + "  <--  [" + response.getStatus() + "] POST " + uriInfo.getPath());
+        return response;
     }
 
     @DELETE
     public Response deleteGameBasket(@QueryParam("userId") Integer userId, @QueryParam("gameId") Integer gameId) {
         String result = BasketService.deleteGameBasket(userId, gameId);
-        return Response.status(Response.Status.OK).entity(result)
+        Response response = Response.status(Response.Status.OK).entity(result)
                 .type(MediaType.APPLICATION_JSON).build();
+
+        logger.log(Level.INFO, time + "  <--  [" + response.getStatus() + "] DELETE " + uriInfo.getPath());
+        return response;
     }
 }
