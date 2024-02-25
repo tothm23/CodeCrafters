@@ -27,6 +27,9 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+import org.apache.logging.log4j.Level;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 /**
  *
@@ -90,6 +93,9 @@ public class User implements Serializable {
     @Temporal(TemporalType.TIMESTAMP)
     private Date updatedAt;
 
+    private static Logger logger = LogManager.getLogger(User.class.getName());
+    private static String salt = "ZJaP9OmgsQzsnS5mPPJvQrvS";
+
     public User() {
     }
 
@@ -114,12 +120,6 @@ public class User implements Serializable {
         this.firstName = firstName;
         this.email = email;
         this.admin = admin;
-    }
-
-    private static final String salt = "ZJaP9OmgsQzsnS5mPPJvQrvS";
-
-    public static String getSalt() {
-        return salt;
     }
 
     public Integer getId() {
@@ -241,7 +241,7 @@ public class User implements Serializable {
             }
 
         } catch (Exception e) {
-            System.err.println(e.getMessage());
+            logger.log(Level.ERROR, e);
         } finally {
             em.clear();
             em.close();
@@ -269,7 +269,7 @@ public class User implements Serializable {
             spq.registerStoredProcedureParameter("adminOUT", Integer.class, ParameterMode.OUT);
 
             spq.setParameter("userNameIN", userNameIN);
-            spq.setParameter("passwordIN", Caesar.encrypt(passwordIN + getSalt(), Caesar.OFFSET));
+            spq.setParameter("passwordIN", Caesar.encrypt(passwordIN + User.salt, Caesar.OFFSET));
 
             Integer id = (Integer) spq.getOutputParameterValue("userIdOUT");
             String userName = (String) spq.getOutputParameterValue("userNameOUT");
@@ -282,7 +282,7 @@ public class User implements Serializable {
             return u;
 
         } catch (Exception e) {
-            System.err.println(e.getMessage());
+            logger.log(Level.ERROR, e);
             return new User();
         } finally {
             em.clear();
@@ -311,7 +311,7 @@ public class User implements Serializable {
             spq.setParameter("lastNameIN", lastNameIN);
             spq.setParameter("firstNameIN", firstNameIN);
             spq.setParameter("emailIN", emailIN);
-            spq.setParameter("passwordIN", Caesar.encrypt(passwordIN + getSalt(), Caesar.OFFSET)
+            spq.setParameter("passwordIN", Caesar.encrypt(passwordIN + User.salt, Caesar.OFFSET)
             );
 
             spq.execute();
@@ -319,7 +319,7 @@ public class User implements Serializable {
 
         } catch (Exception e) {
 
-            System.err.println(e.getMessage());
+            logger.log(Level.ERROR, e);
             return false;
 
         } finally {
@@ -354,7 +354,7 @@ public class User implements Serializable {
 
         } catch (Exception e) {
 
-            System.err.println(e.getMessage());
+            logger.log(Level.ERROR, e);
             return false;
 
         } finally {
@@ -380,7 +380,7 @@ public class User implements Serializable {
 
         } catch (Exception e) {
 
-            System.err.println(e.getMessage());
+            logger.log(Level.ERROR, e);
             return false;
 
         } finally {
@@ -405,7 +405,7 @@ public class User implements Serializable {
             count = (Integer) spq.getOutputParameterValue("countOUT");
 
         } catch (Exception e) {
-            System.err.println(e.getMessage());
+            logger.log(Level.ERROR, e);
 
         } finally {
             em.clear();
@@ -487,7 +487,7 @@ public class User implements Serializable {
             count = (Integer) spq.getOutputParameterValue("countOUT");
 
         } catch (Exception e) {
-            System.err.println(e.getMessage());
+            logger.log(Level.ERROR, e);
 
         } finally {
             em.clear();
