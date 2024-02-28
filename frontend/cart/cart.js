@@ -22,9 +22,9 @@ document.addEventListener('DOMContentLoaded', function () {
         cart_content.innerHTML = "";
 
         for (let i = 0; i < data.length; i++) {
-            cart_size[i] = data[i].id;
+            cart_size[i] = data[i].gameId;
             cart_content.innerHTML += `
-        <div class="card d-flex flex-row justify-content-center h-auto h-lg-120" data-id="${data[i].id}">
+        <div class="card d-flex flex-row justify-content-center h-auto h-lg-120" data-id="${data[i].gameId}">
             <img class="card-img-top img-fluid justify-content-center" src="../img/games/${data[i].image}" alt="${data[i].name}">
             <div class="card-body d-flex flex-row justify-align-content-between border-10">
                 <p class="card-text text-lg-center">${data[i].name}</p>
