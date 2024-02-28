@@ -21,7 +21,7 @@ public class BasketService {
         for (Map<String, Object> basket : baskets) {
             JSONObject obj = new JSONObject();
 
-            obj.put("id", basket.get("id"));
+            obj.put("gameId", basket.get("gameId"));
             obj.put("name", basket.get("name"));
             obj.put("amount", basket.get("amount"));
             obj.put("image", basket.get("image"));

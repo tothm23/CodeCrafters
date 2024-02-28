@@ -147,7 +147,7 @@ public class Basket implements Serializable {
                 for (Object[] line : result) {
                     LinkedHashMap<String, Object> basket = new LinkedHashMap<>();
 
-                    basket.put("id", (Integer) line[1]);
+                    basket.put("gameId", (Integer) line[1]);
                     basket.put("name", (String) line[2]);
                     basket.put("amount", (Integer) line[3]);
                     basket.put("image", (String) line[4]);
