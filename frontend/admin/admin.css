@@ -1,0 +1,123 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: Arial, Helvetica, sans-serif;
+    color: white;
+}
+
+html,
+body {
+    margin: 0;
+    padding: 0;
+    min-height: 100%;
+    background-color: #404040;
+}
+
+.container {
+    max-width: 800px;
+    margin: auto;
+}
+
+.products{
+    margin-top: 50px;
+    margin-bottom: 50px;
+    border: black solid 1px;
+    border-radius: 15px;
+    background-color: #241f1f;
+}
+
+
+.card {
+    min-width: 300px;
+    width: 100%;
+    display: flex;
+    margin-bottom: 1.5em;
+    background-color: #404040;
+    padding: 0px;
+    border: black 1px solid;
+    border-radius: 30px;
+    padding-right: 10px;
+}
+
+.card-body{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0px;
+    
+
+}
+
+.card button{
+    font-weight: bolder;
+}
+
+.img-fluid{
+    max-height: fit-content;
+    max-width: 150px;
+    border-top-left-radius: 30px;
+    border-bottom-left-radius: 30px;
+}
+
+.card-text {
+    color: white;
+    padding: 5px;
+}
+.w-lg-auto{
+ max-width: 80px;
+}
+.h-lg-auto{
+    max-height: 120px;
+}
+.btns {
+    display: flex;
+    margin-top: 1em;
+    justify-content: space-around;
+}
+
+.btn-back {
+    color: white;
+    background-color: inherit;
+    border: 1px solid white;
+    border-radius: 10px;
+    font-weight: bold;
+    margin: 40px 0px 80px 0px;
+    font-size: 1.75em;
+    width: 150px;
+}
+
+.btn-back:hover {
+    border: 1px solid white;
+    background-color: #404040;
+}
+
+.btn-back a {
+    color: #fff;
+}
+
+.btn-create,.edit_btn{
+    color: black;
+    background-color: greenyellow;
+    border-radius: 10px;
+    font-weight: bold;
+    margin: 40px 0px 80px 0px;
+    font-size: 1.75em;
+    width: 200px;
+}
+
+i{
+    color: black;
+}
+
+.btn-create:hover,
+.btn-create:focus ,.btn-create:disabled{
+    color: black;
+    background-color: rgb(139, 185, 45);
+}
+
+.edit_btn:hover,
+.edit_btn:focus ,.edit_btn:disabled{
+    color: black;
+    background-color: rgb(139, 185, 45);
+}
