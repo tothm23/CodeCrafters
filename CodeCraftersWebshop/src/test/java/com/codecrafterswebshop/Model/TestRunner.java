@@ -11,6 +11,7 @@ public class TestRunner {
 
     public static void main(String[] args) {
         runTests(UserTest.class);
+        runTests(GameTest.class);
     }
 
     public static void runTests(Class<?> testClass) {
