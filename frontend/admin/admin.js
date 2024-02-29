@@ -8,7 +8,7 @@ document.addEventListener('DOMContentLoaded', function () {
     console.log(logeduser_data && logeduser_data.id);
 
     addEventListener('load', function () {
-        if (logeduser_data.id && logeduser_data.admin==1) {
+        if (logeduser_data.id && logeduser_data.admin == 1) {
             productGet();
         } else {
             // Ha nincs bejelentkezett felhasználó, valamilyen hiba kezelése vagy irányítás
@@ -23,25 +23,31 @@ document.addEventListener('DOMContentLoaded', function () {
         for (let i = 0; i < data.length; i++) {
             _size[i] = data[i].id;
             product_content.innerHTML += `
-        <div class="card d-flex flex-row justify-content-center h-auto h-lg-120" data-id="${data[i].id}">
-            <img class="card-img-top img-fluid justify-content-center" src="../img/games/${data[i].image}" alt="${data[i].gameName}">
-            <div class="card-body d-flex flex-row justify-align-content-between border-10">
+        <div class="card d-flex flex-lg-row flex-column h-auto h-lg-120" data-id="${data[i].id}">
+            <div class="img-div d-flex justify-content-center">
+                <img class="img-fluid" src="../img/games/${data[i].image}" alt="${data[i].gameName}">
+            </div>
+            <div class="card-body d-flex flex-lg-row flex-column justify-align-content-between border-10">
                 <p class="card-text text-lg-center">${data[i].gameName}</p>
-                <button id="edit_btn" class="btn btn-primary edit_btn" type="button">Szerkesztés</button>
+                <div class="d-flex justify-align-content-center flex-row">
+                    <button id="edit_btn" class="btn edit_btn" type="button">Szerkesztés</button>
+                    <button id="delete_btn" class="btn delete_btn" type="button"><i class="fa-solid fa-trash"></i></button>
+                </div>
             </div>
         </div>
     `;
         }
     }
+
     function productGet() {
         fetch(
-            "http://localhost:8080/CodeCraftersWebshop-1.0-SNAPSHOT/webresources/products"
-          )
-          .then((response) => response.json())
-          .then((result) => {
-            _content(result);
-          })
-          .catch((error) => alert(error));
+                "http://localhost:8080/CodeCraftersWebshop-1.0-SNAPSHOT/webresources/products"
+            )
+            .then((response) => response.json())
+            .then((result) => {
+                _content(result);
+            })
+            .catch((error) => alert(error));
     }
 
 });

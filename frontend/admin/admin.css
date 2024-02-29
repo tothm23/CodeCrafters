@@ -11,20 +11,22 @@ body {
     margin: 0;
     padding: 0;
     min-height: 100%;
-    background-color: #404040;
+    background-color: #241f1f;
 }
-
+.back_button{
+    margin: 10px;
+}
 .container {
-    max-width: 800px;
+    max-width: 1000px;
     margin: auto;
 }
 
-.products{
+.products {
     margin-top: 50px;
     margin-bottom: 50px;
-    border: black solid 1px;
-    border-radius: 15px;
-    background-color: #241f1f;
+    border-radius: 20px;
+    background-color: #404040;
+    padding: 20px;
 }
 
 
@@ -33,47 +35,45 @@ body {
     width: 100%;
     display: flex;
     margin-bottom: 1.5em;
-    background-color: #404040;
+    background-color: #241f1f;
     padding: 0px;
-    border: black 1px solid;
-    border-radius: 30px;
     padding-right: 10px;
+    border-radius: 10px;
 }
 
-.card-body{
+.card-body {
     display: flex;
+    flex-direction: row;
     justify-content: space-between;
     align-items: center;
     padding: 0px;
-    
-
+    font-weight: bold;
 }
 
-.card button{
-    font-weight: bolder;
+.card-text{
+    margin: 10px;
 }
 
-.img-fluid{
+.card button {
+    margin: 10px;
+}
+
+button,
+button:hover,
+button:focus {
+    border: none;
+    box-shadow: none;
+}
+
+.img-fluid {
     max-height: fit-content;
     max-width: 150px;
-    border-top-left-radius: 30px;
-    border-bottom-left-radius: 30px;
+    border-radius: 10px;
 }
 
 .card-text {
     color: white;
     padding: 5px;
-}
-.w-lg-auto{
- max-width: 80px;
-}
-.h-lg-auto{
-    max-height: 120px;
-}
-.btns {
-    display: flex;
-    margin-top: 1em;
-    justify-content: space-around;
 }
 
 .btn-back {
@@ -96,28 +96,48 @@ body {
     color: #fff;
 }
 
-.btn-create,.edit_btn{
+.btn-create,
+.edit_btn {
     color: black;
     background-color: greenyellow;
     border-radius: 10px;
     font-weight: bold;
     margin: 40px 0px 80px 0px;
-    font-size: 1.75em;
-    width: 200px;
+    font-size: 1.1em;
+    width: 150px;
 }
 
-i{
+.delete_btn {
+    color: black;
+    background-color: #DF3333;
+    border-radius: 10px;
+    font-weight: bold;
+    margin: 40px 0px 80px 0px;
+    font-size: 1.1em;
+    width: 100px;
+}
+
+i {
     color: black;
 }
 
 .btn-create:hover,
-.btn-create:focus ,.btn-create:disabled{
+.btn-create:focus {
     color: black;
     background-color: rgb(139, 185, 45);
 }
 
 .edit_btn:hover,
-.edit_btn:focus ,.edit_btn:disabled{
+.edit_btn:focus {
     color: black;
     background-color: rgb(139, 185, 45);
+}
+
+.delete_btn:hover,
+.delete_btn:focus {
+    background-color: rgb(179, 45, 45);
+}
+
+.delete_btn i {
+    color: white;
 }

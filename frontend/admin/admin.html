@@ -13,15 +13,17 @@
 </head>
 
 <body>
-    <div class="container">
-        <button class="btn btn-primary btn-back" type="button"><a class="text-decoration-none"
-                href="javascript:history.back()">Vissza</a></button>
+    <div class="container d-flex flex-row">
+        <div class="back_button">
+            <button class="btn btn-primary btn-back" type="button"><a class="text-decoration-none"
+                    href="javascript:history.back()">Vissza</a></button>
+        </div>
         <div class="products">
             <div class="card d-flex flex-row justify-content-center h-auto h-lg-120">
-                <div class="card-body d-flex flex-row justify-align-content-between border-10">
+                <div class="card-body d-flex flex-lg-row flex-column justify-align-content-between border-10">
                     <p class="card-text text-lg-center">Új Termék hozzáadása</p>
-                    <button id="create_btn" class="btn btn-primary btn-create" type="button"><i
-                            class="fa-solid fa-plus"></i></button>
+                    <button id="create_btn" class="btn btn-create" type="button">
+                        <i class="fa-solid fa-plus"></i></button>
                 </div>
             </div>
             <div id="product_content" class="d-flex flex-column justify-content-center">
