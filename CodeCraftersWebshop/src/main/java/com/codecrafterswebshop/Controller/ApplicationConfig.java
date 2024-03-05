@@ -26,6 +26,7 @@ public class ApplicationConfig extends Application {
         resources.add(com.codecrafterswebshop.Controller.GameResource.class);
         resources.add(com.codecrafterswebshop.Controller.MainPageResource.class);
         resources.add(com.codecrafterswebshop.Controller.OrderResource.class);
+        resources.add(com.codecrafterswebshop.Controller.PaymentResource.class);
         resources.add(com.codecrafterswebshop.Controller.ProductsResource.class);
         resources.add(com.codecrafterswebshop.Controller.UserResource.class);
     }
