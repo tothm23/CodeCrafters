@@ -75,6 +75,7 @@ fetch(`${link}/${id}`)
         sale_price.innerHTML = "";
       }
       document.getElementById("add_btn").innerHTML=add_btn(id);
+      
       desc.innerHTML = result.description;
     } else {
       alert("A játék nem található!");

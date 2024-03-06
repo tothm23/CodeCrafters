@@ -85,16 +85,18 @@ function previewImage(event) {
 function save() {
     const myHeaders = new Headers();
     myHeaders.append("Content-Type", "application/json");
+    console.log(JSON.stringify(myHeaders));
+    console.log(logeduser_token);
     myHeaders.append("Authorization", `Bearer ${logeduser_token}`);
-
+    console.log(JSON.stringify(myHeaders));
     const raw = JSON.stringify({
         "name": productName.value,
         "price": price.value,
         "description": desc.value,
         "image": "images/netbeans2.jpg",
         "ageLimit": agelimit.selected.value,
-        "discount": 10,
-        "inStock": 10,
+        "discount": discount.value,
+        "inStock": stock.value,
         "deviceId": 1,
         "platformId": 1
     });
