@@ -1,5 +1,6 @@
 package com.codecrafterswebshop.Controller;
 
+import com.codecrafterswebshop.Config.Token;
 import com.codecrafterswebshop.Model.Game;
 import com.codecrafterswebshop.Service.GameService;
 import java.text.SimpleDateFormat;
@@ -13,6 +14,7 @@ import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.Context;
+import javax.ws.rs.core.HttpHeaders;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.UriInfo;
@@ -33,6 +35,9 @@ public class GameResource {
 
     @Context
     private UriInfo uriInfo;
+
+    @Context
+    private HttpHeaders headers;
     private Logger logger;
     private String time;
 
@@ -54,6 +59,27 @@ public class GameResource {
 
     @POST
     public Response newGame(Game g) {
+        Response unauthorized = Response
+                .status(Response.Status.UNAUTHORIZED)
+                .entity("Hozzáférés megtagadva!")
+                .type(MediaType.TEXT_PLAIN).build();
+
+        Response notAdmin = Response
+                .status(Response.Status.UNAUTHORIZED)
+                .entity("Játékot csak adminisztrátor szerkeszthet!")
+                .type(MediaType.TEXT_PLAIN).build();
+
+        String authHeader = headers.getHeaderString(HttpHeaders.AUTHORIZATION);
+
+        if (authHeader == null || !authHeader.startsWith("Bearer ")) {
+            return unauthorized;
+        }
+
+        String token = authHeader.substring("Bearer".length()).trim();
+        if (Token.decodeAdmin(token) == 0) {
+            return notAdmin;
+        }
+
         String result = GameService.newGame(g.getName(), g.getPrice(),
                 g.getDescription(), g.getImage(), g.getAgeLimit(),
                 g.getDiscount(), g.getInStock(),
@@ -69,6 +95,27 @@ public class GameResource {
     @PUT
     @Path("{gameId}")
     public Response updateGame(Game g, @PathParam("gameId") Integer id) {
+        Response unauthorized = Response
+                .status(Response.Status.UNAUTHORIZED)
+                .entity("Hozzáférés megtagadva!")
+                .type(MediaType.TEXT_PLAIN).build();
+
+        Response notAdmin = Response
+                .status(Response.Status.UNAUTHORIZED)
+                .entity("Játékot csak adminisztrátor szerkeszthet!")
+                .type(MediaType.TEXT_PLAIN).build();
+
+        String authHeader = headers.getHeaderString(HttpHeaders.AUTHORIZATION);
+
+        if (authHeader == null || !authHeader.startsWith("Bearer ")) {
+            return unauthorized;
+        }
+
+        String token = authHeader.substring("Bearer".length()).trim();
+        if (Token.decodeAdmin(token) == 0) {
+            return notAdmin;
+        }
+
         JSONObject result = GameService.game(id);
         String update = GameService.updateGame(id, g.getName(), g.getPrice(),
                 g.getDescription(), g.getImage(), g.getAgeLimit(),
@@ -87,6 +134,27 @@ public class GameResource {
     @DELETE
     @Path("{gameId}")
     public Response deleteGame(@PathParam("gameId") Integer id) {
+        Response unauthorized = Response
+                .status(Response.Status.UNAUTHORIZED)
+                .entity("Hozzáférés megtagadva!")
+                .type(MediaType.TEXT_PLAIN).build();
+
+        Response notAdmin = Response
+                .status(Response.Status.UNAUTHORIZED)
+                .entity("Játékot csak adminisztrátor szerkeszthet!")
+                .type(MediaType.TEXT_PLAIN).build();
+
+        String authHeader = headers.getHeaderString(HttpHeaders.AUTHORIZATION);
+
+        if (authHeader == null || !authHeader.startsWith("Bearer ")) {
+            return unauthorized;
+        }
+
+        String token = authHeader.substring("Bearer".length()).trim();
+        if (Token.decodeAdmin(token) == 0) {
+            return notAdmin;
+        }
+
         JSONObject result = GameService.game(id);
         String delete = GameService.deleteGame(id);
         Response response = result.length() == 0 ? Response.status(Response.Status.NOT_FOUND).entity(delete)

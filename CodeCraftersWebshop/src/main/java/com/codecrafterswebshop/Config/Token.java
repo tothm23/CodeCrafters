@@ -42,21 +42,21 @@ public class Token {
         return token;
     }
 
-    public static int decode(String token) {
-        try {
-            Jws<Claims> result = Jwts.parser().setSigningKey(TextCodec.BASE64.decode(Token.SECRET)).parseClaimsJws(token);
-            return 0;
-
-        } catch (ExpiredJwtException | MalformedJwtException | SignatureException | UnsupportedJwtException | IllegalArgumentException ex) {
-            return -1;
-        }
-    }
-
     public static int decodeAdmin(String token) {
         try {
             Jws<Claims> result = Jwts.parser().setSigningKey(TextCodec.BASE64.decode(Token.SECRET)).parseClaimsJws(token);
             int admin = result.getBody().get("admin", Integer.class);
             return admin == 0 ? 0 : -1;
+
+        } catch (ExpiredJwtException | MalformedJwtException | SignatureException | UnsupportedJwtException | IllegalArgumentException ex) {
+            return -1;
+        }
+    }
+    
+     public static int decodeUser(String token) {
+        try {
+            Jws<Claims> result = Jwts.parser().setSigningKey(TextCodec.BASE64.decode(Token.SECRET)).parseClaimsJws(token);
+            return result.getBody().get("id", Integer.class);
 
         } catch (ExpiredJwtException | MalformedJwtException | SignatureException | UnsupportedJwtException | IllegalArgumentException ex) {
             return -1;

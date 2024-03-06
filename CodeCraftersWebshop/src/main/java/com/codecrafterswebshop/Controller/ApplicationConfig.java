@@ -21,7 +21,6 @@ public class ApplicationConfig extends Application {
 
     private void addRestResourceClasses(Set<Class<?>> resources) {
         resources.add(com.codecrafterswebshop.Config.CorsFilter.class);
-        resources.add(com.codecrafterswebshop.Config.TokenFilter.class);
         resources.add(com.codecrafterswebshop.Controller.BasketResource.class);
         resources.add(com.codecrafterswebshop.Controller.GameResource.class);
         resources.add(com.codecrafterswebshop.Controller.MainPageResource.class);
