@@ -96,6 +96,12 @@ button:focus {
     color: #fff;
 }
 
+.card-body .btn a,.card-body .btn a:hover,.card-body .btn a::after{
+    text-decoration: none;
+    color: #241f1f;
+    font-size: 1.75;
+}
+
 .btn-create,
 .edit_btn {
     color: black;

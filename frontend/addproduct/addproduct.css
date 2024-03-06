@@ -35,6 +35,10 @@ label{
     margin-right: 5px;
 }
 
+.platform,.age,.device{
+    margin: 10px;
+}
+
 .select,.select:focus,.select::after{
     background: none;
     color: white;
@@ -59,18 +63,17 @@ option{
     margin-right: 5px;
 }
 
-.discount i{
-    width: 30px;
-    height: 30px;
-    color: white;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+#save_btn{
+    background-color: greenyellow;
+    border: none;
 }
 
-.discount_row{
-    display: flex;
-    flex-direction: row;
+#save_btn i{
+    color: black;
+}
+
+#delete_btn{
+    background-color: #DF3333;
 }
 
 .desc_class textarea,.desc_class textarea:focus{
@@ -83,3 +86,41 @@ option{
     margin-bottom: 5px;
 }
 
+#save_btn,#delete_btn {
+    margin: 10px;
+}
+
+.btn-back {
+    color: white;
+    background-color: inherit;
+    border: 1px solid white;
+    border-radius: 10px;
+    font-weight: bold;
+    margin: 40px 0px 80px 0px;
+    font-size: 1.75em;
+    width: 150px;
+}
+
+.btn-back:hover {
+    border: 1px solid white;
+    background-color: #404040;
+}
+
+.btn-back a {
+    color: #fff;
+}
+
+#delete_btn:hover,
+#delete_btn:focus {
+    background-color: rgb(179, 45, 45);
+}
+
+#delete_btn i {
+    color: white;
+}
+
+#save_btn:hover,
+#save_btn:focus{
+    color: black;
+    background-color: rgb(139, 185, 45);
+}

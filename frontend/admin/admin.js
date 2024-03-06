@@ -30,7 +30,7 @@ document.addEventListener('DOMContentLoaded', function () {
             <div class="card-body d-flex flex-lg-row flex-column justify-align-content-between border-10">
                 <p class="card-text text-lg-center">${data[i].gameName}</p>
                 <div class="d-flex justify-align-content-center flex-row">
-                    <button id="edit_btn" class="btn edit_btn" type="button">Szerkesztés</button>
+                    <button id="edit_btn" class="btn edit_btn" type="button"><a href="../addproduct/addproduct.html?id=${data[i].id}">Szerkesztés</a></button>
                     <button id="delete_btn" class="btn delete_btn" type="button"><i class="fa-solid fa-trash"></i></button>
                 </div>
             </div>

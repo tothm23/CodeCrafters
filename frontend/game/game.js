@@ -17,18 +17,18 @@ let id = parseInt(parameterek.get("id"));
 // GET kérés
 fetch(`${link}/${id}`)
   .then((response) => response.json())
-  .then((data) => {
-    if (data.id) {
-      console.log(data)
+  .then((result) => {
+    if (result.id) {
+      console.log(result);
       img.innerHTML;
-      var src='../img/games/'+data.image;
+      var src='../img/games/'+result.image;
       img.setAttribute("src", src);
       
-      game_name.innerHTML = data.gameName;
-      device.innerHTML = data.deviceName;
-      platform.innerHTML = data.platformName;
+      game_name.innerHTML = result.gameName;
+      device.innerHTML = result.deviceName;
+      platform.innerHTML = result.platformName;
       // Korhatár színe
-      switch (data.ageLimit) {
+      switch (result.ageLimit) {
         case 3:
           age.style.border = "3px solid #a5c301";
           break;
@@ -48,10 +48,10 @@ fetch(`${link}/${id}`)
       }
 
       age.style.borderRadius = "50%";
-      age.innerHTML = data.ageLimit;
+      age.innerHTML = result.ageLimit;
 
       // Raktáron
-      if (data.inStock > 0) {
+      if (result.inStock > 0) {
         available.innerHTML = "elérhető";
         available.style.color = "#95e72d";
       } else {
@@ -59,23 +59,23 @@ fetch(`${link}/${id}`)
         available.style.color = "#ff0000";
       }
 
-      price.innerHTML = data.price + " Ft";
+      price.innerHTML = result.price + " Ft";
       //Ár megjelenítése
-      if(data.discount > 0){
-        price.innerHTML=`<p class="card-text price" style="text-decoration: line-through;">${data.price} Ft</p>`; 
+      if(result.discount > 0){
+        price.innerHTML=`<p class="card-text price" style="text-decoration: line-through;">${result.price} Ft</p>`; 
       }
       else{
-        price.innerHTML=`<p class="card-text price">${data.price} Ft</p>`;
+        price.innerHTML=`<p class="card-text price">${result.price} Ft</p>`;
       }
-      if(data.discount > 0){
+      if(result.discount > 0){
         // Akciós ár egész számra kerekítve
-        sale_price.innerHTML = `<p class="card-text saleprice">${Math.round(data.price - (data.price / 100) * data.discount)} Ft</p>`;
+        sale_price.innerHTML = `<p class="card-text saleprice">${Math.round(result.price - (result.price / 100) * result.discount)} Ft</p>`;
       }
       else{ 
         sale_price.innerHTML = "";
       }
       document.getElementById("add_btn").innerHTML=add_btn(id);
-      desc.innerHTML = data.description;
+      desc.innerHTML = result.description;
     } else {
       alert("A játék nem található!");
     }

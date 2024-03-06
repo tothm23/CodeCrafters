@@ -16,6 +16,10 @@
 </head>
 
 <body class="text-white d-flex align-items-center justify-content-center">
+    <div class="back_button">
+        <button class="btn btn-primary btn-back" type="button"><a class="text-decoration-none"
+                href="javascript:history.back()">Vissza</a></button>
+    </div>
     <div class="container d-flex flex-column justify-content-center">
 
         <div class="d-flex flex-column flex-md-row justify-content-between">
@@ -34,22 +38,46 @@
                 </div>
                 <div class="discount mb-3">
                     <label for="number" class="form-label">Akció (%):</label>
-                    <div class="discount_row">
-                        <button id="discount_btn" type="button" class="btn btn-success"><i
-                                class="fa-solid fa-check"></i></button>
-                        <button id="no_discount_btn" type="button" class="btn  btn-danger"><i
-                                class="fa-solid fa-xmark"></i></button>
-                        <input type="number" class="form-control" id="discount" required>
-                    </div>
+                    <input type="number" class="form-control" id="discount" required>
+
                 </div>
-                <div class="d-flex flex-row">
+                <div class="stock mb-3">
+                    <label for="number" class="form-label">Raktáron:</label>
+                    <input type="number" class="form-control" id="stock" required>
+
+                </div>
+                <div class="d-flex flex-row platform">
+                    <label>Platform:</label>
+                    <select id="platform" class="select text-center form-select form-select-sm" aria-label="-">
+                        <option selected>Nincs</option>
+                        <option value="Steam">Steam</option>
+                        <option value="Origin">Origin</option>
+                        <option value="Epic Games">Epic Games</option>
+                        <option value="Ubisoft">Ubisoft</option>
+                    </select>
+                </div>
+                <div class="d-flex flex-row age">
                     <label>Korhatár:</label>
-                    <select class="select text-center form-select form-select-sm" aria-label="-">
-                        <option selected>-</option>
-                        <option value="1">7</option>
-                        <option value="2">12</option>
-                        <option value="3">16</option>
-                        <option value="4">18</option>
+                    <select id="age" class="select text-center form-select form-select-sm" aria-label="-">
+                        <option selected>Nincs</option>
+                        <option value="7">7</option>
+                        <option value="12">12</option>
+                        <option value="16">16</option>
+                        <option value="18">18</option>
+                    </select>
+                </div>
+
+                <div class="d-flex flex-row device">
+                    <label>Eszköz:</label>
+                    <select id="device" class="select text-center form-select form-select-sm" aria-label="-">
+                        <option selected>Nincs</option>
+                        <option value="PC">PC</option>
+                        <option value="Nintendo Switch">Nintendo Switch</option>
+                        <option value="PS4">PS4</option>
+                        <option value="PS5">PS5</option>
+                        <option value="XBOX One">XBOX One</option>
+                        <option value="XBOX Series S">XBOX Series S</option>
+                        <option value="XBOX Series X">XBOX Series X</option>
                     </select>
                 </div>
             </div>
@@ -58,7 +86,7 @@
         <div class="desc_class">
             <label>Leírás:</label>
             <div class="input-group input-group-lg">
-                <textarea class="form-control" aria-label="Sizing example input"
+                <textarea id="desc" class="form-control" aria-label="Sizing example input"
                     aria-describedby="inputGroup-sizing-md"></textarea>
             </div>
         </div>
