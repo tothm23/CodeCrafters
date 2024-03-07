@@ -52,14 +52,24 @@ public class Token {
             return -1;
         }
     }
-    
-     public static int decodeUser(String token) {
+
+    public static int decodeUser(String token) {
         try {
             Jws<Claims> result = Jwts.parser().setSigningKey(TextCodec.BASE64.decode(Token.SECRET)).parseClaimsJws(token);
             return result.getBody().get("id", Integer.class);
 
         } catch (ExpiredJwtException | MalformedJwtException | SignatureException | UnsupportedJwtException | IllegalArgumentException ex) {
             return -1;
+        }
+    }
+
+    public static String decodeUserByEmail(String token) {
+        try {
+            Jws<Claims> result = Jwts.parser().setSigningKey(TextCodec.BASE64.decode(Token.SECRET)).parseClaimsJws(token);
+            return result.getBody().get("email", String.class);
+
+        } catch (ExpiredJwtException | MalformedJwtException | SignatureException | UnsupportedJwtException | IllegalArgumentException ex) {
+            return "";
         }
     }
 }
