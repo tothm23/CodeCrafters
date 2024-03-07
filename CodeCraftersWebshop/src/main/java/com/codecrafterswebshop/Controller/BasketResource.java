@@ -1,5 +1,6 @@
 package com.codecrafterswebshop.Controller;
 
+import com.codecrafterswebshop.Config.Token;
 import com.codecrafterswebshop.Model.Basket;
 import com.codecrafterswebshop.Service.BasketService;
 import java.text.SimpleDateFormat;
@@ -13,6 +14,7 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.Context;
+import javax.ws.rs.core.HttpHeaders;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.UriInfo;
@@ -33,17 +35,41 @@ public class BasketResource {
 
     @Context
     private UriInfo uriInfo;
+    @Context
+    private HttpHeaders headers;
     private Logger logger;
     private String time;
+    private Response unauthorized;
 
     public BasketResource() {
         this.logger = LogManager.getLogger(GameResource.class.getName());
         this.time = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date());
+        this.unauthorized = Response
+                .status(Response.Status.UNAUTHORIZED)
+                .entity("Hozzáférés megtagadva!")
+                .type(MediaType.TEXT_PLAIN).build();
     }
 
     @GET
     @Path("{userId}")
     public Response userBasket(@PathParam("userId") Integer id) {
+        Response userResponse = Response
+                .status(Response.Status.UNAUTHORIZED)
+                .entity("Minden felhasználó csak a saját kosarát tekintheti meg!")
+                .type(MediaType.TEXT_PLAIN).build();
+
+        String authHeader = headers.getHeaderString(HttpHeaders.AUTHORIZATION);
+
+        if (authHeader == null || !authHeader.startsWith("Bearer ")) {
+            return unauthorized;
+        }
+
+        String token = authHeader.substring("Bearer".length()).trim();
+
+        if (Token.decodeUser(token) != id) {
+            return userResponse;
+        }
+
         JSONArray result = BasketService.userBasket(id);
         Response response = result.isEmpty() ? Response.status(Response.Status.OK).entity("A kosár üres!")
                 .type(MediaType.APPLICATION_JSON).build() : Response.status(Response.Status.OK).entity(result.toString())
@@ -55,6 +81,23 @@ public class BasketResource {
 
     @POST
     public Response basket(Basket k) {
+        Response userResponse = Response
+                .status(Response.Status.UNAUTHORIZED)
+                .entity("Minden felhasználó csak a saját kosarához adhat hozzá terméket!")
+                .type(MediaType.TEXT_PLAIN).build();
+
+        String authHeader = headers.getHeaderString(HttpHeaders.AUTHORIZATION);
+
+        if (authHeader == null || !authHeader.startsWith("Bearer ")) {
+            return unauthorized;
+        }
+
+        String token = authHeader.substring("Bearer".length()).trim();
+
+        if (Token.decodeUser(token) != k.getUserId()) {
+            return userResponse;
+        }
+
         String result = BasketService.basket(k.getGameId(), k.getUserId());
         Response response = Response.status(Response.Status.OK).entity(result)
                 .type(MediaType.APPLICATION_JSON).build();
@@ -65,6 +108,23 @@ public class BasketResource {
 
     @DELETE
     public Response deleteGameBasket(@QueryParam("userId") Integer userId, @QueryParam("gameId") Integer gameId) {
+        Response userResponse = Response
+                .status(Response.Status.UNAUTHORIZED)
+                .entity("Minden felhasználó csak a saját kosarából törölhet terméket!")
+                .type(MediaType.TEXT_PLAIN).build();
+
+        String authHeader = headers.getHeaderString(HttpHeaders.AUTHORIZATION);
+
+        if (authHeader == null || !authHeader.startsWith("Bearer ")) {
+            return unauthorized;
+        }
+
+        String token = authHeader.substring("Bearer".length()).trim();
+
+        if (Token.decodeUser(token) != userId) {
+            return userResponse;
+        }
+
         String result = BasketService.deleteGameBasket(userId, gameId);
         Response response = Response.status(Response.Status.OK).entity(result)
                 .type(MediaType.APPLICATION_JSON).build();
