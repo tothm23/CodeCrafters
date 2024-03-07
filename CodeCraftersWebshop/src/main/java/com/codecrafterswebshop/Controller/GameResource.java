@@ -35,15 +35,19 @@ public class GameResource {
 
     @Context
     private UriInfo uriInfo;
-
     @Context
     private HttpHeaders headers;
     private Logger logger;
     private String time;
+    private Response unauthorized;
 
     public GameResource() {
         this.logger = LogManager.getLogger(GameResource.class.getName());
         this.time = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date());
+        this.unauthorized = Response
+                .status(Response.Status.UNAUTHORIZED)
+                .entity("Hozzáférés megtagadva!")
+                .type(MediaType.TEXT_PLAIN).build();
     }
 
     @GET
@@ -59,14 +63,9 @@ public class GameResource {
 
     @POST
     public Response newGame(Game g) {
-        Response unauthorized = Response
-                .status(Response.Status.UNAUTHORIZED)
-                .entity("Hozzáférés megtagadva!")
-                .type(MediaType.TEXT_PLAIN).build();
-
         Response notAdmin = Response
                 .status(Response.Status.UNAUTHORIZED)
-                .entity("Játékot csak adminisztrátor szerkeszthet!")
+                .entity("Játékot csak adminisztrátor hozhat létre!")
                 .type(MediaType.TEXT_PLAIN).build();
 
         String authHeader = headers.getHeaderString(HttpHeaders.AUTHORIZATION);
@@ -95,11 +94,6 @@ public class GameResource {
     @PUT
     @Path("{gameId}")
     public Response updateGame(Game g, @PathParam("gameId") Integer id) {
-        Response unauthorized = Response
-                .status(Response.Status.UNAUTHORIZED)
-                .entity("Hozzáférés megtagadva!")
-                .type(MediaType.TEXT_PLAIN).build();
-
         Response notAdmin = Response
                 .status(Response.Status.UNAUTHORIZED)
                 .entity("Játékot csak adminisztrátor szerkeszthet!")
@@ -134,14 +128,9 @@ public class GameResource {
     @DELETE
     @Path("{gameId}")
     public Response deleteGame(@PathParam("gameId") Integer id) {
-        Response unauthorized = Response
-                .status(Response.Status.UNAUTHORIZED)
-                .entity("Hozzáférés megtagadva!")
-                .type(MediaType.TEXT_PLAIN).build();
-
         Response notAdmin = Response
                 .status(Response.Status.UNAUTHORIZED)
-                .entity("Játékot csak adminisztrátor szerkeszthet!")
+                .entity("Játékot csak adminisztrátor törölhet!")
                 .type(MediaType.TEXT_PLAIN).build();
 
         String authHeader = headers.getHeaderString(HttpHeaders.AUTHORIZATION);
