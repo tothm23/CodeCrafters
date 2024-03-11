@@ -11,12 +11,10 @@ public class OrderService {
 
     public static String order(Integer userIdIN) {
         try {
-            String addressee = EmailService.addressee(Basket.productKeys(userIdIN));
-            String content = EmailService.htmlOrder(Basket.productKeys(userIdIN));
-
             if (!Basket.checkUserIdBasket(userIdIN)) {
                 return "Hibás felhasznaloId!";
-            } else if (!EmailService.email(addressee, "Megrendelésed összeállítottuk", content)) {
+            } else if (!EmailService.email(EmailService.addressee(Basket.productKeys(userIdIN)),
+                    "Megrendelésed összeállítottuk", EmailService.htmlOrder(Basket.productKeys(userIdIN)))) {
                 return "Hiba az email küldésénél!";
             } else if (Basket.order(userIdIN)) {
                 return "Sikeres rendelés!";
