@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Feb 19, 2024 at 01:24 PM
+-- Generation Time: Mar 11, 2024 at 11:19 AM
 -- Server version: 5.7.24
 -- PHP Version: 8.0.1
 
@@ -161,7 +161,9 @@ CREATE DEFINER=`root`@`localhost` PROCEDURE `game` (IN `idIN` INT(9))   BEGIN
         game.ageLimit,
         game.discount,
         game.inStock,
+        device.id AS "deviceId",
         device.name AS "deviceName",
+        platform.id AS "platformId",
         platform.name AS "platformName"
     FROM game
 
