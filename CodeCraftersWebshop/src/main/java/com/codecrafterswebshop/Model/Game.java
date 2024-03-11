@@ -436,6 +436,8 @@ public class Game implements Serializable {
                 game.put("inStock", (Integer) line[7]);
                 game.put("deviceName", (String) line[8]);
                 game.put("platformName", (String) line[9]);
+                game.put("deviceId", (String) line[10]);
+                game.put("platformId", (String) line[11]);
             }
 
         } catch (Exception e) {
