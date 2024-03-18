@@ -74,7 +74,7 @@ fetch(`${link}/${id}`)
       else{ 
         sale_price.innerHTML = "";
       }
-      document.getElementById("add_btn").innerHTML=add_btn(id);
+      document.getElementById("add_btn_place").innerHTML=add_btn(id);
       
       desc.innerHTML = result.description;
     } else {

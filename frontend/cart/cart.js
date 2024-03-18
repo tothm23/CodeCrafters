@@ -5,6 +5,7 @@ document.addEventListener('DOMContentLoaded', function () {
     const order_btn = document.getElementById('order_btn');
     // Kinyerjük a bejelentkezési adatokat a localStorage-ból
     const logeduser_data = JSON.parse(localStorage.getItem("loged_userdata"));
+    const loged_usertoken = localStorage.getItem("loged_usertoken");
     // Ellenőrizzük, hogy van-e bejelentkezett felhasználó
     console.log(logeduser_data && logeduser_data.id);
 
@@ -47,8 +48,12 @@ document.addEventListener('DOMContentLoaded', function () {
     });
 
     function cart_delete(gameId) {
+        const myHeaders = new Headers();
+        myHeaders.append("Content-Type", "application/json");
+        myHeaders.append("Authorization", `Bearer ${loged_usertoken}`);
         var requestOptions = {
             method: 'DELETE',
+            headers: myHeaders,
             redirect: 'follow'
         };
         fetch(`http://localhost:8080/CodeCraftersWebshop-1.0-SNAPSHOT/webresources/basket?userId=${logeduser_data.id}&gameId=${gameId}`, requestOptions)
@@ -63,6 +68,7 @@ document.addEventListener('DOMContentLoaded', function () {
     order_btn.addEventListener('click', function () {
         var myHeaders = new Headers();
         myHeaders.append("Content-Type", "application/json");
+        myHeaders.append("Authorization", `Bearer ${loged_usertoken}`);
 
         var raw = JSON.stringify({
             "userId": logeduser_data.id
@@ -104,8 +110,18 @@ document.addEventListener('DOMContentLoaded', function () {
         console.log(sum_price);
     }
 
+
+
     function cartGet() {
-        fetch(`http://localhost:8080/CodeCraftersWebshop-1.0-SNAPSHOT/webresources/basket/${logeduser_data.id}`, )
+        const myHeaders = new Headers();
+        myHeaders.append("Authorization", `Bearer ${loged_usertoken}`);
+        console.log(myHeaders);
+        const requestOptions = {
+            method: "GET",
+            headers: myHeaders,
+            redirect: "follow"
+        };
+        fetch(`http://localhost:8080/CodeCraftersWebshop-1.0-SNAPSHOT/webresources/basket/${logeduser_data.id}`, requestOptions)
             .then(response => response.json())
             .then(result => {
                 // Itt további kezelése a kapott adatoknak
@@ -116,9 +132,9 @@ document.addEventListener('DOMContentLoaded', function () {
             .catch(error => {
                 console.error(error);
                 if (error) {
-                value="";
-                _content(value);
-                final_price_cal(value);
+                    value = "";
+                    _content(value);
+                    final_price_cal(value);
                 }
             });
     }

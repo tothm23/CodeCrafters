@@ -1,6 +1,7 @@
 const logged_user = JSON.parse(localStorage.getItem("loged_userdata"));
 const log_reg = document.getElementById("log_reg");
 const userbox = document.getElementById("user-box");
+const loged_usertoken = localStorage.getItem("loged_usertoken");
 
 let cart_id = [];
 
@@ -102,9 +103,17 @@ fetch(
 
 //get kosár
 function getCart(btn_id) {
-  fetch(`http://localhost:8080/CodeCraftersWebshop-1.0-SNAPSHOT/webresources/basket/${logged_user.id}`, {
-      method: 'GET'
-    })
+  console.log(logged_user);
+  console.log(loged_usertoken);
+  const myHeaders = new Headers();
+        myHeaders.append("Authorization", `Bearer ${loged_usertoken}`);
+        console.log(myHeaders);
+        const requestOptions = {
+            method: "GET",
+            headers: myHeaders,
+            redirect: "follow"
+        };
+  fetch(`http://localhost:8080/CodeCraftersWebshop-1.0-SNAPSHOT/webresources/basket/${logged_user.id}`,requestOptions)
     .then(response => response.json())
     .then(result => {
       // Ellenőrizze, hogy a válasz tartalmazza-e a várt tulajdonságokat
@@ -150,6 +159,7 @@ function add_btn(id) {
     for (let i = 0; i < cart_id.length; i++) {
       if (cart_id[i] === id) {
         vanilyen_ID = true;
+        console.log(cart_id[i]);
       }
     }
     if (vanilyen_ID) {
@@ -259,6 +269,7 @@ document.addEventListener("DOMContentLoaded", function () {
       if (gameId)
         var myHeaders = new Headers();
       myHeaders.append("Content-Type", "application/json");
+      myHeaders.append("Authorization", `Bearer ${loged_usertoken}`);
       var raw = JSON.stringify({
         gameId: gameId,
         userId: logged_user.id
