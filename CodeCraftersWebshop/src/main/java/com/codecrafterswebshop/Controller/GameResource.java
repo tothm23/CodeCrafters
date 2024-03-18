@@ -1,6 +1,6 @@
 package com.codecrafterswebshop.Controller;
 
-import com.codecrafterswebshop.Config.Token;
+import com.codecrafterswebshop.Service.TokenService;
 import com.codecrafterswebshop.Model.Game;
 import com.codecrafterswebshop.Service.GameService;
 import java.text.SimpleDateFormat;
@@ -68,16 +68,7 @@ public class GameResource {
                 .entity("Játékot csak adminisztrátor hozhat létre!")
                 .type(MediaType.TEXT_PLAIN).build();
 
-        String authHeader = headers.getHeaderString(HttpHeaders.AUTHORIZATION);
-
-        if (authHeader == null || !authHeader.startsWith("Bearer ")) {
-            return unauthorized;
-        }
-
-        String token = authHeader.substring("Bearer".length()).trim();
-        if (Token.decodeAdmin(token) == 0) {
-            return notAdmin;
-        }
+        TokenService.filterAdmin(notAdmin, headers);
 
         String result = GameService.newGame(g.getName(), g.getPrice(),
                 g.getDescription(), g.getImage(), g.getAgeLimit(),
@@ -99,16 +90,7 @@ public class GameResource {
                 .entity("Játékot csak adminisztrátor szerkeszthet!")
                 .type(MediaType.TEXT_PLAIN).build();
 
-        String authHeader = headers.getHeaderString(HttpHeaders.AUTHORIZATION);
-
-        if (authHeader == null || !authHeader.startsWith("Bearer ")) {
-            return unauthorized;
-        }
-
-        String token = authHeader.substring("Bearer".length()).trim();
-        if (Token.decodeAdmin(token) == 0) {
-            return notAdmin;
-        }
+        TokenService.filterAdmin(notAdmin, headers);
 
         JSONObject result = GameService.game(id);
         String update = GameService.updateGame(id, g.getName(), g.getPrice(),
@@ -133,16 +115,7 @@ public class GameResource {
                 .entity("Játékot csak adminisztrátor törölhet!")
                 .type(MediaType.TEXT_PLAIN).build();
 
-        String authHeader = headers.getHeaderString(HttpHeaders.AUTHORIZATION);
-
-        if (authHeader == null || !authHeader.startsWith("Bearer ")) {
-            return unauthorized;
-        }
-
-        String token = authHeader.substring("Bearer".length()).trim();
-        if (Token.decodeAdmin(token) == 0) {
-            return notAdmin;
-        }
+        TokenService.filterAdmin(notAdmin, headers);
 
         JSONObject result = GameService.game(id);
         String delete = GameService.deleteGame(id);

@@ -1,6 +1,6 @@
 package com.codecrafterswebshop.Controller;
 
-import com.codecrafterswebshop.Config.Token;
+import com.codecrafterswebshop.Service.TokenService;
 import com.codecrafterswebshop.Model.Basket;
 import com.codecrafterswebshop.Model.Payment;
 import com.codecrafterswebshop.Service.OrderService;
@@ -42,27 +42,12 @@ public class PaymentResource {
 
     @POST
     public Response pay(Payment p) {
-        Response unauthorized = Response
-                .status(Response.Status.UNAUTHORIZED)
-                .entity("Hozzáférés megtagadva!")
-                .type(MediaType.TEXT_PLAIN).build();
-
         Response userResponse = Response
                 .status(Response.Status.UNAUTHORIZED)
                 .entity("Minden felhasználó csak a saját termékeit fizetheti ki!")
                 .type(MediaType.TEXT_PLAIN).build();
 
-        String authHeader = headers.getHeaderString(HttpHeaders.AUTHORIZATION);
-
-        if (authHeader == null || !authHeader.startsWith("Bearer ")) {
-            return unauthorized;
-        }
-
-        String token = authHeader.substring("Bearer".length()).trim();
-
-        if (!Token.decodeUserByEmail(token).equals(p.getCustomerEmail())) {
-            return userResponse;
-        }
+        TokenService.filterEmail(userResponse, headers, p.getCustomerEmail());
 
         String result = PaymentService.pay(p.getCustomerName(), p.getCustomerEmail(),
                 p.getAmount(), p.getCardNumber(), p.getCardExpMonth(), p.getCardExpYear(), p.getCardCvc());
