@@ -18,6 +18,8 @@ import org.apache.logging.log4j.Logger;
  */
 public class PaymentService {
 
+    private static String chargeId;
+
     public static boolean processPayment(String stripeSecretKey, String customerName, String customerEmail, String token, Long amount) {
         Stripe.apiKey = stripeSecretKey;
         Logger logger = LogManager.getLogger(PaymentService.class.getName());
@@ -31,7 +33,7 @@ public class PaymentService {
                             .build();
             Customer customer = Customer.create(params);
 
-            Charge.create(
+            Charge charge = Charge.create(
                     new ChargeCreateParams.Builder()
                             .setAmount(amount * 100)
                             .setCurrency("huf")
@@ -39,6 +41,7 @@ public class PaymentService {
                             .setCustomer(customer.getId())
                             .build());
 
+            PaymentService.chargeId = charge.getId();
             return true;
         } catch (StripeException e) {
             logger.log(Level.ERROR, e);
@@ -63,7 +66,7 @@ public class PaymentService {
             Token token = Token.create(params);
             if (processPayment("sk_test_51OjIDZEtu0vYeAdJUzt40UYgZkmFkGrsqpaKJIbfAHKRYAEq5z664kRxqVJVL7Ba2VwbMKG8AwUXXZswJCc2a5fg00qRsn9e94",
                     customerName, customerEmail, token.getId(), amount)) {
-                return "Sikeres fizetés!";
+                return PaymentService.chargeId;
             } else {
                 return "Hiba a fizetésnél!";
             }

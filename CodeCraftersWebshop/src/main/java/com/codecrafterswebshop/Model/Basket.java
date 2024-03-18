@@ -227,7 +227,7 @@ public class Basket implements Serializable {
         }
     }
 
-    public static boolean order(Integer userIdIN) {
+    public static boolean order(Integer userIdIN, String chargeIdIN) {
 
         EntityManagerFactory emf = Persistence.createEntityManagerFactory(Database.PERSISTENCEUNITNAME);
         EntityManager em = emf.createEntityManager();
@@ -236,7 +236,9 @@ public class Basket implements Serializable {
             StoredProcedureQuery spq = em.createStoredProcedureQuery("order_");
 
             spq.registerStoredProcedureParameter("userIdIN", Integer.class, ParameterMode.IN);
+            spq.registerStoredProcedureParameter("chargeIdIN", String.class, ParameterMode.IN);
             spq.setParameter("userIdIN", userIdIN);
+            spq.setParameter("chargeIdIN", chargeIdIN);
 
             spq.execute();
             return true;

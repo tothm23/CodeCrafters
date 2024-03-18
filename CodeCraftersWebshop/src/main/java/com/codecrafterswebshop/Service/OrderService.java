@@ -9,14 +9,14 @@ import com.codecrafterswebshop.Model.Basket;
  */
 public class OrderService {
 
-    public static String order(Integer userIdIN) {
+    public static String order(Integer userIdIN, String chargeIdIN) {
         try {
             if (!Basket.checkUserIdBasket(userIdIN)) {
                 return "Hibás felhasznaloId!";
             } else if (!EmailService.email(EmailService.addressee(Basket.productKeys(userIdIN)),
                     "Megrendelésed összeállítottuk", EmailService.htmlOrder(Basket.productKeys(userIdIN)))) {
                 return "Hiba az email küldésénél!";
-            } else if (Basket.order(userIdIN)) {
+            } else if (Basket.order(userIdIN, chargeIdIN)) {
                 return "Sikeres rendelés!";
             } else {
                 return "Hiba a rendelésnél!";
