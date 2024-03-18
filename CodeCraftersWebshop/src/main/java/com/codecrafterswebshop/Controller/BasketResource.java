@@ -1,6 +1,6 @@
 package com.codecrafterswebshop.Controller;
 
-import com.codecrafterswebshop.Config.Token;
+import com.codecrafterswebshop.Service.TokenService;
 import com.codecrafterswebshop.Model.Basket;
 import com.codecrafterswebshop.Service.BasketService;
 import java.text.SimpleDateFormat;
@@ -39,15 +39,10 @@ public class BasketResource {
     private HttpHeaders headers;
     private Logger logger;
     private String time;
-    private Response unauthorized;
 
     public BasketResource() {
         this.logger = LogManager.getLogger(GameResource.class.getName());
         this.time = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date());
-        this.unauthorized = Response
-                .status(Response.Status.UNAUTHORIZED)
-                .entity("Hozzáférés megtagadva!")
-                .type(MediaType.TEXT_PLAIN).build();
     }
 
     @GET
@@ -58,17 +53,7 @@ public class BasketResource {
                 .entity("Minden felhasználó csak a saját kosarát tekintheti meg!")
                 .type(MediaType.TEXT_PLAIN).build();
 
-        String authHeader = headers.getHeaderString(HttpHeaders.AUTHORIZATION);
-
-        if (authHeader == null || !authHeader.startsWith("Bearer ")) {
-            return unauthorized;
-        }
-
-        String token = authHeader.substring("Bearer".length()).trim();
-
-        if (Token.decodeUser(token) != id) {
-            return userResponse;
-        }
+        TokenService.filterUser(userResponse, headers, id);
 
         JSONArray result = BasketService.userBasket(id);
         Response response = result.isEmpty() ? Response.status(Response.Status.OK).entity("A kosár üres!")
@@ -86,17 +71,7 @@ public class BasketResource {
                 .entity("Minden felhasználó csak a saját kosarához adhat hozzá terméket!")
                 .type(MediaType.TEXT_PLAIN).build();
 
-        String authHeader = headers.getHeaderString(HttpHeaders.AUTHORIZATION);
-
-        if (authHeader == null || !authHeader.startsWith("Bearer ")) {
-            return unauthorized;
-        }
-
-        String token = authHeader.substring("Bearer".length()).trim();
-
-        if (Token.decodeUser(token) != k.getUserId()) {
-            return userResponse;
-        }
+        TokenService.filterUser(userResponse, headers, k.getUserId());
 
         String result = BasketService.basket(k.getGameId(), k.getUserId());
         Response response = Response.status(Response.Status.OK).entity(result)
@@ -113,17 +88,7 @@ public class BasketResource {
                 .entity("Minden felhasználó csak a saját kosarából törölhet terméket!")
                 .type(MediaType.TEXT_PLAIN).build();
 
-        String authHeader = headers.getHeaderString(HttpHeaders.AUTHORIZATION);
-
-        if (authHeader == null || !authHeader.startsWith("Bearer ")) {
-            return unauthorized;
-        }
-
-        String token = authHeader.substring("Bearer".length()).trim();
-
-        if (Token.decodeUser(token) != userId) {
-            return userResponse;
-        }
+        TokenService.filterUser(userResponse, headers, userId);
 
         String result = BasketService.deleteGameBasket(userId, gameId);
         Response response = Response.status(Response.Status.OK).entity(result)

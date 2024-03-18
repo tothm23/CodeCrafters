@@ -1,6 +1,6 @@
 package com.codecrafterswebshop.Controller;
 
-import com.codecrafterswebshop.Config.Token;
+import com.codecrafterswebshop.Service.TokenService;
 import com.codecrafterswebshop.Model.Basket;
 import com.codecrafterswebshop.Service.OrderService;
 import java.text.SimpleDateFormat;
@@ -40,27 +40,12 @@ public class OrderResource {
 
     @POST
     public Response order(Basket k) {
-        Response unauthorized = Response
-                .status(Response.Status.UNAUTHORIZED)
-                .entity("Hozzáférés megtagadva!")
-                .type(MediaType.TEXT_PLAIN).build();
-
         Response userResponse = Response
                 .status(Response.Status.UNAUTHORIZED)
                 .entity("Minden felhasználó csak a saját termékeit rendelheti meg!")
                 .type(MediaType.TEXT_PLAIN).build();
 
-        String authHeader = headers.getHeaderString(HttpHeaders.AUTHORIZATION);
-
-        if (authHeader == null || !authHeader.startsWith("Bearer ")) {
-            return unauthorized;
-        }
-
-        String token = authHeader.substring("Bearer".length()).trim();
-
-        if (Token.decodeUser(token) != k.getUserId()) {
-            return userResponse;
-        }
+        TokenService.filterUser(userResponse, headers, k.getUserId());
 
         String result = OrderService.order(k.getUserId());
         Response response = Response.status(Response.Status.CREATED).entity(result)
