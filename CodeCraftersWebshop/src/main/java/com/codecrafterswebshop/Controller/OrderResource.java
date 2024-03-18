@@ -8,6 +8,7 @@ import java.util.Date;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
+import javax.ws.rs.PathParam;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.HttpHeaders;
 import javax.ws.rs.core.MediaType;
@@ -39,7 +40,8 @@ public class OrderResource {
     }
 
     @POST
-    public Response order(Basket k) {
+    @Path("{chargeId}")
+    public Response order(Basket k, @PathParam("chargeId") String chargeId) {
         Response userResponse = Response
                 .status(Response.Status.UNAUTHORIZED)
                 .entity("Minden felhasználó csak a saját termékeit rendelheti meg!")
@@ -47,7 +49,7 @@ public class OrderResource {
 
         TokenService.filterUser(userResponse, headers, k.getUserId());
 
-        String result = OrderService.order(k.getUserId());
+        String result = OrderService.order(k.getUserId(), chargeId);
         Response response = Response.status(Response.Status.CREATED).entity(result)
                 .type(MediaType.APPLICATION_JSON).build();
 
