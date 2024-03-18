@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Mar 11, 2024 at 11:19 AM
+-- Generation Time: Mar 18, 2024 at 01:32 PM
 -- Server version: 5.7.24
 -- PHP Version: 8.0.1
 
@@ -258,7 +258,7 @@ CREATE DEFINER=`root`@`localhost` PROCEDURE `newGames` ()   BEGIN
 
 END$$
 
-CREATE DEFINER=`root`@`localhost` PROCEDURE `order_` (IN `userIdIN` INT(9))   BEGIN
+CREATE DEFINER=`root`@`localhost` PROCEDURE `order_` (IN `userIdIN` INT(9), IN `chargeIdIN` CHAR(27))   BEGIN
 
     DECLARE total INT(9);
 
@@ -268,11 +268,15 @@ CREATE DEFINER=`root`@`localhost` PROCEDURE `order_` (IN `userIdIN` INT(9))   BE
 
     INSERT INTO order_(
         order_.userId,
-        order_.totalAmount
+        order_.totalAmount,
+        order_.orderedAt,
+        order_.chargeId
     )
     VALUES(
         userIdIN,
-        total
+        total,
+        CURRENT_TIMESTAMP,
+        chargeIdIN
     );
 
 END$$
@@ -488,7 +492,8 @@ CREATE TABLE `order_` (
   `id` int(9) NOT NULL,
   `userId` int(9) NOT NULL,
   `totalAmount` int(9) NOT NULL,
-  `orderedAt` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP
+  `orderedAt` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `chargeId` char(27) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
