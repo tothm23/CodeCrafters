@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Mar 18, 2024 at 01:32 PM
+-- Generation Time: Mar 19, 2024 at 10:11 AM
 -- Server version: 5.7.24
 -- PHP Version: 8.0.1
 
@@ -98,6 +98,11 @@ CREATE DEFINER=`root`@`localhost` PROCEDURE `carouselGames` ()   BEGIN
     LIMIT 3;
     
 END$$
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `checkChargeId` (IN `chargeIdIN` CHAR(27), OUT `countOUT` INT(1))   SELECT COUNT(order_.chargeId) 
+INTO countOUT
+FROM order_
+WHERE order_.chargeId = chargeIdIN$$
 
 CREATE DEFINER=`root`@`localhost` PROCEDURE `checkGameId` (IN `gameIdIN` INT(9), OUT `countOUT` INT(1))   SELECT COUNT(game.id) 
 INTO countOUT
@@ -619,6 +624,7 @@ ALTER TABLE `game`
 --
 ALTER TABLE `order_`
   ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `chargeId` (`chargeId`),
   ADD KEY `felhasznaloId` (`userId`);
 
 --
