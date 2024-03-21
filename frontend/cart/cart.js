@@ -35,17 +35,21 @@ document.addEventListener('DOMContentLoaded', function () {
         </div>
     `;
         }
+
+        document.querySelectorAll(".card #del_btn").forEach(function(delete_btn) {
+            delete_btn.addEventListener("click", event => {
+                console.log("Click");
+                var closest_card = event.target.closest('.card');
+                // Get the ID from the data-id attribute
+                var gameid = closest_card.getAttribute('data-id');
+                console.log("game id:", gameid);
+                cart_delete(gameid);
+            });
+        });
     }
 
-    document.addEventListener("click", event => {
-        console.log("Click");
-        var closest_card = event.target.closest('.card');
-        // Olvassa ki az ID-t a data-id attribútumból
-        var gameid = closest_card.getAttribute('data-id');
-        console.log("termek id:", gameid);
-        cart_delete(gameid);
-
-    });
+    
+    
 
     function cart_delete(gameId) {
         const myHeaders = new Headers();

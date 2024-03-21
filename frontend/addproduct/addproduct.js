@@ -2,7 +2,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
     // Kinyerjük a bejelentkezési adatokat a localStorage-ból
     const logeduser_data = JSON.parse(localStorage.getItem("loged_userdata"));
-    const logeduser_token = JSON.parse(localStorage.getItem("loged_usertoken"));
+    const logeduser_token = localStorage.getItem("loged_usertoken");
     let imageInput=document.getElementById("imageInput");
     let productName=document.getElementById("productName");
     let price=document.getElementById("price");
