@@ -10,6 +10,7 @@ document.addEventListener('DOMContentLoaded', function () {
     let stock=document.getElementById("stock");
     let agelimit = document.getElementById("age").options;
     let platform = document.getElementById("platform").options;
+    let device = document.getElementById("device").options;
     let desc = document.getElementById("desc");
     // Ellenőrizzük, hogy van-e bejelentkezett felhasználó
     console.log(logeduser_data && logeduser_data.id);
@@ -59,6 +60,16 @@ document.addEventListener('DOMContentLoaded', function () {
                     break;
                 }
             }
+
+            for (let i = 0; i < device.length; i++) {
+                console.log(device[i]);
+                if (device[i].value == result.deviceName) {
+                    console.log(device[i].value);
+                    device[i].selected = true;
+                    break;
+                }
+            }
+
             desc.value = result.description;
 
         })

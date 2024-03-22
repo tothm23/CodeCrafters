@@ -180,6 +180,7 @@ document.addEventListener("DOMContentLoaded", function () {
   const logout = document.getElementById("logout");
   const settings_btn = document.getElementById("settings");
   const cart_btn = document.getElementById("cart");
+  const admin_btn = document.getElementById("admin");
   const user_name = document.getElementById("username");
   const email = document.getElementById("email");
   const login = document.getElementById("login");
@@ -188,11 +189,15 @@ document.addEventListener("DOMContentLoaded", function () {
   if (logged_user) {
     log_reg.display = "none";
     userbox.display = "flex";
+    if(logged_user.admin!=1){
+      admin_btn.style.display = "none";
+    }
     getCart(cart_id);
   } else {
     log_reg.display = "flex";
     userbox.display = "none";
   }
+
   //kijelentkezés essetén
   logout.addEventListener("click", function () {
     localStorage.removeItem("loged_userdata");
@@ -213,6 +218,14 @@ document.addEventListener("DOMContentLoaded", function () {
       window.location.href = "./cart/cart.html";
     } else {
       window.location.href = "../cart/cart.html";
+    }
+  });
+  admin_btn.addEventListener("click", function () {
+    if (actual_path == "/frontend/index.html") {
+      // Most már tovább navigálhatsz az új oldalra
+      window.location.href = "./admin/admin.html";
+    } else {
+      window.location.href = "../admin/admin.html";
     }
   });
   reg.addEventListener("click", function () {
