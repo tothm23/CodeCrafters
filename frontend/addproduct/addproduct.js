@@ -3,6 +3,7 @@ document.addEventListener('DOMContentLoaded', function () {
     // Kinyerjük a bejelentkezési adatokat a localStorage-ból
     const logeduser_data = JSON.parse(localStorage.getItem("loged_userdata"));
     const logeduser_token = localStorage.getItem("loged_usertoken");
+    let preview=document.getElementById("preview");
     let imageInput=document.getElementById("imageInput");
     let productName=document.getElementById("productName");
     let price=document.getElementById("price");
@@ -12,6 +13,7 @@ document.addEventListener('DOMContentLoaded', function () {
     let platform = document.getElementById("platform").options;
     let device = document.getElementById("device").options;
     let desc = document.getElementById("desc");
+    let data;
     // Ellenőrizzük, hogy van-e bejelentkezett felhasználó
     console.log(logeduser_data && logeduser_data.id);
 
@@ -38,7 +40,12 @@ document.addEventListener('DOMContentLoaded', function () {
         .then((response) => response.json())
         .then((result) => {
             console.log(result);
-            imageInput.accept = "../img/game" + result.image;
+            
+            data = result;
+
+            console.log("Data: ",data);
+            preview.src= "../img/games/" + result.image;
+            preview.style.display = "block";
             productName.value = result.gameName;
             price.value = result.price;
             discount.value = result.discount;
@@ -48,6 +55,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 if (platform[i].value == result.platformName) {
                     console.log(platform[i].value);
                     platform[i].selected = true;
+                    console.log(platform.selectedIndex);
                     break;
                 }
             }
@@ -57,6 +65,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 if (agelimit[i].value == result.ageLimit) {
                     console.log(agelimit[i].value);
                     agelimit[i].selected = true;
+                    console.log(agelimit.selectedIndex);
                     break;
                 }
             }
@@ -66,6 +75,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 if (device[i].value == result.deviceName) {
                     console.log(device[i].value);
                     device[i].selected = true;
+                    console.log(device.selectedIndex);
                     break;
                 }
             }
@@ -75,7 +85,7 @@ document.addEventListener('DOMContentLoaded', function () {
         })
         .catch((error) => console.error(error));
 
-    document.getElementById("save_btn").addEventListener("click", () => save());
+    document.getElementById("save_btn").addEventListener("click", () => save(logeduser_token,id));
 
 });
 
@@ -93,7 +103,7 @@ function previewImage(event) {
     reader.readAsDataURL(event.target.files[0]);
 }
 
-function save() {
+function save(logeduser_token,id) {
     const myHeaders = new Headers();
     myHeaders.append("Content-Type", "application/json");
     console.log(JSON.stringify(myHeaders));
@@ -104,12 +114,12 @@ function save() {
         "name": productName.value,
         "price": price.value,
         "description": desc.value,
-        "image": "images/netbeans2.jpg",
+        "image": "imagename",
         "ageLimit": agelimit.selected.value,
         "discount": discount.value,
         "inStock": stock.value,
-        "deviceId": 1,
-        "platformId": 1
+        "deviceId": device.selectedIndex,
+        "platformId": platform.selectedIndex
     });
 
     const requestOptions = {
