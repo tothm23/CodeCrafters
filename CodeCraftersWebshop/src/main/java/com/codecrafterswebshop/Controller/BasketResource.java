@@ -74,9 +74,20 @@ public class BasketResource {
                 .entity("Minden felhasználó csak a saját kosarához adhat hozzá terméket!")
                 .type(MediaType.TEXT_PLAIN).build();
 
-        TokenService.filterUser(userResponse, headers, k.getUserId());
+        Response unauthorized = Response
+                .status(Response.Status.UNAUTHORIZED)
+                .entity("Hozzáférés megtagadva!")
+                .type(MediaType.TEXT_PLAIN).build();
 
-        String result = BasketService.basket(k.getGameId(), k.getUserId());
+        int id = TokenService.decodeUser(headers);
+
+        if (id == -1) {
+            return unauthorized;
+        }
+
+        TokenService.filterUser(userResponse, headers, id);
+
+        String result = BasketService.basket(k.getGameId(), id);
         Response response = Response.status(Response.Status.OK).entity(result)
                 .type(MediaType.APPLICATION_JSON).build();
 
