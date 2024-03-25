@@ -1,7 +1,6 @@
 package com.codecrafterswebshop.Controller;
 
 import com.codecrafterswebshop.Service.TokenService;
-import com.codecrafterswebshop.Model.Basket;
 import com.codecrafterswebshop.Service.OrderService;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -41,15 +40,26 @@ public class OrderResource {
 
     @POST
     @Path("{chargeId}")
-    public Response order(Basket k, @PathParam("chargeId") String chargeId) {
+    public Response order(@PathParam("chargeId") String chargeId) {
         Response userResponse = Response
                 .status(Response.Status.UNAUTHORIZED)
                 .entity("Minden felhasználó csak a saját termékeit rendelheti meg!")
                 .type(MediaType.TEXT_PLAIN).build();
 
-        TokenService.filterUser(userResponse, headers, k.getUserId());
+        Response unauthorized = Response
+                .status(Response.Status.UNAUTHORIZED)
+                .entity("Hozzáférés megtagadva!")
+                .type(MediaType.TEXT_PLAIN).build();
 
-        String result = OrderService.order(k.getUserId(), chargeId);
+        int id = TokenService.decodeUser(headers);
+
+        if (id == -1) {
+            return unauthorized;
+        }
+
+        TokenService.filterUser(userResponse, headers, id);
+
+        String result = OrderService.order(id, chargeId);
         Response response = Response.status(Response.Status.CREATED).entity(result)
                 .type(MediaType.APPLICATION_JSON).build();
 
