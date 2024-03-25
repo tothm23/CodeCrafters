@@ -46,14 +46,17 @@ public class BasketResource {
     }
 
     @GET
-    @Path("{userId}")
-    public Response userBasket(@PathParam("userId") Integer id) {
-        Response userResponse = Response
+    public Response userBasket() {
+        Response unauthorized = Response
                 .status(Response.Status.UNAUTHORIZED)
-                .entity("Minden felhasználó csak a saját kosarát tekintheti meg!")
+                .entity("Hozzáférés megtagadva!")
                 .type(MediaType.TEXT_PLAIN).build();
 
-        TokenService.filterUser(userResponse, headers, id);
+        int id = TokenService.decodeUser(headers);
+
+        if (id == -1) {
+            return unauthorized;
+        }
 
         JSONArray result = BasketService.userBasket(id);
         Response response = result.isEmpty() ? Response.status(Response.Status.OK).entity("A kosár üres!")
