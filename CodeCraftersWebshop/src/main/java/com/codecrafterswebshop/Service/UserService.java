@@ -57,7 +57,7 @@ public class UserService {
 
         JSONObject obj = new JSONObject();
         User u = User.login(userNameIN, passwordIN);
-        String token = TokenService.create(u, 600000);
+        String token = TokenService.create(u, 3600000);
 
         if (u.getId() != null) {
             obj.put("token", token);
