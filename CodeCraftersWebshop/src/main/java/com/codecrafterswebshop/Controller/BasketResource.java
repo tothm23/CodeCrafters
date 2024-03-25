@@ -39,19 +39,19 @@ public class BasketResource {
     private HttpHeaders headers;
     private Logger logger;
     private String time;
+    private Response unauthorized;
 
     public BasketResource() {
         this.logger = LogManager.getLogger(GameResource.class.getName());
         this.time = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date());
+        this.unauthorized = Response
+                .status(Response.Status.UNAUTHORIZED)
+                .entity("Hozzáférés megtagadva!")
+                .type(MediaType.TEXT_PLAIN).build();
     }
 
     @GET
     public Response userBasket() {
-        Response unauthorized = Response
-                .status(Response.Status.UNAUTHORIZED)
-                .entity("Hozzáférés megtagadva!")
-                .type(MediaType.TEXT_PLAIN).build();
-
         int id = TokenService.decodeUser(headers);
 
         if (id == -1) {
@@ -74,11 +74,6 @@ public class BasketResource {
                 .entity("Minden felhasználó csak a saját kosarához adhat hozzá terméket!")
                 .type(MediaType.TEXT_PLAIN).build();
 
-        Response unauthorized = Response
-                .status(Response.Status.UNAUTHORIZED)
-                .entity("Hozzáférés megtagadva!")
-                .type(MediaType.TEXT_PLAIN).build();
-
         int id = TokenService.decodeUser(headers);
 
         if (id == -1) {
@@ -96,15 +91,21 @@ public class BasketResource {
     }
 
     @DELETE
-    public Response deleteGameBasket(@QueryParam("userId") Integer userId, @QueryParam("gameId") Integer gameId) {
+    public Response deleteGameBasket(@QueryParam("gameId") Integer gameId) {
         Response userResponse = Response
                 .status(Response.Status.UNAUTHORIZED)
                 .entity("Minden felhasználó csak a saját kosarából törölhet terméket!")
                 .type(MediaType.TEXT_PLAIN).build();
 
-        TokenService.filterUser(userResponse, headers, userId);
+        int id = TokenService.decodeUser(headers);
 
-        String result = BasketService.deleteGameBasket(userId, gameId);
+        if (id == -1) {
+            return unauthorized;
+        }
+
+        TokenService.filterUser(userResponse, headers, id);
+
+        String result = BasketService.deleteGameBasket(id, gameId);
         Response response = Response.status(Response.Status.OK).entity(result)
                 .type(MediaType.APPLICATION_JSON).build();
 
