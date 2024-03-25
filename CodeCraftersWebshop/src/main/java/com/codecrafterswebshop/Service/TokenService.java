@@ -139,4 +139,17 @@ public class TokenService {
 
         return unauthorized;
     }
+
+    public static int decodeUser(HttpHeaders headers) {
+
+        String authHeader = headers.getHeaderString(HttpHeaders.AUTHORIZATION);
+
+        if (authHeader == null || !authHeader.startsWith("Bearer ")) {
+            return -1;
+        }
+
+        String token = authHeader.substring("Bearer".length()).trim();
+
+        return TokenService.decodeUser(token);
+    }
 }
