@@ -10,6 +10,7 @@ document.addEventListener('DOMContentLoaded', function () {
     let preview = document.getElementById("preview");
     let save_btn = document.getElementById("save_btn");
     let create_btn = document.getElementById("create_btn");
+    let delete_btn = document.getElementById("delete_btn");
 
     let productName = document.getElementById("productName");
     let price = document.getElementById("price");
@@ -30,8 +31,7 @@ document.addEventListener('DOMContentLoaded', function () {
     console.log(id);
     if (isNaN(id)) {
         save_btn.style.display = "none";
-
-
+        delete_btn.style.display = "none";
     } else {
         create_btn.style.display = "none";
 
@@ -108,6 +108,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
     create_btn.addEventListener('click', () => create(logeduser_token));
     save_btn.addEventListener("click", () => save(logeduser_token, id));
+    delete_btn.addEventListener("click", () => delete_game(logeduser_token, id));
 
 });
 
@@ -130,7 +131,7 @@ function previewImage(event) {
     reader.readAsDataURL(uploadedFile);
 }
 
-function save(logeduser_token) {
+function save(logeduser_token,id) {
     let limit = document.getElementById("age");
     let selectedOption = limit.options[limit.selectedIndex];
     let selectedText = selectedOption.textContent;
@@ -172,12 +173,12 @@ function save(logeduser_token) {
         .catch((error) => console.error(error));
 }
 
-function create(logeduser_token, id) {
+function create(logeduser_token) {
     let limit = document.getElementById("age");
     let selectedOption = limit.options[limit.selectedIndex];
     let selectedText = selectedOption.textContent;
     console.log("Selected age:", selectedText);
-    
+
     console.log(imageName);
 
 
@@ -208,6 +209,26 @@ function create(logeduser_token, id) {
     };
 
     fetch("http://localhost:8080/CodeCraftersWebshop-1.0-SNAPSHOT/webresources/game", requestOptions)
+        .then((response) => response.text())
+        .then((result) => console.log(result))
+        .catch((error) => console.error(error));
+}
+
+function delete_game(logeduser_token,id) {
+    const myHeaders = new Headers();
+    myHeaders.append("Content-Type", "application/json");
+    console.log(JSON.stringify(myHeaders));
+    console.log(logeduser_token);
+    myHeaders.append("Authorization", `Bearer ${logeduser_token}`);
+    console.log(JSON.stringify(myHeaders));
+
+    const requestOptions = {
+        method: "DELETE",
+        headers: myHeaders,
+        redirect: "follow"
+    };
+
+    fetch(`http://localhost:8080/CodeCraftersWebshop-1.0-SNAPSHOT/webresources/game/${id}`, requestOptions)
         .then((response) => response.text())
         .then((result) => console.log(result))
         .catch((error) => console.error(error));
