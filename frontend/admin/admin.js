@@ -4,6 +4,7 @@ document.addEventListener('DOMContentLoaded', function () {
     let _size = [];
     // Kinyerjük a bejelentkezési adatokat a localStorage-ból
     const logeduser_data = JSON.parse(localStorage.getItem("loged_userdata"));
+    const logeduser_token = localStorage.getItem("loged_usertoken");
     // Ellenőrizzük, hogy van-e bejelentkezett felhasználó
     console.log(logeduser_data && logeduser_data.id);
 
@@ -37,6 +38,17 @@ document.addEventListener('DOMContentLoaded', function () {
         </div>
     `;
         }
+
+        document.querySelectorAll(".delete_btn").forEach(function(delete_btn) {
+            delete_btn.addEventListener("click", event => {
+                console.log("Click");
+                var closest_card = event.target.closest('.card');
+                // Get the ID from the data-id attribute
+                var gameid = closest_card.getAttribute('data-id');
+                console.log("game id:", gameid);
+                _delete(logeduser_token,gameid);
+            });
+        });
     }
 
     function productGet() {
@@ -49,5 +61,30 @@ document.addEventListener('DOMContentLoaded', function () {
             })
             .catch((error) => alert(error));
     }
+
+
+
+    function _delete(logeduser_token,id){
+        const myHeaders = new Headers();
+        myHeaders.append("Content-Type", "application/json");
+        console.log(JSON.stringify(myHeaders));
+        console.log(logeduser_token);
+        myHeaders.append("Authorization", `Bearer ${logeduser_token}`);
+        console.log(JSON.stringify(myHeaders));
+    
+        const requestOptions = {
+            method: "DELETE",
+            headers: myHeaders,
+            redirect: "follow"
+        };
+    
+        fetch(`http://localhost:8080/CodeCraftersWebshop-1.0-SNAPSHOT/webresources/game/${id}`, requestOptions)
+            .then((response) => response.text())
+            .then((result) => console.log(result))
+            .catch((error) => console.error(error));
+    };
+
+        
+    
 
 });
