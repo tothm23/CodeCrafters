@@ -1,14 +1,16 @@
+let imageName;
+let get_imageName;
+
 document.addEventListener('DOMContentLoaded', function () {
 
     // Kinyerjük a bejelentkezési adatokat a localStorage-ból
     const logeduser_data = JSON.parse(localStorage.getItem("loged_userdata"));
     const logeduser_token = localStorage.getItem("loged_usertoken");
-    let preview=document.getElementById("preview");
-    let imageInput=document.getElementById("imageInput");
-    let productName=document.getElementById("productName");
-    let price=document.getElementById("price");
-    let discount=document.getElementById("discount");
-    let stock=document.getElementById("stock");
+    let preview = document.getElementById("preview");
+    let productName = document.getElementById("productName");
+    let price = document.getElementById("price");
+    let discount = document.getElementById("discount");
+    let stock = document.getElementById("stock");
     let agelimit = document.getElementById("age").options;
     let platform = document.getElementById("platform").options;
     let device = document.getElementById("device").options;
@@ -40,11 +42,14 @@ document.addEventListener('DOMContentLoaded', function () {
         .then((response) => response.json())
         .then((result) => {
             console.log(result);
-            
+
             data = result;
 
-            console.log("Data: ",data);
-            preview.src= "../img/games/" + result.image;
+            console.log("Data: ", data);
+            preview.src = "../img/games/" + result.image;
+            
+            get_imageName = result.image;
+            console.log("Image: ",get_imageName);
             preview.style.display = "block";
             productName.value = result.gameName;
             price.value = result.price;
@@ -59,7 +64,7 @@ document.addEventListener('DOMContentLoaded', function () {
                     break;
                 }
             }
-            
+
             for (let i = 0; i < agelimit.length; i++) {
                 console.log(agelimit[i]);
                 if (agelimit[i].value == result.ageLimit) {
@@ -85,13 +90,12 @@ document.addEventListener('DOMContentLoaded', function () {
         })
         .catch((error) => console.error(error));
 
-    document.getElementById("save_btn").addEventListener("click", () => save(logeduser_token,id));
+    document.getElementById("save_btn").addEventListener("click", () => save(logeduser_token, id));
 
 });
 
-// Assuming result.image is the image name received from the fetch request
 var imageInput = document.getElementById("imageInput");
-imageInput.accept = "image/*;capture=camera"; // Updating the accept attribute with the image URL
+imageInput.accept = "image/*;capture=camera";
 
 function previewImage(event) {
     var reader = new FileReader();
@@ -100,10 +104,26 @@ function previewImage(event) {
         preview.src = reader.result;
         preview.style.display = "block";
     }
-    reader.readAsDataURL(event.target.files[0]);
+
+    //feltöltés
+    var uploadedFile = event.target.files[0];
+
+    imageName = uploadedFile.name;
+    console.log("Kép neve:", imageName);
+    reader.readAsDataURL(uploadedFile);
 }
 
-function save(logeduser_token,id) {
+function save(logeduser_token, id) {
+    let limit = document.getElementById("age");
+    let selectedOption = limit.options[limit.selectedIndex];
+    let selectedText = selectedOption.textContent;
+    console.log("Selected age:", selectedText);
+    
+    console.log(imageName);
+    console.log(get_imageName);
+    if(imageName===undefined)imageName=get_imageName;
+    console.log(imageName);
+    
     const myHeaders = new Headers();
     myHeaders.append("Content-Type", "application/json");
     console.log(JSON.stringify(myHeaders));
@@ -114,8 +134,8 @@ function save(logeduser_token,id) {
         "name": productName.value,
         "price": price.value,
         "description": desc.value,
-        "image": "imagename",
-        "ageLimit": agelimit.selected.value,
+        "image": imageName,
+        "ageLimit": selectedText,
         "discount": discount.value,
         "inStock": stock.value,
         "deviceId": device.selectedIndex,
