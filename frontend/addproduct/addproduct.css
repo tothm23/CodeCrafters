@@ -63,12 +63,12 @@ option{
     margin-right: 5px;
 }
 
-#save_btn{
+#save_btn,#create_btn {
     background-color: greenyellow;
     border: none;
 }
 
-#save_btn i{
+#save_btn i,#create_btn i{
     color: black;
 }
 
@@ -86,7 +86,7 @@ option{
     margin-bottom: 5px;
 }
 
-#save_btn,#delete_btn {
+#save_btn,#create_btn,#delete_btn {
     margin: 10px;
 }
 
@@ -120,7 +120,9 @@ option{
 }
 
 #save_btn:hover,
-#save_btn:focus{
+#save_btn:focus,
+#create_btn:hover,
+#create_btn:focus{
     color: black;
     background-color: rgb(139, 185, 45);
 }
