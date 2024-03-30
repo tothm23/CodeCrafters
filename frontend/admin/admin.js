@@ -80,8 +80,8 @@ document.addEventListener('DOMContentLoaded', function () {
     
         fetch(`http://localhost:8080/CodeCraftersWebshop-1.0-SNAPSHOT/webresources/game/${id}`, requestOptions)
             .then((response) => response.text())
-            .then((result) => console.log(result))
-            .catch((error) => console.error(error));
+            .then((result) => alert(result))
+            .catch((error) => alert(error));
     };
 
         

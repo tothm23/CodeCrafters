@@ -102,7 +102,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
             })
             .catch((error) => {
-                console.error(error);
+                alert(error);
             });
     }
 
@@ -169,8 +169,8 @@ function save(logeduser_token,id) {
 
     fetch(`http://localhost:8080/CodeCraftersWebshop-1.0-SNAPSHOT/webresources/game/${id}`, requestOptions)
         .then((response) => response.text())
-        .then((result) => console.log(result))
-        .catch((error) => console.error(error));
+        .then((result) => alert(result))
+        .catch((error) => alert(error));
 }
 
 function create(logeduser_token) {
@@ -210,8 +210,8 @@ function create(logeduser_token) {
 
     fetch("http://localhost:8080/CodeCraftersWebshop-1.0-SNAPSHOT/webresources/game", requestOptions)
         .then((response) => response.text())
-        .then((result) => console.log(result))
-        .catch((error) => console.error(error));
+        .then((result) => alert(result))
+        .catch((error) => alert(error));
 }
 
 function delete_game(logeduser_token,id) {
@@ -230,6 +230,6 @@ function delete_game(logeduser_token,id) {
 
     fetch(`http://localhost:8080/CodeCraftersWebshop-1.0-SNAPSHOT/webresources/game/${id}`, requestOptions)
         .then((response) => response.text())
-        .then((result) => console.log(result))
-        .catch((error) => console.error(error));
+        .then((result) => alert(result))
+        .catch((error) => alert(error));
 }
