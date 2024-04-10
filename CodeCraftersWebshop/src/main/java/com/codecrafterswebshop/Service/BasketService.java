@@ -32,6 +32,12 @@ public class BasketService {
         return jsonArray;
     }
 
+    public static JSONObject emptyUserBasket() {
+        JSONObject obj = new JSONObject();
+        obj.put("message", "A kosár üres!");
+        return obj;
+    }
+
     public static String basket(Integer gameIdIN, Integer userIdIN) {
         try {
             if (!Basket.checkGameId(gameIdIN)) {

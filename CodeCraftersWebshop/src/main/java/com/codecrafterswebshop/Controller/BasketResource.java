@@ -21,6 +21,7 @@ import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.json.JSONArray;
+import org.json.JSONObject;
 
 /**
  * REST Web Service
@@ -58,7 +59,8 @@ public class BasketResource {
         }
 
         JSONArray result = BasketService.userBasket(id);
-        Response response = result.isEmpty() ? Response.status(Response.Status.OK).entity("A kosár üres!")
+        JSONObject empty = BasketService.emptyUserBasket();
+        Response response = result.isEmpty() ? Response.status(Response.Status.OK).entity(empty.toString())
                 .type(MediaType.APPLICATION_JSON).build() : Response.status(Response.Status.OK).entity(result.toString())
                 .type(MediaType.APPLICATION_JSON).build();
 

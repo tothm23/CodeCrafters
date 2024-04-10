@@ -22,6 +22,12 @@ public class GameService {
         return obj;
     }
 
+    public static JSONObject emptyGame() {
+        JSONObject obj = new JSONObject();
+        obj.put("message", "A játék nem található!");
+        return obj;
+    }
+
     public static String newGame(String nameIN, Integer priceIN, String descriptionIN,
             String imageIN, Integer ageLimitIN, Integer discountIN, Integer inStockIN, Integer deviceIdIN, Integer platformIdIN) {
         try {
