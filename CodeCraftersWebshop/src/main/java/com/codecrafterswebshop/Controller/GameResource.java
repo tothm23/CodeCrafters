@@ -54,7 +54,9 @@ public class GameResource {
     @Path("{gameId}")
     public Response game(@PathParam("gameId") Integer id) {
         JSONObject result = GameService.game(id);
-        Response response = Response.status(Response.Status.OK).entity(result.toString())
+        JSONObject empty = GameService.emptyGame();
+        Response response = result.isEmpty() ? Response.status(Response.Status.OK).entity(empty.toString())
+                .type(MediaType.APPLICATION_JSON).build() : Response.status(Response.Status.OK).entity(result.toString())
                 .type(MediaType.APPLICATION_JSON).build();
 
         logger.log(Level.INFO, time + "  <--  [" + response.getStatus() + "] GET " + uriInfo.getPath());
