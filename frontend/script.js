@@ -113,7 +113,7 @@ function getCart(btn_id) {
             headers: myHeaders,
             redirect: "follow"
         };
-  fetch(`http://localhost:8080/CodeCraftersWebshop-1.0-SNAPSHOT/webresources/basket/${logged_user.id}`,requestOptions)
+  fetch(`http://localhost:8080/CodeCraftersWebshop-1.0-SNAPSHOT/webresources/basket`,requestOptions)
     .then(response => response.json())
     .then(result => {
       // Ellenőrizze, hogy a válasz tartalmazza-e a várt tulajdonságokat

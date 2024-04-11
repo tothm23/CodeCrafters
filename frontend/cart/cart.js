@@ -60,7 +60,7 @@ document.addEventListener('DOMContentLoaded', function () {
             headers: myHeaders,
             redirect: 'follow'
         };
-        fetch(`http://localhost:8080/CodeCraftersWebshop-1.0-SNAPSHOT/webresources/basket?userId=${logeduser_data.id}&gameId=${gameId}`, requestOptions)
+        fetch(`http://localhost:8080/CodeCraftersWebshop-1.0-SNAPSHOT/webresources/basket?gameId=${gameId}`, requestOptions)
             .then(response => response.text())
             .then(result => {
                 console.log(result);
@@ -125,7 +125,7 @@ document.addEventListener('DOMContentLoaded', function () {
             headers: myHeaders,
             redirect: "follow"
         };
-        fetch(`http://localhost:8080/CodeCraftersWebshop-1.0-SNAPSHOT/webresources/basket/${logeduser_data.id}`, requestOptions)
+        fetch(`http://localhost:8080/CodeCraftersWebshop-1.0-SNAPSHOT/webresources/basket`, requestOptions)
             .then(response => response.json())
             .then(result => {
                 // Itt további kezelése a kapott adatoknak
