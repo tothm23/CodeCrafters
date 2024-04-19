@@ -3,15 +3,22 @@ document.addEventListener('DOMContentLoaded', function () {
     let cart_size = [];
     const final_price = document.getElementById('final_price');
     const order_btn = document.getElementById('order_btn');
+    const amountIn = document.getElementById('amount');
+    const nameIn = document.getElementById('customerName');
+    const emailIn = document.getElementById('customerEmail');
     // Kinyerjük a bejelentkezési adatokat a localStorage-ból
     const logeduser_data = JSON.parse(localStorage.getItem("loged_userdata"));
     const loged_usertoken = localStorage.getItem("loged_usertoken");
     // Ellenőrizzük, hogy van-e bejelentkezett felhasználó
     console.log(logeduser_data && logeduser_data.id);
-
+    let payment_code;
     addEventListener('load', function () {
         if (logeduser_data.id) {
             cartGet();
+            let name = logeduser_data.firstName + " " + logeduser_data.lastName
+            console.log(name);
+            nameIn.value = name;
+            emailIn.value = logeduser_data.email;
         } else {
             // Ha nincs bejelentkezett felhasználó, valamilyen hiba kezelése vagy irányítás
             console.error("Nincs bejelentkezett felhasználó");
@@ -19,7 +26,7 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     });
 
-    document.getElementById("credit_card_btn").addEventListener("click", function() {
+    document.getElementById("credit_card_btn").addEventListener("click", function () {
         var popup = document.getElementById("credit_card_form");
         if (popup.style.display === "none") {
             popup.style.display = "block";
@@ -27,7 +34,7 @@ document.addEventListener('DOMContentLoaded', function () {
             popup.style.display = "none";
         }
     });
-    document.getElementById("close_submit_btn").addEventListener("click", function() {
+    document.getElementById("close_submit_btn").addEventListener("click", function () {
         var popup = document.getElementById("credit_card_form");
         popup.style.display = "none";
     });
@@ -49,7 +56,7 @@ document.addEventListener('DOMContentLoaded', function () {
     `;
         }
 
-        document.querySelectorAll(".card #del_btn").forEach(function(delete_btn) {
+        document.querySelectorAll(".card #del_btn").forEach(function (delete_btn) {
             delete_btn.addEventListener("click", event => {
                 console.log("Click");
                 var closest_card = event.target.closest('.card');
@@ -61,8 +68,8 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     }
 
-    
-    
+
+
 
     function cart_delete(gameId) {
         const myHeaders = new Headers();
@@ -82,14 +89,49 @@ document.addEventListener('DOMContentLoaded', function () {
             .catch(error => console.log('error', error));
     }
 
+    document.getElementById('submitBtn').addEventListener('click', function () {
+        var myHeaders = new Headers();
+        myHeaders.append("Content-Type", "application/json");
+        myHeaders.append("Authorization", `Bearer ${loged_usertoken}`);
+
+
+        const raw = JSON.stringify({
+            "customerName": nameIn.value,
+            "customerEmail": emailIn.value,
+            "amount": amountIn.value,
+            "cardNumber": document.getElementById("cardNumber").value,
+            "cardExpMonth": document.getElementById("cardExpMonth").value,
+            "cardExpYear": document.getElementById("cardExpYear").value,
+            "cardCvc": document.getElementById("cardCvc").value
+        });
+
+        const requestOptions = {
+            method: "POST",
+            headers: myHeaders,
+            body: raw,
+            redirect: "follow"
+        };
+
+        fetch("http://localhost:8080/CodeCraftersWebshop-1.0-SNAPSHOT/webresources/payment", requestOptions)
+            .then((response) => response.text())
+            .then((result) => {
+                console.log(result);
+                payment_code=result;
+                var popup = document.getElementById("credit_card_form");
+                popup.style.display = "none";
+
+            })
+            .catch((error) => console.error(error));
+
+
+    });
+
     order_btn.addEventListener('click', function () {
         var myHeaders = new Headers();
         myHeaders.append("Content-Type", "application/json");
         myHeaders.append("Authorization", `Bearer ${loged_usertoken}`);
 
-        var raw = JSON.stringify({
-            "userId": logeduser_data.id
-        });
+        var raw = "";
 
         var requestOptions = {
             method: 'POST',
@@ -97,7 +139,7 @@ document.addEventListener('DOMContentLoaded', function () {
             body: raw,
             redirect: 'follow'
         };
-        fetch("http://localhost:8080/CodeCraftersWebshop-1.0-SNAPSHOT/webresources/order", requestOptions)
+        fetch(`http://localhost:8080/CodeCraftersWebshop-1.0-SNAPSHOT/webresources/order/${payment_code}`, requestOptions)
             .then(response => response.text())
             .then(result => {
                 console.log(result);
@@ -124,7 +166,8 @@ document.addEventListener('DOMContentLoaded', function () {
         if (sum_price == 0) order_btn.disabled = true;
         else order_btn.disabled = false;
         final_price.innerHTML += `${sum_price} Ft`;
-        document.getElementById('amount').ariaPlaceholder = final_price
+        amount.value = sum_price;
+
         console.log(sum_price);
     }
 
