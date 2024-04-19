@@ -19,6 +19,19 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     });
 
+    document.getElementById("credit_card_btn").addEventListener("click", function() {
+        var popup = document.getElementById("credit_card_form");
+        if (popup.style.display === "none") {
+            popup.style.display = "block";
+        } else {
+            popup.style.display = "none";
+        }
+    });
+    document.getElementById("close_submit_btn").addEventListener("click", function() {
+        var popup = document.getElementById("credit_card_form");
+        popup.style.display = "none";
+    });
+
     function _content(data) {
         cart_content.innerHTML = "";
 
@@ -111,6 +124,7 @@ document.addEventListener('DOMContentLoaded', function () {
         if (sum_price == 0) order_btn.disabled = true;
         else order_btn.disabled = false;
         final_price.innerHTML += `${sum_price} Ft`;
+        document.getElementById('amount').ariaPlaceholder = final_price
         console.log(sum_price);
     }
 
