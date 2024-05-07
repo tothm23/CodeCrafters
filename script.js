@@ -205,44 +205,19 @@ document.addEventListener("DOMContentLoaded", function () {
     userbox.style.display = "none";
   });
   settings_btn.addEventListener("click", function () {
-    if (actual_path == "/frontend/index.html") {
-      // Most már tovább navigálhatsz az új oldalra
-      window.location.href = "./user/user.html";
-    } else {
       window.location.href = "../user/user.html";
-    }
   });
   cart_btn.addEventListener("click", function () {
-    if (actual_path == "/frontend/index.html") {
-      // Most már tovább navigálhatsz az új oldalra
-      window.location.href = "./cart/cart.html";
-    } else {
       window.location.href = "../cart/cart.html";
-    }
   });
   admin_btn.addEventListener("click", function () {
-    if (actual_path == "/frontend/index.html") {
-      // Most már tovább navigálhatsz az új oldalra
-      window.location.href = "./admin/admin.html";
-    } else {
       window.location.href = "../admin/admin.html";
-    }
   });
   reg.addEventListener("click", function () {
-    if (actual_path == "/frontend/index.html") {
-      // Most már tovább navigálhatsz az új oldalra
-      window.location.href = "./registration/registration.html";
-    } else {
       window.location.href = "../registration/registration.html";
-    }
   });
   login.addEventListener("click", function () {
-    if (actual_path == "/frontend/index.html") {
-      // Most már tovább navigálhatsz az új oldalra
-      window.location.href = "./login/login.html";
-    } else {
       window.location.href = "../login/login.html";
-    }
   });
   // Eseményfigyelők hozzáadása a keresőhöz és az ármezőkhöz
   form.addEventListener("submit", function (esemeny) {
@@ -251,10 +226,10 @@ document.addEventListener("DOMContentLoaded", function () {
     // A keresőszöveg tárolása a localStorage-ban
     localStorage.setItem('searched_text', search_Input.value.toLowerCase());
 
-    if (actual_path == "/frontend/index.html") {
+    if (actual_path == "index.html") {
       // Tovább navigálunk az új oldalra
       window.location.href = "./products/products.html";
-    } else if (actual_path == "/frontend/game/game.html") {
+    } else if (actual_path == "/game/game.html") {
       window.location.href = "../products/products.html";
     } else {
       // Egyéb esetek kezelése (opcionális)
