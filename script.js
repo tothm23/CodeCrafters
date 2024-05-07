@@ -226,7 +226,7 @@ document.addEventListener("DOMContentLoaded", function () {
     // A keresőszöveg tárolása a localStorage-ban
     localStorage.setItem('searched_text', search_Input.value.toLowerCase());
 
-    if (actual_path == "index.html") {
+    if (actual_path == "/index.html") {
       // Tovább navigálunk az új oldalra
       window.location.href = "./products/products.html";
     } else if (actual_path == "/game/game.html") {
