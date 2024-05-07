@@ -38,7 +38,7 @@ document.addEventListener("DOMContentLoaded", function () {
         redirect: 'follow'
       };
       // regisztráció fetch
-      fetch("http://localhost:8080/CodeCraftersWebshop-1.0-SNAPSHOT/webresources/user", requestOptions)
+      fetch("http://34.22.156.32:8080/CodeCraftersWebshop-1.0-SNAPSHOT/webresources/user", requestOptions)
         .then(response => response.text())
         .then(result => {
           console.log(result);

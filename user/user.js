@@ -43,7 +43,7 @@ document.addEventListener('DOMContentLoaded', function () {
                     body: raw,
                     redirect: 'follow'
                 };
-                let url = `http://localhost:8080/CodeCraftersWebshop-1.0-SNAPSHOT/webresources/user/${loged_userdata.id}`;
+                let url = `http://34.22.156.32:8080/CodeCraftersWebshop-1.0-SNAPSHOT/webresources/user/${loged_userdata.id}`;
                 fetch(url, requestOptions)
                     .then(response => response.text())
                     .then(result => console.log(result))
@@ -82,7 +82,7 @@ document.addEventListener('DOMContentLoaded', function () {
                     redirect: 'follow'
                 };
 
-                fetch(`http://localhost:8080/CodeCraftersWebshop-1.0-SNAPSHOT/webresources/user/${loged_userdata.id}`, requestOptions)
+                fetch(`http://34.22.156.32:8080/CodeCraftersWebshop-1.0-SNAPSHOT/webresources/user/${loged_userdata.id}`, requestOptions)
                     .then(response => response.text())
                     .then(result => console.log(result))
                     .catch(error => console.log('error', error));

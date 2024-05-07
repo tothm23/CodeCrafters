@@ -1,4 +1,4 @@
-const link = "http://localhost:8080/CodeCraftersWebshop-1.0-SNAPSHOT/webresources/game";
+const link = "http://34.22.156.32:8080/CodeCraftersWebshop-1.0-SNAPSHOT/webresources/game";
 
 const img = document.getElementById("img");
 const game_name = document.getElementById("game_name");

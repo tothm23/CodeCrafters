@@ -35,7 +35,7 @@ document.addEventListener('DOMContentLoaded', function () {
     } else {
         create_btn.style.display = "none";
 
-        let link = "http://localhost:8080/CodeCraftersWebshop-1.0-SNAPSHOT/webresources/game";
+        let link = "http://34.22.156.32:8080/CodeCraftersWebshop-1.0-SNAPSHOT/webresources/game";
 
         addEventListener('load', function () {
             if (logeduser_data.id && logeduser_data.admin == 1) {} else {
@@ -167,7 +167,7 @@ function save(logeduser_token,id) {
         redirect: "follow"
     };
 
-    fetch(`http://localhost:8080/CodeCraftersWebshop-1.0-SNAPSHOT/webresources/game/${id}`, requestOptions)
+    fetch(`http://34.22.156.32:8080/CodeCraftersWebshop-1.0-SNAPSHOT/webresources/game/${id}`, requestOptions)
         .then((response) => response.text())
         .then((result) => alert(result))
         .catch((error) => alert(error));
@@ -208,7 +208,7 @@ function create(logeduser_token) {
         redirect: "follow"
     };
 
-    fetch("http://localhost:8080/CodeCraftersWebshop-1.0-SNAPSHOT/webresources/game", requestOptions)
+    fetch("http://34.22.156.32:8080/CodeCraftersWebshop-1.0-SNAPSHOT/webresources/game", requestOptions)
         .then((response) => response.text())
         .then((result) => alert(result))
         .catch((error) => alert(error));
@@ -228,7 +228,7 @@ function delete_game(logeduser_token,id) {
         redirect: "follow"
     };
 
-    fetch(`http://localhost:8080/CodeCraftersWebshop-1.0-SNAPSHOT/webresources/game/${id}`, requestOptions)
+    fetch(`http://34.22.156.32:8080/CodeCraftersWebshop-1.0-SNAPSHOT/webresources/game/${id}`, requestOptions)
         .then((response) => response.text())
         .then((result) => alert(result))
         .catch((error) => alert(error));
