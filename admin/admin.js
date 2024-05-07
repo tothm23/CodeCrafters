@@ -53,7 +53,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
     function productGet() {
         fetch(
-                "http://34.22.156.32:8080/CodeCraftersWebshop-1.0-SNAPSHOT/webresources/products"
+                "http://localhost:8080/CodeCraftersWebshop-1.0-SNAPSHOT/webresources/products"
             )
             .then((response) => response.json())
             .then((result) => {
@@ -78,7 +78,7 @@ document.addEventListener('DOMContentLoaded', function () {
             redirect: "follow"
         };
     
-        fetch(`http://34.22.156.32:8080/CodeCraftersWebshop-1.0-SNAPSHOT/webresources/game/${id}`, requestOptions)
+        fetch(`http://localhost:8080/CodeCraftersWebshop-1.0-SNAPSHOT/webresources/game/${id}`, requestOptions)
             .then((response) => response.text())
             .then((result) => alert(result))
             .catch((error) => alert(error));

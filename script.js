@@ -7,7 +7,7 @@ let cart_id = [];
 
 // GET kérés
 fetch(
-    "http://34.22.156.32:8080/CodeCraftersWebshop-1.0-SNAPSHOT/webresources/mainPage"
+    "http://localhost:8080/CodeCraftersWebshop-1.0-SNAPSHOT/webresources/mainPage"
   )
   .then((response) => response.json())
   .then((data) => {
@@ -113,7 +113,7 @@ function getCart(btn_id) {
             headers: myHeaders,
             redirect: "follow"
         };
-  fetch(`http://34.22.156.32:8080/CodeCraftersWebshop-1.0-SNAPSHOT/webresources/basket`,requestOptions)
+  fetch(`http://localhost:8080/CodeCraftersWebshop-1.0-SNAPSHOT/webresources/basket`,requestOptions)
     .then(response => response.json())
     .then(result => {
       // Ellenőrizze, hogy a válasz tartalmazza-e a várt tulajdonságokat
@@ -272,7 +272,7 @@ document.addEventListener("DOMContentLoaded", function () {
         redirect: 'follow'
       };
 
-      fetch("http://34.22.156.32:8080/CodeCraftersWebshop-1.0-SNAPSHOT/webresources/basket", requestOptions)
+      fetch("http://localhost:8080/CodeCraftersWebshop-1.0-SNAPSHOT/webresources/basket", requestOptions)
         .then(response => response.text())
         .then(result => console.log(result))
         .catch(error => console.log('error', error));
