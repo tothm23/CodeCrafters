@@ -4,194 +4,140 @@
 		"name": "codecrafters",
 		"description": "Webáruház videójátékoknak",
 		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json",
-		"_exporter_id": "29325685"
+		"_exporter_id": "29325685",
+		"_collection_link": "https://winter-astronaut-528743.postman.co/workspace/CodeCrafters~726760a8-5596-4ba9-a696-22caabd1b8b0/collection/29325685-0d1212b8-d4ce-408e-9c9c-2f4bd3c7f3dc?action=share&source=collection_link&creator=29325685"
 	},
 	"item": [
 		{
-			"name": "jatek",
+			"name": "user",
 			"item": [
 				{
-					"name": "ujJatek",
-					"protocolProfileBehavior": {
-						"disabledSystemHeaders": {}
-					},
-					"request": {
-						"auth": {
-							"type": "bearer",
-							"bearer": {
-								"token": "eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJjb2RlY3JhZnRlcnMiLCJpZCI6MTIsImZlbGhhc3puYWxvTmV2IjoidG90aG0yMyIsInZlemV0ZWtOZXYiOiJUw7N0aCIsImtlcmVzenROZXYiOiJNaWzDoW4iLCJlbWFpbCI6InRvdGhtQGdtYWlsLmNvbSIsImpvZ29zdWx0c2FnSWQiOjEsImlhdCI6MTcwNDcxMjIxMywiZXhwIjoxNzA0NzEyODEzfQ.-myzFc-02tj0lL_IBD6y_PDfyQFzatHKev2_UV21t4o"
-							}
-						},
-						"method": "POST",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\n    \"nev\": \"Netbeans játék\",\n    \"ar\": 1500,\n    \"leiras\": \"Egy játék a Netbeansből\",\n    \"kep\": \"kepek/netbeans.jpg\",\n    \"korhatar\": 18,\n    \"akcio\": 20,\n    \"mennyisegraktaron\": 1,\n    \"eszkozId\": 1,\n    \"platformId\": 2\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": "http://localhost:8080/CodeCraftersWebshop-1.0-SNAPSHOT/webresources/jatek"
-					},
-					"response": []
-				},
-				{
-					"name": "torlesJatek",
-					"request": {
-						"auth": {
-							"type": "bearer",
-							"bearer": {
-								"token": "eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJjb2RlY3JhZnRlcnMiLCJpZCI6MSwiZmVsaGFzem5hbG9OZXYiOiJ0b3RobTIzIiwidmV6ZXRla05ldiI6IkEiLCJrZXJlc3p0TmV2IjoiQiIsImVtYWlsIjoidG90aG0uMjE0c3pAYWNzanN6a2kuaHUiLCJqb2dvc3VsdHNhZ0lkIjoyLCJpYXQiOjE3MDMyNDA2NzMsImV4cCI6MTcwMzI0MTI3M30.9OBpSH_m_RVkYbZTaqSaVMlx0srgnB_Tk9gYqTO7Q50"
-							}
-						},
-						"method": "DELETE",
-						"header": [],
-						"url": "http://localhost:8080/CodeCraftersWebshop-1.0-SNAPSHOT/webresources/jatek/5"
-					},
-					"response": []
-				},
-				{
-					"name": "jatek",
-					"request": {
-						"method": "GET",
-						"header": [],
-						"url": "http://localhost:8080/CodeCraftersWebshop-1.0-SNAPSHOT/webresources/jatek/1"
-					},
-					"response": []
-				},
-				{
-					"name": "frissitesJatek",
-					"request": {
-						"auth": {
-							"type": "bearer",
-							"bearer": {
-								"token": "eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJjb2RlY3JhZnRlcnMiLCJpZCI6MTIsImZlbGhhc3puYWxvTmV2IjoidG90aG0yMyIsInZlemV0ZWtOZXYiOiJUw7N0aCIsImtlcmVzenROZXYiOiJNaWzDoW4iLCJlbWFpbCI6InRvdGhtQGdtYWlsLmNvbSIsImpvZ29zdWx0c2FnSWQiOjEsImlhdCI6MTcwNDcxMjIxMywiZXhwIjoxNzA0NzEyODEzfQ.-myzFc-02tj0lL_IBD6y_PDfyQFzatHKev2_UV21t4o"
-							}
-						},
-						"method": "PUT",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\n    \"nev\": \"Netbeans frissített játék\",\n    \"ar\": 91500,\n    \"leiras\": \"Egy frissített játék a Netbeansből\",\n    \"kep\": \"kepek/netbeans.jpg\",\n    \"korhatar\": 18,\n    \"akcio\": 20,\n    \"mennyisegraktaron\": 1,\n    \"kategoriaId\": 3,\n    \"eszkozId\": 1,\n    \"platformId\": 2\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": "http://localhost:8080/CodeCraftersWebshop-1.0-SNAPSHOT/webresources/jatek/2"
-					},
-					"response": []
-				}
-			]
-		},
-		{
-			"name": "felhasznalo",
-			"item": [
-				{
-					"name": "ujFelhasznalo",
+					"name": "registration",
 					"request": {
 						"method": "POST",
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"felhasznaloNev\": \"tothm23\",\n    \"vezetekNev\": \"Tóth\",\n    \"keresztNev\": \"Milán\",\n    \"email\": \"tothm@gmail.com\",\n    \"jelszo\": \"asdASD123!\",\n    \"jogosultsagId\": \"2\"\n}",
+							"raw": "{\n    \"userName\": \"tothm23\",\n    \"lastName\": \"Tóth\",\n    \"firstName\": \"Milán\",\n    \"email\": \"tothm.214sz@acsjszki.hu\",\n    \"password\": \"asdASD123!\"\n}",
 							"options": {
 								"raw": {
 									"language": "json"
 								}
 							}
 						},
-						"url": "http://localhost:8080/CodeCraftersWebshop-1.0-SNAPSHOT/webresources/felhasznalo"
+						"url": "http://localhost:8080/CodeCraftersWebshop-1.0-SNAPSHOT/webresources/user",
+						"description": "Regisztráció, aminek sikerességéről a felhasználó **emailben** értesül. Az emal küldés csak **gmailes** fiók esetében működik.\n\n- **username** Minimum 1, maximum 100 karater hosszú **egyedi** szöveg\n- **lastName** Minimum 1, maximum 100 karater hosszú szöveg\n- **firstName** Minimum 1, maximum 100 karater hosszú szöveg\n- **email** Minimum 1, maximum 100 karater hosszú **egyedi** szöveg, amienk tartalmaznia kell a **@** karaktert\n- **password** Minimum 8, maximum 100 karater hosszú **egyedi** szöveg, aminek tartalmaznia kell **betűt**, **számot** és **speciális** karaktert"
 					},
 					"response": []
 				},
 				{
-					"name": "felhasznaloBelepes",
+					"name": "login",
 					"request": {
 						"method": "POST",
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"felhasznaloNev\": \"tothm23\",\n    \"jelszo\": \"asdASD123!\"\n}",
+							"raw": "{\n    \"userName\": \"tothm23\",\n    \"password\": \"asdASD123!\"\n}",
 							"options": {
 								"raw": {
 									"language": "json"
 								}
 							}
 						},
-						"url": "http://localhost:8080/CodeCraftersWebshop-1.0-SNAPSHOT/webresources/felhasznalo/bejelentkezes"
+						"url": "http://localhost:8080/CodeCraftersWebshop-1.0-SNAPSHOT/webresources/user/login",
+						"description": "Sikeres kérés esetén egy [JWT](https://jwt.io/)\\-vel tér vissza. Rossz felhasználónév vagy jelszó esetén egy üres szöveggel tér vissza. Konkrét információt nem szolgáltat a sikertelen bejelentkezésről, mint például hibás jelszó vagy hibás felhasználónév, mivel ezzel veszélyeztetjük a fiók biztonságát, hiszen egy támadó könnyebben próbálkozhat más kombinációkkal."
 					},
 					"response": []
 				},
 				{
-					"name": "frissitesFelhasznalo",
+					"name": "update",
 					"request": {
 						"method": "PUT",
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"felhasznaloNev\": \"elekdezso23\",\n    \"vezetekNev\": \"Elek\",\n    \"keresztNev\": \"Dezső\",\n    \"jelszo\": \"asdASD123!\"\n}",
+							"raw": "{\n    \"userName\": \"tothm23\",\n    \"lastName\": \"Apache\",\n    \"firstName\": \"Netbeans\",\n    \"password\": \"asdASD123!\"\n}",
 							"options": {
 								"raw": {
 									"language": "json"
 								}
 							}
 						},
-						"url": "http://localhost:8080/CodeCraftersWebshop-1.0-SNAPSHOT/webresources/felhasznalo/2"
+						"url": "http://localhost:8080/CodeCraftersWebshop-1.0-SNAPSHOT/webresources/user/18",
+						"description": "Egy adott felhasználó adatainak frissítése. Az email cím nem módosítható. ~~_**Bejelentkezéshez kötött**_~~, így a felhasználó csak a saját fiókját frissítheti.\n\n- **username** Minimum 1, maximum 100 karater hosszú **egyedi** szöveg\n- **lastName** Minimum 1, maximum 100 karater hosszú szöveg\n- **firstName** Minimum 1, maximum 100 karater hosszú szöveg\n- **password** Minimum 8, maximum 100 karater hosszú **egyedi** szöveg, aminek tartalmaznia kell **betűt**, **számot** és **speciális** karaktert"
 					},
 					"response": []
 				},
 				{
-					"name": "torlesFelhasznalo",
+					"name": "delete",
 					"request": {
 						"method": "DELETE",
 						"header": [],
-						"url": "http://localhost:8080/CodeCraftersWebshop-1.0-SNAPSHOT/webresources/felhasznalo/3"
+						"url": "http://localhost:8080/CodeCraftersWebshop-1.0-SNAPSHOT/webresources/user/3",
+						"description": "Egy adott felhasználó törlése. ~~_**Bejelentkezéshez kötött**_~~, így a felhasználó csak a saját fiókját törölheti."
 					},
 					"response": []
 				}
-			]
+			],
+			"description": "**Felhasználóval** kapcsolatos kérések"
 		},
 		{
-			"name": "kosar",
+			"name": "basket",
 			"item": [
 				{
-					"name": "felhasznaloKosar",
+					"name": "userBasket",
 					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJjb2RlY3JhZnRlcnMiLCJpZCI6NCwidXNlck5hbWUiOiJ0b3RobTIzIiwibGFzdE5hbWUiOiJUw7N0aCIsImZpcnN0TmFtZSI6Ik1pbMOhbiIsImVtYWlsIjoidG90aG0uMjE0c3pAYWNzanN6a2kuaHUiLCJhZG1pbiI6MSwiaWF0IjoxNzEyNzM4NDc1LCJleHAiOjE3MTI3NDIwNzV9.oMmSt8K2ucrBoXmO9gNNIgQBNHC__iWd-l4oYZeALCM"
+							}
+						},
 						"method": "GET",
 						"header": [],
-						"url": "http://localhost:8080/CodeCraftersWebshop-1.0-SNAPSHOT/webresources/kosar/1"
+						"url": "http://localhost:8080/CodeCraftersWebshop-1.0-SNAPSHOT/webresources/basket",
+						"description": "Egy adott felhasználó kosara. **Bejelentkezéshez kötött**, így a felhasználó csak a saját kosarát tekintheti meg."
 					},
 					"response": []
 				},
 				{
-					"name": "kosar",
+					"name": "basket",
 					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJjb2RlY3JhZnRlcnMiLCJpZCI6NCwidXNlck5hbWUiOiJ0b3RobTIzIiwibGFzdE5hbWUiOiJUw7N0aCIsImZpcnN0TmFtZSI6Ik1pbMOhbiIsImVtYWlsIjoidG90aG0uMjE0c3pAYWNzanN6a2kuaHUiLCJhZG1pbiI6MSwiaWF0IjoxNzEyNzM4NDc1LCJleHAiOjE3MTI3NDIwNzV9.oMmSt8K2ucrBoXmO9gNNIgQBNHC__iWd-l4oYZeALCM"
+							}
+						},
 						"method": "POST",
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"jatekId\": 2,\n    \"felhasznaloId\": 1\n}",
+							"raw": "{\n    \"gameId\": 4\n}",
 							"options": {
 								"raw": {
 									"language": "json"
 								}
 							}
 						},
-						"url": "http://localhost:8080/CodeCraftersWebshop-1.0-SNAPSHOT/webresources/kosar"
+						"url": "http://localhost:8080/CodeCraftersWebshop-1.0-SNAPSHOT/webresources/basket",
+						"description": "Játékok kosárba helyezése. **Bejelentkezéshez kötött**, így a felhasználó csak a saját kosarához adhat játékot.\n\n- **gameId** A játék azonosítója, ami egy **egész** szám. A játék amit a felhasználó a saját kosarába rak\n- **userId** A felhasználó azonosítója, ami egy **egész** szám. A felhasználó aki a játékot a kosarába rakja"
 					},
 					"response": []
 				},
 				{
-					"name": "torlesJatekKosarbol",
+					"name": "deleteGameFromBasket",
 					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJjb2RlY3JhZnRlcnMiLCJpZCI6NCwidXNlck5hbWUiOiJ0b3RobTIzIiwibGFzdE5hbWUiOiJUw7N0aCIsImZpcnN0TmFtZSI6Ik1pbMOhbiIsImVtYWlsIjoidG90aG0uMjE0c3pAYWNzanN6a2kuaHUiLCJhZG1pbiI6MSwiaWF0IjoxNzEyNzM4NDc1LCJleHAiOjE3MTI3NDIwNzV9.oMmSt8K2ucrBoXmO9gNNIgQBNHC__iWd-l4oYZeALCM"
+							}
+						},
 						"method": "DELETE",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:8080/CodeCraftersWebshop-1.0-SNAPSHOT/webresources/kosar?felhasznaloId=1&jatekId=17",
+							"raw": "http://localhost:8080/CodeCraftersWebshop-1.0-SNAPSHOT/webresources/basket?gameId=4",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -200,60 +146,184 @@
 							"path": [
 								"CodeCraftersWebshop-1.0-SNAPSHOT",
 								"webresources",
-								"kosar"
+								"basket"
 							],
 							"query": [
 								{
-									"key": "felhasznaloId",
-									"value": "1"
-								},
-								{
-									"key": "jatekId",
-									"value": "17"
+									"key": "gameId",
+									"value": "4"
 								}
 							]
-						}
+						},
+						"description": "A felhasználó töröl egy játékot a kosarából. **Bejelentkezéshez kötött**, így a felhasználó csak a saját kosaából törölhet játékot.\n\n- **gameId** A játék azonosítója, ami egy egész szám. A játék amit a felhasználó a saját kosarából töröl"
 					},
 					"response": []
 				}
 			]
 		},
 		{
-			"name": "termekek",
+			"name": "game",
+			"item": [
+				{
+					"name": "game",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://localhost:8080/CodeCraftersWebshop-1.0-SNAPSHOT/webresources/game/1",
+						"description": "Egy adott játék adatai.\n\n- **image** A játékhoz tartozó kép\n- **agelimit** A játék korhatár besorolása a [PEGI számok ](https://www.digitaliscsalad.hu/fogalomtar/te-tudod-mik-azok-pegi-szamok) alapján (3, 7, 12, 16, 18)\n- **gameName** A játék neve\n- **price** A játék ára forintban kifejezve\n- **description** A játék leírása\n- **discount** A játékhoz tartozó kedvezmény százalékban megadva\n- **inStock** Raktáron lévő mennyiség\n- **id** A játék azonosítója\n- **platformName** A platform, amin a játék elérhető\n- **deviceName** Az eszköz neve, amin a játék fut"
+					},
+					"response": []
+				},
+				{
+					"name": "new",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJjb2RlY3JhZnRlcnMiLCJpZCI6NCwidXNlck5hbWUiOiJzIiwibGFzdE5hbWUiOiJzIiwiZmlyc3ROYW1lIjoicyIsImVtYWlsIjoic0BnbWFpbC5jb20iLCJhZG1pbiI6MCwiaWF0IjoxNzA5ODExNjg0LCJleHAiOjE3MDk4MTIyODR9.yMSosy93aX1qYuZDu1mWxlJQ8xlTuf3w2KVdJiX_FCU"
+							}
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"Netbeans new game_\",\n    \"price\": 91500,\n    \"description\": \"A new game from Netbeans\",\n    \"image\": \"images/netbeans.jpg_\",\n    \"ageLimit\": 18,\n    \"discount\": 20,\n    \"inStock\": 1,\n    \"deviceId\": 1,\n    \"platformId\": 2\n}\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://localhost:8080/CodeCraftersWebshop-1.0-SNAPSHOT/webresources/game",
+						"description": "Egy új játék létrehozása. **Bejelentkezéshez kötött**, így csak adminisztrátor hozhat létre új játékot.\n\n- **image** A játékhoz tartozó kép\n- **agelimit** A játék korhatár besorolása a [PEGI számok ](https://www.digitaliscsalad.hu/fogalomtar/te-tudod-mik-azok-pegi-szamok) alapján (3, 7, 12, 16, 18)\n- **gameName** A játék neve\n- **price** A játék ára forintban kifejezve\n- **description** A játék leírása\n- **discount** A játékhoz tartozó kedvezmény százalékban megadva\n- **inStock** Raktáron lévő mennyiség\n- **platformName** A platform, amin a játék elérhető\n- **deviceName** Az eszköz neve, amin a játék fut"
+					},
+					"response": []
+				},
+				{
+					"name": "update",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJjb2RlY3JhZnRlcnMiLCJpZCI6MTEsInVzZXJOYW1lIjoidG90aG0yMyIsImxhc3ROYW1lIjoiVMOzdGgiLCJmaXJzdE5hbWUiOiJNaWzDoW4iLCJlbWFpbCI6InRvdGhtLjIxNHN6QGFjc2pzemtpLmh1IiwiYWRtaW4iOjEsImlhdCI6MTcwODU5MzIzMiwiZXhwIjoxNzA4NTkzODMyfQ.rVc8eeb4lt_UZBJ2hQJr8tEqSEdxZjLbdxb5gOwkoAM"
+							}
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"Netbeans updated game\",\n    \"price\": 100,\n    \"description\": \"An updated game from Netbeans\",\n    \"image\": \"images/netbeans2.jpg\",\n    \"ageLimit\": 18,\n    \"discount\": 10,\n    \"inStock\": 10,\n    \"deviceId\": 1,\n    \"platformId\": 1\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://localhost:8080/CodeCraftersWebshop-1.0-SNAPSHOT/webresources/game/27",
+						"description": "Egy adott játék frisssítése. **Bejelentkezéshez kötött**, így csak adminisztrátor frissíthet egy megadott játékot.\n\n- **image** A játékhoz tartozó kép\n- **agelimit** A játék korhatár besorolása a [PEGI számok ](https://www.digitaliscsalad.hu/fogalomtar/te-tudod-mik-azok-pegi-szamok) alapján (3, 7, 12, 16, 18)\n- **gameName** A játék neve\n- **price** A játék ára forintban kifejezve\n- **description** A játék leírása\n- **discount** A játékhoz tartozó kedvezmény százalékban megadva\n- **inStock** Raktáron lévő mennyiség\n- **id** A játék azonosítója\n- **platformName** A platform, amin a játék elérhető\n- **deviceName** Az eszköz neve, amin a játék fut"
+					},
+					"response": []
+				},
+				{
+					"name": "delete",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJjb2RlY3JhZnRlcnMiLCJpZCI6MTEsInVzZXJOYW1lIjoidG90aG0yMyIsImxhc3ROYW1lIjoiVMOzdGgiLCJmaXJzdE5hbWUiOiJNaWzDoW4iLCJlbWFpbCI6InRvdGhtLjIxNHN6QGFjc2pzemtpLmh1IiwiYWRtaW4iOjEsImlhdCI6MTcwODU5MzIzMiwiZXhwIjoxNzA4NTkzODMyfQ.rVc8eeb4lt_UZBJ2hQJr8tEqSEdxZjLbdxb5gOwkoAM"
+							}
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": "http://localhost:8080/CodeCraftersWebshop-1.0-SNAPSHOT/webresources/game/27",
+						"description": "Egy adott játék törlése. **Bejelentkezéshez kötött**, így csak adminisztrátor törölhet egy megadott játékot."
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "products",
 			"request": {
 				"auth": {
 					"type": "noauth"
 				},
 				"method": "GET",
 				"header": [],
-				"url": "http://localhost:8080/CodeCraftersWebshop-1.0-SNAPSHOT/webresources/termekek"
+				"url": "http://localhost:8080/CodeCraftersWebshop-1.0-SNAPSHOT/webresources/products",
+				"description": "Az összes játék összes adatával."
 			},
 			"response": []
 		},
 		{
-			"name": "fooldal",
+			"name": "mainPage",
 			"request": {
 				"method": "GET",
 				"header": [],
-				"url": "http://localhost:8080/CodeCraftersWebshop-1.0-SNAPSHOT/webresources/fooldal"
+				"url": "http://localhost:8080/CodeCraftersWebshop-1.0-SNAPSHOT/webresources/mainPage",
+				"description": "A főoldalhoz tartozó játékok, amik a következőket tartalmazzák:\n\n- 3 véletlenszerűen megjelenített játék a **carouselhez**\n    \n- 3 legtöbbet eladott játék a raktáron levő mennyiséghez (**inStock**) viszonyítva\n    \n- 3 legújabb játék a játék létrehozásának idejéhez (**createdAt**) viszonyítva"
 			},
 			"response": []
 		},
 		{
-			"name": "rendeles",
+			"name": "order",
 			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": {
+						"token": "eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJjb2RlY3JhZnRlcnMiLCJpZCI6NCwidXNlck5hbWUiOiJ0b3RobTIzIiwibGFzdE5hbWUiOiJUw7N0aCIsImZpcnN0TmFtZSI6Ik1pbMOhbiIsImVtYWlsIjoidG90aG0uMjE0c3pAYWNzanN6a2kuaHUiLCJhZG1pbiI6MSwiaWF0IjoxNzExMzc5ODcwLCJleHAiOjE3MTEzODM0NzB9.MiHlm0ZobK8NOWoLjR3-VCdA4C8b-xJhR8M7fVCUViI"
+					}
+				},
 				"method": "POST",
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n    \"felhasznaloId\": 1\n}",
+					"raw": "",
 					"options": {
 						"raw": {
 							"language": "json"
 						}
 					}
 				},
-				"url": "http://localhost:8080/CodeCraftersWebshop-1.0-SNAPSHOT/webresources/rendeles"
+				"url": "http://localhost:8080/CodeCraftersWebshop-1.0-SNAPSHOT/webresources/order/ch_3OyFIgEtu0vYeAdJ0x6mVqh3",
+				"description": "Rendelés leadása, ami csak akkor lehetséges, ha a **felhasználó kosara nem üres**. **Bejelentkezéshez kötött**, így a felhasználó csak a saját rendelését adhatja le. A sikeres rendelésről a felhasználó emailben értesül. Az emal küldés csak **gmailes** fiók esetében működik."
+			},
+			"response": []
+		},
+		{
+			"name": "payment",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": {
+						"token": "eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJjb2RlY3JhZnRlcnMiLCJpZCI6NCwidXNlck5hbWUiOiJ0b3RobTIzIiwibGFzdE5hbWUiOiJUw7N0aCIsImZpcnN0TmFtZSI6Ik1pbMOhbiIsImVtYWlsIjoidG90aG0uMjE0c3pAYWNzanN6a2kuaHUiLCJhZG1pbiI6MSwiaWF0IjoxNzExMzc5ODcwLCJleHAiOjE3MTEzODM0NzB9.MiHlm0ZobK8NOWoLjR3-VCdA4C8b-xJhR8M7fVCUViI"
+					}
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"customerName\": \"Tóth Milán\",\n    \"customerEmail\": \"tothm.214sz@acsjszki.hu\",\n    \"amount\": 5100,\n    \"cardNumber\": \"4242424242424242\",\n    \"cardExpMonth\": \"12\",\n    \"cardExpYear\": \"2024\",\n    \"cardCvc\": \"123\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "http://localhost:8080/CodeCraftersWebshop-1.0-SNAPSHOT/webresources/payment",
+				"description": "Sikeres fieztés esetén a tranzakció azonosítójával tér vissza szöveges formátumban. A fizetés csak akkor lehetséges, ha a ~~_**felhasználó kosara nem üres**_~~. **Bejelentkezéshez kötött**, így a felhasználó csak a saját rendelését adhatja le. A sikeres fizetésről a felhasználó ~~_**emailben értesül**_~~. Az emal küldés csak **gmailes** fiók esetében működik.\n\n- **customerName** A vevő teljes neve\n- **customerEmal** A vevő email címe\n- **amount** A végösszeg (_Több játék esetén számítást igényel!_)\n- **cardnumber** 16 karakterből álló bankkártya szám, szöveges formátumban. [Lehetséges bankkártya számok](https://docs.stripe.com/testing)\n- **cardExpMonth** A lejárati dátum hónapja szöveges formátumban\n- **cardExpYear** A lejárati dátum éve szöveges formátumban\n- **cardCvc** CVC kód, ami egy 3 karakter hosszú szám szöveges formátumban"
 			},
 			"response": []
 		}
