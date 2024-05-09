@@ -1,0 +1,107 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: Arial, Helvetica, sans-serif;
+}
+body {
+    box-sizing: border-box;
+    background: #404040;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 50px;
+    margin-bottom: 50px;
+}
+
+img{
+    max-width: 100px;
+}
+
+#lastName,#lastName2,#firstName,#firstName2{
+    margin: 1px;
+}
+
+.form-popup {
+    width: 100%;
+    max-width: 700px;
+    border: 2px solid #fff;
+    border-radius: 15px;
+    padding: 20px;
+    text-align: left;
+    border-radius: 20px;
+    background: #241F1F;
+}
+
+.form-content {
+    color: #FFF;
+    text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;
+    font-family: Inter;
+    font-size: 20px;
+    font-style: normal;
+    font-weight: bold;
+    line-height: normal;
+    flex-shrink: 0;
+}
+
+.form-content .mb-3 input[type="text"],
+.form-content .mb-3 input[type="password"] {
+    background: none;
+    color: white;
+    box-shadow: none;
+    border-radius: 15px;
+    border: 1px solid #000;
+    background: rgba(217, 217, 217, 0.10);
+}
+
+.form-check-input[type="checkbox"] {
+    background: #404040;
+    border: 1px solid #717171;
+    box-shadow: none;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+}
+
+#email::placeholder{
+    color: white;
+}
+
+.user-btns {
+    margin-top: 1em;
+    display: flex;
+    justify-content: center;
+}
+
+#save {
+    border-radius: 10px;
+    border: 1px solid black;
+    color: black;
+    font-weight: bold;
+    background: greenyellow;
+    max-width: 125px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+#save:hover {
+    background-color: rgb(139, 185, 45)
+}
+
+#delete {
+    border-radius: 10px;
+    border: 1px solid black;
+    color: black;
+    font-weight: bold;
+    background: #EB5757;
+    max-width: 125px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+#delete:hover {
+    background-color: #CC4C4C;
+}

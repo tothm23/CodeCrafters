@@ -1,0 +1,149 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: Arial, Helvetica, sans-serif;
+    color: white;
+}
+
+html,
+body {
+    margin: 0;
+    padding: 0;
+    min-height: 100%;
+    background-color: #241f1f;
+}
+.back_button{
+    margin: 10px;
+}
+.container {
+    max-width: 1000px;
+    margin: auto;
+}
+
+.products {
+    margin-top: 50px;
+    margin-bottom: 50px;
+    border-radius: 20px;
+    background-color: #404040;
+    padding: 20px;
+}
+
+
+.card {
+    min-width: 300px;
+    width: 100%;
+    display: flex;
+    margin-bottom: 1.5em;
+    background-color: #241f1f;
+    padding: 0px;
+    padding-right: 10px;
+    border-radius: 10px;
+}
+
+.card-body {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0px;
+    font-weight: bold;
+}
+
+.card-text{
+    margin: 10px;
+}
+
+.card button {
+    margin: 10px;
+}
+
+button,
+button:hover,
+button:focus {
+    border: none;
+    box-shadow: none;
+}
+
+.img-fluid {
+    max-height: fit-content;
+    max-width: 150px;
+    border-radius: 10px;
+}
+
+.card-text {
+    color: white;
+    padding: 5px;
+}
+
+.btn-back {
+    color: white;
+    background-color: inherit;
+    border: 1px solid white;
+    border-radius: 10px;
+    font-weight: bold;
+    margin: 40px 0px 80px 0px;
+    font-size: 1.75em;
+    width: 150px;
+}
+
+.btn-back:hover {
+    border: 1px solid white;
+    background-color: #404040;
+}
+
+.btn-back a {
+    color: #fff;
+}
+
+.card-body .btn a,.card-body .btn a:hover,.card-body .btn a::after{
+    text-decoration: none;
+    color: #241f1f;
+    font-size: 1.75;
+}
+
+.btn-create,
+.edit_btn {
+    color: black;
+    background-color: greenyellow;
+    border-radius: 10px;
+    font-weight: bold;
+    margin: 40px 0px 80px 0px;
+    font-size: 1.1em;
+    width: 150px;
+}
+
+.delete_btn {
+    color: black;
+    background-color: #DF3333;
+    border-radius: 10px;
+    font-weight: bold;
+    margin: 40px 0px 80px 0px;
+    font-size: 1.1em;
+    width: 100px;
+}
+
+i {
+    color: black;
+}
+
+.btn-create:hover,
+.btn-create:focus {
+    color: black;
+    background-color: rgb(139, 185, 45);
+}
+
+.edit_btn:hover,
+.edit_btn:focus {
+    color: black;
+    background-color: rgb(139, 185, 45);
+}
+
+.delete_btn:hover,
+.delete_btn:focus {
+    background-color: rgb(179, 45, 45);
+}
+
+.delete_btn i {
+    color: white;
+}

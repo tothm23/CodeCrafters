@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="hu">
+
+<head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link rel="icon" type="image/x-icon" href="../kepek/favicon.ico">
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+                integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
+                crossorigin="anonymous" />
+        <link rel="stylesheet" href="cart.css" />
+        <title>Kosar</title>
+</head>
+
+<body>
+        <div class="container">
+                <div class="cart">
+                        <h2 class="header">A kosár tartalma</h2>
+                        <div id="cart_content" class="d-flex flex-column justify-content-center">
+                        </div>
+                        <div class="final-price-div text-center text-lg-end">
+                                <strong class="final_price_text">Végösszeg:</strong>
+                                <span id="final_price"></span>
+                        </div>
+                        <div id="credit_card_form">
+                                <form>
+                                        <div class="input">
+                                                <label for="customerName">Név:</label>
+                                                <input type="text" id="customerName" name="customerName" disabled><br>
+                                        </div>
+                                        <div class="input">
+                                                <label for="customerEmail">Email:</label>
+                                                <input type="email" id="customerEmail" name="customerEmail" disabled><br>
+                                        </div>
+                                        <div class="input">
+                                                <label for="amount">Ár:</label>
+                                                <input type="number" id="amount" name="amount" disabled><br>
+                                        </div>
+                                        <div class="input">
+                                                <label for="cardNumber">Kártya Szám:</label>
+                                                <input type="text" id="cardNumber" name="cardNumber"><br>
+                                        </div>
+                                        <div class="input">
+                                                <label for="cardExpMonth">Lejárati Dátum (Hó):</label>
+                                                <input type="text" id="cardExpMonth" name="cardExpMonth"><br>
+                                        </div>
+                                        <div class="input">
+                                                <label for="cardExpYear">Lejárati Dátum (Év):</label>
+                                                <input type="text" id="cardExpYear" name="cardExpYear"><br>
+                                        </div>
+                                        <div class="input">
+                                                <label for="cardCvc">CVC:</label>
+                                                <input type="text" id="cardCvc" name="cardCvc"><br>
+                                        </div>
+                                    
+                                        <div class="cart-btns">
+                                                <button id="submitBtn" type="button">Fizetés</button>
+                                                <button id="close_submit_btn" type="button">X</button>
+                                        </div>
+                                </form>
+                        </div>
+                        <div class="cart-btns">
+                                <button class="btn btn-primary btn-back" type="button"><a class="text-decoration-none"
+                                                href="../index.html">Vissza</a></button>
+                                <button id="credit_card_btn" class="btn btn-primary btn-credit-card"
+                                        type="button">Bankkártya</button>
+
+                                <button id="order_btn" class="btn btn-primary btn-order" type="button">Rendelés</button>
+                        </div>
+                </div>
+        </div>
+
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+                integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+                crossorigin="anonymous"></script>
+        <script src="cart.js"></script>
+</body>
+
+</html>
