@@ -10,16 +10,16 @@ import org.junit.runner.Result;
 public class TestRunner {
 
     public static void main(String[] args) {
-        runTests(FelhasznaloTest.class);
-        runTests(JatekTest.class);
+        runTests(UserTest.class);
+        runTests(GameTest.class);
     }
 
     public static void runTests(Class<?> testClass) {
-        Result eredmeny = JUnitCore.runClasses(testClass);
+        Result result = JUnitCore.runClasses(testClass);
 
-        System.out.println("\nTesztelt osztály: " + testClass.getName());
-        System.out.println("Futtatott tesztek száma: " + eredmeny.getRunCount());
-        System.out.println("Sikeres tesztek száma: " + (eredmeny.getRunCount() - eredmeny.getFailureCount()));
-        System.out.println("Hibás tesztek száma: " + eredmeny.getFailureCount() + "\n");
+        System.out.println("\nTest Class: " + testClass.getName());
+        System.out.println("Number of tests: " + result.getRunCount());
+        System.out.println("Number of succesful tests: " + (result.getRunCount() - result.getFailureCount()));
+        System.out.println("Number of failed tests: " + result.getFailureCount() + "\n");
     }
 }

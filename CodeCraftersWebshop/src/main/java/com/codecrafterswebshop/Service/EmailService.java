@@ -11,6 +11,9 @@ import javax.mail.Session;
 import javax.mail.Transport;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
+import org.apache.logging.log4j.Level;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 /**
  *
@@ -18,57 +21,57 @@ import javax.mail.internet.MimeMessage;
  */
 public class EmailService {
 
-    public static String cimzett(List<Map<String, Object>> termekkulcsok) {
-        String cimzett = "";
+    public static String addressee(List<Map<String, Object>> productKeys) {
+        String addressee = "";
 
-        for (Map<String, Object> termek : termekkulcsok) {
-            for (Map.Entry<String, Object> entry : termek.entrySet()) {
+        for (Map<String, Object> product : productKeys) {
+            for (Map.Entry<String, Object> entry : product.entrySet()) {
 
                 if (entry.getKey().equals("email")) {
-                    cimzett = (String) entry.getValue();
+                    addressee = (String) entry.getValue();
                     break;
                 }
             }
 
         }
 
-        return cimzett;
+        return addressee;
     }
 
-    public static String felhasznaloNev(List<Map<String, Object>> termekkulcsok) {
-        String felhasznaloNev = "";
+    public static String userName(List<Map<String, Object>> productKeys) {
+        String userName = "";
 
-        for (Map<String, Object> termek : termekkulcsok) {
-            for (Map.Entry<String, Object> entry : termek.entrySet()) {
+        for (Map<String, Object> product : productKeys) {
+            for (Map.Entry<String, Object> entry : product.entrySet()) {
 
-                if (entry.getKey().equals("felhasznaloNev")) {
-                    felhasznaloNev = (String) entry.getValue();
+                if (entry.getKey().equals("userName")) {
+                    userName = (String) entry.getValue();
                     break;
                 }
             }
 
         }
 
-        return felhasznaloNev;
+        return userName;
     }
 
-    public static int vegosszeg(List<Map<String, Object>> termekkulcsok) {
-        int vegosszeg = 0;
+    public static int amount(List<Map<String, Object>> productKeys) {
+        int amount = 0;
 
-        for (Map<String, Object> termek : termekkulcsok) {
-            for (Map.Entry<String, Object> entry : termek.entrySet()) {
+        for (Map<String, Object> product : productKeys) {
+            for (Map.Entry<String, Object> entry : product.entrySet()) {
 
-                if (entry.getKey().equals("vegosszeg")) {
-                    vegosszeg += (Integer) entry.getValue();
+                if (entry.getKey().equals("amount")) {
+                    amount += (Integer) entry.getValue();
                 }
             }
 
         }
 
-        return vegosszeg;
+        return amount;
     }
 
-    public static String htmlMegrendeles(List<Map<String, Object>> termekkulcsok) {
+    public static String htmlOrder(List<Map<String, Object>> productKeys) {
         StringBuilder sb = new StringBuilder();
 
         sb.append("<!DOCTYPE html>\n"
@@ -135,21 +138,21 @@ public class EmailService {
                 + "\n"
                 + "  <body>\n"
                 + "    <div class=\"kosar\">\n"
-                + "      <h1 class=\"header\">Kedves ").append(felhasznaloNev(termekkulcsok)).append("!</h1>\n"
+                + "      <h1 class=\"header\">Kedves ").append(userName(productKeys)).append("!</h1>\n"
                 + "      <p class=\"szoveg\">Köszönjük a rendelését! Az alábbiakban látható a rendelés összesítése:</p>\n"
                 + "\n"
                 + "      <table>\n"
                 + "        <tr>");
 
-        for (String key : termekkulcsok.get(0).keySet()) {
+        for (String key : productKeys.get(0).keySet()) {
 
-            if (key.equals("nev")) {
+            if (key.equals("name")) {
                 sb.append("<th>").append("Játék").append("</th>");
             }
-            if (key.equals("vegosszeg")) {
+            if (key.equals("amount")) {
                 sb.append("<th>").append("Ár").append("</th>");
             }
-            if (key.equals("kulcs")) {
+            if (key.equals("key")) {
                 sb.append("<th>").append("Termékkulcs").append("</th>");
             }
 
@@ -157,13 +160,13 @@ public class EmailService {
 
         sb.append("</tr>");
 
-        for (Map<String, Object> termek : termekkulcsok) {
+        for (Map<String, Object> product : productKeys) {
             sb.append("<tr>");
-            for (Map.Entry<String, Object> entry : termek.entrySet()) {
-                if (entry.getKey().equals("nev") || entry.getKey().equals("vegosszeg")) {
+            for (Map.Entry<String, Object> entry : product.entrySet()) {
+                if (entry.getKey().equals("name") || entry.getKey().equals("amount")) {
                     sb.append("<td>").append(entry.getValue()).append("</td>");
                 }
-                if (entry.getKey().equals("kulcs")) {
+                if (entry.getKey().equals("key")) {
                     sb.append("<td><b>").append(entry.getValue()).append("</b></td>");
                 }
 
@@ -173,7 +176,7 @@ public class EmailService {
 
         sb.append(" </table>\n"
                 + "\n"
-                + "      <h2 class=\"szoveg-jobbra\">Összesen: <b id=\"vegosszeg\">").append(vegosszeg(termekkulcsok)).append(" FT</b></h2>\n"
+                + "      <h2 class=\"szoveg-jobbra\">Összesen: <b id=\"amount\">").append(amount(productKeys)).append(" FT</b></h2>\n"
                 + "\n"
                 + "      <p class=\"szoveg\">Üdvözlettel,</p>\n"
                 + "      <p class=\"szoveg\">CodeCrafters</p>\n"
@@ -184,7 +187,7 @@ public class EmailService {
         return new String(sb);
     }
 
-    public static String htmlRegisztracio(String felhasznaloNev) {
+    public static String htmlRegistration(String userName) {
         StringBuilder sb = new StringBuilder();
 
         sb.append("<!DOCTYPE html>\n"
@@ -226,7 +229,7 @@ public class EmailService {
                 + "\n"
                 + "  <body>\n"
                 + "    <div class=\"kosar\">\n"
-                + "      <h1 class=\"header\">Kedves ").append(felhasznaloNev).append("!</h1>\n"
+                + "      <h1 class=\"header\">Kedves ").append(userName).append("!</h1>\n"
                 + "      <p class=\"szoveg\">Köszönjük a regisztrációd! Reméljük, hogy elégedett leszel szolgáltatásainkkal, és mindent megtalálsz, amire szüksége van!</p>\n"
                 + "      <br />\n"
                 + "\n"
@@ -239,7 +242,7 @@ public class EmailService {
         return new String(sb);
     }
 
-    public static boolean email(String cimzett, String targy, String tartalom) {
+    public static boolean email(String addressee, String subject, String content) {
 
         Properties props = new Properties();
         props.put("mail.smtp.host", "smtp.gmail.com");
@@ -255,17 +258,18 @@ public class EmailService {
             }
         });
 
+        Logger logger = LogManager.getLogger(EmailService.class.getName());
         try {
-            MimeMessage uzenet = new MimeMessage(session);
-            uzenet.addRecipient(Message.RecipientType.TO, new InternetAddress(cimzett, true));
-            uzenet.setSubject(targy);
-            uzenet.setContent(tartalom, "text/html");
-            Transport.send(uzenet);
+            MimeMessage message = new MimeMessage(session);
+            message.addRecipient(Message.RecipientType.TO, new InternetAddress(addressee, true));
+            message.setSubject(subject);
+            message.setContent(content, "text/html");
+            Transport.send(message);
 
             return true;
 
         } catch (MessagingException me) {
-            System.err.println(me.getMessage());
+            logger.log(Level.ERROR, me);
         }
 
         return false;

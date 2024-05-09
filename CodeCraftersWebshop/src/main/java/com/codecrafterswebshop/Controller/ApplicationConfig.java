@@ -21,13 +21,13 @@ public class ApplicationConfig extends Application {
 
     private void addRestResourceClasses(Set<Class<?>> resources) {
         resources.add(com.codecrafterswebshop.Config.CorsFilter.class);
-        resources.add(com.codecrafterswebshop.Config.TokenFilter.class);
-        resources.add(com.codecrafterswebshop.Controller.FelhasznaloResource.class);
-        resources.add(com.codecrafterswebshop.Controller.FooldalResource.class);
-        resources.add(com.codecrafterswebshop.Controller.JatekResource.class);
-        resources.add(com.codecrafterswebshop.Controller.KosarResource.class);
-        resources.add(com.codecrafterswebshop.Controller.RendelesResource.class);
-        resources.add(com.codecrafterswebshop.Controller.TermekekResource.class);
+        resources.add(com.codecrafterswebshop.Controller.BasketResource.class);
+        resources.add(com.codecrafterswebshop.Controller.GameResource.class);
+        resources.add(com.codecrafterswebshop.Controller.MainPageResource.class);
+        resources.add(com.codecrafterswebshop.Controller.OrderResource.class);
+        resources.add(com.codecrafterswebshop.Controller.PaymentResource.class);
+        resources.add(com.codecrafterswebshop.Controller.ProductsResource.class);
+        resources.add(com.codecrafterswebshop.Controller.UserResource.class);
     }
 
 }

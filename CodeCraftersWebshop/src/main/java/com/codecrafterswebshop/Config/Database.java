@@ -6,10 +6,5 @@ package com.codecrafterswebshop.Config;
  */
 public class Database {
 
-    private static final String persistenceUnitNev = "com_CodeCraftersWebshop_war_1.0-SNAPSHOTPU";
-
-    public static String getPersistenceUnitNev() {
-        return persistenceUnitNev;
-    }
-
+    public static final String PERSISTENCEUNITNAME = "com_CodeCraftersWebshop_war_1.0-SNAPSHOTPU";
 }
