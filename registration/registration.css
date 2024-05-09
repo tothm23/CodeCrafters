@@ -1,0 +1,93 @@
+body {
+    box-sizing: border-box;
+    background: #404040;
+    display: flex;
+    height: 100vh;
+    margin-top: 50px;
+    margin-bottom: 50px;
+}
+
+.form-popup {
+    width: 100%;
+    max-width: 700px;
+    border: 2px solid #fff;
+    border-radius: 15px;
+    padding: 20px;
+    text-align: left;
+    border-radius: 20px;
+    background: #241F1F;
+}
+
+.form-content {
+    color: #FFF;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 20px;
+    font-style: normal;
+    font-weight: bold;
+    line-height: normal;
+    flex-shrink: 0;
+}
+
+
+.form-content .btn-primary {
+    background-color: #BB4930;
+    border: none;
+    margin-top: 20px;
+}
+
+.form-content .btn-primary:hover {
+    background-color: #712d1e;
+}
+
+.form-content .mb-3 input[type="text"],
+.form-content .mb-3 input[type="password"] {
+    background: none;
+    color: white;
+    box-shadow: none;
+    border-radius: 15px;
+    border: none;
+    background: rgba(217, 217, 217, 0.10);
+}
+
+.form-check-input[type="checkbox"] {
+    background: #404040;
+    border: 1px solid #717171;
+    box-shadow: none;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+}
+
+a {
+    color: #BB4930;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+a:hover {
+    color: #BB4930;
+    text-decoration: underline;
+}
+
+.option:hover {
+    text-decoration: none;
+}
+
+.mb-3 label {
+    font-weight: bold;
+    min-width: 300px;
+}
+
+#registration {
+    border-radius: 15px;
+    border: 1px solid #FFF;
+    background: rgba(0, 0, 0, 0.50);
+    max-width: 125px;
+}
+
+#registration a{
+    text-decoration: none;
+    color: #fff;
+}

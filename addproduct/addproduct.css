@@ -1,0 +1,128 @@
+body {
+    box-sizing: border-box;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+    background: #241f1f;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.mb-3 input[type="text"],
+.mb-3 input[type="number"] {
+    background: none;
+    color: white;
+    box-shadow: none;
+    border: none;
+    background: rgba(217, 217, 217, 0.10);
+    margin-bottom: 5px;
+}
+
+.inputs,.img{
+    margin: 5px;
+    width: 100%;
+    max-width: 500px;
+}
+
+.img img{
+    display: none;
+    width: 100%;
+    max-width: 500px;
+}
+
+label{
+    margin-right: 5px;
+}
+
+.platform,.age,.device{
+    margin: 10px;
+}
+
+.select,.select:focus,.select::after{
+    background: none;
+    color: white;
+    box-shadow: none;
+    border: none;
+    background: rgba(217, 217, 217, 0.10);
+}
+
+option{
+    color: black;
+}
+
+.discount{
+    display: flex;
+    flex-direction: column;
+}
+
+#discount_btn,#no_discount_btn {
+    border-radius: 10px;
+    width: 60px;
+    margin-left: 5px;
+    margin-right: 5px;
+}
+
+#save_btn,#create_btn {
+    background-color: greenyellow;
+    border: none;
+}
+
+#save_btn i,#create_btn i{
+    color: black;
+}
+
+#delete_btn{
+    background-color: #DF3333;
+}
+
+.desc_class textarea,.desc_class textarea:focus{
+    min-height: 300px;
+    min-width: 100%;
+    color: white;
+    box-shadow: none;
+    border: none;
+    background: rgba(217, 217, 217, 0.10);
+    margin-bottom: 5px;
+}
+
+#save_btn,#create_btn,#delete_btn {
+    margin: 10px;
+}
+
+.btn-back {
+    color: white;
+    background-color: inherit;
+    border: 1px solid white;
+    border-radius: 10px;
+    font-weight: bold;
+    margin: 40px 0px 80px 0px;
+    font-size: 1.75em;
+    width: 150px;
+}
+
+.btn-back:hover {
+    border: 1px solid white;
+    background-color: #404040;
+}
+
+.btn-back a {
+    color: #fff;
+}
+
+#delete_btn:hover,
+#delete_btn:focus {
+    background-color: rgb(179, 45, 45);
+}
+
+#delete_btn i {
+    color: white;
+}
+
+#save_btn:hover,
+#save_btn:focus,
+#create_btn:hover,
+#create_btn:focus{
+    color: black;
+    background-color: rgb(139, 185, 45);
+}
