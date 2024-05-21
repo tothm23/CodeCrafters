@@ -173,10 +173,6 @@ form{
     flex-direction: column;
 }
 
-input{
-    color: black;
-}
-
 #close_submit_btn,#submitBtn{
     color: black;
     border: 1px solid black;
@@ -203,9 +199,9 @@ button:focus {
     width: 400px;
     transform: translate(-50%, -50%);
     background-color: #241f1f;
-    margin-top: 50px;
-    margin-bottom: 50px;
+    margin-top: 20px;
     border-radius: 10px;
     border: 1px solid white;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    z-index: 9999;
 }
