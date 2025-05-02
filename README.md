@@ -12,7 +12,7 @@ A webáruházunk fő célja a videójátékok különböző platformokra törté
 
 # Használat
 
-A webalkalmazás használatához csak egy böngésző és megfelelő internetkapcsolat szükséges.
+A webalkalmazás használatához csak egy böngésző és megfelelő internetkapcsolat szükséges. Működése megtekinthető [felhasználói](https://github.com/tothm23/CodeCrafters/blob/main/dokumentumok/M%C5%B1k%C3%B6d%C3%A9s%20felhaszn%C3%A1l%C3%B3k%C3%A9nt.mp4), valamint [admin](https://github.com/tothm23/CodeCrafters/blob/main/dokumentumok/M%C5%B1k%C3%B6d%C3%A9s%20admink%C3%A9nt.mp4) oldalról.
 
 # Közreműködők
 
